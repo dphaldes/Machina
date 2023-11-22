@@ -4,6 +4,7 @@ import java.util.*
 plugins {
     id("idea")
     id("maven-publish")
+    kotlin("jvm") version "1.9.20"
     id("net.minecraftforge.gradle") version "[6.0,6.2)"
 }
 
@@ -12,9 +13,6 @@ val mod_id: String by project
 val mod_group_id: String by project
 val mapping_channel: String by project
 val mapping_version: String by project
-val minecraft_version: String by project
-val minecraft_version_range: String by project
-val forge_version: String by project
 
 version = mod_version
 group = mod_group_id
@@ -109,8 +107,22 @@ sourceSets {
 }
 
 repositories {
-
+    maven {
+        name = "Kotlin for Forge"
+        setUrl("https://thedarkcolour.github.io/KotlinForForge/")
+    }
+    maven {
+        name = "tterrag maven"
+        url = uri("https://maven.tterrag.com/")
+    }
+    maven("https://dogforce-games.com/maven")
 }
+
+val minecraft_version: String by project
+val forge_version: String by project
+val kff_version: String by project
+val registrate_version: String by project
+val graphlib_version: String by project
 
 dependencies {
     // Specify the version of Minecraft to use.
@@ -120,6 +132,18 @@ dependencies {
     // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
     minecraft("net.minecraftforge:forge:$minecraft_version-$forge_version")
 
+    // Kotlin for forge
+    implementation("thedarkcolour:kotlinforforge:$kff_version")
+
+    // Registrate
+    implementation("com.tterrag.registrate:Registrate:$registrate_version")
+    jarJar("com.tterrag.registrate:Registrate:[$registrate_version,)") {
+        jarJar.pin(this, registrate_version)
+    }
+    implementation(fg.deobf("dev.gigaherz.graph:GraphLib3:${graphlib_version}"))
+    jarJar("dev.gigaherz.graph:GraphLib3:[${graphlib_version},)") {
+        jarJar.pin(this, graphlib_version)
+    }
     // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
     // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
     // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
@@ -135,9 +159,11 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 }
+jarJar.enable()
 
 val forge_version_range: String by project
 val loader_version_range: String by project
+val minecraft_version_range: String by project
 val mod_name: String by project
 val mod_license: String by project
 val mod_authors: String by project
