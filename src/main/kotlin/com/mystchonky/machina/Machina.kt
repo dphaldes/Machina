@@ -1,10 +1,11 @@
 package com.mystchonky.machina
 
 import com.mojang.logging.LogUtils
-import com.mystchonky.machina.util.Registrate
-import net.minecraftforge.fml.common.Mod
-import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent
-import thedarkcolour.kotlinforforge.forge.MOD_CONTEXT
+import net.neoforged.fml.common.Mod
+import net.neoforged.fml.event.lifecycle.FMLCommonSetupEvent
+import thedarkcolour.kotlinforforge.neoforge.forge.MOD_CONTEXT
+
+//import com.mystchonky.machina.util.Registrate
 
 @Mod(Machina.MODID)
 class Machina {
@@ -17,7 +18,8 @@ class Machina {
 
     companion object {
         const val MODID = "machina"
-        val REGISTRATE by lazy { Registrate.create(MODID) }
+
+        //        val REGISTRATE by lazy { Registrate.create(MODID) }
         private val LOGGER = LogUtils.getLogger()
     }
 }

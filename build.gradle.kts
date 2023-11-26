@@ -5,7 +5,7 @@ plugins {
     id("idea")
     id("maven-publish")
     kotlin("jvm") version "1.9.20"
-    id("net.minecraftforge.gradle") version "[6.0,6.2)"
+    id("net.neoforged.gradle.userdev") version "[7.0,)"
 }
 
 val mod_version: String by project
@@ -22,84 +22,54 @@ base {
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(17))
 
-minecraft {
-    mappings(mapping_channel, mapping_version)
+// Access transformers
+//minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
 
+runs {
+    configureEach {
+        workingDirectory(project.file("run"))
 
-    // When true, this property will have all Eclipse/IntelliJ IDEA run configurations run the "prepareX" task for the given run configuration before launching the game.
-    // In most cases, it is not necessary to enable.
-    // enableEclipsePrepareRuns = true
-    // enableIdeaPrepareRuns = true
+        // Recommended logging data for a userdev environment
+        // The markers can be added/remove as needed separated by commas.
+        // "SCAN": For mods scan.
+        // "REGISTRIES": For firing of registry events.
+        // "REGISTRYDUMP": For getting the contents of all registries.
+        systemProperty("forge.logging.markers", "REGISTRIES")
 
-    copyIdeResources.set(true)
+        // Recommended logging level for the console
+        // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
+        systemProperty("forge.logging.console.level", "debug")
 
-    // When true, this property will add the folder name of all declared run configurations to generated IDE run configurations.
-    // The folder name can be set on a run configuration using the "folderName" property.
-    // By default, the folder name of a run configuration is the name of the Gradle project containing it.
-    // generateRunFolders = true
+        modSource(project.sourceSets.main.get())
+    }
 
-    // This property enables access transformers for use in development.
-    // They will be applied to the Minecraft artifact.
-    // The access transformer file can be anywhere in the project.
-    // However, it must be at "META-INF/accesstransformer.cfg" in the final mod jar to be loaded by Forge.
-    // This default location is a best practice to automatically put the file in the right place in the final jar.
-    // See https://docs.minecraftforge.net/en/latest/advanced/accesstransformers/ for more information.
-    // accessTransformer = file("src/main/resources/META-INF/accesstransformer.cfg")
+    create("client") {
+        // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
+        systemProperty("forge.enabledGameTestNamespaces", mod_id)
+    }
 
-    // Default run configurations.
-    // These can be tweaked, removed, or duplicated as needed.
-    runs {
-        // applies to all the run configs below
-        configureEach {
-            workingDirectory(project.file("run"))
+    create("server") {
+        systemProperty("forge.enabledGameTestNamespaces", mod_id)
+        programArgument("--nogui")
+    }
 
-            // Recommended logging data for a userdev environment
-            // The markers can be added/remove as needed separated by commas.
-            // "SCAN": For mods scan.
-            // "REGISTRIES": For firing of registry events.
-            // "REGISTRYDUMP": For getting the contents of all registries.
-            property("forge.logging.markers", "REGISTRIES")
-
-            // Recommended logging level for the console
-            // You can set various levels here.
-            // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
-            property("forge.logging.console.level", "debug")
-
-            mods {
-                create("${mod_id}") {
-                    source(sourceSets.main.get())
-                }
-            }
-        }
-
-        create("client") {
-            // Comma-separated list of namespaces to load gametests from. Empty = all namespaces.
-            property("forge.enabledGameTestNamespaces", mod_id)
-        }
-
-        create("server") {
-            property("forge.enabledGameTestNamespaces", mod_id)
-            args("--nogui")
-        }
-
-        // This run config launches GameTestServer and runs all registered gametests, then exits.
-        // By default, the server will crash when no gametests are provided.
-        // The gametest system is also enabled by default for other run configs under the /test command.
+    // This run config launches GameTestServer and runs all registered gametests, then exits.
+    // By default, the server will crash when no gametests are provided.
+    // The gametest system is also enabled by default for other run configs under the /test command.
 //        gameTestServer {
 //            property "forge.enabledGameTestNamespaces", mod_id
 //        }
 
-        create("data") {
-            // example of overriding the workingDirectory set in configureEach above
-            workingDirectory(project.file("run-data"))
+    create("data") {
+        // example of overriding the workingDirectory set in configureEach above
+        // workingDirectory(project.file("run-data"))
 
-            // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
-            args("--mod", mod_id, "--all", "--output", file("src/generated/resources/"), "--existing", file("src/main/resources/"))
-        }
+        // Specify the modid for data generation, where to output the resulting resource, and where to look for existing resources.
+        programArguments.addAll("--mod", mod_id, "--all", "--output", file("src/generated/resources/").absolutePath, "--existing", file("src/main/resources/").absolutePath)
     }
 }
 
-// Include resources generated by data generators.
+
 sourceSets {
     main {
         resources.srcDir("src/generated/resources")
@@ -119,49 +89,30 @@ repositories {
 }
 
 val minecraft_version: String by project
-val forge_version: String by project
+val neo_version: String by project
 val kff_version: String by project
 val registrate_version: String by project
 val graphlib_version: String by project
 
 dependencies {
-    // Specify the version of Minecraft to use.
-    // Any artifact can be supplied so long as it has a "userdev" classifier artifact and is a compatible patcher artifact.
-    // The "userdev" classifier will be requested and setup by ForgeGradle.
-    // If the group id is "net.minecraft" and the artifact id is one of ["client", "server", "joined"],
-    // then special handling is done to allow a setup of a vanilla dependency without the use of an external repository.
-    minecraft("net.minecraftforge:forge:$minecraft_version-$forge_version")
+    implementation("net.neoforged:neoforge:$neo_version")
 
     // Kotlin for forge
-    implementation("thedarkcolour:kotlinforforge:$kff_version")
+    implementation("thedarkcolour:kotlinforforge-neoforge:$kff_version")
 
     // Registrate
-    implementation("com.tterrag.registrate:Registrate:$registrate_version")
-    jarJar("com.tterrag.registrate:Registrate:[$registrate_version,)") {
-        jarJar.pin(this, registrate_version)
-    }
-    implementation(fg.deobf("dev.gigaherz.graph:GraphLib3:${graphlib_version}"))
+//    implementation("com.tterrag.registrate:Registrate:$registrate_version")
+//    jarJar("com.tterrag.registrate:Registrate:[$registrate_version,)") {
+//        jarJar.pin(this, registrate_version)
+//    }
+    implementation("dev.gigaherz.graph:GraphLib3:${graphlib_version}")
     jarJar("dev.gigaherz.graph:GraphLib3:[${graphlib_version},)") {
         jarJar.pin(this, graphlib_version)
     }
-    // Example mod dependency with JEI - using fg.deobf() ensures the dependency is remapped to your development mappings
-    // The JEI API is declared for compile time use, while the full JEI artifact is used at runtime
-    // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-common-api:${jei_version}")
-    // compileOnly fg.deobf("mezz.jei:jei-${mc_version}-forge-api:${jei_version}")
-    // runtimeOnly fg.deobf("mezz.jei:jei-${mc_version}-forge:${jei_version}")
-
-    // Example mod dependency using a mod jar from ./libs with a flat dir repository
-    // This maps to ./libs/coolmod-${mc_version}-${coolmod_version}.jar
-    // The group id is ignored when searching -- in this case, it is "blank"
-    // implementation fg.deobf("blank:coolmod-${mc_version}:${coolmod_version}")
-
-    // For more info:
-    // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
-    // http://www.gradle.org/docs/current/userguide/dependency_management.html
 }
 jarJar.enable()
 
-val forge_version_range: String by project
+val neo_version_range: String by project
 val loader_version_range: String by project
 val minecraft_version_range: String by project
 val mod_name: String by project
@@ -175,7 +126,8 @@ tasks.withType<ProcessResources> {
     filesMatching(listOf("META-INF/mods.toml", "pack.mcmeta")) {
         expand(
                 mapOf(
-                        "forge_version_range" to forge_version_range,
+                        "neo_version" to neo_version,
+                        "neo_version_range" to neo_version_range,
                         "loader_version_range" to loader_version_range,
                         "minecraft_version" to minecraft_version,
                         "minecraft_version_range" to minecraft_version_range,
