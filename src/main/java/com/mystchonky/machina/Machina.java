@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 @Mod(Machina.MODID)
 public class Machina {
     public static final String MODID = "machina";
-    private static final Logger LOGGER = LogUtils.getLogger();
+    public static final Logger LOGGER = LogUtils.getLogger();
 
     public Machina() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
