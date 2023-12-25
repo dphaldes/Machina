@@ -6,12 +6,15 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.SavedData;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.TickEvent;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-//@Mod.EventBusSubscriber
+@Mod.EventBusSubscriber
 class NexusSavedData extends SavedData {
 
     private final List<NexusNetwork> networks = new ArrayList<>();
@@ -35,14 +38,14 @@ class NexusSavedData extends SavedData {
         return level.getDataStorage().computeIfAbsent(new Factory<>(NexusSavedData::new, (nbt) -> new NexusSavedData(level, nbt)), "machina_nexus_network");
     }
 
-//    @SubscribeEvent
-//    public static void onLevelTick(TickEvent.LevelTickEvent event) {
-//        if (event.phase == TickEvent.Phase.START) return;
-//
-//        if (event.level instanceof ServerLevel level) {
-//            get(level).tick(level);
-//        }
-//    }
+    @SubscribeEvent
+    public static void onLevelTick(TickEvent.LevelTickEvent event) {
+        if (event.phase == TickEvent.Phase.START) return;
+
+        if (event.level instanceof ServerLevel level) {
+            get(level).tick(level);
+        }
+    }
 
     @Override
     public CompoundTag save(CompoundTag tag) {
@@ -57,11 +60,14 @@ class NexusSavedData extends SavedData {
 
     public void tick(ServerLevel level) {
         setDirty();
+        // Remove empty graphs
+        networks.removeIf(network -> network.getObjects().isEmpty() || network.getObjects().iterator().next().getGraph() != network);
 
-//        TODO("Clear empty graphs")
-
-//        TODO("Tick each graph")
-
+        if (level.getGameTime() % 10 == 0) {
+            for (var graph : networks) {
+                graph.tick(level);
+            }
+        }
     }
 
     @Override

@@ -25,6 +25,7 @@ public class MachinaRegistrar {
 
     public static void register(IEventBus bus) {
         BlockRegistrar.register(bus);
+        BlockEntityRegistrar.register(bus);
 
         CREATIVE_TABS.register(bus);
     }
