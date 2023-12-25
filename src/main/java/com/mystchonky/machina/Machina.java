@@ -1,7 +1,7 @@
 package com.mystchonky.machina;
 
 import com.mojang.logging.LogUtils;
-import com.mystchonky.machina.common.registrar.BlockRegistrar;
+import com.mystchonky.machina.common.registrar.MachinaRegistrar;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
@@ -13,6 +13,6 @@ public class Machina {
 
     public Machina(IEventBus modEventBus) {
         // TODO: Handle configs
-        BlockRegistrar.register(modEventBus);
+        MachinaRegistrar.register(modEventBus);
     }
 }

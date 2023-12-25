@@ -6,13 +6,12 @@ import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.saveddata.SavedData;
-import net.neoforged.fml.common.Mod;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-@Mod.EventBusSubscriber
+//@Mod.EventBusSubscriber
 class NexusSavedData extends SavedData {
 
     private final List<NexusNetwork> networks = new ArrayList<>();
