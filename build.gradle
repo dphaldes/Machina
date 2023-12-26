@@ -4,10 +4,7 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'net.neoforged.gradle.userdev' version '[7,)'
-}
-
-repositories {
-    mavenLocal()
+    id 'org.jetbrains.kotlin.jvm' version '1.9.22'
 }
 
 base {
@@ -74,6 +71,9 @@ repositories {
     maven {
         url = "https://dogforce-games.com/maven"
     }
+    maven {
+        url = 'https://thedarkcolour.github.io/KotlinForForge/'
+    }
 }
 
 dependencies {
@@ -87,7 +87,10 @@ dependencies {
 
     implementation("dev.gigaherz.graph:GraphLib3:${graphlib_version}")
     jarJar("dev.gigaherz.graph:GraphLib3:${graphlib_version}")
+
+    implementation "thedarkcolour:kotlinforforge-neoforge:${kff_version}"
 }
+
 jarJar.enable()
 
 tasks.withType(ProcessResources).configureEach {

@@ -1,76 +1,64 @@
-package com.mystchonky.machina.common.block;
+package com.mystchonky.machina.common.block
 
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import net.minecraft.world.item.context.BlockPlaceContext;
-import net.minecraft.world.level.LevelAccessor;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.EntityBlock;
-import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.state.BlockBehaviour;
-import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
-import net.minecraft.world.level.block.state.properties.BooleanProperty;
-import net.minecraft.world.level.material.Fluid;
-import net.minecraft.world.level.material.FluidState;
-import net.minecraft.world.level.material.Fluids;
-import net.minecraft.world.level.material.PushReaction;
-import org.jetbrains.annotations.Nullable;
+import com.mystchonky.machina.common.registrar.BlockEntityRegistrar
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import net.minecraft.world.item.context.BlockPlaceContext
+import net.minecraft.world.level.LevelAccessor
+import net.minecraft.world.level.block.Block
+import net.minecraft.world.level.block.EntityBlock
+import net.minecraft.world.level.block.SimpleWaterloggedBlock
+import net.minecraft.world.level.block.entity.BlockEntity
+import net.minecraft.world.level.block.state.BlockState
+import net.minecraft.world.level.block.state.StateDefinition
+import net.minecraft.world.level.block.state.properties.BlockStateProperties
+import net.minecraft.world.level.material.Fluid
+import net.minecraft.world.level.material.FluidState
+import net.minecraft.world.level.material.Fluids
+import net.minecraft.world.level.material.PushReaction
 
-public class NexusBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
-
-    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
-
-    public NexusBlock() {
-        super(BlockBehaviour.Properties.of());
-        registerDefaultState(getStateDefinition().any().setValue(WATERLOGGED, false));
+class NexusBlock : Block(Properties.of()), EntityBlock, SimpleWaterloggedBlock {
+    init {
+        registerDefaultState(getStateDefinition().any().setValue(WATERLOGGED, false))
     }
 
-    @Override
-    public @Nullable PushReaction getPistonPushReaction(BlockState state) {
-        return PushReaction.BLOCK;
+    override fun getPistonPushReaction(state: BlockState): PushReaction? {
+        return PushReaction.BLOCK
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public boolean canBeReplaced(BlockState blockState, Fluid fluid) {
-        return false;
+    override fun canBeReplaced(blockState: BlockState, fluid: Fluid): Boolean {
+        return false
     }
 
     // region Water-logging
-    @Override
-    public BlockState getStateForPlacement(BlockPlaceContext context) {
-        return defaultBlockState().setValue(WATERLOGGED, context.getLevel().getFluidState(context.getClickedPos()).getType() == Fluids.WATER);
+    override fun getStateForPlacement(context: BlockPlaceContext): BlockState {
+        return defaultBlockState().setValue(WATERLOGGED, context.level.getFluidState(context.clickedPos).type === Fluids.WATER)
     }
 
-    @Override
-    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
-        builder.add(WATERLOGGED);
+    override fun createBlockStateDefinition(builder: StateDefinition.Builder<Block, BlockState>) {
+        builder.add(WATERLOGGED)
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public BlockState updateShape(BlockState state, Direction direction, BlockState neighborState, LevelAccessor level, BlockPos currentPos,
-                                  BlockPos neighborPos) {
+    override fun updateShape(
+            state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, currentPos: BlockPos,
+            neighborPos: BlockPos
+    ): BlockState {
         if (state.getValue(WATERLOGGED)) {
-            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level));
+            level.scheduleTick(currentPos, Fluids.WATER, Fluids.WATER.getTickDelay(level))
         }
-
-        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos);
+        return super.updateShape(state, direction, neighborState, level, currentPos, neighborPos)
     }
 
-    @SuppressWarnings("deprecation")
-    @Override
-    public FluidState getFluidState(BlockState state) {
-        return state.getValue(WATERLOGGED) ? Fluids.WATER.getSource(false) : super.getFluidState(state);
+    override fun getFluidState(state: BlockState): FluidState {
+        return if (state.getValue(WATERLOGGED)) Fluids.WATER.getSource(false) else super.getFluidState(state)
     }
+
     // endregion
+    override fun newBlockEntity(pos: BlockPos, blockState: BlockState): BlockEntity? {
+        return BlockEntityRegistrar.NEXUS_BLOCK_ENTITY.get().create(pos, blockState)
+    }
 
-    @Nullable
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
-        return null;
+    companion object {
+        val WATERLOGGED = BlockStateProperties.WATERLOGGED
     }
 }

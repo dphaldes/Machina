@@ -1,4 +1,3 @@
-package com.mystchonky.machina.common.nexus;
+package com.mystchonky.machina.common.nexus
 
-public interface INexusType {
-}
+interface INexusType

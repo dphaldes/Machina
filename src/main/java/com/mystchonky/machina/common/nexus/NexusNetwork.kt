@@ -1,34 +1,18 @@
-package com.mystchonky.machina.common.nexus;
+package com.mystchonky.machina.common.nexus
 
-import dev.gigaherz.graph3.Graph;
-import dev.gigaherz.graph3.Mergeable;
-import net.minecraft.nbt.CompoundTag;
-import net.minecraft.server.level.ServerLevel;
-import net.neoforged.neoforge.common.util.INBTSerializable;
+import dev.gigaherz.graph3.Graph
+import dev.gigaherz.graph3.Mergeable
+import net.minecraft.nbt.CompoundTag
+import net.minecraft.server.level.ServerLevel
+import net.neoforged.neoforge.common.util.INBTSerializable
 
-import java.util.ArrayList;
-import java.util.List;
-
-public class NexusNetwork extends Graph<Mergeable.Dummy> implements INBTSerializable<CompoundTag> {
-
-    List<INexusType> types = new ArrayList<>();
-
-    public void tick(ServerLevel level) {
-
+class NexusNetwork : Graph<Mergeable.Dummy>(), INBTSerializable<CompoundTag> {
+    var types: List<INexusType> = ArrayList()
+    fun tick(level: ServerLevel) {}
+    fun updateGraph() {}
+    override fun serializeNBT(): CompoundTag? {
+        return null
     }
 
-    public void updateGraph() {
-
-    }
-
-    @Override
-    public CompoundTag serializeNBT() {
-        return null;
-    }
-
-    @Override
-    public void deserializeNBT(CompoundTag nbt) {
-
-    }
-
+    override fun deserializeNBT(nbt: CompoundTag) {}
 }

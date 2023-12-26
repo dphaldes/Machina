@@ -1,74 +1,49 @@
-package com.mystchonky.machina.common.nexus;
+package com.mystchonky.machina.common.nexus
 
-import dev.gigaherz.graph3.Graph;
-import dev.gigaherz.graph3.GraphObject;
-import dev.gigaherz.graph3.Mergeable;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
-import org.jetbrains.annotations.Nullable;
+import dev.gigaherz.graph3.Graph
+import dev.gigaherz.graph3.GraphObject
+import dev.gigaherz.graph3.Mergeable
+import net.minecraft.core.BlockPos
+import net.minecraft.core.Direction
+import java.util.*
 
-import java.util.EnumMap;
-import java.util.Map;
-import java.util.Optional;
-
-public class NexusIdentifier<T extends IExtendedNexusData<?>> implements GraphObject<Mergeable.Dummy> {
-
-    private final Map<Direction, IOState> ioStates = new EnumMap<>(Direction.class);
-    private final BlockPos blockPos;
-    private final T extendedNexusData;
-
-    @Nullable
-    private Graph<Mergeable.Dummy> graph = null;
-
-    public NexusIdentifier(BlockPos blockPos, T extendedNexusData) {
-        this.blockPos = blockPos;
-        this.extendedNexusData = extendedNexusData;
+class NexusIdentifier<T : IExtendedNexusData<*>>(val blockPos: BlockPos, val extendedNexusData: T) :
+        GraphObject<Mergeable.Dummy> {
+    private val ioStates: MutableMap<Direction, IOState> = EnumMap(
+            Direction::class.java
+    )
+    private var graph: Graph<Mergeable.Dummy>? = null
+    override fun getGraph(): Graph<Mergeable.Dummy>? {
+        return graph
     }
 
-    @Override
-    public @Nullable Graph<Mergeable.Dummy> getGraph() {
-        return graph;
+    override fun setGraph(graph: Graph<Mergeable.Dummy>) {
+        this.graph = graph
     }
 
-    @Override
-    public void setGraph(Graph<Mergeable.Dummy> graph) {
-        this.graph = graph;
+    fun pushState(direction: Direction, insert: Boolean, extract: Boolean) {
+        ioStates[direction] = IOState(insert, extract)
     }
 
-    public void pushState(Direction direction, boolean insert, boolean extract) {
-        ioStates.put(direction, new IOState(insert, extract));
+    fun getIOState(direction: Direction): Optional<IOState> {
+        return Optional.ofNullable(ioStates[direction])
     }
 
-    public Optional<IOState> getIOState(Direction direction) {
-        return Optional.ofNullable(ioStates.get(direction));
+    fun clearState(direction: Direction) {
+        ioStates.remove(direction)
     }
 
-    public T getExtendedNexusData() {
-        return extendedNexusData;
+    @JvmRecord
+    data class IOState(val insert: Boolean, val extract: Boolean) {
+        //        private static IOState of() {
+        //            return new IOState(Optional.ofNullable(in), Optional.ofNullable(extract), control, redstoneChannel);
+        //        }
+        //        public boolean isInsert() {
+        //            return insert()
+        //        }
+        //
+        //        public boolean isExtract() {
+        //            return extract().isPresent();
+        //        }
     }
-
-    public void clearState(Direction direction) {
-        ioStates.remove(direction);
-    }
-
-    public BlockPos getBlockPos() {
-        return blockPos;
-    }
-
-    public record IOState(boolean insert, boolean extract) {
-
-//        private static IOState of() {
-//            return new IOState(Optional.ofNullable(in), Optional.ofNullable(extract), control, redstoneChannel);
-//        }
-
-//        public boolean isInsert() {
-//            return insert()
-//        }
-//
-//        public boolean isExtract() {
-//            return extract().isPresent();
-//        }
-    }
-
-
 }

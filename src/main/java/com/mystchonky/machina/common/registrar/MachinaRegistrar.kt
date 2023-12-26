@@ -1,38 +1,38 @@
-package com.mystchonky.machina.common.registrar;
+package com.mystchonky.machina.common.registrar
 
-import com.mystchonky.machina.Machina;
-import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.CreativeModeTab;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
-import net.minecraft.world.level.ItemLike;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredHolder;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import com.mystchonky.machina.Machina
+import net.minecraft.core.registries.Registries
+import net.minecraft.network.chat.Component
+import net.minecraft.world.item.CreativeModeTab
+import net.minecraft.world.item.CreativeModeTab.ItemDisplayParameters
+import net.minecraft.world.item.ItemStack
+import net.minecraft.world.item.Items
+import net.minecraft.world.level.ItemLike
+import net.neoforged.bus.api.IEventBus
+import net.neoforged.neoforge.registries.DeferredRegister
+import java.util.function.Supplier
 
-import java.util.function.Consumer;
+object MachinaRegistrar {
+    val CREATIVE_TABS: DeferredRegister<CreativeModeTab> = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Machina.MODID)
+    val MACHINA_TAB = CREATIVE_TABS.register("machina", Supplier {
+        CreativeModeTab.builder()
+                .icon { ItemStack(Items.RECOVERY_COMPASS) }
+                .displayItems { _: ItemDisplayParameters, output: CreativeModeTab.Output -> buildTabContents(output) }
+                .title(Component.literal("Machina"))
+                .build()
+    })
 
-public class MachinaRegistrar {
+    fun register(bus: IEventBus) {
+        BlockRegistrar.register(bus)
+        BlockEntityRegistrar.register(bus)
 
-    public static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Machina.MODID);
-
-    public static final DeferredHolder<CreativeModeTab, CreativeModeTab> MACHINA_TAB = CREATIVE_TABS.register("machina", () -> CreativeModeTab.builder()
-            .icon(() -> new ItemStack(Items.RECOVERY_COMPASS))
-            .displayItems((params, output) -> buildTabContents(output))
-            .title(Component.literal("Machina"))
-            .build());
-
-    public static void register(IEventBus bus) {
-        BlockRegistrar.register(bus);
-        BlockEntityRegistrar.register(bus);
-
-        CREATIVE_TABS.register(bus);
+        CREATIVE_TABS.register(bus)
     }
 
-    public static void buildTabContents(CreativeModeTab.Output output) {
-        Consumer<DeferredRegister<? extends ItemLike>> registryHandler = (registry) -> registry.getEntries().forEach(it -> output.accept(it.get()));
+    private fun buildTabContents(output: CreativeModeTab.Output) {
+        val registryHandler = { registry: DeferredRegister<out ItemLike> -> registry.entries.forEach { output.accept(it.get()) } }
 
-        registryHandler.accept(BlockRegistrar.BLOCKS);
+        registryHandler(BlockRegistrar.BLOCKS)
     }
+
 }

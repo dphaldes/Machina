@@ -1,21 +1,26 @@
-package com.mystchonky.machina.common.registrar;
+package com.mystchonky.machina.common.registrar
 
-import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.blockentity.NexusBlockEntity;
-import net.minecraft.core.registries.BuiltInRegistries;
-import net.minecraft.world.level.block.entity.BlockEntityType;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.neoforge.registries.DeferredRegister;
+import com.mystchonky.machina.Machina
+import com.mystchonky.machina.common.blockentity.NexusBlockEntity
+import net.minecraft.core.BlockPos
+import net.minecraft.core.registries.BuiltInRegistries
+import net.minecraft.world.level.block.entity.BlockEntityType
+import net.minecraft.world.level.block.state.BlockState
+import net.neoforged.bus.api.IEventBus
+import net.neoforged.neoforge.registries.DeferredRegister
+import java.util.function.Supplier
 
-import java.util.function.Supplier;
+object BlockEntityRegistrar {
+    val BlOCK_ENTITIES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Machina.MODID)
+    val NEXUS_BLOCK_ENTITY: Supplier<BlockEntityType<NexusBlockEntity>> =
+            BlOCK_ENTITIES.register("nexus_block_entity", Supplier {
+                BlockEntityType.Builder.of(
+                        { blockPos: BlockPos, blockState: BlockState -> NexusBlockEntity(blockPos, blockState) },
+                        BlockRegistrar.NEXUS_BLOCK.block.get()
+                ).build(null)
+            })
 
-public class BlockEntityRegistrar {
-
-    public static final DeferredRegister<BlockEntityType<?>> BlOCK_ENTITIES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Machina.MODID);
-
-    public static final Supplier<BlockEntityType<NexusBlockEntity>> NEXUS_BLOCK_ENTITY = BlOCK_ENTITIES.register("nexus_block_entity", () -> BlockEntityType.Builder.of(NexusBlockEntity::new, BlockRegistrar.NEXUS_BLOCK.block().get()).build(null));
-
-    static void register(IEventBus bus) {
-        BlOCK_ENTITIES.register(bus);
+    fun register(bus: IEventBus) {
+        BlOCK_ENTITIES.register(bus)
     }
 }
