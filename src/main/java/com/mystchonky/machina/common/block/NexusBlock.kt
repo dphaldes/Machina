@@ -12,12 +12,13 @@ import net.minecraft.world.level.block.entity.BlockEntity
 import net.minecraft.world.level.block.state.BlockState
 import net.minecraft.world.level.block.state.StateDefinition
 import net.minecraft.world.level.block.state.properties.BlockStateProperties
+import net.minecraft.world.level.block.state.properties.BooleanProperty
 import net.minecraft.world.level.material.Fluid
 import net.minecraft.world.level.material.FluidState
 import net.minecraft.world.level.material.Fluids
 import net.minecraft.world.level.material.PushReaction
 
-class NexusBlock : Block(Properties.of()), EntityBlock, SimpleWaterloggedBlock {
+abstract class NexusBlock : Block(Properties.of()), EntityBlock, SimpleWaterloggedBlock {
     init {
         registerDefaultState(getStateDefinition().any().setValue(WATERLOGGED, false))
     }
@@ -39,6 +40,7 @@ class NexusBlock : Block(Properties.of()), EntityBlock, SimpleWaterloggedBlock {
         builder.add(WATERLOGGED)
     }
 
+    @Suppress("DEPRECATION")
     override fun updateShape(
             state: BlockState, direction: Direction, neighborState: BlockState, level: LevelAccessor, currentPos: BlockPos,
             neighborPos: BlockPos
@@ -55,10 +57,10 @@ class NexusBlock : Block(Properties.of()), EntityBlock, SimpleWaterloggedBlock {
 
     // endregion
     override fun newBlockEntity(pos: BlockPos, blockState: BlockState): BlockEntity? {
-        return BlockEntityRegistrar.NEXUS_BLOCK_ENTITY.get().create(pos, blockState)
+        return BlockEntityRegistrar.ENERGY_NEXUS_BLOCK_ENTITY.get().create(pos, blockState)
     }
 
     companion object {
-        val WATERLOGGED = BlockStateProperties.WATERLOGGED
+        val WATERLOGGED: BooleanProperty = BlockStateProperties.WATERLOGGED
     }
 }

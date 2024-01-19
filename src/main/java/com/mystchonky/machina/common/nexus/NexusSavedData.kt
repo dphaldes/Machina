@@ -1,9 +1,11 @@
 package com.mystchonky.machina.common.nexus
 
 import com.mystchonky.machina.Machina
+import net.minecraft.core.BlockPos
 import net.minecraft.nbt.CompoundTag
 import net.minecraft.nbt.Tag
 import net.minecraft.server.level.ServerLevel
+import net.minecraft.world.level.ChunkPos
 import net.minecraft.world.level.saveddata.SavedData
 import net.neoforged.bus.api.SubscribeEvent
 import net.neoforged.fml.common.Mod.EventBusSubscriber
@@ -14,6 +16,7 @@ import java.io.File
 @EventBusSubscriber
 internal class NexusSavedData() : SavedData() {
     private val networks: MutableList<NexusNetwork> = ArrayList()
+    private val deserializedNodes: Map<INexusType<*>, Map<ChunkPos, Map<BlockPos, NexusIdentifier<*>>>> = HashMap()
 
     constructor(level: ServerLevel, nbt: CompoundTag) : this() {
         val networksTag = nbt.getList(KEY_NETWORKS, Tag.TAG_COMPOUND.toInt())

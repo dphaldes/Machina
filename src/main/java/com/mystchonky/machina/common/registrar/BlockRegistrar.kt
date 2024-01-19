@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.registrar
 
 import com.mystchonky.machina.Machina
-import com.mystchonky.machina.common.block.NexusBlock
+import com.mystchonky.machina.common.block.EnergyNexusBlock
 import net.minecraft.world.item.BlockItem
 import net.minecraft.world.level.block.Block
 import net.neoforged.bus.api.IEventBus
@@ -14,7 +14,7 @@ object BlockRegistrar {
     val BLOCKS: DeferredRegister.Blocks = DeferredRegister.createBlocks(Machina.MODID)
     val BLOCK_ITEMS: DeferredRegister.Items = DeferredRegister.createItems(Machina.MODID)
 
-    val NEXUS_BLOCK = registerBlockPair("nexus_block") { NexusBlock() }
+    val ENERGY_NEXUS = registerBlockPair("energy_nexus") { EnergyNexusBlock() }
     private fun <X : Block> registerBlockPair(name: String, supplier: Supplier<X>): BlockItemPair<X, BlockItem> {
         val block = BLOCKS.register(name, supplier)
         val blockItem = BLOCK_ITEMS.registerSimpleBlockItem(block)

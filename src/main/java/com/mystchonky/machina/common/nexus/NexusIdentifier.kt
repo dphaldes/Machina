@@ -33,7 +33,6 @@ class NexusIdentifier<T : IExtendedNexusData<*>>(val blockPos: BlockPos, val ext
         ioStates.remove(direction)
     }
 
-    @JvmRecord
     data class IOState(val insert: Boolean, val extract: Boolean) {
         //        private static IOState of() {
         //            return new IOState(Optional.ofNullable(in), Optional.ofNullable(extract), control, redstoneChannel);

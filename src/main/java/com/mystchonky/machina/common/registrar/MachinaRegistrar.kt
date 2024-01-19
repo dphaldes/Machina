@@ -13,7 +13,7 @@ import net.neoforged.neoforge.registries.DeferredRegister
 import java.util.function.Supplier
 
 object MachinaRegistrar {
-    val CREATIVE_TABS: DeferredRegister<CreativeModeTab> = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Machina.MODID)
+    private val CREATIVE_TABS: DeferredRegister<CreativeModeTab> = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Machina.MODID)
     val MACHINA_TAB = CREATIVE_TABS.register("machina", Supplier {
         CreativeModeTab.builder()
                 .icon { ItemStack(Items.RECOVERY_COMPASS) }

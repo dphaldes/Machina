@@ -7,12 +7,21 @@ import net.minecraft.server.level.ServerLevel
 import net.neoforged.neoforge.common.util.INBTSerializable
 
 class NexusNetwork : Graph<Mergeable.Dummy>(), INBTSerializable<CompoundTag> {
-    var types: List<INexusType> = ArrayList()
-    fun tick(level: ServerLevel) {}
+    private var types: List<INexusType<*>> = ArrayList()
+
     fun updateGraph() {}
+    fun tick(level: ServerLevel) {
+        types.forEach { type -> tickType(type, level) }
+    }
+
+    private fun tickType(type: INexusType<*>, level: ServerLevel) {
+
+    }
+
     override fun serializeNBT(): CompoundTag? {
         return null
     }
 
     override fun deserializeNBT(nbt: CompoundTag) {}
+
 }
