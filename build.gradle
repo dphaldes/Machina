@@ -4,8 +4,10 @@ plugins {
     id 'idea'
     id 'maven-publish'
     id 'net.neoforged.gradle.userdev' version '[7,)'
-    id 'org.jetbrains.kotlin.jvm' version '1.9.22'
 }
+
+version = mod_version
+group = mod_group_id
 
 base {
     archivesName = mod_id
@@ -71,9 +73,6 @@ repositories {
     maven {
         url = "https://dogforce-games.com/maven"
     }
-    maven {
-        url = 'https://thedarkcolour.github.io/KotlinForForge/'
-    }
 }
 
 dependencies {
@@ -88,7 +87,6 @@ dependencies {
     implementation("dev.gigaherz.graph:GraphLib3:${graphlib_version}")
     jarJar("dev.gigaherz.graph:GraphLib3:${graphlib_version}")
 
-    implementation "thedarkcolour:kotlinforforge-neoforge:${kff_version}"
 }
 
 jarJar.enable()
