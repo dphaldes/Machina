@@ -24,6 +24,7 @@ public class MachinaRegistrar {
     );
 
     public static void register(IEventBus bus) {
+        ItemRegistrar.register(bus);
         BlockRegistrar.register(bus);
         BlockEntityRegistrar.register(bus);
         CREATIVE_TABS.register(bus);
@@ -32,6 +33,7 @@ public class MachinaRegistrar {
     private static void buildTabContents(CreativeModeTab.Output output) {
         Consumer<DeferredRegister<? extends ItemLike>> registryHandler = registry -> registry.getEntries().forEach(entry -> output.accept(entry.get()));
 
+        registryHandler.accept(ItemRegistrar.ITEMS);
         registryHandler.accept(BlockRegistrar.BLOCKS);
 
     }
