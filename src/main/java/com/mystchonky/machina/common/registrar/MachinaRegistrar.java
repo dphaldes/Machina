@@ -28,6 +28,9 @@ public class MachinaRegistrar {
         BlockRegistrar.register(bus);
         BlockEntityRegistrar.register(bus);
         CREATIVE_TABS.register(bus);
+
+        AttachmentRegistrar.register(bus);
+        GearRegistrar.register(bus);
     }
 
     private static void buildTabContents(CreativeModeTab.Output output) {

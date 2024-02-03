@@ -2,6 +2,7 @@ package com.mystchonky.machina;
 
 import com.mojang.logging.LogUtils;
 import com.mystchonky.machina.common.registrar.MachinaRegistrar;
+import net.minecraft.resources.ResourceLocation;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
@@ -15,5 +16,10 @@ public class Machina {
         // TODO: Handle configs
         MachinaRegistrar.register(modEventBus);
     }
+
+    public static ResourceLocation resource(String id) {
+        return new ResourceLocation(Machina.MODID, id);
+    }
+
 }
 
