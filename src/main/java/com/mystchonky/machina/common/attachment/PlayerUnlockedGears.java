@@ -13,7 +13,7 @@ public record PlayerUnlockedGears(Map<ResourceLocation, Integer> gears) {
         return new PlayerUnlockedGears(new HashMap<>());
     }
 
-    public static Codec<PlayerUnlockedGears> CODEC = RecordCodecBuilder.create(instance ->
+    public static final Codec<PlayerUnlockedGears> CODEC = RecordCodecBuilder.create(instance ->
             instance.group(Codec.unboundedMap(ResourceLocation.CODEC, Codec.INT).fieldOf("gears").forGetter(PlayerUnlockedGears::gears))
                     .apply(instance, PlayerUnlockedGears::new));
 
