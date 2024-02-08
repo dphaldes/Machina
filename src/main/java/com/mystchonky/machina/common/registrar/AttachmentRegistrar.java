@@ -24,6 +24,6 @@ public class AttachmentRegistrar {
                     .build());
 
     public static void register(IEventBus bus) {
-        bus.register(ATTACHMENTS);
+        ATTACHMENTS.register(bus);
     }
 }
