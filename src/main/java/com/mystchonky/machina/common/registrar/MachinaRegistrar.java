@@ -1,6 +1,7 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.common.command.CommandManager;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -9,6 +10,8 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.bus.api.IEventBus;
+import net.neoforged.neoforge.common.NeoForge;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Consumer;
@@ -31,6 +34,9 @@ public class MachinaRegistrar {
 
         AttachmentRegistrar.register(bus);
         GearRegistrar.register(bus);
+        LangRegistrar.register();
+
+        NeoForge.EVENT_BUS.addListener(MachinaRegistrar::registerCommands);
     }
 
     private static void buildTabContents(CreativeModeTab.Output output) {
@@ -40,4 +46,9 @@ public class MachinaRegistrar {
         registryHandler.accept(BlockRegistrar.BLOCKS);
 
     }
+
+    private static void registerCommands(RegisterCommandsEvent event) {
+        event.getDispatcher().register(CommandManager.register());
+    }
+
 }
