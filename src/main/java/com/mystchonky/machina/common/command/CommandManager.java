@@ -4,11 +4,10 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mystchonky.machina.common.gear.GearManager;
-import com.mystchonky.machina.common.registrar.LangRegistrar;
-import com.mystchonky.machina.util.ComponentUtil;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
@@ -33,7 +32,7 @@ public class CommandManager {
     private static int getUnlockedGears(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = EntityArgument.getPlayer(context, PLAYER);
         Map<ResourceLocation, Integer> gears = GearManager.getAllUnlockedGears(player);
-        context.getSource().sendSuccess(() -> ComponentUtil.withArgs(LangRegistrar.GET_UNLOCKED_GEAR, gears.toString()), true);
+        context.getSource().sendSuccess(() -> Component.literal(gears.toString()), true);
         return 0;
     }
 
