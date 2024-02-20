@@ -1,6 +1,7 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.client.registrar.ScreenRegistrar;
 import com.mystchonky.machina.common.command.CommandManager;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
@@ -30,11 +31,14 @@ public class MachinaRegistrar {
         ItemRegistrar.register(bus);
         BlockRegistrar.register(bus);
         BlockEntityRegistrar.register(bus);
+//        MenuRegistrar.register(bus);
         CREATIVE_TABS.register(bus);
 
         AttachmentRegistrar.register(bus);
         GearRegistrar.register(bus);
         LangRegistrar.register();
+
+        bus.addListener(ScreenRegistrar::registerScreens);
 
         NeoForge.EVENT_BUS.addListener(MachinaRegistrar::registerCommands);
     }
