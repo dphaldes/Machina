@@ -88,8 +88,8 @@ dependencies {
     implementation("dev.gigaherz.graph:GraphLib3:${graphlib_version}")
     jarJar("dev.gigaherz.graph:GraphLib3:${graphlib_version}")
 
-    implementation("com.example.examplemod:Regilite:1.0.0")
-    jarJar("com.example.examplemod:Regilite:1.0.0")
+    implementation("com.enderio.regilite:Regilite:${minecraft_version}-${regilite_version}")
+    jarJar("com.enderio.regilite:Regilite:${minecraft_version}-${regilite_version}")
 
 }
 

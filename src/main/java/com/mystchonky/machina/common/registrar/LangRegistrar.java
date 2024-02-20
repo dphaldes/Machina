@@ -1,6 +1,6 @@
 package com.mystchonky.machina.common.registrar;
 
-import com.example.regilite.data.RegiliteDataProvider;
+import com.enderio.regilite.data.RegiliteDataProvider;
 import com.mystchonky.machina.Machina;
 import net.minecraft.network.chat.MutableComponent;
 import net.minecraft.resources.ResourceLocation;
