@@ -3,6 +3,7 @@ package com.mystchonky.machina.common.registrar;
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.client.registrar.ScreenRegistrar;
 import com.mystchonky.machina.common.command.CommandManager;
+import com.mystchonky.machina.common.network.NetworkManager;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -38,6 +39,7 @@ public class MachinaRegistrar {
         GearRegistrar.register(bus);
         LangRegistrar.register();
 
+        bus.addListener(NetworkManager::registerMessages);
         bus.addListener(ScreenRegistrar::registerScreens);
 
         NeoForge.EVENT_BUS.addListener(MachinaRegistrar::registerCommands);

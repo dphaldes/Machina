@@ -8,7 +8,7 @@ import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class GearRegistrar {
-    public static final DeferredRegister<Gear> GEARS = DeferredRegister.create(Machina.resource("gears"), Machina.MODID);
+    public static final DeferredRegister<Gear> GEARS = DeferredRegister.create(Machina.prefix("gears"), Machina.MODID);
 
     public static final DeferredHolder<Gear, ProtectionGear> PROTECTION = GEARS.register("protection", ProtectionGear::new);
 
