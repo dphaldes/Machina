@@ -4,14 +4,16 @@ import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.common.network.Message;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.FriendlyByteBuf;
-import net.minecraft.resources.ResourceLocation;
+import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.level.ServerPlayer;
 
 import javax.annotation.Nullable;
 
 public class MessageSyncPlayerAttachments implements Message {
 
-    public static final ResourceLocation ID = Machina.prefix("sync_player_attachments");
+    public static final CustomPacketPayload.Type<MessageSyncPlayerAttachments> TYPE = new Type<>(Machina.prefix("sync_player_attachments"));
+    public static final StreamCodec<FriendlyByteBuf, MessageSyncPlayerAttachments> STREAM_CODEC = CustomPacketPayload.codec(MessageSyncPlayerAttachments::encode, MessageSyncPlayerAttachments::new);
 
     @Nullable
     CompoundTag tag;
@@ -24,10 +26,8 @@ public class MessageSyncPlayerAttachments implements Message {
     }
 
     public MessageSyncPlayerAttachments(FriendlyByteBuf buf) {
-        this.decode(buf);
     }
 
-    @Override
     public void encode(FriendlyByteBuf buf) {
         //TODO : STREAM CODEC
 //        tag = new CompoundTag();
@@ -41,13 +41,7 @@ public class MessageSyncPlayerAttachments implements Message {
     }
 
     @Override
-    public void decode(FriendlyByteBuf buf) {
-        //TODO : STREAM CODEC
-//        tag = buf.readNbt();
-    }
-
-    @Override
-    public ResourceLocation id() {
-        return ID;
+    public Type<? extends CustomPacketPayload> type() {
+        return TYPE;
     }
 }

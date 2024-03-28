@@ -15,7 +15,7 @@ public class NetworkManager {
     public static void registerMessages(final RegisterPayloadHandlerEvent event) {
         final IPayloadRegistrar registrar = event.registrar(Machina.MODID);
 
-        registrar.play(MessageSyncPlayerAttachments.ID, MessageSyncPlayerAttachments::new, MessageHandler::handle);
+        registrar.play(MessageSyncPlayerAttachments.TYPE, MessageSyncPlayerAttachments.STREAM_CODEC, MessageHandler::handle);
     }
 
     public static <T extends Message> void sendTo(ServerPlayer player, T message) {

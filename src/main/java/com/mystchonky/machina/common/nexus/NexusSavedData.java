@@ -2,6 +2,7 @@ package com.mystchonky.machina.common.nexus;
 
 import com.mystchonky.machina.Machina;
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
@@ -12,7 +13,6 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.Mod.EventBusSubscriber;
 import net.neoforged.neoforge.event.TickEvent;
 import net.neoforged.neoforge.event.TickEvent.LevelTickEvent;
-import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class NexusSavedData extends SavedData {
 
     // Deserialization
     public static NexusSavedData get(ServerLevel level) {
-        return level.getDataStorage().computeIfAbsent(new Factory<>(NexusSavedData::new, nbt -> new NexusSavedData(level, nbt)), "machina_nexus_network");
+        return level.getDataStorage().computeIfAbsent(new Factory<>(NexusSavedData::new, (nbt, provider) -> new NexusSavedData(level, nbt)), "machina_nexus_network");
     }
 
     @SubscribeEvent
@@ -53,7 +53,7 @@ public class NexusSavedData extends SavedData {
     }
 
     @Override
-    public @NotNull CompoundTag save(CompoundTag tag) {
+    public CompoundTag save(CompoundTag tag, HolderLookup.Provider provider) {
         // CODEC SAVE
         return tag;
     }
@@ -76,7 +76,7 @@ public class NexusSavedData extends SavedData {
     }
 
     @Override
-    public void save(File file) {
+    public void save(File file, HolderLookup.Provider provider) {
         if (isDirty()) {
             //This is an exact copy of Mekanism MekanismSavedData's system which is loosely based on
             // Refined Storage's RSSavedData's system of saving first to a temp file
@@ -84,7 +84,7 @@ public class NexusSavedData extends SavedData {
 
             //Thanks pupnewster
             File tempFile = file.toPath().getParent().resolve(file.getName() + ".tmp").toFile();
-            super.save(tempFile);
+            super.save(tempFile, provider);
             if (file.exists() && !file.delete()) {
                 Machina.LOGGER.error("Failed to delete " + file.getName());
             }

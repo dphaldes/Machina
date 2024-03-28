@@ -16,12 +16,12 @@ public class BlockRegistrar {
     public static DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Machina.MODID);
     public static DeferredRegister.Items BLOCK_ITEMS = DeferredRegister.createItems(Machina.MODID);
 
-    public static BlockItemPair<EnergyNexusBlock, BlockItem> ENERGY_NEXUS = registerBlockPair("energy_nexus", EnergyNexusBlock::new);
+    public static BlockPair<EnergyNexusBlock, BlockItem> ENERGY_NEXUS = registerBlockPair("energy_nexus", EnergyNexusBlock::new);
 
-    private static <X extends Block> BlockItemPair<X, BlockItem> registerBlockPair(String name, Supplier<X> supplier) {
+    private static <X extends Block> BlockPair<X, BlockItem> registerBlockPair(String name, Supplier<X> supplier) {
         var block = BLOCKS.register(name, supplier);
         var blockItem = BLOCK_ITEMS.registerSimpleBlockItem(block);
-        return new BlockItemPair<>(block, blockItem);
+        return new BlockPair<>(block, blockItem);
     }
 
     public static void register(IEventBus bus) {
@@ -29,7 +29,7 @@ public class BlockRegistrar {
         BLOCK_ITEMS.register(bus);
     }
 
-    public record BlockItemPair<X extends Block, Y extends BlockItem>(DeferredBlock<X> block,
-                                                                      DeferredItem<Y> blockItem) {
+    public record BlockPair<X extends Block, Y extends BlockItem>(DeferredBlock<X> block,
+                                                                  DeferredItem<Y> blockItem) {
     }
 }

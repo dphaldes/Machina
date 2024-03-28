@@ -73,23 +73,16 @@ repositories {
     maven {
         url = "https://dogforce-games.com/maven"
     }
-    mavenLocal()
+    maven {
+        url = "https://maven.firstdark.dev/snapshots"
+    }
 }
 
 dependencies {
     implementation("net.neoforged:neoforge:${neo_version}")
 
-    // Registrate
-//    implementation("com.tterrag.registrate:Registrate:$registrate_version")
-//    jarJar("com.tterrag.registrate:Registrate:[$registrate_version,)") {
-//        jarJar.pin(this, registrate_version)
-//    }
-
     implementation("dev.gigaherz.graph:GraphLib3:${graphlib_version}")
     jarJar("dev.gigaherz.graph:GraphLib3:${graphlib_version}")
-
-    implementation("com.enderio.regilite:Regilite:${minecraft_version}-${regilite_version}")
-    jarJar("com.enderio.regilite:Regilite:${minecraft_version}-${regilite_version}")
 
 }
 
@@ -105,7 +98,7 @@ tasks.withType(ProcessResources).configureEach {
     ]
     inputs.properties replaceProperties
 
-    filesMatching(['META-INF/mods.toml', 'pack.mcmeta']) {
+    filesMatching(['META-INF/neoforge.mods.toml', 'pack.mcmeta']) {
         expand replaceProperties + [project: project]
     }
 }

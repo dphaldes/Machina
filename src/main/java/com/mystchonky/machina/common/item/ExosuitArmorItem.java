@@ -4,8 +4,7 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
-
-import java.util.function.Consumer;
+import org.jetbrains.annotations.Nullable;
 
 public class ExosuitArmorItem extends ArmorItem {
     public ExosuitArmorItem(Type type) {
@@ -13,7 +12,7 @@ public class ExosuitArmorItem extends ArmorItem {
     }
 
     @Override
-    public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, T entity, Consumer<T> onBroken) {
+    public <T extends LivingEntity> int damageItem(ItemStack stack, int amount, @Nullable T entity, Runnable onBroken) {
         return 0;
     }
 
