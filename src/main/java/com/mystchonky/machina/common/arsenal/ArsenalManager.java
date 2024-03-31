@@ -1,12 +1,9 @@
-package com.mystchonky.machina.common.gear;
+package com.mystchonky.machina.common.arsenal;
 
 import com.mystchonky.machina.common.item.ExosuitArmorItem;
-import com.mystchonky.machina.common.registrar.AttachmentRegistrar;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.Map;
 import java.util.stream.StreamSupport;
 
 public class ArsenalManager {
@@ -21,7 +18,4 @@ public class ArsenalManager {
         player.displayClientMessage(Component.literal("Showing Screen now"), true);
     }
 
-    public static Map<ResourceLocation, Integer> getAllUnlockedGears(Player player) {
-        return player.getData(AttachmentRegistrar.PLAYER_UNLOCKED_GEARS).gears();
-    }
 }

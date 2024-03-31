@@ -7,6 +7,6 @@ public class LangRegistrar {
     // endregion
 
 
-    public static void register() {
+    public static void load() {
     }
 }

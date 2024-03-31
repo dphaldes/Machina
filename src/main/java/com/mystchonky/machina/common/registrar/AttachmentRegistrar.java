@@ -1,8 +1,8 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.attachment.PlayerActiveArsenal;
-import com.mystchonky.machina.common.attachment.PlayerUnlockedGears;
+import com.mystchonky.machina.common.attachment.Arsenal;
+import com.mystchonky.machina.common.attachment.UnlockedGears;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -13,14 +13,16 @@ import java.util.function.Supplier;
 public class AttachmentRegistrar {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, Machina.MODID);
 
-    public static final Supplier<AttachmentType<PlayerUnlockedGears>> PLAYER_UNLOCKED_GEARS = ATTACHMENTS.register("unlocked_gears",
-            () -> AttachmentType.builder(PlayerUnlockedGears::create)
-                    .serialize(PlayerUnlockedGears.CODEC)
+    public static final Supplier<AttachmentType<Arsenal>> ARSENAL = ATTACHMENTS.register("arsenal",
+            () -> AttachmentType.builder(Arsenal::empty)
+                    .serialize(Arsenal.CODEC)
+                    .copyOnDeath()
                     .build());
 
-    public static final Supplier<AttachmentType<PlayerActiveArsenal>> PLAYER_ACTIVE_ARSENAL = ATTACHMENTS.register("active_arsenal",
-            () -> AttachmentType.builder(PlayerActiveArsenal::empty)
-                    .serialize(PlayerActiveArsenal.CODEC)
+    public static final Supplier<AttachmentType<UnlockedGears>> UNLOCKED_GEARS = ATTACHMENTS.register("unlocked_gears",
+            () -> AttachmentType.builder(UnlockedGears::create)
+                    .serialize(UnlockedGears.CODEC)
+                    .copyOnDeath()
                     .build());
 
     public static void register(IEventBus bus) {

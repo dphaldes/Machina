@@ -20,7 +20,7 @@ import net.minecraft.world.level.material.PushReaction;
 
 abstract class NexusBlock extends Block implements EntityBlock, SimpleWaterloggedBlock {
 
-    public static BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
+    public static final BooleanProperty WATERLOGGED = BlockStateProperties.WATERLOGGED;
 
     public NexusBlock() {
         super(Properties.of());

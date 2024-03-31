@@ -1,4 +1,4 @@
-package com.mystchonky.machina.util;
+package com.mystchonky.machina.common.util;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;

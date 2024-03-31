@@ -15,7 +15,6 @@ public class MachinaDataGenerator {
 
     @SubscribeEvent
     public static void gatherData(final GatherDataEvent event) {
-        Machina.LOGGER.info("DATAGENNING");
         DataGenerator dataGenerator = event.getGenerator();
         PackOutput packOutput = dataGenerator.getPackOutput();
         ExistingFileHelper helper = event.getExistingFileHelper();

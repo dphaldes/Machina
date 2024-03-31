@@ -10,7 +10,7 @@ public interface Message extends CustomPacketPayload {
     default void onClientReceived(Minecraft minecraft, Player player) {
     }
 
-    default void onServerReceived(MinecraftServer minecraftServer, ServerPlayer player) {
+    default void onServerReceived(MinecraftServer server, ServerPlayer player) {
     }
 
 }

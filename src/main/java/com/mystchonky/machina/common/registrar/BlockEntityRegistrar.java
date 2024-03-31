@@ -10,8 +10,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class BlockEntityRegistrar {
-    private static DeferredRegister<BlockEntityType<?>> BlOCK_ENTITIES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Machina.MODID);
-    public static Supplier<BlockEntityType<NexusBlockEntity>> ENERGY_NEXUS_BLOCK_ENTITY =
+    private static final DeferredRegister<BlockEntityType<?>> BlOCK_ENTITIES = DeferredRegister.create(BuiltInRegistries.BLOCK_ENTITY_TYPE, Machina.MODID);
+    public static final Supplier<BlockEntityType<NexusBlockEntity>> ENERGY_NEXUS_BLOCK_ENTITY =
             BlOCK_ENTITIES.register("nexus_block_entity", () ->
                     BlockEntityType.Builder.of(
                             NexusBlockEntity::new,

@@ -13,10 +13,10 @@ import java.util.function.Supplier;
 
 public class BlockRegistrar {
 
-    public static DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Machina.MODID);
-    public static DeferredRegister.Items BLOCK_ITEMS = DeferredRegister.createItems(Machina.MODID);
+    public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Machina.MODID);
+    public static final DeferredRegister.Items BLOCK_ITEMS = DeferredRegister.createItems(Machina.MODID);
 
-    public static BlockPair<EnergyNexusBlock, BlockItem> ENERGY_NEXUS = registerBlockPair("energy_nexus", EnergyNexusBlock::new);
+    public static final BlockPair<EnergyNexusBlock, BlockItem> ENERGY_NEXUS = registerBlockPair("energy_nexus", EnergyNexusBlock::new);
 
     private static <X extends Block> BlockPair<X, BlockItem> registerBlockPair(String name, Supplier<X> supplier) {
         var block = BLOCKS.register(name, supplier);

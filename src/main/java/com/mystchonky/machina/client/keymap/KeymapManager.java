@@ -1,7 +1,7 @@
 package com.mystchonky.machina.client.keymap;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.gear.ArsenalManager;
+import com.mystchonky.machina.common.arsenal.ArsenalManager;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;

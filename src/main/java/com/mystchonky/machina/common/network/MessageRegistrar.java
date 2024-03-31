@@ -1,7 +1,8 @@
 package com.mystchonky.machina.common.network;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.network.messages.MessageSyncPlayerAttachments;
+import com.mystchonky.machina.common.network.messages.MessageSyncArsenal;
+import com.mystchonky.machina.common.network.messages.MessageSyncGears;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -11,11 +12,12 @@ import net.neoforged.neoforge.network.PacketDistributor;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlerEvent;
 import net.neoforged.neoforge.network.registration.IPayloadRegistrar;
 
-public class NetworkManager {
+public class MessageRegistrar {
     public static void registerMessages(final RegisterPayloadHandlerEvent event) {
         final IPayloadRegistrar registrar = event.registrar(Machina.MODID);
 
-        registrar.play(MessageSyncPlayerAttachments.TYPE, MessageSyncPlayerAttachments.STREAM_CODEC, MessageHandler::handle);
+        registrar.play(MessageSyncArsenal.TYPE, MessageSyncArsenal.STREAM_CODEC, MessageHandler::handle);
+        registrar.play(MessageSyncGears.TYPE, MessageSyncGears.STREAM_CODEC, MessageHandler::handle);
     }
 
     public static <T extends Message> void sendTo(ServerPlayer player, T message) {

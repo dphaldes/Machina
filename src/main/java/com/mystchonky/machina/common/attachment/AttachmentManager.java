@@ -1,20 +1,57 @@
 package com.mystchonky.machina.common.attachment;
 
 
-import com.mystchonky.machina.common.network.NetworkManager;
-import com.mystchonky.machina.common.network.messages.MessageSyncPlayerAttachments;
+import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.common.network.MessageRegistrar;
+import com.mystchonky.machina.common.network.messages.MessageSyncArsenal;
+import com.mystchonky.machina.common.network.messages.MessageSyncGears;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+import net.neoforged.bus.api.SubscribeEvent;
+import net.neoforged.fml.common.Mod;
+import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 
 public class AttachmentManager {
-    public static void syncPlayerAttachments(Player player) {
+    public static void syncArsenal(Player player) {
         if (player instanceof ServerPlayer serverPlayer) {
-            NetworkManager.sendTo(serverPlayer, new MessageSyncPlayerAttachments(serverPlayer));
+            MessageRegistrar.sendTo(serverPlayer, MessageSyncArsenal.create(serverPlayer));
         }
     }
 
-//    @Mod.EventBusSubscriber(modid = Machina.MODID)
-//    public static class EventHandler {
-//
-//    }
+    public static void syncGears(Player player) {
+        if (player instanceof ServerPlayer serverPlayer) {
+            MessageRegistrar.sendTo(serverPlayer, MessageSyncGears.create(serverPlayer));
+        }
+    }
+
+    public static void syncAllAttachments(Player player) {
+        syncArsenal(player);
+        syncGears(player);
+    }
+
+    @Mod.EventBusSubscriber(modid = Machina.MODID)
+    public static class EventHandler {
+
+        @SubscribeEvent
+        public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+            if (event.getEntity() instanceof ServerPlayer player) {
+                syncAllAttachments(player);
+            }
+        }
+
+        @SubscribeEvent
+        public static void playerRespawn(PlayerEvent.PlayerRespawnEvent event) {
+            if (event.getEntity() instanceof ServerPlayer player) {
+                syncAllAttachments(player);
+            }
+        }
+
+        @SubscribeEvent
+        public static void playerDimChange(PlayerEvent.PlayerChangedDimensionEvent event) {
+            if (event.getEntity() instanceof ServerPlayer player) {
+                syncAllAttachments(player);
+            }
+        }
+
+    }
 }

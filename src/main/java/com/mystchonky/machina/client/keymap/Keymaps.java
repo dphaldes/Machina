@@ -13,7 +13,7 @@ import org.lwjgl.glfw.GLFW;
 @Mod.EventBusSubscriber(modid = Machina.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class Keymaps {
 
-    public static KeyMapping KEY_PLAYER_ARSENAL = new KeyMapping("key.machina.key_arsenal",
+    public static final KeyMapping KEY_PLAYER_ARSENAL = new KeyMapping("key.machina.key_arsenal",
             KeyConflictContext.IN_GAME,
             InputConstants.Type.KEYSYM,
             GLFW.GLFW_KEY_O,
