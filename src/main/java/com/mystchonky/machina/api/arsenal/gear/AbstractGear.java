@@ -22,6 +22,8 @@ public abstract class AbstractGear {
         this.id = id;
     }
 
+    public abstract String getDisplayName();
+
     public final boolean isCompatibleWith(AbstractGear other) {
         return this.checkCompatibility(other) && other.checkCompatibility(this);
     }
@@ -52,7 +54,8 @@ public abstract class AbstractGear {
     }
 
     public enum Polarity implements StringRepresentable {
-        NONE("none"), DELTA("delta"),  // Δ real
+        NONE("none"),
+        DELTA("delta"),  // Δ real
         PHI("phi"),    // Φ imaginary
         THETA("theta"),  // Θ state (known)
         PSI("psi");    // Ψ magic (unknown)

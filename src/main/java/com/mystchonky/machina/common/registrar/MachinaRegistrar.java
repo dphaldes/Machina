@@ -1,7 +1,6 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.client.registrar.ScreenRegistrar;
 import com.mystchonky.machina.common.command.CommandManager;
 import com.mystchonky.machina.common.network.MessageRegistrar;
 import net.minecraft.core.Holder;
@@ -28,7 +27,7 @@ public class MachinaRegistrar {
                     .build()
     );
 
-    public static void register(IEventBus bus) {
+    public static void register(final IEventBus bus) {
         ItemRegistrar.register(bus);
         BlockRegistrar.register(bus);
         BlockEntityRegistrar.register(bus);
@@ -40,12 +39,11 @@ public class MachinaRegistrar {
 
         LangRegistrar.load();
         bus.addListener(MessageRegistrar::registerMessages);
-        bus.addListener(ScreenRegistrar::registerScreens);
 
         NeoForge.EVENT_BUS.addListener(MachinaRegistrar::registerCommands);
     }
 
-    private static void buildTabContents(CreativeModeTab.Output output) {
+    private static void buildTabContents(final CreativeModeTab.Output output) {
         Consumer<DeferredRegister<? extends ItemLike>> registryHandler = registry -> registry.getEntries().forEach(entry -> output.accept(entry.get()));
 
         registryHandler.accept(ItemRegistrar.ITEMS);
@@ -54,7 +52,7 @@ public class MachinaRegistrar {
 
     }
 
-    private static void registerCommands(RegisterCommandsEvent event) {
+    private static void registerCommands(final RegisterCommandsEvent event) {
         event.getDispatcher().register(CommandManager.register());
     }
 

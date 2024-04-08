@@ -2,5 +2,9 @@
   "item.machina.exo_boots": "EXO Boots",
   "item.machina.exo_helmet": "EXO Helmet",
   "item.machina.exo_leggings": "EXO Leggings",
-  "item.machina.exo_plate": "EXO Plate"
+  "item.machina.exo_plate": "EXO Plate",
+  "item.machina.gear_breath": "Water Breathing Gear",
+  "item.machina.gear_glide": "Glide Gear",
+  "item.machina.gear_health": "Health Gear",
+  "item.machina.gear_speed": "Speed Gear"
 }

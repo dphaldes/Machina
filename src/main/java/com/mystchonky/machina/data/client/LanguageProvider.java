@@ -1,7 +1,9 @@
 package com.mystchonky.machina.data.client;
 
 import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.common.registrar.GearRegistrar;
 import com.mystchonky.machina.common.registrar.ItemRegistrar;
+import com.mystchonky.machina.common.registrar.LangRegistrar;
 import net.minecraft.data.PackOutput;
 
 public class LanguageProvider extends net.neoforged.neoforge.common.data.LanguageProvider {
@@ -15,5 +17,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(ItemRegistrar.EXO_PLATE.get(), "EXO Plate");
         add(ItemRegistrar.EXO_LEGGINGS.get(), "EXO Leggings");
         add(ItemRegistrar.EXO_BOOTS.get(), "EXO Boots");
+
+        GearRegistrar.GEARS.getEntries().forEach(gear -> add(gear.get().getGearItem(), gear.get().getDisplayName()));
+        LangRegistrar.entries.forEach(this::add);
     }
 }

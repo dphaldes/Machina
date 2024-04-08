@@ -15,7 +15,7 @@ public class GearItem extends Item {
     public final AbstractGear gear;
 
     public GearItem(AbstractGear gear) {
-        super(new Properties());
+        super(new Properties().stacksTo(1));
         this.gear = gear;
     }
 

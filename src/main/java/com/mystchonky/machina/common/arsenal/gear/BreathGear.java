@@ -3,15 +3,15 @@ package com.mystchonky.machina.common.arsenal.gear;
 import com.mystchonky.machina.api.arsenal.gear.AbstractGear;
 import com.mystchonky.machina.common.arsenal.GearLibrary;
 
-public class SpeedGear extends AbstractGear {
-    public static final SpeedGear INSTANCE = new SpeedGear();
+public class BreathGear extends AbstractGear {
+    public static final BreathGear INSTANCE = new BreathGear();
 
-    protected SpeedGear() {
-        super(GearLibrary.SPEED);
+    protected BreathGear() {
+        super(GearLibrary.WATER_BREATH);
     }
 
     @Override
     public String getDisplayName() {
-        return "Speed Gear";
+        return "Water Breathing Gear";
     }
 }

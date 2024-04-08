@@ -4,9 +4,7 @@ import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.common.registrar.GearRegistrar;
 import com.mystchonky.machina.common.registrar.ItemRegistrar;
 import net.minecraft.data.PackOutput;
-import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-import net.neoforged.neoforge.registries.DeferredHolder;
 
 public class ItemModelProvider extends net.neoforged.neoforge.client.model.generators.ItemModelProvider {
     public ItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -20,8 +18,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(ItemRegistrar.EXO_LEGGINGS.get());
         basicItem(ItemRegistrar.EXO_BOOTS.get());
 
-        for (DeferredHolder<Item, ? extends Item> gear : GearRegistrar.GEAR_ITEMS.getEntries()) {
-            basicItem(gear.get());
-        }
+        GearRegistrar.GEAR_ITEMS.getEntries().forEach(gear -> basicItem(gear.get()));
+
     }
 }

@@ -3,15 +3,15 @@ package com.mystchonky.machina.common.arsenal.gear;
 import com.mystchonky.machina.api.arsenal.gear.AbstractGear;
 import com.mystchonky.machina.common.arsenal.GearLibrary;
 
-public class SpeedGear extends AbstractGear {
-    public static final SpeedGear INSTANCE = new SpeedGear();
+public class HealthGear extends AbstractGear {
+    public static final HealthGear INSTANCE = new HealthGear();
 
-    protected SpeedGear() {
-        super(GearLibrary.SPEED);
+    protected HealthGear() {
+        super(GearLibrary.HEALTH);
     }
 
     @Override
     public String getDisplayName() {
-        return "Speed Gear";
+        return "Health Gear";
     }
 }

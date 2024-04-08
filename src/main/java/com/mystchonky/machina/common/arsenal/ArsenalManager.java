@@ -1,6 +1,8 @@
 package com.mystchonky.machina.common.arsenal;
 
+import com.mystchonky.machina.client.screen.PlayerArsenalScreen;
 import com.mystchonky.machina.common.item.ExosuitArmorItem;
+import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;
 
@@ -15,7 +17,7 @@ public class ArsenalManager {
             player.displayClientMessage(Component.literal("Not wearing the full set"), true);
             return;
         }
-        player.displayClientMessage(Component.literal("Showing Screen now"), true);
+        Minecraft.getInstance().setScreen(new PlayerArsenalScreen(player));
     }
 
 }
