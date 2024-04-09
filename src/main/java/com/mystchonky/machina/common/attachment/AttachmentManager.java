@@ -5,6 +5,7 @@ import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.common.network.MessageRegistrar;
 import com.mystchonky.machina.common.network.messages.MessageSyncArsenal;
 import com.mystchonky.machina.common.network.messages.MessageSyncGears;
+import com.mystchonky.machina.common.network.messages.MessageUpdateArsenal;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -27,6 +28,10 @@ public class AttachmentManager {
     public static void syncAllAttachments(Player player) {
         syncArsenal(player);
         syncGears(player);
+    }
+
+    public static void updateArsenal(Arsenal arsenal) {
+        MessageRegistrar.sendToServer(new MessageUpdateArsenal(arsenal));
     }
 
     @Mod.EventBusSubscriber(modid = Machina.MODID)

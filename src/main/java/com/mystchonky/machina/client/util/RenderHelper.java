@@ -19,6 +19,7 @@ import org.joml.Matrix4f;
 
 public class RenderHelper {
     private static final RenderType TRANSLUCENT = RenderType.entityTranslucent(TextureAtlas.LOCATION_BLOCKS);
+    private static final Matrix4f SCALE_INVERT_Y = new Matrix4f().scaling(1F, -1F, 1F);
 
     public static void drawGear(AbstractGear gear, GuiGraphics graphics, int positionX, int positionY, int size, boolean renderTransparent, int zIndex) {
         renderFakeItemTransparent(graphics.pose(), gear.getGearItem().getDefaultInstance(), positionX, positionY, size, 0, renderTransparent, zIndex);
@@ -33,15 +34,12 @@ public class RenderHelper {
     }
 
     public static void renderFakeItemTransparent(PoseStack poseStack, ItemStack stack, int x, int y, int scale, int alpha, boolean transparent, int zIndex) {
-        if (stack.isEmpty())
-            return;
+        if (stack.isEmpty()) return;
 
         var renderer = Minecraft.getInstance().getItemRenderer();
         var model = renderer.getModel(stack, null, Minecraft.getInstance().player, 0);
         renderItemModel(poseStack, stack, x, y, scale, alpha, model, renderer, transparent, zIndex);
     }
-
-    private static final Matrix4f SCALE_INVERT_Y = new Matrix4f().scaling(1F, -1F, 1F);
 
     public static void renderItemModel(PoseStack poseStack, ItemStack stack, int x, int y, int scale, int alpha, BakedModel model, ItemRenderer renderer, boolean transparent, int zIndex) {
         poseStack.pushPose();
@@ -55,16 +53,7 @@ public class RenderHelper {
         }
 
         var buffer = Minecraft.getInstance().renderBuffers().bufferSource();
-        renderer.render(
-                stack,
-                ItemDisplayContext.GUI,
-                false,
-                poseStack,
-                transparent ? transparentBuffer(buffer) : buffer,
-                LightTexture.FULL_BRIGHT,
-                OverlayTexture.NO_OVERLAY,
-                model
-        );
+        renderer.render(stack, ItemDisplayContext.GUI, false, poseStack, transparent ? transparentBuffer(buffer) : buffer, LightTexture.FULL_BRIGHT, OverlayTexture.NO_OVERLAY, model);
         buffer.endBatch();
 
         RenderSystem.enableDepthTest();

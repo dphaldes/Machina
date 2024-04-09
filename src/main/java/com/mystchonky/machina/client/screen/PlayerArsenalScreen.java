@@ -2,44 +2,52 @@ package com.mystchonky.machina.client.screen;
 
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.api.arsenal.gear.AbstractGear;
+import com.mystchonky.machina.client.screen.widget.ArsenalGearButton;
 import com.mystchonky.machina.client.screen.widget.GearButton;
 import com.mystchonky.machina.common.attachment.Arsenal;
+import com.mystchonky.machina.common.attachment.ArsenalGearSlot;
+import com.mystchonky.machina.common.attachment.AttachmentManager;
 import com.mystchonky.machina.common.attachment.UnlockedGears;
 import com.mystchonky.machina.common.registrar.LangRegistrar;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class PlayerArsenalScreen extends Screen {
 
     public static ResourceLocation background = Machina.prefix("textures/gui/arsenal.png");
+    public static ResourceLocation applyButton = Machina.prefix("apply");
+    public static WidgetSprites applySprites = new WidgetSprites(applyButton, applyButton);
 
     protected final int imageWidth = 216;
     protected final int imageHeight = 148;
+    private final Player player;
+    private final Arsenal playerArsenal;
+    private final List<AbstractGear> unlockedGearsList;
+    private final List<AbstractGear> arsenalGearsList;
+    private final List<GearButton> gearButtons = new ArrayList<>();
+    private final List<ArsenalGearButton> arsenalButtons = new ArrayList<>();
+    private final int currentPage = 0;
     protected int leftPos;
     protected int topPos;
-
-    private final Player player;
-    private final UnlockedGears unlockedGears;
-    private final Arsenal playerArsenal;
     private int maxPages = 1;
-    private int currentPage = 0;
-
-    private List<AbstractGear> displayGears;
-    private List<GearButton> gearButtons = new ArrayList<>();
 
     public PlayerArsenalScreen(Player player) {
         super(LangRegistrar.ARSENAL_SCREEN);
         this.player = player;
-        unlockedGears = UnlockedGears.get(player);
         playerArsenal = Arsenal.get(player);
+        unlockedGearsList = new ArrayList<>(UnlockedGears.get(player).gears());
+        arsenalGearsList = new ArrayList<>(Arsenal.get(player).gears());
 
-        displayGears = new ArrayList<>(unlockedGears.gears());
         updateNumPages();
     }
 
@@ -48,12 +56,10 @@ public class PlayerArsenalScreen extends Screen {
         this.leftPos = (this.width - this.imageWidth) / 2;
         this.topPos = (this.height - this.imageHeight) / 2;
 
-        layoutGearButtons(currentPage);
-    }
+        displayUnlockedGears(currentPage);
+        displayArsenalGears();
 
-    @Override
-    public void render(GuiGraphics pGuiGraphics, int pMouseX, int pMouseY, float pPartialTick) {
-        super.render(pGuiGraphics, pMouseX, pMouseY, pPartialTick);
+        addRenderableWidget(new ImageButton(leftPos + imageWidth - 48, topPos + imageHeight - 16, 48, 16, applySprites, this::applyButtonClicked, Component.literal("Apply")));
     }
 
     @Override
@@ -68,22 +74,38 @@ public class PlayerArsenalScreen extends Screen {
     }
 
     private void updateNumPages() {
-        this.maxPages = (int) Math.ceil((double) displayGears.size() / 36);
+        this.maxPages = (int) Math.ceil((double) unlockedGearsList.size() / 36);
     }
 
-    private void layoutGearButtons(final int page) {
+    private void displayUnlockedGears(final int page) {
         clearButtons(gearButtons);
 
         //TODO:PAGES
-
         int xOffset = 0;
         int yOffset = 0;
-        for (var gear : displayGears) {
-            final var button = new GearButton(leftPos + 16 + xOffset, topPos + 16 + yOffset, 16, 16, this::onGearClicked, gear);
+        for (var gear : unlockedGearsList) {
+            final var button = new GearButton(leftPos + 16 + xOffset, topPos + 16 + yOffset, 16, 16, (btn) -> onGearClicked(btn, gear), gear);
             addRenderableWidget(button);
             gearButtons.add(button);
             xOffset += 20;
-            if (xOffset > width) {
+            if (xOffset > 116) {
+                xOffset = 0;
+                yOffset += 20;
+            }
+        }
+    }
+
+    private void displayArsenalGears() {
+        clearButtons(arsenalButtons);
+
+        int xOffset = 0;
+        int yOffset = 0;
+        for (var gear : arsenalGearsList) {
+            final var button = new ArsenalGearButton(leftPos + 164 + xOffset, topPos + 36 + yOffset, 16, 16, (btn) -> arsenalGearClicked(btn, gear), gear);
+            addRenderableWidget(button);
+            arsenalButtons.add(button);
+            xOffset += 20;
+            if (xOffset > 36) {
                 xOffset = 0;
                 yOffset += 20;
             }
@@ -98,7 +120,32 @@ public class PlayerArsenalScreen extends Screen {
         buttons.clear();
     }
 
-    public void onGearClicked(Button button) {
-        Machina.LOGGER.info("Button pressed!");
+    private void onGearClicked(Button button, AbstractGear gear) {
+        Machina.LOGGER.info("Button pressed! Gear:" + gear);
+        var contain = arsenalGearsList.stream().anyMatch(it -> it == gear);
+        if (!contain) {
+            for (int i = 0; i < arsenalGearsList.size(); i++) {
+                if (arsenalGearsList.get(i) != null) continue;
+                arsenalGearsList.set(i, gear);
+                break;
+            }
+            displayArsenalGears();
+        }
+    }
+
+    private void arsenalGearClicked(Button button, @Nullable AbstractGear gear) {
+        Machina.LOGGER.info("Arsenal Button pressed! Gear:" + gear);
+        if (gear == null) return;
+        for (int i = 0; i < arsenalGearsList.size(); i++) {
+            if (arsenalGearsList.get(i) == gear) arsenalGearsList.set(i, null);
+        }
+        displayArsenalGears();
+    }
+
+    private void applyButtonClicked(Button button) {
+        for (int i = 0; i < playerArsenal.slots().size(); i++) {
+            playerArsenal.slots().set(i, new ArsenalGearSlot(arsenalGearsList.get(i)));
+        }
+        AttachmentManager.updateArsenal(playerArsenal);
     }
 }

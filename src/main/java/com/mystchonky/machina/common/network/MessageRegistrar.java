@@ -3,6 +3,7 @@ package com.mystchonky.machina.common.network;
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.common.network.messages.MessageSyncArsenal;
 import com.mystchonky.machina.common.network.messages.MessageSyncGears;
+import com.mystchonky.machina.common.network.messages.MessageUpdateArsenal;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -18,6 +19,7 @@ public class MessageRegistrar {
 
         registrar.play(MessageSyncArsenal.TYPE, MessageSyncArsenal.STREAM_CODEC, MessageHandler::handle);
         registrar.play(MessageSyncGears.TYPE, MessageSyncGears.STREAM_CODEC, MessageHandler::handle);
+        registrar.play(MessageUpdateArsenal.TYPE, MessageUpdateArsenal.STREAM_CODEC, MessageHandler::handle);
     }
 
     public static <T extends Message> void sendTo(ServerPlayer player, T message) {
