@@ -1,6 +1,5 @@
-package com.mystchonky.machina.common.arsenal;
+package com.mystchonky.machina.client.screen;
 
-import com.mystchonky.machina.client.screen.PlayerArsenalScreen;
 import com.mystchonky.machina.common.item.ExosuitArmorItem;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
@@ -8,7 +7,7 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.stream.StreamSupport;
 
-public class ArsenalManager {
+public class ScreenManager {
 
     public static void openArsenalScreen(Player player) {
         boolean armorMatch = StreamSupport.stream(player.getArmorSlots().spliterator(), false)
@@ -17,7 +16,7 @@ public class ArsenalManager {
             player.displayClientMessage(Component.literal("Not wearing the full set"), true);
             return;
         }
-        Minecraft.getInstance().setScreen(new PlayerArsenalScreen(player));
+        Minecraft.getInstance().setScreen(new ArsenalScreen(player));
     }
 
 }

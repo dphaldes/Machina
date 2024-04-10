@@ -21,8 +21,9 @@ import net.minecraft.world.entity.player.Player;
 import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
-public class PlayerArsenalScreen extends Screen {
+public class ArsenalScreen extends Screen {
 
     public static ResourceLocation background = Machina.prefix("textures/gui/arsenal.png");
     public static ResourceLocation applyButton = Machina.prefix("apply");
@@ -41,7 +42,7 @@ public class PlayerArsenalScreen extends Screen {
     protected int topPos;
     private int maxPages = 1;
 
-    public PlayerArsenalScreen(Player player) {
+    public ArsenalScreen(Player player) {
         super(LangRegistrar.ARSENAL_SCREEN);
         this.player = player;
         playerArsenal = Arsenal.get(player);
@@ -121,9 +122,9 @@ public class PlayerArsenalScreen extends Screen {
     }
 
     private void onGearClicked(Button button, AbstractGear gear) {
-        Machina.LOGGER.info("Button pressed! Gear:" + gear);
         var contain = arsenalGearsList.stream().anyMatch(it -> it == gear);
-        if (!contain) {
+        var compatible = arsenalGearsList.stream().filter(Objects::nonNull).allMatch(it -> it.isCompatibleWith(gear));
+        if (!contain && compatible) {
             for (int i = 0; i < arsenalGearsList.size(); i++) {
                 if (arsenalGearsList.get(i) != null) continue;
                 arsenalGearsList.set(i, gear);
@@ -134,7 +135,6 @@ public class PlayerArsenalScreen extends Screen {
     }
 
     private void arsenalGearClicked(Button button, @Nullable AbstractGear gear) {
-        Machina.LOGGER.info("Arsenal Button pressed! Gear:" + gear);
         if (gear == null) return;
         for (int i = 0; i < arsenalGearsList.size(); i++) {
             if (arsenalGearsList.get(i) == gear) arsenalGearsList.set(i, null);
