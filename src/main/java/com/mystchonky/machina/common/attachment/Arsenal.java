@@ -2,6 +2,7 @@ package com.mystchonky.machina.common.attachment;
 
 import com.mojang.serialization.Codec;
 import com.mystchonky.machina.api.arsenal.gear.AbstractGear;
+import com.mystchonky.machina.common.arsenal.ArsenalManager;
 import com.mystchonky.machina.common.registrar.AttachmentRegistrar;
 import com.mystchonky.machina.common.util.LimitedList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -34,15 +35,10 @@ public record Arsenal(LimitedList<ArsenalGearSlot> slots) {
         return player.getData(AttachmentRegistrar.ARSENAL);
     }
 
-    public static void set(Player player, Arsenal updated) {
-        var oldGears = get(player).gears();
-        var newGears = updated.gears();
-        var removed = oldGears.stream().filter(it -> !newGears.contains(it)).toList();
-        var installed = newGears.stream().filter(it -> !oldGears.contains(it)).toList();
-
-        player.setData(AttachmentRegistrar.ARSENAL, updated);
-        removed.forEach(gear -> gear.onUnequip(player));
-        installed.forEach(gear -> gear.onEquip(player));
+    public static void set(Player player, Arsenal arsenal) {
+        ArsenalManager.removeArsenalEffects(player, get(player));
+        player.setData(AttachmentRegistrar.ARSENAL, arsenal);
+        ArsenalManager.applyArsenalEffects(player, arsenal);
     }
 
     public List<AbstractGear> gears() {

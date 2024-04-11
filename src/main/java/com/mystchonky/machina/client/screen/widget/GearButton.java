@@ -1,14 +1,13 @@
 package com.mystchonky.machina.client.screen.widget;
 
 import com.mystchonky.machina.api.arsenal.gear.AbstractGear;
+import com.mystchonky.machina.client.screen.TooltipProvider;
 import com.mystchonky.machina.client.util.RenderHelper;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.item.TooltipFlag;
-import net.minecraft.world.item.component.TooltipProvider;
 
-import java.util.function.Consumer;
+import java.util.List;
 
 public class GearButton extends Button implements TooltipProvider {
 
@@ -29,7 +28,8 @@ public class GearButton extends Button implements TooltipProvider {
     }
 
     @Override
-    public void addToTooltip(Consumer<Component> componentConsumer, TooltipFlag flag) {
-
+    public void getTooltip(List<Component> tooltip) {
+        tooltip.add(Component.translatable(gear.getLocalizationKey()));
+        gear.getTooltip(tooltip);
     }
 }

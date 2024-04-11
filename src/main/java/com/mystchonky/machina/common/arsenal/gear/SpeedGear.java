@@ -12,7 +12,7 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 
 import java.util.UUID;
 
-public class SpeedGear extends AbstractGear implements AttributeGear {
+public class SpeedGear extends AbstractGear implements AttributeGear<SpeedGear> {
     public static final SpeedGear INSTANCE = new SpeedGear();
 
     public static final UUID GEAR_SPEED_UUID = UUID.fromString("ac0be5f9-6906-4d06-98a7-1114f11d46ff");
@@ -29,8 +29,13 @@ public class SpeedGear extends AbstractGear implements AttributeGear {
     @Override
     public Multimap<Holder<Attribute>, AttributeModifier> getModifiers() {
         ImmutableMultimap.Builder<Holder<Attribute>, AttributeModifier> modifiers = new ImmutableMultimap.Builder<>();
-        modifiers.put(Attributes.MOVEMENT_SPEED, new AttributeModifier(GEAR_SPEED_UUID, "SpeedGear", 0.6, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL));
+        addModifier(this, modifiers, Attributes.MOVEMENT_SPEED, 0.6, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
+        addModifier(this, modifiers, Attributes.GRAVITY, -0.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
         return modifiers.build();
     }
 
+    @Override
+    public UUID getUUID() {
+        return GEAR_SPEED_UUID;
+    }
 }

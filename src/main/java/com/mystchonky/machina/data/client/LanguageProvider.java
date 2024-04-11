@@ -18,7 +18,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(ItemRegistrar.EXO_LEGGINGS.get(), "EXO Leggings");
         add(ItemRegistrar.EXO_BOOTS.get(), "EXO Boots");
 
-        GearRegistrar.GEARS.getEntries().forEach(gear -> add(gear.get().getGearItem(), gear.get().getDisplayName()));
+        GearRegistrar.GEARS.getEntries().forEach(gear -> {
+            add(gear.get().getGearItem(), gear.get().getDisplayName());
+            add(gear.get().getLocalizationKey(), gear.get().getDisplayName());
+        });
         LangRegistrar.entries.forEach(this::add);
     }
 }

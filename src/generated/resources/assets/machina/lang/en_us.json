@@ -1,4 +1,10 @@
 {
+  "attribute.machina.add": "+%s %s",
+  "attribute.machina.add_n": "-%s %s",
+  "attribute.machina.multiply_base": "+%s%% %s",
+  "attribute.machina.multiply_base_n": "-%s%% %s",
+  "attribute.machina.multiply_total": "+%s%% %s",
+  "attribute.machina.multiply_total_n": "-%s%% %s",
   "item.machina.exo_boots": "EXO Boots",
   "item.machina.exo_helmet": "EXO Helmet",
   "item.machina.exo_leggings": "EXO Leggings",
@@ -6,5 +12,10 @@
   "item.machina.gear_breath": "Water Breathing Gear",
   "item.machina.gear_glide": "Glide Gear",
   "item.machina.gear_health": "Health Gear",
-  "item.machina.gear_speed": "Speed Gear"
+  "item.machina.gear_speed": "Speed Gear",
+  "name.machina.gear_breath": "Water Breathing Gear",
+  "name.machina.gear_glide": "Glide Gear",
+  "name.machina.gear_health": "Health Gear",
+  "name.machina.gear_speed": "Speed Gear",
+  "title.machina.arsenal": "Arsenal Screen"
 }

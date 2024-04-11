@@ -10,8 +10,10 @@ import com.mystchonky.machina.common.attachment.AttachmentManager;
 import com.mystchonky.machina.common.attachment.UnlockedGears;
 import com.mystchonky.machina.common.registrar.LangRegistrar;
 import net.minecraft.client.gui.GuiGraphics;
+import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
+import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -43,7 +45,7 @@ public class ArsenalScreen extends Screen {
     private int maxPages = 1;
 
     public ArsenalScreen(Player player) {
-        super(LangRegistrar.ARSENAL_SCREEN);
+        super(LangRegistrar.ARSENAL_SCREEN.component());
         this.player = player;
         playerArsenal = Arsenal.get(player);
         unlockedGearsList = new ArrayList<>(UnlockedGears.get(player).gears());
@@ -61,6 +63,12 @@ public class ArsenalScreen extends Screen {
         displayArsenalGears();
 
         addRenderableWidget(new ImageButton(leftPos + imageWidth - 48, topPos + imageHeight - 16, 48, 16, applySprites, this::applyButtonClicked, Component.literal("Apply")));
+    }
+
+    @Override
+    public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        super.render(guiGraphics, mouseX, mouseY, partialTick);
+        drawTooltip(guiGraphics, mouseX, mouseY);
     }
 
     @Override
@@ -122,9 +130,8 @@ public class ArsenalScreen extends Screen {
     }
 
     private void onGearClicked(Button button, AbstractGear gear) {
-        var contain = arsenalGearsList.stream().anyMatch(it -> it == gear);
         var compatible = arsenalGearsList.stream().filter(Objects::nonNull).allMatch(it -> it.isCompatibleWith(gear));
-        if (!contain && compatible) {
+        if (compatible) {
             for (int i = 0; i < arsenalGearsList.size(); i++) {
                 if (arsenalGearsList.get(i) != null) continue;
                 arsenalGearsList.set(i, gear);
@@ -148,4 +155,25 @@ public class ArsenalScreen extends Screen {
         }
         AttachmentManager.updateArsenal(playerArsenal);
     }
+
+    public void drawTooltip(GuiGraphics guiGraphics, int mouseX, int mouseY) {
+        List<Component> tooltip = new ArrayList<>();
+        collectTooltips(mouseX, mouseY, tooltip);
+        if (!tooltip.isEmpty()) {
+            guiGraphics.renderComponentTooltip(font, tooltip, mouseX, mouseY);
+        }
+    }
+
+    public void collectTooltips(int mouseX, int mouseY, List<Component> tooltip) {
+        for (Renderable renderable : renderables) {
+            if (renderable instanceof AbstractWidget widget && widget instanceof TooltipProvider tooltipProvider) {
+                if (widget.isMouseOver(mouseX, mouseY)) {
+                    tooltipProvider.getTooltip(tooltip);
+                    break;
+                }
+            }
+        }
+    }
+
+
 }
