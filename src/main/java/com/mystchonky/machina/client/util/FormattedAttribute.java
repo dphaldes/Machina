@@ -1,4 +1,4 @@
-package com.mystchonky.machina.client.screen.widget;
+package com.mystchonky.machina.client.util;
 
 import com.mystchonky.machina.common.registrar.LangRegistrar;
 import net.minecraft.ChatFormatting;
@@ -20,22 +20,18 @@ public class FormattedAttribute {
             }
             case ADD_MULTIPLIED_BASE -> {
                 var key = side ? LangRegistrar.ATTRIBUTE_MULTIPLY_BASE.key() : LangRegistrar.ATTRIBUTE_MULTIPLY_BASE_N.key();
-                yield Component.translatable(key, cleanScaled(modifier), name);
+                yield Component.translatable(key, formatted(modifier), name);
             }
             case ADD_MULTIPLIED_TOTAL -> {
                 var key = side ? LangRegistrar.ATTRIBUTE_MULTIPLY_TOTAL.key() : LangRegistrar.ATTRIBUTE_MULTIPLY_TOTAL_N.key();
-                yield Component.translatable(key, cleanScaled(modifier), name);
+                yield Component.translatable(key, formatted(modifier), name);
             }
         };
 
         return side ? component.withStyle(ChatFormatting.AQUA) : component.withStyle(ChatFormatting.RED);
     }
 
-    public static double clean(AttributeModifier modifier) {
-        return Math.abs(modifier.amount());
-    }
-
-    public static String cleanScaled(AttributeModifier modifier) {
-        return ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(clean(modifier) * 100);
+    public static String formatted(AttributeModifier modifier) {
+        return ItemAttributeModifiers.ATTRIBUTE_MODIFIER_FORMAT.format(Math.abs(modifier.amount()) * 100);
     }
 }
