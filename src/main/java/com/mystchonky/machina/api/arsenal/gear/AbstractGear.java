@@ -59,10 +59,10 @@ public abstract class AbstractGear implements TooltipProvider {
         subtypes.forEach(it -> it.onEquip(player));
     }
 
-    public final void onUnequip(Player player) {
+    public final void onRemove(Player player) {
         if (player.level().isClientSide()) return;
 
-        subtypes.forEach(it -> it.onUnEquip(player));
+        subtypes.forEach(it -> it.onRemove(player));
     }
 
     @Override

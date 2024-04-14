@@ -30,7 +30,7 @@ public class ArsenalManager {
     }
 
     public static void removeArsenalEffects(Player player, Arsenal arsenal) {
-        arsenal.gears().stream().filter(Objects::nonNull).forEach(gear -> gear.onUnequip(player));
+        arsenal.gears().stream().filter(Objects::nonNull).forEach(gear -> gear.onRemove(player));
     }
 
     @SubscribeEvent

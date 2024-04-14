@@ -9,7 +9,7 @@ public interface GearType {
 
     void onEquip(Player player);
 
-    void onUnEquip(Player player);
+    void onRemove(Player player);
 
     void getTooltip(List<Component> tooltip);
 }

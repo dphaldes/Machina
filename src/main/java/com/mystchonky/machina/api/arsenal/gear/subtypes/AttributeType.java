@@ -47,7 +47,7 @@ public final class AttributeType implements GearType {
     }
 
     @Override
-    public void onUnEquip(Player player) {
+    public void onRemove(Player player) {
         var gearMap = this.getModifiers();
         var playerMap = player.getAttributes();
         gearMap.forEach((holder, modifier) -> {

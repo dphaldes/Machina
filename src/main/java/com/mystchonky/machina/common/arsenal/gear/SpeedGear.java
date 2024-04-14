@@ -9,9 +9,8 @@ import net.minecraft.world.entity.ai.attributes.Attributes;
 import java.util.UUID;
 
 public class SpeedGear extends AbstractGear {
-    public static final SpeedGear INSTANCE = new SpeedGear();
-
     public static final UUID GEAR_SPEED_UUID = UUID.fromString("ac0be5f9-6906-4d06-98a7-1114f11d46ff");
+    public static final SpeedGear INSTANCE = new SpeedGear();
 
     protected SpeedGear() {
         super(GearLibrary.SPEED);
