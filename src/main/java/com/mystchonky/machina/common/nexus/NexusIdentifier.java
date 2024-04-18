@@ -6,6 +6,7 @@ import dev.gigaherz.graph3.Mergeable;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 
+import javax.annotation.Nullable;
 import java.util.EnumMap;
 import java.util.Map;
 import java.util.Optional;
@@ -15,6 +16,7 @@ public class NexusIdentifier<T extends IExtendedNexusData<?>> implements GraphOb
     private final Map<Direction, IOState> ioStates = new EnumMap<>(Direction.class);
     BlockPos blockPos;
     T extendedNexusData;
+    @Nullable
     private Graph<Mergeable.Dummy> graph = null;
 
     public NexusIdentifier(BlockPos blockPos, T extendedNexusData) {
@@ -23,7 +25,7 @@ public class NexusIdentifier<T extends IExtendedNexusData<?>> implements GraphOb
     }
 
     @Override
-    public Graph<Mergeable.Dummy> getGraph() {
+    public @Nullable Graph<Mergeable.Dummy> getGraph() {
         return graph;
     }
 
@@ -44,7 +46,7 @@ public class NexusIdentifier<T extends IExtendedNexusData<?>> implements GraphOb
         ioStates.remove(direction);
     }
 
-    record IOState(Boolean insert, Boolean extract) {
+    public record IOState(Boolean insert, Boolean extract) {
         //        private static IOState of() {
         //            return new IOState(Optional.ofNullable(in), Optional.ofNullable(extract), control, redstoneChannel);
         //        }

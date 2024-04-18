@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractGear implements TooltipProvider {
-    public static final Codec<AbstractGear> CODEC = MachinaRegistries.GEAR_REGISTRY.byNameCodec();
-    public static final StreamCodec<RegistryFriendlyByteBuf, AbstractGear> STREAM_CODEC = ByteBufCodecs.registry(MachinaRegistries.GEAR_REGISTRY.key());
+    public static final Codec<AbstractGear> CODEC = MachinaRegistries.GEARS_REGISTRY.byNameCodec();
+    public static final StreamCodec<RegistryFriendlyByteBuf, AbstractGear> STREAM_CODEC = ByteBufCodecs.registry(MachinaRegistries.GEARS_REGISTRY.key());
     private final String id;
     private final List<GearType> subtypes = new ArrayList<>();
     @Nullable

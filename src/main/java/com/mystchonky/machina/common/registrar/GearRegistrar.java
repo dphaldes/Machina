@@ -12,7 +12,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class GearRegistrar {
 
-    public static final DeferredRegister<AbstractGear> GEARS = DeferredRegister.create(MachinaRegistries.GEAR_REGISTRY, Machina.MODID);
+    public static final DeferredRegister<AbstractGear> GEARS = DeferredRegister.create(MachinaRegistries.GEARS_REGISTRY, Machina.MODID);
     public static final DeferredRegister.Items GEAR_ITEMS = DeferredRegister.createItems(Machina.MODID);
 
     public static final DeferredHolder<AbstractGear, SpeedGear> SPEED = registerGear(SpeedGear.INSTANCE);

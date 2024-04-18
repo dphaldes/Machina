@@ -13,7 +13,7 @@ base {
     archivesName = mod_id
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
 // Access transformers
 //minecraft.accessTransformers.file rootProject.file('src/main/resources/META-INF/accesstransformer.cfg')
@@ -82,7 +82,7 @@ dependencies {
     implementation("net.neoforged:neoforge:${neo_version}")
 
     implementation("dev.gigaherz.graph:GraphLib3:${graphlib_version}")
-    jarJar("dev.gigaherz.graph:GraphLib3:${graphlib_version}")
+    jarJar("dev.gigaherz.graph:GraphLib3:[${graphlib_version},)")
 
 }
 

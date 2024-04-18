@@ -8,7 +8,6 @@ import com.mystchonky.machina.common.util.LimitedList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
-import net.minecraft.util.ExtraCodecs;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.Collections;
@@ -18,7 +17,7 @@ import java.util.stream.Collectors;
 public record Arsenal(LimitedList<ArsenalGearSlot> slots) {
     private static final int ARSENAL_SIZE = 8;
 
-    public static final Codec<Arsenal> CODEC = ExtraCodecs.sizeLimitedList(ArsenalGearSlot.CODEC.listOf(), ARSENAL_SIZE)
+    public static final Codec<Arsenal> CODEC = ArsenalGearSlot.CODEC.sizeLimitedListOf(ARSENAL_SIZE)
             .xmap(LimitedList::new, List::copyOf)
             .xmap(Arsenal::new, Arsenal::slots);
 

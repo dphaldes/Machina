@@ -8,9 +8,12 @@ import net.neoforged.neoforge.registries.NewRegistryEvent;
 import net.neoforged.neoforge.registries.RegistryBuilder;
 
 public class MachinaRegistries {
-    public static final Registry<AbstractGear> GEAR_REGISTRY = new RegistryBuilder<AbstractGear>(ResourceKey.createRegistryKey(Machina.prefix("gears"))).create();
+    public static final ResourceKey<Registry<AbstractGear>> GEARS = ResourceKey.createRegistryKey(Machina.prefix("gears"));
+    public static final Registry<AbstractGear> GEARS_REGISTRY = new RegistryBuilder<>(GEARS)
+            .sync(true)
+            .create();
 
     public static void register(final NewRegistryEvent event) {
-        event.register(GEAR_REGISTRY);
+        event.register(GEARS_REGISTRY);
     }
 }
