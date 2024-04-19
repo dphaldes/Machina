@@ -1,8 +1,7 @@
 package com.mystchonky.machina.common.network.messages;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.attachment.UnlockedGears;
-import com.mystchonky.machina.common.network.Message;
+import com.mystchonky.machina.common.armament.gear.UnlockedGears;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;

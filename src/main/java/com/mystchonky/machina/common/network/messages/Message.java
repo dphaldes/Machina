@@ -1,4 +1,4 @@
-package com.mystchonky.machina.common.network;
+package com.mystchonky.machina.common.network.messages;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;

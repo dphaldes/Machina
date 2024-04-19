@@ -1,6 +1,6 @@
 package com.mystchonky.machina.client.screen.widget;
 
-import com.mystchonky.machina.api.arsenal.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.gear.AbstractGear;
 import com.mystchonky.machina.client.screen.TooltipProvider;
 import com.mystchonky.machina.client.util.RenderHelper;
 import net.minecraft.client.gui.GuiGraphics;
@@ -33,7 +33,7 @@ public class ArsenalGearButton extends Button implements TooltipProvider {
     @Override
     public void getTooltip(List<Component> tooltip) {
         if (gear == null) return;
-        tooltip.add(Component.translatable(gear.getLocalizationKey()));
+        tooltip.add(Component.translatable(gear.localizationKey()));
         gear.getTooltip(tooltip);
     }
 }

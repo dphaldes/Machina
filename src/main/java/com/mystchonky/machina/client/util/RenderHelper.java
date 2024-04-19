@@ -3,7 +3,7 @@ package com.mystchonky.machina.client.util;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mystchonky.machina.api.arsenal.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.gear.AbstractGear;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.LightTexture;

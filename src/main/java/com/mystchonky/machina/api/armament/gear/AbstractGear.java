@@ -1,8 +1,8 @@
-package com.mystchonky.machina.api.arsenal.gear;
+package com.mystchonky.machina.api.armament.gear;
 
 import com.mojang.serialization.Codec;
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.api.arsenal.gear.subtypes.GearType;
+import com.mystchonky.machina.api.armament.gear.types.GearType;
 import com.mystchonky.machina.client.screen.TooltipProvider;
 import com.mystchonky.machina.common.item.GearItem;
 import com.mystchonky.machina.common.registrar.MachinaRegistries;
@@ -28,7 +28,7 @@ public abstract class AbstractGear implements TooltipProvider {
         this.id = id;
     }
 
-    public String getId() {
+    public String id() {
         return id;
     }
 
@@ -39,7 +39,7 @@ public abstract class AbstractGear implements TooltipProvider {
         return gearItem;
     }
 
-    public abstract String getDisplayName();
+    public abstract String displayName();
 
     protected boolean checkCompatibility(AbstractGear other) {
         return this != other;
@@ -72,10 +72,10 @@ public abstract class AbstractGear implements TooltipProvider {
 
     @Override
     public String toString() {
-        return getId();
+        return id();
     }
 
-    public final String getLocalizationKey() {
-        return "name." + Machina.MODID + "." + getId();
+    public final String localizationKey() {
+        return "name." + Machina.MODID + "." + id();
     }
 }

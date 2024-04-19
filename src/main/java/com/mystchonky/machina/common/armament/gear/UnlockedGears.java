@@ -1,7 +1,7 @@
-package com.mystchonky.machina.common.attachment;
+package com.mystchonky.machina.common.armament.gear;
 
 import com.mojang.serialization.Codec;
-import com.mystchonky.machina.api.arsenal.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.gear.AbstractGear;
 import com.mystchonky.machina.common.registrar.AttachmentRegistrar;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;

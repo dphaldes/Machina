@@ -1,8 +1,8 @@
-package com.mystchonky.machina.api.arsenal.gear.subtypes;
+package com.mystchonky.machina.api.armament.gear.types;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.mystchonky.machina.api.arsenal.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.gear.AbstractGear;
 import com.mystchonky.machina.client.util.FormattedAttribute;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
@@ -30,7 +30,7 @@ public final class AttributeType implements GearType {
     }
 
     public void addModifier(AbstractGear gear, Holder<Attribute> holder, double amount, AttributeModifier.Operation operation) {
-        builder.put(holder, new AttributeModifier(uuid, gear.getId(), amount, operation));
+        builder.put(holder, new AttributeModifier(uuid, gear.id(), amount, operation));
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.mystchonky.machina.common.network;
 
+import com.mystchonky.machina.common.network.messages.Message;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.server.MinecraftServer;

@@ -1,9 +1,8 @@
 package com.mystchonky.machina.common.network.messages;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.attachment.Arsenal;
-import com.mystchonky.machina.common.attachment.AttachmentManager;
-import com.mystchonky.machina.common.network.Message;
+import com.mystchonky.machina.common.armament.arsenal.Arsenal;
+import com.mystchonky.machina.common.network.NetworkedAttachments;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
@@ -27,6 +26,6 @@ public record MessageUpdateArsenal(Arsenal arsenal) implements Message {
     @Override
     public void onServerReceived(MinecraftServer minecraft, ServerPlayer player) {
         Arsenal.set(player, arsenal());
-        AttachmentManager.syncArsenal(player);
+        NetworkedAttachments.syncArsenal(player);
     }
 }

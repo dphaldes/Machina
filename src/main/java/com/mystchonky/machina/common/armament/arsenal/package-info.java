@@ -1,7 +1,7 @@
 @FieldsAreNonnullByDefault
 @MethodsReturnNonnullByDefault
 @ParametersAreNonnullByDefault
-package com.mystchonky.machina.common.arsenal.gear;
+package com.mystchonky.machina.common.armament.arsenal;
 
 import net.minecraft.FieldsAreNonnullByDefault;
 import net.minecraft.MethodsReturnNonnullByDefault;

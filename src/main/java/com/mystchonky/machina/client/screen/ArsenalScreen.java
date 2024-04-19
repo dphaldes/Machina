@@ -1,13 +1,12 @@
 package com.mystchonky.machina.client.screen;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.api.arsenal.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.gear.AbstractGear;
 import com.mystchonky.machina.client.screen.widget.ArsenalGearButton;
 import com.mystchonky.machina.client.screen.widget.GearButton;
-import com.mystchonky.machina.common.attachment.Arsenal;
-import com.mystchonky.machina.common.attachment.ArsenalGearSlot;
-import com.mystchonky.machina.common.attachment.AttachmentManager;
-import com.mystchonky.machina.common.attachment.UnlockedGears;
+import com.mystchonky.machina.common.armament.arsenal.Arsenal;
+import com.mystchonky.machina.common.armament.gear.UnlockedGears;
+import com.mystchonky.machina.common.network.NetworkedAttachments;
 import com.mystchonky.machina.common.registrar.LangRegistrar;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.AbstractWidget;
@@ -150,10 +149,10 @@ public class ArsenalScreen extends Screen {
     }
 
     private void applyButtonClicked(Button button) {
-        for (int i = 0; i < playerArsenal.slots().size(); i++) {
-            playerArsenal.slots().set(i, new ArsenalGearSlot(arsenalGearsList.get(i)));
+        for (int i = 0; i < playerArsenal.gears().size(); i++) {
+            playerArsenal.gears().set(i, arsenalGearsList.get(i));
         }
-        AttachmentManager.updateArsenal(playerArsenal);
+        NetworkedAttachments.updateArsenal(playerArsenal);
     }
 
     public void drawTooltip(GuiGraphics guiGraphics, int mouseX, int mouseY) {

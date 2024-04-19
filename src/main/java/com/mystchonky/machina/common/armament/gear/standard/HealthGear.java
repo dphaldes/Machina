@@ -1,8 +1,8 @@
-package com.mystchonky.machina.common.arsenal.gear;
+package com.mystchonky.machina.common.armament.gear.standard;
 
-import com.mystchonky.machina.api.arsenal.gear.AbstractGear;
-import com.mystchonky.machina.api.arsenal.gear.subtypes.AttributeType;
-import com.mystchonky.machina.common.arsenal.GearLibrary;
+import com.mystchonky.machina.api.armament.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.gear.types.AttributeType;
+import com.mystchonky.machina.common.armament.GearLibrary;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
@@ -22,7 +22,7 @@ public class HealthGear extends AbstractGear {
     }
 
     @Override
-    public String getDisplayName() {
+    public String displayName() {
         return "Health Gear";
     }
 }

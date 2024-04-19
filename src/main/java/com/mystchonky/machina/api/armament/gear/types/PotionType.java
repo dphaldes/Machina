@@ -1,4 +1,4 @@
-package com.mystchonky.machina.api.arsenal.gear.subtypes;
+package com.mystchonky.machina.api.armament.gear.types;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -17,7 +17,6 @@ public final class PotionType implements GearType {
     @Override
     public void onEquip(Player player) {
         player.addEffect(effectInstance);
-
     }
 
     @Override

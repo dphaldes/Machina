@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.api.arsenal.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.gear.AbstractGear;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 import net.neoforged.neoforge.registries.NewRegistryEvent;

@@ -1,4 +1,4 @@
-package com.mystchonky.machina.api.arsenal.gear.subtypes;
+package com.mystchonky.machina.api.armament.gear.types;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.entity.player.Player;

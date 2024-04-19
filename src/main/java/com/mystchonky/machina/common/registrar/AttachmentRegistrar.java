@@ -1,8 +1,8 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.attachment.Arsenal;
-import com.mystchonky.machina.common.attachment.UnlockedGears;
+import com.mystchonky.machina.common.armament.arsenal.Arsenal;
+import com.mystchonky.machina.common.armament.gear.UnlockedGears;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -14,7 +14,7 @@ public class AttachmentRegistrar {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, Machina.MODID);
 
     public static final Supplier<AttachmentType<Arsenal>> ARSENAL = ATTACHMENTS.register("arsenal",
-            () -> AttachmentType.builder(Arsenal::empty)
+            () -> AttachmentType.builder(Arsenal::create)
                     .serialize(Arsenal.CODEC)
                     .copyOnDeath()
                     .build());
