@@ -2,12 +2,10 @@ package com.mystchonky.machina.common.armament.arsenal;
 
 import com.mystchonky.machina.common.item.ExosuitArmorItem;
 import net.minecraft.world.entity.player.Player;
-import net.neoforged.fml.common.Mod;
 
 import java.util.Objects;
 import java.util.stream.StreamSupport;
 
-@Mod.EventBusSubscriber
 public class ArsenalController {
 
     public static boolean isWearingArmor(Player player) {

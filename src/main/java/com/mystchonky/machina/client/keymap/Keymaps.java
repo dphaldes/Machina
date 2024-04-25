@@ -5,12 +5,12 @@ import com.mystchonky.machina.Machina;
 import net.minecraft.client.KeyMapping;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import org.lwjgl.glfw.GLFW;
 
-@Mod.EventBusSubscriber(modid = Machina.MODID, value = Dist.CLIENT, bus = Mod.EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Machina.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class Keymaps {
 
     public static final KeyMapping KEY_PLAYER_ARSENAL = new KeyMapping("key.machina.key_arsenal",

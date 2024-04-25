@@ -5,10 +5,10 @@ import com.mystchonky.machina.client.screen.ScreenManager;
 import net.minecraft.client.Minecraft;
 import net.neoforged.api.distmarker.Dist;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.Mod;
+import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.TickEvent;
 
-@Mod.EventBusSubscriber(modid = Machina.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Machina.MODID, value = Dist.CLIENT)
 public class KeymapManager {
     private static final Minecraft minecraft = Minecraft.getInstance();
 

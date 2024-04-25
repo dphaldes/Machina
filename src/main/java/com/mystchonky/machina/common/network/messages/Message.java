@@ -1,16 +1,17 @@
 package com.mystchonky.machina.common.network.messages;
 
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 
-public interface Message extends CustomPacketPayload {
-    default void onClientReceived(Minecraft minecraft, Player player) {
+public sealed interface Message extends CustomPacketPayload {
+
+    non-sealed interface Server extends Message {
+        void onServerReceived(ServerPlayer player);
     }
 
-    default void onServerReceived(MinecraftServer server, ServerPlayer player) {
+    non-sealed interface Client extends Message {
+        void onClientReceived(Player player);
     }
 
 }

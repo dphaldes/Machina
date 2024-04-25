@@ -1,40 +1,35 @@
 package com.mystchonky.machina.common.network;
 
 import com.mystchonky.machina.common.network.messages.Message;
-import net.minecraft.client.Minecraft;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
-import net.neoforged.fml.LogicalSide;
-import net.neoforged.neoforge.network.handling.PlayPayloadContext;
+import net.neoforged.neoforge.network.handling.IPayloadContext;
 
 public class MessageHandler {
 
-    public static <T extends CustomPacketPayload> void handle(T payload, PlayPayloadContext ctx) {
-        if (ctx.flow().getReceptionSide() == LogicalSide.SERVER) {
-            ctx.workHandler().submitAsync(() -> {
-                handleServer(payload, ctx);
-            });
-        } else {
-            ctx.workHandler().submitAsync(() -> {
-                //separate class to avoid loading client code on server.
-                ClientMessageHandler.handleClient(payload, ctx);
-            });
+    public static <T extends CustomPacketPayload> void bidirectional(T payload, IPayloadContext context) {
+        if (context.flow().isServerbound()) {
+            server(payload, context);
+        } else if (context.flow().isClientbound()) {
+            client(payload, context);
         }
     }
 
-    public static <T extends CustomPacketPayload> void handleServer(T payload, PlayPayloadContext ctx) {
-        MinecraftServer server = ctx.level().get().getServer();
-        if (payload instanceof Message message)
-            message.onServerReceived(server, (ServerPlayer) ctx.player().get());
+    public static <T extends CustomPacketPayload> void server(T payload, IPayloadContext context) {
+        if (payload instanceof Message.Server message)
+            message.onServerReceived((ServerPlayer) context.player());
     }
 
-    public static class ClientMessageHandler {
+    public static <T extends CustomPacketPayload> void client(T payload, IPayloadContext context) {
+        Client.handle(payload, context);
+    }
 
-        public static <T extends CustomPacketPayload> void handleClient(T payload, PlayPayloadContext ctx) {
-            Minecraft minecraft = Minecraft.getInstance();
-            if (payload instanceof Message message)
-                message.onClientReceived(minecraft, minecraft.player);
+    private static class Client {
+
+        public static <T extends CustomPacketPayload> void handle(T payload, IPayloadContext context) {
+            if (payload instanceof Message.Client message)
+                message.onClientReceived(context.player());
         }
+
     }
 }

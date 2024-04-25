@@ -6,10 +6,9 @@ import com.mystchonky.machina.common.network.NetworkedAttachments;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
-import net.minecraft.server.MinecraftServer;
 import net.minecraft.server.level.ServerPlayer;
 
-public record MessageUpdateArsenal(Arsenal arsenal) implements Message {
+public record MessageUpdateArsenal(Arsenal arsenal) implements Message.Server {
 
     public static final Type<MessageUpdateArsenal> TYPE = new Type<>(Machina.prefix("update_arsenal"));
     public static final StreamCodec<RegistryFriendlyByteBuf, MessageUpdateArsenal> STREAM_CODEC = StreamCodec.composite(
@@ -24,7 +23,7 @@ public record MessageUpdateArsenal(Arsenal arsenal) implements Message {
     }
 
     @Override
-    public void onServerReceived(MinecraftServer minecraft, ServerPlayer player) {
+    public void onServerReceived(ServerPlayer player) {
         Arsenal.set(player, arsenal());
         NetworkedAttachments.syncArsenal(player);
     }
