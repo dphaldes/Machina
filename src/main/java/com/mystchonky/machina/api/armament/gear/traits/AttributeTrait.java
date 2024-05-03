@@ -1,4 +1,4 @@
-package com.mystchonky.machina.api.armament.gear.types;
+package com.mystchonky.machina.api.armament.gear.traits;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
@@ -14,12 +14,12 @@ import javax.annotation.Nullable;
 import java.util.List;
 import java.util.UUID;
 
-public final class AttributeType implements GearType {
+public final class AttributeTrait implements Trait {
     private final UUID uuid;
     private final ImmutableMultimap.Builder<Holder<Attribute>, AttributeModifier> builder = new ImmutableMultimap.Builder<>();
     private @Nullable Multimap<Holder<Attribute>, AttributeModifier> modifiers = null;
 
-    public AttributeType(UUID uuid) {
+    public AttributeTrait(UUID uuid) {
         this.uuid = uuid;
     }
 

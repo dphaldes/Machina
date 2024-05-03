@@ -1,4 +1,4 @@
-package com.mystchonky.machina.common.armament;
+package com.mystchonky.machina.common.armament.gear;
 
 public class GearLibrary {
     public static final String SPEED = name("speed");

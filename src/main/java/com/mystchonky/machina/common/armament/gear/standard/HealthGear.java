@@ -1,8 +1,8 @@
 package com.mystchonky.machina.common.armament.gear.standard;
 
 import com.mystchonky.machina.api.armament.gear.AbstractGear;
-import com.mystchonky.machina.api.armament.gear.types.AttributeType;
-import com.mystchonky.machina.common.armament.GearLibrary;
+import com.mystchonky.machina.api.armament.gear.traits.AttributeTrait;
+import com.mystchonky.machina.common.armament.gear.GearLibrary;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
@@ -15,10 +15,10 @@ public class HealthGear extends AbstractGear {
     protected HealthGear() {
         super(GearLibrary.HEALTH);
 
-        var attribute = new AttributeType(GEAR_HEALTH_UUID);
+        var attribute = new AttributeTrait(GEAR_HEALTH_UUID);
         attribute.addModifier(this, Attributes.MAX_HEALTH, 10, AttributeModifier.Operation.ADD_VALUE);
         attribute.addModifier(this, Attributes.SCALE, 0.5, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-        addSubType(attribute);
+        addTrait(attribute);
     }
 
     @Override

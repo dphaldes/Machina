@@ -1,4 +1,4 @@
-package com.mystchonky.machina.api.armament.gear.types;
+package com.mystchonky.machina.api.armament.gear.traits;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
@@ -7,10 +7,10 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
 
-public final class PotionType implements GearType {
+public final class PotionTrait implements Trait {
     private final MobEffectInstance effectInstance;
 
-    public PotionType(MobEffectInstance effectInstance) {
+    public PotionTrait(MobEffectInstance effectInstance) {
         this.effectInstance = effectInstance;
     }
 

@@ -3,6 +3,7 @@ package com.mystchonky.machina.common.registrar;
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.common.armament.arsenal.Arsenal;
 import com.mystchonky.machina.common.armament.gear.UnlockedGears;
+import com.mystchonky.machina.common.armament.perk.Perks;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -22,6 +23,12 @@ public class AttachmentRegistrar {
     public static final Supplier<AttachmentType<UnlockedGears>> UNLOCKED_GEARS = ATTACHMENTS.register("unlocked_gears",
             () -> AttachmentType.builder(UnlockedGears::create)
                     .serialize(UnlockedGears.CODEC)
+                    .copyOnDeath()
+                    .build());
+
+    public static final Supplier<AttachmentType<Perks>> PERKS = ATTACHMENTS.register("perks",
+            () -> AttachmentType.builder(Perks::create)
+                    .serialize(Perks.CODEC)
                     .copyOnDeath()
                     .build());
 

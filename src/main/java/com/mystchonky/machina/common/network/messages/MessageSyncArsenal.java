@@ -1,6 +1,7 @@
 package com.mystchonky.machina.common.network.messages;
 
 import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.common.armament.Armament;
 import com.mystchonky.machina.common.armament.arsenal.Arsenal;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -28,6 +29,6 @@ public record MessageSyncArsenal(Arsenal arsenal) implements Message.Client {
 
     @Override
     public void onClientReceived(Player player) {
-        Arsenal.set(player, arsenal());
+        Armament.updateArsenal(player, arsenal());
     }
 }

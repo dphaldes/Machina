@@ -12,6 +12,7 @@ public class LangRegistrar {
     public static final Map<String, String> entries = new HashMap<>();
 
     public static final LangEntry ARSENAL_SCREEN = addTranslation("title", "arsenal", "Arsenal Screen");
+    public static final LangEntry ARMOR_MISSING = addTranslation("text", "armor_missing", "Not wearing the full set");
 
     // REGION ATTRIBUTES
 

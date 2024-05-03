@@ -6,14 +6,9 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.function.Predicate;
 
-public class LimitedList<E> extends ArrayList<E> {
+public class SizedList<E> extends ArrayList<E> {
 
-
-    public LimitedList(int initialCapacity) {
-        throw new UnsupportedOperationException();
-    }
-
-    public LimitedList(@NotNull Collection<? extends E> c) {
+    public SizedList(@NotNull Collection<? extends E> c) {
         super(c);
     }
 

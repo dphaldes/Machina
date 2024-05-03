@@ -1,8 +1,8 @@
 package com.mystchonky.machina.common.armament.gear.standard;
 
 import com.mystchonky.machina.api.armament.gear.AbstractGear;
-import com.mystchonky.machina.api.armament.gear.types.PotionType;
-import com.mystchonky.machina.common.armament.GearLibrary;
+import com.mystchonky.machina.api.armament.gear.traits.PotionTrait;
+import com.mystchonky.machina.common.armament.gear.GearLibrary;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 
@@ -14,11 +14,11 @@ public class BreathGear extends AbstractGear {
     protected BreathGear() {
         super(GearLibrary.WATER_BREATH);
 
-        var water = new PotionType(WATER_BREATHING);
-        addSubType(water);
+        var water = new PotionTrait(WATER_BREATHING);
+        addTrait(water);
 
-        var regeneration = new PotionType(REGENERATION);
-        addSubType(regeneration);
+        var regeneration = new PotionTrait(REGENERATION);
+        addTrait(regeneration);
     }
 
     @Override

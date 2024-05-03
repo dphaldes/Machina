@@ -2,7 +2,7 @@ package com.mystchonky.machina.api.armament.gear;
 
 import com.mojang.serialization.Codec;
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.api.armament.gear.types.GearType;
+import com.mystchonky.machina.api.armament.gear.traits.Trait;
 import com.mystchonky.machina.client.screen.TooltipProvider;
 import com.mystchonky.machina.common.item.GearItem;
 import com.mystchonky.machina.common.registrar.MachinaRegistries;
@@ -20,7 +20,7 @@ public abstract class AbstractGear implements TooltipProvider {
     public static final Codec<AbstractGear> CODEC = MachinaRegistries.GEARS_REGISTRY.byNameCodec();
     public static final StreamCodec<RegistryFriendlyByteBuf, AbstractGear> STREAM_CODEC = ByteBufCodecs.registry(MachinaRegistries.GEARS_REGISTRY.key());
     private final String id;
-    private final List<GearType> subtypes = new ArrayList<>();
+    private final List<Trait> traits = new ArrayList<>();
     @Nullable
     private GearItem gearItem;
 
@@ -49,25 +49,32 @@ public abstract class AbstractGear implements TooltipProvider {
         return this.checkCompatibility(other) && other.checkCompatibility(this);
     }
 
-    public final <T extends GearType> void addSubType(T type) {
-        subtypes.add(type);
+    public final <T extends Trait> void addTrait(T type) {
+        traits.add(type);
     }
 
     public final void onEquip(Player player) {
         if (player.level().isClientSide()) return;
 
-        subtypes.forEach(it -> it.onEquip(player));
+        // handle traits
+        traits.forEach(it -> it.onEquip(player));
+
     }
 
     public final void onRemove(Player player) {
         if (player.level().isClientSide()) return;
 
-        subtypes.forEach(it -> it.onRemove(player));
+        // handle traits
+        traits.forEach(it -> it.onRemove(player));
     }
 
     @Override
     public final void getTooltip(List<Component> tooltip) {
-        subtypes.forEach(it -> it.getTooltip(tooltip));
+        traits.forEach(it -> it.getTooltip(tooltip));
+    }
+
+    public List<Trait> getTraits() {
+        return traits;
     }
 
     @Override

@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.event;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.armament.arsenal.ArsenalController;
+import com.mystchonky.machina.common.armament.Armament;
 import com.mystchonky.machina.common.item.ExosuitArmorItem;
 import com.mystchonky.machina.common.network.NetworkedAttachments;
 import net.minecraft.server.level.ServerPlayer;
@@ -39,10 +39,10 @@ public class PlayerEventHandler {
         if (!(event.getEntity() instanceof Player player)) return;
 
         if (event.getFrom().getItem() instanceof ExosuitArmorItem || event.getTo().getItem() instanceof ExosuitArmorItem) {
-            if (ArsenalController.isWearingArmor(player)) {
-                ArsenalController.activate(player);
+            if (Armament.isWearingArmor(player)) {
+                Armament.activateArmor(player);
             } else {
-                ArsenalController.deactivate(player);
+                Armament.deactivateArmor(player);
             }
         }
     }

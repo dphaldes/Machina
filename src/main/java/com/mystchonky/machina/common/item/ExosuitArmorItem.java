@@ -1,6 +1,9 @@
 package com.mystchonky.machina.common.item;
 
+import com.mystchonky.machina.common.armament.perk.PerkLibrary;
+import com.mystchonky.machina.common.armament.perk.Perks;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.ItemStack;
@@ -21,4 +24,19 @@ public class ExosuitArmorItem extends ArmorItem {
         return false;
     }
 
+    @Override
+    public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
+        if (!(entity instanceof Player player))
+            return false;
+
+        return Perks.get(player).map().getOrDefault(PerkLibrary.GLIDE, false);
+    }
+
+    @Override
+    public boolean canElytraFly(ItemStack stack, LivingEntity entity) {
+        if (!(entity instanceof Player player))
+            return false;
+
+        return Perks.get(player).map().getOrDefault(PerkLibrary.GLIDE, false);
+    }
 }
