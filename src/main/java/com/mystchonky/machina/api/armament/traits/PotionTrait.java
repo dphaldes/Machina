@@ -1,5 +1,6 @@
 package com.mystchonky.machina.api.armament.traits;
 
+import com.mystchonky.machina.common.registrar.LangRegistrar;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.effect.MobEffectInstance;
@@ -8,24 +9,25 @@ import net.minecraft.world.entity.player.Player;
 import java.util.List;
 
 public final class PotionTrait implements Trait {
-    private final MobEffectInstance effectInstance;
+    private final MobEffectInstance effect;
 
-    public PotionTrait(MobEffectInstance effectInstance) {
-        this.effectInstance = effectInstance;
+    public PotionTrait(MobEffectInstance effect) {
+        this.effect = effect;
     }
 
     @Override
     public void onEquip(Player player) {
-        player.addEffect(effectInstance);
+        player.addEffect(effect);
     }
 
     @Override
     public void onRemove(Player player) {
-        player.removeEffect(effectInstance.getEffect());
+        player.removeEffect(effect.getEffect());
     }
 
     @Override
     public void getTooltip(List<Component> tooltip) {
-        tooltip.add(effectInstance.getEffect().value().getDisplayName().copy().withStyle(ChatFormatting.GOLD));
+        tooltip.add(Component.translatable(LangRegistrar.POTION.key(), effect.getEffect().value().getDisplayName())
+                .withStyle(ChatFormatting.GREEN));
     }
 }

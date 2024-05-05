@@ -14,14 +14,17 @@ public class LangRegistrar {
     public static final LangEntry ARSENAL_SCREEN = addTranslation("title", "arsenal", "Arsenal Screen");
     public static final LangEntry ARMOR_MISSING = addTranslation("text", "armor_missing", "Not wearing the full set");
 
-    // REGION ATTRIBUTES
+    // REGION TRAITS
 
-    public static final LangEntry ATTRIBUTE_ADD = addTranslation("attribute", "add", "+%s %s");
-    public static final LangEntry ATTRIBUTE_ADD_N = addTranslation("attribute", "add_n", "-%s %s");
-    public static final LangEntry ATTRIBUTE_MULTIPLY_BASE = addTranslation("attribute", "multiply_base", "+%s%% %s");
-    public static final LangEntry ATTRIBUTE_MULTIPLY_BASE_N = addTranslation("attribute", "multiply_base_n", "-%s%% %s");
-    public static final LangEntry ATTRIBUTE_MULTIPLY_TOTAL = addTranslation("attribute", "multiply_total", "+%s%% %s");
-    public static final LangEntry ATTRIBUTE_MULTIPLY_TOTAL_N = addTranslation("attribute", "multiply_total_n", "-%s%% %s");
+    public static final LangEntry ATTRIBUTE_ADD = addTranslation("trait", "attribute_add", "+%s %s");
+    public static final LangEntry ATTRIBUTE_ADD_N = addTranslation("trait", "attribute_add_n", "-%s %s");
+    public static final LangEntry ATTRIBUTE_MULTIPLY_BASE = addTranslation("trait", "attribute_multiply_base", "+%s%% %s");
+    public static final LangEntry ATTRIBUTE_MULTIPLY_BASE_N = addTranslation("trait", "attribute_multiply_base_n", "-%s%% %s");
+    public static final LangEntry ATTRIBUTE_MULTIPLY_TOTAL = addTranslation("trait", "attribute_multiply_total", "+%s%% %s");
+    public static final LangEntry ATTRIBUTE_MULTIPLY_TOTAL_N = addTranslation("trait", "attribute_multiply_total_n", "-%s%% %s");
+
+    public static final LangEntry POTION = addTranslation("trait", "potion", "Applies %s");
+    public static final LangEntry PERK = addTranslation("trait", "perk", "Provides %s");
 
     // ENDREGION
 

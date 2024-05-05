@@ -1,10 +1,4 @@
 {
-  "attribute.machina.add": "+%s %s",
-  "attribute.machina.add_n": "-%s %s",
-  "attribute.machina.multiply_base": "+%s%% %s",
-  "attribute.machina.multiply_base_n": "-%s%% %s",
-  "attribute.machina.multiply_total": "+%s%% %s",
-  "attribute.machina.multiply_total_n": "-%s%% %s",
   "item.machina.exo_boots": "EXO Boots",
   "item.machina.exo_helmet": "EXO Helmet",
   "item.machina.exo_leggings": "EXO Leggings",
@@ -17,6 +11,16 @@
   "name.machina.gear_glide": "Glide Gear",
   "name.machina.gear_health": "Health Gear",
   "name.machina.gear_speed": "Speed Gear",
+  "perk.machina.gilded": "Gilded",
+  "perk.machina.glide": "Glide",
   "text.machina.armor_missing": "Not wearing the full set",
-  "title.machina.arsenal": "Arsenal Screen"
+  "title.machina.arsenal": "Arsenal Screen",
+  "trait.machina.attribute_add": "+%s %s",
+  "trait.machina.attribute_add_n": "-%s %s",
+  "trait.machina.attribute_multiply_base": "+%s%% %s",
+  "trait.machina.attribute_multiply_base_n": "-%s%% %s",
+  "trait.machina.attribute_multiply_total": "+%s%% %s",
+  "trait.machina.attribute_multiply_total_n": "-%s%% %s",
+  "trait.machina.perk": "Provides %s",
+  "trait.machina.potion": "Applies %s"
 }
