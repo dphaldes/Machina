@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.armament.gear;
 
 import com.mojang.serialization.Codec;
-import com.mystchonky.machina.api.armament.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.AbstractGear;
 import com.mystchonky.machina.common.registrar.AttachmentRegistrar;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -11,24 +11,22 @@ import net.minecraft.world.entity.player.Player;
 import java.util.ArrayList;
 import java.util.List;
 
-public record UnlockedGears(ArrayList<AbstractGear> gears) {
-    public static final Codec<UnlockedGears> CODEC = AbstractGear.CODEC.listOf()
-            .xmap(ArrayList::new, List::copyOf)
-            .xmap(UnlockedGears::new, UnlockedGears::gears);
+public final class UnlockedGears {
+    public static final Codec<ArrayList<AbstractGear>> CODEC =
+            AbstractGear.CODEC.listOf().xmap(ArrayList::new, List::copyOf);
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, UnlockedGears> STREAM_CODEC = AbstractGear.STREAM_CODEC.apply(ByteBufCodecs.list())
-            .map(ArrayList::new, List::copyOf)
-            .map(UnlockedGears::new, UnlockedGears::gears);
+    public static final StreamCodec<RegistryFriendlyByteBuf, ArrayList<AbstractGear>> STREAM_CODEC =
+            AbstractGear.STREAM_CODEC.apply(ByteBufCodecs.list()).map(ArrayList::new, List::copyOf);
 
-    public static UnlockedGears create() {
-        return new UnlockedGears(new ArrayList<>());
+    public static ArrayList<AbstractGear> create() {
+        return new ArrayList<>();
     }
 
-    public static UnlockedGears get(Player player) {
+    public static ArrayList<AbstractGear> get(Player player) {
         return player.getData(AttachmentRegistrar.UNLOCKED_GEARS);
     }
 
-    public static void set(Player player, UnlockedGears gears) {
+    public static void set(Player player, ArrayList<AbstractGear> gears) {
         player.setData(AttachmentRegistrar.UNLOCKED_GEARS, gears);
     }
 }

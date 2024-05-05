@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.armament.gear.standard;
 
-import com.mystchonky.machina.api.armament.gear.AbstractGear;
-import com.mystchonky.machina.api.armament.gear.traits.PotionTrait;
+import com.mystchonky.machina.api.armament.AbstractGear;
+import com.mystchonky.machina.api.armament.traits.PotionTrait;
 import com.mystchonky.machina.common.armament.gear.GearLibrary;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;

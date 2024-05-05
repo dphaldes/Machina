@@ -1,30 +1,25 @@
 package com.mystchonky.machina.common.armament.perk;
 
 import com.mojang.serialization.Codec;
+import com.mystchonky.machina.api.armament.Perk;
 import com.mystchonky.machina.common.registrar.AttachmentRegistrar;
-import io.netty.buffer.ByteBuf;
-import net.minecraft.network.codec.ByteBufCodecs;
-import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.HashMap;
+import java.util.List;
 
-public record Perks(HashMap<Perk, Boolean> map) {
+public final class Perks {
 
-    public static final Codec<Perks> CODEC = Codec.unboundedMap(Perk.CODEC, Codec.BOOL).xmap(HashMap::new, it -> it).xmap(Perks::new, Perks::map);
+    public static final Codec<List<Perk>> CODEC = Perk.CODEC.listOf();
 
-    public static final StreamCodec<ByteBuf, Perks> STREAM_CODEC =
-            ByteBufCodecs.map(HashMap::new, Perk.STREAM_CODEC, ByteBufCodecs.BOOL).map(Perks::new, Perks::map);
-
-    public static Perks create() {
-        return new Perks(new HashMap<>());
+    public static List<Perk> create() {
+        return List.of();
     }
 
-    public static Perks get(Player player) {
+    public static List<Perk> get(Player player) {
         return player.getData(AttachmentRegistrar.PERKS);
     }
 
-    public static void set(Player player, Perks perks) {
+    public static void set(Player player, List<Perk> perks) {
         player.setData(AttachmentRegistrar.PERKS, perks);
     }
 }

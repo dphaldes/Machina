@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.armament.arsenal;
 
 import com.mojang.serialization.Codec;
-import com.mystchonky.machina.api.armament.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.AbstractGear;
 import com.mystchonky.machina.common.util.Codecs;
 import com.mystchonky.machina.common.util.Optionals;
 import com.mystchonky.machina.common.util.SizedList;

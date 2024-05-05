@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.api.armament.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.AbstractGear;
 import com.mystchonky.machina.common.armament.gear.standard.BreathGear;
 import com.mystchonky.machina.common.armament.gear.standard.GlideGear;
 import com.mystchonky.machina.common.armament.gear.standard.HealthGear;

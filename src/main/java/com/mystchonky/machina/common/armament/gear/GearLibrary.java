@@ -6,7 +6,7 @@ public class GearLibrary {
     public static final String GLIDE = name("glide");
     public static final String HEALTH = name("health");
 
-    public static String name(String id) {
+    private static String name(String id) {
         return "gear_" + id;
     }
 }

@@ -12,11 +12,8 @@ import net.minecraft.server.level.ServerPlayer;
 public record MessageUpdateArsenal(Arsenal arsenal) implements Message.Server {
 
     public static final Type<MessageUpdateArsenal> TYPE = new Type<>(Machina.prefix("update_arsenal"));
-    public static final StreamCodec<RegistryFriendlyByteBuf, MessageUpdateArsenal> STREAM_CODEC = StreamCodec.composite(
-            Arsenal.STREAM_CODEC,
-            MessageUpdateArsenal::arsenal,
-            MessageUpdateArsenal::new
-    );
+    public static final StreamCodec<RegistryFriendlyByteBuf, MessageUpdateArsenal> STREAM_CODEC =
+            Arsenal.STREAM_CODEC.map(MessageUpdateArsenal::new, MessageUpdateArsenal::arsenal);
 
     @Override
     public Type<? extends CustomPacketPayload> type() {

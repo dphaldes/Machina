@@ -10,12 +10,9 @@ import net.minecraft.world.entity.player.Player;
 
 public record MessageSyncArsenal(Arsenal arsenal) implements Message.Client {
 
-    public static final CustomPacketPayload.Type<MessageSyncArsenal> TYPE = new Type<>(Machina.prefix("sync_arsenal"));
-    public static final StreamCodec<RegistryFriendlyByteBuf, MessageSyncArsenal> STREAM_CODEC = StreamCodec.composite(
-            Arsenal.STREAM_CODEC,
-            MessageSyncArsenal::arsenal,
-            MessageSyncArsenal::new
-    );
+    public static final Type<MessageSyncArsenal> TYPE = new Type<>(Machina.prefix("sync_arsenal"));
+    public static final StreamCodec<RegistryFriendlyByteBuf, MessageSyncArsenal> STREAM_CODEC =
+            Arsenal.STREAM_CODEC.map(MessageSyncArsenal::new, MessageSyncArsenal::arsenal);
 
     public static MessageSyncArsenal create(Player player) {
         Arsenal arsenal = Arsenal.get(player);

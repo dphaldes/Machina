@@ -1,6 +1,6 @@
 package com.mystchonky.machina.client.screen.widget;
 
-import com.mystchonky.machina.api.armament.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.AbstractGear;
 import com.mystchonky.machina.client.screen.TooltipProvider;
 import com.mystchonky.machina.client.util.RenderHelper;
 import net.minecraft.client.gui.GuiGraphics;

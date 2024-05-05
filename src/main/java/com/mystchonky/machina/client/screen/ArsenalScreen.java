@@ -1,7 +1,7 @@
 package com.mystchonky.machina.client.screen;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.api.armament.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.AbstractGear;
 import com.mystchonky.machina.client.screen.widget.ArsenalGearButton;
 import com.mystchonky.machina.client.screen.widget.GearButton;
 import com.mystchonky.machina.common.armament.arsenal.Arsenal;
@@ -47,7 +47,7 @@ public class ArsenalScreen extends Screen {
         super(LangRegistrar.ARSENAL_SCREEN.component());
         this.player = player;
         playerArsenal = Arsenal.get(player);
-        unlockedGearsList = new ArrayList<>(UnlockedGears.get(player).gears());
+        unlockedGearsList = new ArrayList<>(UnlockedGears.get(player));
         arsenalGearsList = new ArrayList<>(Arsenal.get(player).gears());
 
         updateNumPages();

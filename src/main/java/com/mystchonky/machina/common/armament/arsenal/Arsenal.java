@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.armament.arsenal;
 
 import com.mojang.serialization.Codec;
-import com.mystchonky.machina.api.armament.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.AbstractGear;
 import com.mystchonky.machina.common.registrar.AttachmentRegistrar;
 import com.mystchonky.machina.common.util.SizedList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -16,7 +16,8 @@ public record Arsenal(SizedList<AbstractGear> gears) {
 
     public static final Codec<Arsenal> CODEC = ExtraSerializers.GEARS_CODEC.xmap(Arsenal::new, Arsenal::gears);
 
-    public static final StreamCodec<RegistryFriendlyByteBuf, Arsenal> STREAM_CODEC = ExtraSerializers.GEARS_STREAM_CODEC.map(Arsenal::new, Arsenal::gears);
+    public static final StreamCodec<RegistryFriendlyByteBuf, Arsenal> STREAM_CODEC =
+            ExtraSerializers.GEARS_STREAM_CODEC.map(Arsenal::new, Arsenal::gears);
 
     public static Arsenal create() {
         List<AbstractGear> slots = Collections.nCopies(ARSENAL_SIZE, null);

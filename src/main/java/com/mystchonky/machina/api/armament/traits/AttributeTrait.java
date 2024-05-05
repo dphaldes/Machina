@@ -1,8 +1,8 @@
-package com.mystchonky.machina.api.armament.gear.traits;
+package com.mystchonky.machina.api.armament.traits;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
-import com.mystchonky.machina.api.armament.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.AbstractGear;
 import com.mystchonky.machina.client.util.FormattedAttribute;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;

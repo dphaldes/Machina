@@ -1,6 +1,6 @@
 package com.mystchonky.machina.common.item;
 
-import com.mystchonky.machina.api.armament.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.AbstractGear;
 import com.mystchonky.machina.common.armament.gear.UnlockedGears;
 import com.mystchonky.machina.common.network.NetworkedAttachments;
 import net.minecraft.network.chat.Component;
@@ -24,11 +24,11 @@ public class GearItem extends Item {
         if (level.isClientSide())
             return super.use(level, player, hand);
 
-        UnlockedGears unlocked = UnlockedGears.get(player);
-        if (!unlocked.gears().contains(gear)) {
-            unlocked.gears().add(gear);
+        var unlockedGears = UnlockedGears.get(player);
+        if (!unlockedGears.contains(gear)) {
+            unlockedGears.add(gear);
         } else {
-            unlocked.gears().remove(gear);
+            unlockedGears.remove(gear);
         }
         NetworkedAttachments.syncGears(player);
         player.sendSystemMessage(Component.literal("WOWOWOA"));

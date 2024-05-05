@@ -3,7 +3,7 @@ package com.mystchonky.machina.common.command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import com.mystchonky.machina.api.armament.gear.AbstractGear;
+import com.mystchonky.machina.api.armament.AbstractGear;
 import com.mystchonky.machina.common.armament.gear.UnlockedGears;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -31,7 +31,7 @@ public class CommandManager {
 
     private static int getUnlockedGears(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = EntityArgument.getPlayer(context, PLAYER);
-        List<AbstractGear> gears = UnlockedGears.get(player).gears();
+        List<AbstractGear> gears = UnlockedGears.get(player);
         context.getSource().sendSuccess(() -> Component.literal(gears.toString()), true);
         return 0;
     }

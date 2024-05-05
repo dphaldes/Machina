@@ -1,8 +1,8 @@
-package com.mystchonky.machina.api.armament.gear;
+package com.mystchonky.machina.api.armament;
 
 import com.mojang.serialization.Codec;
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.api.armament.gear.traits.Trait;
+import com.mystchonky.machina.api.armament.traits.Trait;
 import com.mystchonky.machina.client.screen.TooltipProvider;
 import com.mystchonky.machina.common.item.GearItem;
 import com.mystchonky.machina.common.registrar.MachinaRegistries;

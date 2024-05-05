@@ -1,4 +1,4 @@
-package com.mystchonky.machina.api.armament.gear.traits;
+package com.mystchonky.machina.api.armament.traits;
 
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

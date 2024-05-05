@@ -29,7 +29,7 @@ public class ExosuitArmorItem extends ArmorItem {
         if (!(entity instanceof Player player))
             return false;
 
-        return Perks.get(player).map().getOrDefault(PerkLibrary.GLIDE, false);
+        return Perks.get(player).contains(PerkLibrary.GLIDE);
     }
 
     @Override
@@ -37,6 +37,7 @@ public class ExosuitArmorItem extends ArmorItem {
         if (!(entity instanceof Player player))
             return false;
 
-        return Perks.get(player).map().getOrDefault(PerkLibrary.GLIDE, false);
+        return Perks.get(player).contains(PerkLibrary.GLIDE);
+
     }
 }

@@ -17,5 +17,6 @@
   "name.machina.gear_glide": "Glide Gear",
   "name.machina.gear_health": "Health Gear",
   "name.machina.gear_speed": "Speed Gear",
+  "text.machina.armor_missing": "Not wearing the full set",
   "title.machina.arsenal": "Arsenal Screen"
 }
