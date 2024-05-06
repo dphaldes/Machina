@@ -4,7 +4,6 @@ import com.mystchonky.machina.api.armament.AbstractGear;
 import com.mystchonky.machina.api.armament.traits.AttributeTrait;
 import com.mystchonky.machina.api.armament.traits.PerkTrait;
 import com.mystchonky.machina.api.armament.traits.PotionTrait;
-import com.mystchonky.machina.common.armament.gear.GearLibrary;
 import com.mystchonky.machina.common.armament.perk.PerkLibrary;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
@@ -16,10 +15,9 @@ import java.util.UUID;
 public class SpeedGear extends AbstractGear {
     public static final UUID GEAR_SPEED_UUID = UUID.fromString("ac0be5f9-6906-4d06-98a7-1114f11d46ff");
     private static final MobEffectInstance REGENERATION = new MobEffectInstance(MobEffects.REGENERATION, -1, 0, true, true);
-    public static final SpeedGear INSTANCE = new SpeedGear();
 
-    protected SpeedGear() {
-        super(GearLibrary.SPEED);
+    public SpeedGear() {
+        super("speed");
 
         var attribute = new AttributeTrait(GEAR_SPEED_UUID);
         attribute.addModifier(this, Attributes.MOVEMENT_SPEED, 0.6, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);

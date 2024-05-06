@@ -2,14 +2,12 @@ package com.mystchonky.machina.common.armament.gear.standard;
 
 import com.mystchonky.machina.api.armament.AbstractGear;
 import com.mystchonky.machina.api.armament.traits.PerkTrait;
-import com.mystchonky.machina.common.armament.gear.GearLibrary;
 import com.mystchonky.machina.common.armament.perk.PerkLibrary;
 
 public class GlideGear extends AbstractGear {
-    public static final GlideGear INSTANCE = new GlideGear();
 
-    protected GlideGear() {
-        super(GearLibrary.GLIDE);
+    public GlideGear() {
+        super("glide");
 
         addTrait(new PerkTrait(PerkLibrary.GLIDE));
     }

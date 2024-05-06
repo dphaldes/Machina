@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "machina:item/gear_glide"
+    "layer0": "machina:item/gear/health"
   }
 }

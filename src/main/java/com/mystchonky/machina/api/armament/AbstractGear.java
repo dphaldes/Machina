@@ -24,7 +24,7 @@ public abstract class AbstractGear implements TooltipProvider {
     @Nullable
     private GearItem gearItem;
 
-    protected AbstractGear(String id) {
+    public AbstractGear(String id) {
         this.id = id;
     }
 

@@ -2,6 +2,7 @@ package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.api.armament.AbstractGear;
+import com.mystchonky.machina.common.armament.gear.Gears;
 import com.mystchonky.machina.common.armament.gear.standard.BreathGear;
 import com.mystchonky.machina.common.armament.gear.standard.GlideGear;
 import com.mystchonky.machina.common.armament.gear.standard.HealthGear;
@@ -10,15 +11,17 @@ import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
+import java.util.function.Supplier;
+
 public class GearRegistrar {
 
     public static final DeferredRegister<AbstractGear> GEARS = DeferredRegister.create(MachinaRegistries.GEARS_REGISTRY, Machina.MODID);
     public static final DeferredRegister.Items GEAR_ITEMS = DeferredRegister.createItems(Machina.MODID);
 
-    public static final DeferredHolder<AbstractGear, SpeedGear> SPEED = registerGear(SpeedGear.INSTANCE);
-    public static final DeferredHolder<AbstractGear, BreathGear> BREATH = registerGear(BreathGear.INSTANCE);
-    public static final DeferredHolder<AbstractGear, GlideGear> GLIDE = registerGear(GlideGear.INSTANCE);
-    public static final DeferredHolder<AbstractGear, HealthGear> HEALTH = registerGear(HealthGear.INSTANCE);
+    public static final Supplier<SpeedGear> SPEED = registerGear(Gears.SPEED);
+    public static final Supplier<BreathGear> BREATH = registerGear(Gears.WATER_BREATH);
+    public static final Supplier<GlideGear> GLIDE = registerGear(Gears.GLIDE);
+    public static final Supplier<HealthGear> HEALTH = registerGear(Gears.HEALTH);
 
     private static <T extends AbstractGear> DeferredHolder<AbstractGear, T> registerGear(T gear) {
         final var holder = GEARS.register(gear.id(), () -> gear);
