@@ -1,0 +1,10 @@
+{
+  "required": true,
+  "package": "com.mystchonky.machina.mixin",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [
+    "perk.EnchantmentMixin",
+    "perk.LivingEntityMixin"
+  ],
+  "minVersion": "0.8"
+}

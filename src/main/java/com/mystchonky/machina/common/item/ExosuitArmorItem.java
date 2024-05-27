@@ -1,7 +1,6 @@
 package com.mystchonky.machina.common.item;
 
 import com.mystchonky.machina.common.armament.perk.PerkLibrary;
-import com.mystchonky.machina.common.armament.perk.Perks;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
@@ -29,7 +28,7 @@ public class ExosuitArmorItem extends ArmorItem {
         if (!(entity instanceof Player player))
             return false;
 
-        return Perks.get(player).contains(PerkLibrary.GLIDE);
+        return PerkLibrary.hasPerk(player, PerkLibrary.GLIDE);
     }
 
     @Override
@@ -37,7 +36,11 @@ public class ExosuitArmorItem extends ArmorItem {
         if (!(entity instanceof Player player))
             return false;
 
-        return Perks.get(player).contains(PerkLibrary.GLIDE);
+        return PerkLibrary.hasPerk(player, PerkLibrary.GLIDE);
+    }
 
+    @Override
+    public boolean makesPiglinsNeutral(ItemStack stack, LivingEntity wearer) {
+        return PerkLibrary.hasPerk(wearer, PerkLibrary.GILDED);
     }
 }
