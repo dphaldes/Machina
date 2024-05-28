@@ -11,8 +11,7 @@ import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.saveddata.SavedData;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.TickEvent;
-import net.neoforged.neoforge.event.TickEvent.LevelTickEvent;
+import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -44,10 +43,8 @@ public class NexusSavedData extends SavedData {
     }
 
     @SubscribeEvent
-    public static void onLevelTick(LevelTickEvent event) {
-        if (event.phase == TickEvent.Phase.START) return;
-
-        if (event.level instanceof ServerLevel level) {
+    public static void onLevelTick(LevelTickEvent.Post event) {
+        if (event.getLevel() instanceof ServerLevel level) {
             get(level).tick(level);
         }
     }
