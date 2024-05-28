@@ -11,6 +11,7 @@ public class AqueousGear extends AbstractGear {
 
         addTrait(new PerkTrait(PerkLibrary.AQUA_AFFINITY));
         addTrait(new PerkTrait(PerkLibrary.DEPTH_STRIDER));
+        addTrait(new PerkTrait(PerkLibrary.RESPIRATION));
     }
 
     @Override

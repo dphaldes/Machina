@@ -1,6 +1,5 @@
 package com.mystchonky.machina.common.block;
 
-import com.mystchonky.machina.common.registrar.BlockEntityRegistrar;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -8,7 +7,6 @@ import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.SimpleWaterloggedBlock;
-import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -63,9 +61,9 @@ abstract class NexusBlock extends Block implements EntityBlock, SimpleWaterlogge
     }
 
     // endregion
-    @Override
-    public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
-        return BlockEntityRegistrar.ENERGY_NEXUS_BLOCK_ENTITY.get().create(pos, blockState);
-    }
+//    @Override
+//    public BlockEntity newBlockEntity(BlockPos pos, BlockState blockState) {
+//        return BlockEntityRegistrar.ENERGY_NEXUS_BLOCK_ENTITY.get().create(pos, blockState);
+//    }
 
 }

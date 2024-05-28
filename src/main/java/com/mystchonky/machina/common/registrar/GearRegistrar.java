@@ -2,12 +2,15 @@ package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.api.armament.AbstractGear;
-import com.mystchonky.machina.common.armament.gear.Gears;
 import com.mystchonky.machina.common.armament.gear.standard.AqueousGear;
+import com.mystchonky.machina.common.armament.gear.standard.ArmorGear;
+import com.mystchonky.machina.common.armament.gear.standard.ElementalProtectionGear;
 import com.mystchonky.machina.common.armament.gear.standard.FrostWalkerGear;
 import com.mystchonky.machina.common.armament.gear.standard.GildedGear;
 import com.mystchonky.machina.common.armament.gear.standard.GlideGear;
 import com.mystchonky.machina.common.armament.gear.standard.HealthGear;
+import com.mystchonky.machina.common.armament.gear.standard.JumpGear;
+import com.mystchonky.machina.common.armament.gear.standard.ProtectionGear;
 import com.mystchonky.machina.common.armament.gear.standard.SpeedGear;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
@@ -20,14 +23,18 @@ public class GearRegistrar {
     public static final DeferredRegister<AbstractGear> GEARS = DeferredRegister.create(MachinaRegistries.GEARS_REGISTRY, Machina.MODID);
     public static final DeferredRegister.Items GEAR_ITEMS = DeferredRegister.createItems(Machina.MODID);
 
-    public static final Supplier<AqueousGear> AQUEOUS = registerGear(Gears.AQUEOUS);
-    public static final Supplier<FrostWalkerGear> FROST_WALKER = registerGear(Gears.FROST_WALKER);
-    public static final Supplier<GildedGear> GILDED = registerGear(Gears.GILDED);
-    public static final Supplier<GlideGear> GLIDE = registerGear(Gears.GLIDE);
-    public static final Supplier<HealthGear> HEALTH = registerGear(Gears.HEALTH);
-    public static final Supplier<SpeedGear> SPEED = registerGear(Gears.SPEED);
+    public static final Supplier<ArmorGear> ARMOR = register(new ArmorGear());
+    public static final Supplier<AqueousGear> AQUEOUS = register(new AqueousGear());
+    public static final Supplier<FrostWalkerGear> FROST_WALKER = register(new FrostWalkerGear());
+    public static final Supplier<GildedGear> GILDED = register(new GildedGear());
+    public static final Supplier<GlideGear> GLIDE = register(new GlideGear());
+    public static final Supplier<HealthGear> HEALTH = register(new HealthGear());
+    public static final Supplier<ProtectionGear> PROTECTION = register(new ProtectionGear());
+    public static final Supplier<ElementalProtectionGear> ELMENTAL_PROTECTION = register(new ElementalProtectionGear());
+    public static final Supplier<SpeedGear> SPEED = register(new SpeedGear());
+    public static final Supplier<JumpGear> JUMP = register(new JumpGear());
 
-    private static <T extends AbstractGear> DeferredHolder<AbstractGear, T> registerGear(T gear) {
+    private static <T extends AbstractGear> DeferredHolder<AbstractGear, T> register(T gear) {
         final var holder = GEARS.register(gear.id(), () -> gear);
         GEAR_ITEMS.register(gear.id(), gear::getGearItem);
         return holder;

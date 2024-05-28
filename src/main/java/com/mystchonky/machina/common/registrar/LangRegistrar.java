@@ -13,6 +13,8 @@ public class LangRegistrar {
 
     public static final LangEntry ARSENAL_SCREEN = addTranslation("title", "arsenal", "Arsenal Screen");
     public static final LangEntry ARMOR_MISSING = addTranslation("text", "armor_missing", "Not wearing the full set");
+    public static final LangEntry GEAR_UNLOCK = addTranslation("gear", "unlock", "Unlocked %s!");
+    public static final LangEntry GEAR_REMOVE = addTranslation("gear", "remove", "Removed %s!");
 
     // REGION TRAITS
 

@@ -21,8 +21,13 @@ public abstract class EnchantmentMixin {
     }
 
     @ModifyReturnValue(method = "getDepthStrider", at = @At("RETURN"))
-    private static int wrapHasDepthStrider(int original, LivingEntity entity) {
+    private static int wrapGetDepthStrider(int original, LivingEntity entity) {
         return original <= 0 ? (PerkLibrary.hasPerk(entity, PerkLibrary.DEPTH_STRIDER) ? 2 : original) : original;
+    }
+
+    @ModifyReturnValue(method = "getRespiration", at = @At("RETURN"))
+    private static int wrapGetRespiration(int original, LivingEntity entity) {
+        return original <= 0 ? (PerkLibrary.hasPerk(entity, PerkLibrary.RESPIRATION) ? 2 : original) : original;
     }
 
 }

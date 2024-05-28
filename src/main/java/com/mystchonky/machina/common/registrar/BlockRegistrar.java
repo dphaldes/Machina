@@ -1,7 +1,6 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.block.EnergyNexusBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.neoforged.bus.api.IEventBus;
@@ -16,7 +15,7 @@ public class BlockRegistrar {
     public static final DeferredRegister.Blocks BLOCKS = DeferredRegister.createBlocks(Machina.MODID);
     public static final DeferredRegister.Items BLOCK_ITEMS = DeferredRegister.createItems(Machina.MODID);
 
-    public static final BlockPair<EnergyNexusBlock, BlockItem> ENERGY_NEXUS = registerBlockPair("energy_nexus", EnergyNexusBlock::new);
+//    public static final BlockPair<EnergyNexusBlock, BlockItem> ENERGY_NEXUS = registerBlockPair("energy_nexus", EnergyNexusBlock::new);
 
     private static <X extends Block> BlockPair<X, BlockItem> registerBlockPair(String name, Supplier<X> supplier) {
         var block = BLOCKS.register(name, supplier);
