@@ -11,7 +11,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 @EventBusSubscriber(modid = Machina.MODID, bus = EventBusSubscriber.Bus.MOD)
-public class MachinaDataGenerator {
+public class DataGen {
 
     @SubscribeEvent
     public static void gatherData(final GatherDataEvent event) {

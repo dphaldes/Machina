@@ -18,48 +18,33 @@ public final class TintedVertexConsumer implements VertexConsumer {
     }
 
     @Override
-    public VertexConsumer vertex(double x, double y, double z) {
-        return wrapped.vertex(x, y, z);
+    public VertexConsumer addVertex(float x, float y, float z) {
+        return wrapped.addVertex(x, y, z);
     }
 
     @Override
-    public VertexConsumer color(int red, int green, int blue, int alpha) {
-        return wrapped.color((int) (red * this.red), (int) (green * this.green), (int) (blue * this.blue), (int) (alpha * this.alpha));
+    public VertexConsumer setColor(int red, int green, int blue, int alpha) {
+        return wrapped.setColor((int) (red * this.red), (int) (green * this.green), (int) (blue * this.blue), (int) (alpha * this.alpha));
     }
 
     @Override
-    public VertexConsumer uv(float u, float v) {
-        return wrapped.uv(u, v);
+    public VertexConsumer setUv(float u, float v) {
+        return wrapped.setUv(u, v);
     }
 
     @Override
-    public VertexConsumer overlayCoords(int u, int v) {
-        return wrapped.overlayCoords(u, v);
+    public VertexConsumer setUv1(int u, int v) {
+        return wrapped.setUv1(u, v);
     }
 
     @Override
-    public VertexConsumer uv2(int u, int v) {
-        return wrapped.uv2(u, v);
+    public VertexConsumer setUv2(int u, int v) {
+        return wrapped.setUv2(u, v);
     }
 
     @Override
-    public VertexConsumer normal(float x, float y, float z) {
-        return wrapped.normal(x, y, z);
-    }
-
-    @Override
-    public void endVertex() {
-        wrapped.endVertex();
-    }
-
-    @Override
-    public void defaultColor(int r, int g, int b, int a) {
-        wrapped.defaultColor(r, g, b, a);
-    }
-
-    @Override
-    public void unsetDefaultColor() {
-        wrapped.unsetDefaultColor();
+    public VertexConsumer setNormal(float x, float y, float z) {
+        return wrapped.setNormal(x, y, z);
     }
 
 }

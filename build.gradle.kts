@@ -23,9 +23,7 @@ val loader_version_range: String by project
 version = mod_version
 group = mod_group_id
 
-base {
-    archivesName.set(mod_id)
-}
+base.archivesName.set(mod_id)
 
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 
@@ -70,7 +68,15 @@ runs {
         // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
         // workingDirectory project.file("run-data")
 
-        programArguments.addAll("--mod", mod_id, "--all", "--output", file("src/generated/resources/").absolutePath, "--existing", file("src/main/resources/").absolutePath)
+        programArguments.addAll(
+            "--mod",
+            mod_id,
+            "--all",
+            "--output",
+            file("src/generated/resources/").absolutePath,
+            "--existing",
+            file("src/main/resources/").absolutePath
+        )
     }
 }
 
@@ -94,17 +100,17 @@ dependencies {
 jarJar.enable()
 
 val replaceProperties = mapOf(
-        "minecraft_version" to minecraft_version,
-        "minecraft_version_range" to minecraft_version_range,
-        "neo_version" to neo_version,
-        "neo_version_range" to neo_version_range,
-        "loader_version_range" to loader_version_range,
-        "mod_id" to mod_id,
-        "mod_name" to mod_name,
-        "mod_license" to mod_license,
-        "mod_version" to mod_version,
-        "mod_authors" to mod_authors,
-        "mod_description" to mod_description,
+    "minecraft_version" to minecraft_version,
+    "minecraft_version_range" to minecraft_version_range,
+    "neo_version" to neo_version,
+    "neo_version_range" to neo_version_range,
+    "loader_version_range" to loader_version_range,
+    "mod_id" to mod_id,
+    "mod_name" to mod_name,
+    "mod_license" to mod_license,
+    "mod_version" to mod_version,
+    "mod_authors" to mod_authors,
+    "mod_description" to mod_description,
 )
 
 tasks.withType<ProcessResources>().configureEach {

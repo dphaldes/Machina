@@ -2,25 +2,26 @@ package com.mystchonky.machina.api.armament.traits;
 
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
+import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.api.armament.AbstractGear;
 import com.mystchonky.machina.client.util.FormattedAttribute;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.ai.attributes.Attribute;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.player.Player;
 
 import javax.annotation.Nullable;
 import java.util.List;
-import java.util.UUID;
 
 public final class AttributeTrait implements Trait {
-    private final UUID uuid;
+    private final AbstractGear gear;
     private final ImmutableMultimap.Builder<Holder<Attribute>, AttributeModifier> builder = new ImmutableMultimap.Builder<>();
     private @Nullable Multimap<Holder<Attribute>, AttributeModifier> modifiers = null;
 
-    public AttributeTrait(UUID uuid) {
-        this.uuid = uuid;
+    public AttributeTrait(AbstractGear gear) {
+        this.gear = gear;
     }
 
     private Multimap<Holder<Attribute>, AttributeModifier> getModifiers() {
@@ -29,8 +30,8 @@ public final class AttributeTrait implements Trait {
         return modifiers;
     }
 
-    public void addModifier(AbstractGear gear, Holder<Attribute> holder, double amount, AttributeModifier.Operation operation) {
-        builder.put(holder, new AttributeModifier(uuid, gear.id(), amount, operation));
+    public void addModifier(Holder<Attribute> holder, double amount, AttributeModifier.Operation operation) {
+        builder.put(holder, new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Machina.MODID, gear.id()), amount, operation));
     }
 
     @Override

@@ -18,7 +18,7 @@ public class Machina {
     }
 
     public static ResourceLocation prefix(String id) {
-        return new ResourceLocation(Machina.MODID, id);
+        return ResourceLocation.fromNamespaceAndPath(Machina.MODID, id);
     }
 
 }

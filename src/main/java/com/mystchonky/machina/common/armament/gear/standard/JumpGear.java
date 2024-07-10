@@ -7,16 +7,13 @@ import com.mystchonky.machina.common.armament.perk.PerkLibrary;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
-import java.util.UUID;
-
 public class JumpGear extends AbstractGear {
-    private static final UUID GEAR_SPEED_UUID = UUID.fromString("09ac1295-2f7d-4bf1-aa8a-9ad81d304b48");
 
     public JumpGear() {
         super("jump");
 
-        var attribute = new AttributeTrait(GEAR_SPEED_UUID);
-        attribute.addModifier(this, Attributes.JUMP_STRENGTH, 0.2, AttributeModifier.Operation.ADD_VALUE);
+        var attribute = new AttributeTrait(this);
+        attribute.addModifier(Attributes.JUMP_STRENGTH, 0.2, AttributeModifier.Operation.ADD_VALUE);
         addTrait(attribute);
 
         addTrait(new PerkTrait(PerkLibrary.PROTECTION_FALL));

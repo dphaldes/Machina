@@ -4,13 +4,13 @@ import com.mystchonky.machina.Machina;
 import net.minecraft.tags.DamageTypeTags;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.entity.living.LivingDamageEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 @EventBusSubscriber(modid = Machina.MODID)
 public class PerkEventHandler {
 
     @SubscribeEvent
-    public static void damageEvent(LivingDamageEvent event) {
+    public static void damageEvent(LivingIncomingDamageEvent event) {
         var damageSource = event.getSource();
         var entity = event.getEntity();
         if (damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY))
