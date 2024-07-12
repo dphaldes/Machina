@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.armament;
 
-import com.mystchonky.machina.api.armament.Perk;
 import com.mystchonky.machina.api.armament.AbstractGear;
+import com.mystchonky.machina.api.armament.Perk;
 import com.mystchonky.machina.api.armament.traits.PerkTrait;
 import com.mystchonky.machina.common.armament.arsenal.Arsenal;
 import com.mystchonky.machina.common.armament.perk.Perks;

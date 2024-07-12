@@ -26,7 +26,7 @@ public class LangRegistrar {
     public static final LangEntry ATTRIBUTE_MULTIPLY_TOTAL_N = addTranslation("trait", "attribute_multiply_total_n", "-%s%% %s");
 
     public static final LangEntry POTION = addTranslation("trait", "potion", "Applies %s");
-    public static final LangEntry PERK = addTranslation("trait", "perk", "Provides %s");
+    public static final LangEntry PERK = addTranslation("trait", "perk", "Grants %s");
 
     // ENDREGION
 

@@ -46,6 +46,6 @@
   "trait.machina.attribute_multiply_base_n": "-%s%% %s",
   "trait.machina.attribute_multiply_total": "+%s%% %s",
   "trait.machina.attribute_multiply_total_n": "-%s%% %s",
-  "trait.machina.perk": "Provides %s",
+  "trait.machina.perk": "Grants %s",
   "trait.machina.potion": "Applies %s"
 }

@@ -4,6 +4,7 @@ import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.common.armament.Armament;
 import com.mystchonky.machina.common.item.ExosuitArmorItem;
 import com.mystchonky.machina.common.network.NetworkedAttachments;
+import com.mystchonky.machina.common.registrar.DataComponentRegistrar;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -41,6 +42,7 @@ public class PlayerEventHandler {
         if (event.getFrom().getItem() instanceof ExosuitArmorItem || event.getTo().getItem() instanceof ExosuitArmorItem) {
             if (Armament.isWearingArmor(player)) {
                 Armament.activateArmor(player);
+                event.getTo().set(DataComponentRegistrar.PLAYER_UUID, player.getUUID());
             } else {
                 Armament.deactivateArmor(player);
             }
