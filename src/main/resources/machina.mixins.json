@@ -3,7 +3,6 @@
   "package": "com.mystchonky.machina.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
-    "perk.LivingEntityMixin"
   ],
   "client": [
     "perk.ElytraLayerMixin"

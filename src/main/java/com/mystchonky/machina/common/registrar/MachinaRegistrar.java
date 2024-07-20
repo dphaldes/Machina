@@ -32,7 +32,6 @@ public class MachinaRegistrar {
         BlockRegistrar.register(bus);
         BlockEntityRegistrar.register(bus);
         CREATIVE_TABS.register(bus);
-        DataComponentRegistrar.register(bus);
 
         bus.addListener(MachinaRegistries::register);
         AttachmentRegistrar.register(bus);

@@ -1,12 +1,15 @@
 package com.mystchonky.machina.common.item;
 
 import com.mystchonky.machina.common.armament.perk.PerkLibrary;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.enchantment.EnchantmentHelper;
+import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
@@ -45,5 +48,15 @@ public class ExosuitArmorItem extends ArmorItem {
     @Override
     public boolean makesPiglinsNeutral(ItemStack stack, LivingEntity wearer) {
         return PerkLibrary.hasPerk(wearer, PerkLibrary.GILDED);
+    }
+
+    // if not equipped, unenchant fully
+    @Override
+    public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
+        if (level.getGameTime() % 20 == 0 && entity instanceof Player && stack.isEnchanted()) {
+            if (slotId < 36 || slotId > 39) {
+                EnchantmentHelper.updateEnchantments(stack, enchants -> enchants.removeIf(holder -> true));
+            }
+        }
     }
 }

@@ -8,13 +8,7 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.List;
 
-public final class PotionTrait implements Trait {
-    private final MobEffectInstance effect;
-
-    public PotionTrait(MobEffectInstance effect) {
-        this.effect = effect;
-    }
-
+public record PotionTrait(MobEffectInstance effect) implements Trait {
     @Override
     public void onEquip(Player player) {
         player.addEffect(effect);

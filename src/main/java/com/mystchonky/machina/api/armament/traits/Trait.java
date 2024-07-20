@@ -7,9 +7,12 @@ import java.util.List;
 
 public interface Trait {
 
-    void onEquip(Player player);
+    default void onEquip(Player player) {
+    }
 
-    void onRemove(Player player);
+    default void onRemove(Player player) {
+
+    }
 
     default void getTooltip(List<Component> tooltip) {
     }
