@@ -1,11 +1,3 @@
-plugins {
-    id("java-library")
-    id("eclipse")
-    id("idea")
-    id("maven-publish")
-    id("net.neoforged.gradle.userdev") version "[7,)"
-}
-
 val mod_id: String by project
 val mod_name: String by project
 val mod_description: String by project
@@ -19,64 +11,65 @@ val minecraft_version: String by project
 val minecraft_version_range: String by project
 val neo_version_range: String by project
 val loader_version_range: String by project
+val parchment_mappings_version: String by project
+val parchment_minecraft_version: String by project
+
+plugins {
+    id("java-library")
+    id("eclipse")
+    id("idea")
+    id("maven-publish")
+    id("net.neoforged.moddev") version "1.0+"
+}
 
 version = mod_version
 group = mod_group_id
 
 base.archivesName.set(mod_id)
-
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 
-// Access transformers
-//minecraft.accessTransformers.file rootProject.file("src/main/resources/META-INF/accesstransformer.cfg")
-//minecraft.accessTransformers.entry public net.minecraft.client.Minecraft textureManager # textureManager
+neoForge {
+    version = neo_version
 
-runs {
-    configureEach {
-        // Recommended logging data for a userdev environment
-        // The markers can be added/remove as needed separated by commas.
-        // "SCAN": For mods scan.
-        // "REGISTRIES": For firing of registry events.
-        // "REGISTRYDUMP": For getting the contents of all registries.
-        systemProperty("forge.logging.markers", "REGISTRIES")
-
-        // Recommended logging level for the console
-        // You can set various levels here.
-        // Please read: https://stackoverflow.com/questions/2031163/when-to-use-the-different-log-levels
-        systemProperty("forge.logging.console.level", "debug")
-
-        modSource(sourceSets.getByName("main"))
+    parchment {
+        mappingsVersion = parchment_mappings_version
+        minecraftVersion = parchment_minecraft_version
     }
 
-    create("client") {
-        systemProperty("forge.enabledGameTestNamespaces", mod_id)
+    runs {
+        create("client") {
+            client()
+            systemProperty("forge.enabledGameTestNamespaces", mod_id)
+        }
+
+        create("server") {
+            server()
+            systemProperty("forge.enabledGameTestNamespaces", mod_id)
+        }
+
+        create("data") {
+            data()
+
+            programArguments.addAll(
+                "--mod",
+                mod_id,
+                "--all",
+                "--output",
+                file("src/generated/resources/").absolutePath,
+                "--existing",
+                file("src/main/resources/").absolutePath
+            )
+        }
+
+        configureEach {
+            logLevel = org.slf4j.event.Level.INFO
+        }
     }
 
-    create("server") {
-        systemProperty("forge.enabledGameTestNamespaces", mod_id)
-        programArgument("--nogui")
-    }
-
-    // This run config launches GameTestServer and runs all registered gametests, then exits.
-    // By default, the server will crash when no gametests are provided.
-    // The gametest system is also enabled by default for other run configs under the /test command.
-    create("gameTestServer") {
-        systemProperty("forge.enabledGameTestNamespaces", mod_id)
-    }
-
-    create("data") {
-        // example of overriding the workingDirectory set in configureEach above, uncomment if you want to use it
-        // workingDirectory project.file("run-data")
-
-        programArguments.addAll(
-            "--mod",
-            mod_id,
-            "--all",
-            "--output",
-            file("src/generated/resources/").absolutePath,
-            "--existing",
-            file("src/main/resources/").absolutePath
-        )
+    mods {
+        register(mod_id) {
+            sourceSet(sourceSets["main"])
+        }
     }
 }
 
@@ -89,15 +82,15 @@ repositories {
 }
 
 dependencies {
-    implementation("net.neoforged:neoforge:${neo_version}")
-
-    val graphlib_version: String by project
-    implementation("dev.gigaherz.graph:GraphLib3:${graphlib_version}")
-    jarJar("dev.gigaherz.graph:GraphLib3:[${graphlib_version},)")
+    val graphlib: String by project
+    implementation("dev.gigaherz.graph:GraphLib3:${graphlib}")
+    jarJar("dev.gigaherz.graph:GraphLib3:[${graphlib},)") {
+        version {
+            prefer(graphlib)
+        }
+    }
 
 }
-
-jarJar.enable()
 
 val replaceProperties = mapOf(
     "minecraft_version" to minecraft_version,
@@ -118,7 +111,6 @@ tasks.withType<ProcessResources>().configureEach {
 
     filesMatching("META-INF/neoforge.mods.toml") {
         expand(replaceProperties)
-        expand(mutableMapOf("project" to project))
     }
 }
 
@@ -132,6 +124,13 @@ publishing {
         maven {
             setUrl("file://${project.projectDir}/repo")
         }
+    }
+}
+
+idea {
+    module {
+        isDownloadSources = true
+        isDownloadJavadoc = true
     }
 }
 
