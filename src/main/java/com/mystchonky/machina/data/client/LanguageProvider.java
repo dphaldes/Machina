@@ -14,16 +14,17 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
     @Override
     protected void addTranslations() {
-        add(ItemRegistrar.EXO_HELMET.get(), "EXO Helmet");
-        add(ItemRegistrar.EXO_PLATE.get(), "EXO Plate");
-        add(ItemRegistrar.EXO_LEGGINGS.get(), "EXO Leggings");
-        add(ItemRegistrar.EXO_BOOTS.get(), "EXO Boots");
+        add(ItemRegistrar.VOID_HELMET.get(), "Voidsteel Helmet");
+        add(ItemRegistrar.VOID_CHESTPLATE.get(), "Voidsteel Chestplate");
+        add(ItemRegistrar.VOID_LEGGINGS.get(), "Voidsteel Leggings");
+        add(ItemRegistrar.VOID_BOOTS.get(), "Voidsteel Boots");
 
         GearRegistrar.GEARS.getEntries().forEach(gear -> {
             add(gear.get().getGearItem(), gear.get().displayName());
             add(gear.get().localizationKey(), gear.get().displayName());
         });
-        PerkLibrary.entries.forEach(this::add);
-        LangRegistrar.entries.forEach(this::add);
+
+        PerkLibrary.entries().forEach(this::add);
+        LangRegistrar.entries().forEach(this::add);
     }
 }

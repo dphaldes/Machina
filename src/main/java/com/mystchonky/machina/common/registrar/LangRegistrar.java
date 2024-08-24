@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class LangRegistrar {
 
-    public static final Map<String, String> entries = new HashMap<>();
+    private static final Map<String, String> entries = new HashMap<>();
 
     public static final LangEntry ARSENAL_SCREEN = addTranslation("title", "arsenal", "Arsenal Screen");
     public static final LangEntry ARMOR_MISSING = addTranslation("text", "armor_missing", "Not wearing the full set");
@@ -37,6 +37,10 @@ public class LangRegistrar {
 
     private static LangEntry addTranslation(String type, String key, String translation) {
         return addTranslation(type + "." + Machina.MODID + "." + key, translation);
+    }
+
+    public static Map<String, String> entries() {
+        return entries;
     }
 
 

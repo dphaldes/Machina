@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "machina:item/exo_plate"
+    "layer0": "machina:item/void_helmet"
   }
 }

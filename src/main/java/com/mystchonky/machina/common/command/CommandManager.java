@@ -4,7 +4,9 @@ import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import com.mystchonky.machina.api.armament.AbstractGear;
+import com.mystchonky.machina.api.armament.Perk;
 import com.mystchonky.machina.common.armament.gear.UnlockedGears;
+import com.mystchonky.machina.common.armament.perk.Perks;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -21,17 +23,32 @@ public class CommandManager {
     public static LiteralArgumentBuilder<CommandSourceStack> register() {
         return Commands.literal("machina")
                 .then(Commands.literal("gears")
-                        .then(Commands.literal("get_unlocked")
+                        .then(Commands.literal("get")
                                 .then(Commands.argument(PLAYER, EntityArgument.player())
-                                        .executes(CommandManager::getUnlockedGears)
+                                        .executes(CommandManager::getGears)
                                         .requires(GameMaster)
                                 )
-                        ));
+                        )
+                ).then(Commands.literal("perks")
+                        .then(Commands.literal("get")
+                                .then(Commands.argument(PLAYER, EntityArgument.player())
+                                        .executes(CommandManager::getPerks)
+                                        .requires(GameMaster)
+                                )
+                        )
+                );
     }
 
-    private static int getUnlockedGears(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+    private static int getGears(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = EntityArgument.getPlayer(context, PLAYER);
         List<AbstractGear> gears = UnlockedGears.get(player);
+        context.getSource().sendSuccess(() -> Component.literal(gears.toString()), true);
+        return 0;
+    }
+
+    private static int getPerks(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
+        ServerPlayer player = EntityArgument.getPlayer(context, PLAYER);
+        List<Perk> gears = Perks.get(player);
         context.getSource().sendSuccess(() -> Component.literal(gears.toString()), true);
         return 0;
     }

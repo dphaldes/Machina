@@ -5,7 +5,7 @@ import com.mystchonky.machina.api.armament.Perk;
 import com.mystchonky.machina.api.armament.traits.PerkTrait;
 import com.mystchonky.machina.common.armament.arsenal.Arsenal;
 import com.mystchonky.machina.common.armament.perk.Perks;
-import com.mystchonky.machina.common.item.ExosuitArmorItem;
+import com.mystchonky.machina.common.item.VoidArmorItem;
 import net.minecraft.world.entity.player.Player;
 
 import java.util.Collection;
@@ -18,7 +18,7 @@ public class Armament {
 
     public static boolean isWearingArmor(Player player) {
         return StreamSupport.stream(player.getArmorSlots().spliterator(), false)
-                .allMatch(itemStack -> itemStack.getItem() instanceof ExosuitArmorItem);
+                .allMatch(itemStack -> itemStack.getItem() instanceof VoidArmorItem);
     }
 
     public static void updateArsenal(Player player, Arsenal arsenal) {

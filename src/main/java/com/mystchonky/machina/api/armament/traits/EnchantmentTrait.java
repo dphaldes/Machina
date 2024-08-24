@@ -1,6 +1,6 @@
 package com.mystchonky.machina.api.armament.traits;
 
-import com.mystchonky.machina.common.item.ExosuitArmorItem;
+import com.mystchonky.machina.common.item.VoidArmorItem;
 import com.mystchonky.machina.common.registrar.LangRegistrar;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
@@ -19,7 +19,7 @@ public record EnchantmentTrait(ResourceKey<Enchantment> enchantment, int level, 
     public void onEquip(Player player) {
         var registry = player.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
         ItemStack stack = player.getItemBySlot(slot());
-        if (stack.getItem() instanceof ExosuitArmorItem) {
+        if (stack.getItem() instanceof VoidArmorItem) {
             stack.enchant(registry.getHolderOrThrow(enchantment()), level());
         }
     }

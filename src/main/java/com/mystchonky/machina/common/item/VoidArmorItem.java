@@ -14,8 +14,8 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.function.Consumer;
 
-public class ExosuitArmorItem extends ArmorItem {
-    public ExosuitArmorItem(Type type) {
+public class VoidArmorItem extends ArmorItem {
+    public VoidArmorItem(Type type) {
         super(ArmorMaterials.IRON, type, new Properties().stacksTo(1));
     }
 

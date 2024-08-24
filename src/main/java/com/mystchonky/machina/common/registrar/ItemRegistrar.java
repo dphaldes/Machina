@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.item.ExosuitArmorItem;
+import com.mystchonky.machina.common.item.VoidArmorItem;
 import net.minecraft.world.item.ArmorItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -11,10 +11,10 @@ public class ItemRegistrar {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.Items.createItems(Machina.MODID);
 
-    public static final DeferredItem<ExosuitArmorItem> EXO_HELMET = ITEMS.registerItem("exo_helmet", (props) -> new ExosuitArmorItem(ArmorItem.Type.HELMET));
-    public static final DeferredItem<ExosuitArmorItem> EXO_PLATE = ITEMS.registerItem("exo_plate", (props) -> new ExosuitArmorItem(ArmorItem.Type.CHESTPLATE));
-    public static final DeferredItem<ExosuitArmorItem> EXO_LEGGINGS = ITEMS.registerItem("exo_leggings", (props) -> new ExosuitArmorItem(ArmorItem.Type.LEGGINGS));
-    public static final DeferredItem<ExosuitArmorItem> EXO_BOOTS = ITEMS.registerItem("exo_boots", (props) -> new ExosuitArmorItem(ArmorItem.Type.BOOTS));
+    public static final DeferredItem<VoidArmorItem> VOID_HELMET = ITEMS.registerItem("void_helmet", (props) -> new VoidArmorItem(ArmorItem.Type.HELMET));
+    public static final DeferredItem<VoidArmorItem> VOID_CHESTPLATE = ITEMS.registerItem("void_chestplate", (props) -> new VoidArmorItem(ArmorItem.Type.CHESTPLATE));
+    public static final DeferredItem<VoidArmorItem> VOID_LEGGINGS = ITEMS.registerItem("void_leggings", (props) -> new VoidArmorItem(ArmorItem.Type.LEGGINGS));
+    public static final DeferredItem<VoidArmorItem> VOID_BOOTS = ITEMS.registerItem("void_boots", (props) -> new VoidArmorItem(ArmorItem.Type.BOOTS));
 
     public static void register(IEventBus bus) {
         ITEMS.register(bus);

@@ -2,7 +2,7 @@ package com.mystchonky.machina.common.event;
 
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.common.armament.Armament;
-import com.mystchonky.machina.common.item.ExosuitArmorItem;
+import com.mystchonky.machina.common.item.VoidArmorItem;
 import com.mystchonky.machina.common.network.NetworkedAttachments;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
@@ -38,7 +38,7 @@ public class PlayerEventHandler {
     public static void equipmentChange(LivingEquipmentChangeEvent event) {
         if (!(event.getEntity() instanceof Player player) || !event.getSlot().isArmor()) return;
 
-        if (event.getFrom().getItem() instanceof ExosuitArmorItem || event.getTo().getItem() instanceof ExosuitArmorItem) {
+        if (event.getFrom().getItem() instanceof VoidArmorItem || event.getTo().getItem() instanceof VoidArmorItem) {
             if (Armament.isWearingArmor(player)) {
                 Armament.activateArmor(player);
             } else {

@@ -2,18 +2,13 @@ package com.mystchonky.machina.common.armament.perk;
 
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.api.armament.Perk;
-import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.enchantment.Enchantment;
-import oshi.util.tuples.Pair;
 
 import java.util.HashMap;
-import java.util.Map;
 
 public class PerkLibrary {
-    public static final HashMap<String, String> entries = new HashMap<>();
-    public static final Map<Perk, Pair<ResourceKey<Enchantment>, Integer>> enchantmentMap = new HashMap<>();
+    private static final HashMap<String, String> entries = new HashMap<>();
 
     public static final Perk GLIDE = newPerk("glide", "Glide");
     public static final Perk GILDED = newPerk("gilded", "Gilded");
@@ -41,6 +36,10 @@ public class PerkLibrary {
             return Perks.get(player).contains(perk);
         }
         return false;
+    }
+
+    public static HashMap<String, String> entries() {
+        return entries;
     }
 
 }
