@@ -27,6 +27,7 @@ public class LangRegistrar {
 
     public static final LangEntry POTION = addTranslation("trait", "potion", "Applies %s");
     public static final LangEntry PERK = addTranslation("trait", "perk", "Grants %s");
+    public static final LangEntry ENCHANT = addTranslation("trait", "enchant", "Enchanted with %s");
 
     // ENDREGION
 

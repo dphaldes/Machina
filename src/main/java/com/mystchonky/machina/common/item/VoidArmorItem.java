@@ -30,6 +30,11 @@ public class VoidArmorItem extends ArmorItem {
     }
 
     @Override
+    public boolean isFoil(ItemStack stack) {
+        return false;
+    }
+
+    @Override
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {
         if (!(entity instanceof Player player))
             return false;

@@ -2,6 +2,8 @@ package com.mystchonky.machina.api.armament.traits;
 
 import com.mystchonky.machina.common.item.VoidArmorItem;
 import com.mystchonky.machina.common.registrar.LangRegistrar;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
@@ -32,6 +34,9 @@ public record EnchantmentTrait(ResourceKey<Enchantment> enchantment, int level, 
 
     @Override
     public void getTooltip(List<Component> tooltip) {
-        tooltip.add(Component.translatable(LangRegistrar.PERK.key(), enchantment().location().toString()));
+        var registry = Minecraft.getInstance().level.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
+        var enchant = registry.getHolderOrThrow(enchantment());
+        tooltip.add(Component.translatable(LangRegistrar.ENCHANT.key(), Enchantment.getFullname(enchant, level()))
+                .withStyle(ChatFormatting.LIGHT_PURPLE));
     }
 }
