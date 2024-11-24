@@ -1,18 +1,4 @@
-val mod_id: String by project
-val mod_name: String by project
-val mod_description: String by project
-val mod_version: String by project
-val mod_group_id: String by project
-val mod_license: String by project
-val mod_authors: String by project
-val neo_version: String by project
-
-val minecraft_version: String by project
-val minecraft_version_range: String by project
-val neo_version_range: String by project
-val loader_version_range: String by project
-val parchment_mappings_version: String by project
-val parchment_minecraft_version: String by project
+import java.util.regex.Matcher
 
 plugins {
     id("java-library")
@@ -22,18 +8,19 @@ plugins {
     id("net.neoforged.moddev") version "1.0+"
 }
 
-version = mod_version
-group = mod_group_id
+val mod_id: String by project
+version = project.property("mod_version") as String
+group = project.property("mod_group_id") as String
 
 base.archivesName.set(mod_id)
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 
 neoForge {
-    version = neo_version
+    version = project.property("neo_version") as String
 
     parchment {
-        mappingsVersion = parchment_mappings_version
-        minecraftVersion = parchment_minecraft_version
+        mappingsVersion = project.property("parchment_mappings_version") as String
+        minecraftVersion = project.property("parchment_minecraft_version") as String
     }
 
     runs {
@@ -49,20 +36,17 @@ neoForge {
 
         create("data") {
             data()
-
             programArguments.addAll(
-                "--mod",
-                mod_id,
+                "--mod", mod_id,
                 "--all",
-                "--output",
-                file("src/generated/resources/").absolutePath,
-                "--existing",
-                file("src/main/resources/").absolutePath
+                "--output", file("src/generated/resources/").absolutePath,
+                "--existing", file("src/main/resources/").absolutePath
             )
         }
 
         configureEach {
-            logLevel = org.slf4j.event.Level.INFO
+            systemProperty("forge.logging.markers", "REGISTRIES")
+            logLevel = org.slf4j.event.Level.DEBUG
         }
     }
 
@@ -95,17 +79,17 @@ dependencies {
 }
 
 val replaceProperties = mapOf(
-    "minecraft_version" to minecraft_version,
-    "minecraft_version_range" to minecraft_version_range,
-    "neo_version" to neo_version,
-    "neo_version_range" to neo_version_range,
-    "loader_version_range" to loader_version_range,
-    "mod_id" to mod_id,
-    "mod_name" to mod_name,
-    "mod_license" to mod_license,
-    "mod_version" to mod_version,
-    "mod_authors" to mod_authors,
-    "mod_description" to mod_description,
+    "minecraft_version" to project.property("minecraft_version") as String,
+    "minecraft_version_range" to project.property("minecraft_version_range") as String,
+    "neo_version" to project.property("neo_version") as String,
+    "neo_version_range" to project.property("neo_version_range") as String,
+    "loader_version_range" to project.property("loader_version_range") as String,
+    "mod_id" to project.property("mod_id") as String,
+    "mod_name" to project.property("mod_name") as String,
+    "mod_license" to project.property("mod_license") as String,
+    "mod_version" to project.property("mod_version") as String,
+    "mod_authors" to project.property("mod_authors") as String,
+    "mod_description" to project.property("mod_description") as String,
 )
 
 tasks.withType<ProcessResources>().configureEach {
@@ -136,4 +120,28 @@ idea {
     }
 }
 
-apply(from = rootProject.file("buildscript/generate-package-infos.gradle.kts"))
+tasks.register<Task>("genPackageInfos") {
+    doLast {
+        fileTree("src/main/java").forEach { javaFile ->
+            val packageInfoFile = File(javaFile.parent, "package-info.java")
+            if (!packageInfoFile.exists()) {
+                var pkgName = javaFile.toString().replace(Matcher.quoteReplacement(File.separator), "/")
+                pkgName = pkgName.substring(pkgName.indexOf("com/mystchonky/"), pkgName.lastIndexOf("/"))
+                pkgName = pkgName.replace("/", ".")
+
+                val pkgInfoText = """
+                    |@FieldsAreNonnullByDefault
+                    |@MethodsReturnNonnullByDefault
+                    |@ParametersAreNonnullByDefault
+                    |package $pkgName;
+                    |
+                    |import javax.annotation.ParametersAreNonnullByDefault;
+                    |import net.minecraft.FieldsAreNonnullByDefault;
+                    |import net.minecraft.MethodsReturnNonnullByDefault;
+                """.trimMargin().trim()
+
+                packageInfoFile.writeText(pkgInfoText)
+            }
+        }
+    }
+}

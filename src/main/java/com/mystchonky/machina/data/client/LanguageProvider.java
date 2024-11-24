@@ -14,10 +14,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
     @Override
     protected void addTranslations() {
-        add(ItemRegistrar.VOID_HELMET.get(), "Voidsteel Helmet");
-        add(ItemRegistrar.VOID_CHESTPLATE.get(), "Voidsteel Chestplate");
-        add(ItemRegistrar.VOID_LEGGINGS.get(), "Voidsteel Leggings");
-        add(ItemRegistrar.VOID_BOOTS.get(), "Voidsteel Boots");
+        add(ItemRegistrar.VOID_HELMET.get(), "Voidwalker Hood");
+        add(ItemRegistrar.VOID_CHESTPLATE.get(), "Voidwalker Mantle");
+        add(ItemRegistrar.VOID_LEGGINGS.get(), "Voidwalker Breeches");
+        add(ItemRegistrar.VOID_BOOTS.get(), "Voidwalker Greaves");
 
         GearRegistrar.GEARS.getEntries().forEach(gear -> {
             add(gear.get().getGearItem(), gear.get().displayName());
