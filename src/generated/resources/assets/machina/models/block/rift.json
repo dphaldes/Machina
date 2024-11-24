@@ -1,6 +1,6 @@
 {
-  "parent": "minecraft:block/carpet",
+  "parent": "machina:block/rift_base",
   "textures": {
-    "wool": "machina:block/rift"
+    "texture": "machina:block/rift"
   }
 }

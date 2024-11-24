@@ -18,14 +18,16 @@ public class BlockRegistrar {
     public static final DeferredRegister.Items BLOCK_ITEMS = DeferredRegister.createItems(Machina.MODID);
 
     //    public static final BlockPair<EnergyNexusBlock, BlockItem> ENERGY_NEXUS = registerBlockPair("energy_nexus", EnergyNexusBlock::new);
-    public static final BlockPair<RiftBlock, BlockItem> RIFT = registerBlockPair("rift",
+    public static final BlockPair<RiftBlock, BlockItem> RIFT = block("rift",
             () -> new RiftBlock(BlockBehaviour.Properties.of()
                     .destroyTime(50.0F)
                     .explosionResistance(6.0F)
                     .lightLevel(state -> 4)
+                    .noOcclusion()
+                    .noLootTable()
             ));
 
-    private static <X extends Block> BlockPair<X, BlockItem> registerBlockPair(String name, Supplier<X> supplier) {
+    private static <X extends Block> BlockPair<X, BlockItem> block(String name, Supplier<X> supplier) {
         var block = BLOCKS.register(name, supplier);
         var blockItem = BLOCK_ITEMS.registerSimpleBlockItem(block);
         return new BlockPair<>(block, blockItem);

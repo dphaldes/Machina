@@ -24,10 +24,10 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(ItemRegistrar.VOID_LEGGINGS.get());
         basicItem(ItemRegistrar.VOID_BOOTS.get());
 
-        GearRegistrar.GEAR_ITEMS.getEntries().forEach(gear -> basicGear(gear.get()));
+        GearRegistrar.GEAR_ITEMS.getEntries()
+                .forEach(gear -> basicGear(gear.get()));
 
-        BlockRegistrar.BLOCK_ITEMS.getEntries().forEach(block ->
-                this.withExistingParent(block.getId().toString(), Machina.prefix("block/" + block.getId().getPath())));
+        basicItem(BlockRegistrar.RIFT.blockItem());
     }
 
     private ItemModelBuilder basicGear(Item item) {

@@ -1,3 +1,6 @@
 {
-  "parent": "machina:block/rift"
+  "parent": "minecraft:item/generated",
+  "textures": {
+    "layer0": "machina:item/rift"
+  }
 }

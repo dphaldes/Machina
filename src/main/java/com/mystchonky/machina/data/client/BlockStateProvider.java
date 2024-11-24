@@ -15,7 +15,9 @@ public class BlockStateProvider extends net.neoforged.neoforge.client.model.gene
     @Override
     protected void registerStatesAndModels() {
 
-        var riftModel = this.models().carpet("rift", Machina.prefix("block/rift"));
+        var riftBase = this.models().getExistingFile(modLoc("block/rift_base"));
+        var riftModel = this.models().getBuilder("block/rift").parent(riftBase).texture("texture", modLoc("block/rift"));
+
         this.directionalBlock(BlockRegistrar.RIFT.block(), riftModel);
     }
 }
