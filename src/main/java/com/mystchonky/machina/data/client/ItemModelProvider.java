@@ -1,6 +1,7 @@
 package com.mystchonky.machina.data.client;
 
 import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.common.registrar.BlockRegistrar;
 import com.mystchonky.machina.common.registrar.GearRegistrar;
 import com.mystchonky.machina.common.registrar.ItemRegistrar;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -10,8 +11,6 @@ import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
-
-import java.util.Objects;
 
 public class ItemModelProvider extends net.neoforged.neoforge.client.model.generators.ItemModelProvider {
     public ItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
@@ -26,15 +25,15 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(ItemRegistrar.VOID_BOOTS.get());
 
         GearRegistrar.GEAR_ITEMS.getEntries().forEach(gear -> basicGear(gear.get()));
+
+        BlockRegistrar.BLOCK_ITEMS.getEntries().forEach(block ->
+                this.withExistingParent(block.getId().toString(), Machina.prefix("block/" + block.getId().getPath())));
     }
 
     private ItemModelBuilder basicGear(Item item) {
-        return basicGear(Objects.requireNonNull(BuiltInRegistries.ITEM.getKey(item)));
-    }
-
-    private ItemModelBuilder basicGear(ResourceLocation item) {
+        var resource = BuiltInRegistries.ITEM.getKey(item);
         return getBuilder(item.toString())
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(item.getNamespace(), "item/gear/" + item.getPath()));
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(resource.getNamespace(), "item/gear/" + resource.getPath()));
     }
 }

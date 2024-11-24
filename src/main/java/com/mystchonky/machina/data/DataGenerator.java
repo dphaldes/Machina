@@ -1,6 +1,7 @@
 package com.mystchonky.machina.data;
 
 import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.data.client.BlockStateProvider;
 import com.mystchonky.machina.data.client.ItemModelProvider;
 import com.mystchonky.machina.data.client.LanguageProvider;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -17,6 +18,7 @@ public class DataGenerator {
         var helper = event.getExistingFileHelper();
 
         //client
+        generator.addProvider(event.includeClient(), new BlockStateProvider(packOutput, helper));
         generator.addProvider(event.includeClient(), new ItemModelProvider(packOutput, helper));
         generator.addProvider(event.includeClient(), new LanguageProvider(packOutput, "en_us"));
     }

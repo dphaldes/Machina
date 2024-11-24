@@ -8,7 +8,7 @@ public class BlockEntityRegistrar {
 //            BlOCK_ENTITIES.register("nexus_block_entity", () ->
 //                    BlockEntityType.Builder.of(
 //                            NexusBlockEntity::new,
-//                            BlockRegistrar.ENERGY_NEXUS.block().get()
+//                            BlockRegistrar.ENERGY_NEXUS.deferredBlock().get()
 //                    ).build(null)
 //            );
 
