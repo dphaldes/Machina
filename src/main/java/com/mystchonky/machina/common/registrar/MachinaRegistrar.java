@@ -31,6 +31,7 @@ public class MachinaRegistrar {
         ItemRegistrar.register(bus);
         BlockRegistrar.register(bus);
         BlockEntityRegistrar.register(bus);
+        RecipeRegistrar.register(bus);
         CREATIVE_TABS.register(bus);
 
         bus.addListener(MachinaRegistries::register);

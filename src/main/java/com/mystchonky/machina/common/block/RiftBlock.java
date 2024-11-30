@@ -1,17 +1,26 @@
 package com.mystchonky.machina.common.block;
 
 import com.mojang.serialization.MapCodec;
+import com.mystchonky.machina.common.blockentity.RiftBlockEntity;
+import com.mystchonky.machina.common.registrar.BlockEntityRegistrar;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.LevelReader;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.DirectionalBlock;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.Mirror;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -19,8 +28,7 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-
-public class RiftBlock extends DirectionalBlock {
+public class RiftBlock extends DirectionalBlock implements EntityBlock {
     private static final MapCodec<RiftBlock> CODEC = simpleCodec(RiftBlock::new);
     private static final VoxelShape UP_AABB = Block.box(0.0, 15.75, 0.0, 16.0, 16.0, 16.0);
     private static final VoxelShape DOWN_AABB = Block.box(0.0, 0.0, 0.0, 16.0, 0.25, 16.0);
@@ -91,5 +99,32 @@ public class RiftBlock extends DirectionalBlock {
     protected boolean canSurvive(BlockState state, LevelReader level, BlockPos pos) {
         BlockPos blockpos = pos.relative(state.getValue(FACING).getOpposite());
         return level.getBlockState(blockpos).isFaceSturdy(level, blockpos, state.getValue(FACING));
+    }
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return BlockEntityRegistrar.RIFT.get().create(pos, state);
+    }
+
+    @Override
+    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+        if (level.isClientSide)
+            return;
+
+        if (entity instanceof ItemEntity item) {
+            if (level.getBlockEntity(pos) instanceof RiftBlockEntity rift) {
+                rift.tryCraft(item);
+            }
+        }
+    }
+
+    @Override
+    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
+        if (level.isClientSide)
+            return;
+
+        if (level.getBlockEntity(pos) instanceof RiftBlockEntity rift) {
+            rift.craft();
+        }
     }
 }
