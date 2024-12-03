@@ -12,22 +12,29 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class RecipeRegistrar {
-    public static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, Machina.MODID);
-    public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, Machina.MODID);
-
-    public static class Recipe {
-        public static final Supplier<RecipeType<RiftRecipe>> RIFT =
-                TYPES.register("rift", () -> RecipeType.simple(Machina.prefix("rift")));
-    }
-
-    public static class Serializer {
-        public static final Supplier<RecipeSerializer<RiftRecipe>> RIFT =
-                SERIALIZERS.register("rift", RiftRecipeSerializer::new);
-    }
-
 
     public static void register(IEventBus bus) {
-        TYPES.register(bus);
-        SERIALIZERS.register(bus);
+        Types.register(bus);
+        Serializers.register(bus);
+    }
+
+    public static class Types {
+        public static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, Machina.MODID);
+
+        public static final Supplier<RecipeType<RiftRecipe>> RIFT = TYPES.register("rift", () -> RecipeType.simple(Machina.prefix("rift")));
+
+        public static void register(IEventBus bus) {
+            TYPES.register(bus);
+        }
+    }
+
+    public static class Serializers {
+        public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, Machina.MODID);
+
+        public static final Supplier<RecipeSerializer<RiftRecipe>> RIFT = SERIALIZERS.register("rift", RiftRecipeSerializer::new);
+
+        public static void register(IEventBus bus) {
+            SERIALIZERS.register(bus);
+        }
     }
 }

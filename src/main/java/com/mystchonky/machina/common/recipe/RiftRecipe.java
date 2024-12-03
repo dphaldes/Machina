@@ -10,15 +10,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-public class RiftRecipe implements Recipe<RiftRecipeInput> {
-
-    private final Ingredient ingredient;
-    private final ItemStack result;
-
-    public RiftRecipe(Ingredient ingredient, ItemStack result) {
-        this.ingredient = ingredient;
-        this.result = result;
-    }
+public record RiftRecipe(Ingredient ingredient, ItemStack result) implements Recipe<RiftRecipeInput> {
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
@@ -48,20 +40,12 @@ public class RiftRecipe implements Recipe<RiftRecipeInput> {
 
     @Override
     public RecipeSerializer<?> getSerializer() {
-        return RecipeRegistrar.Serializer.RIFT.get();
+        return RecipeRegistrar.Serializers.RIFT.get();
     }
 
     @Override
     public RecipeType<?> getType() {
-        return RecipeRegistrar.Recipe.RIFT.get();
-    }
-
-    public Ingredient getIngredient() {
-        return ingredient;
-    }
-
-    public ItemStack getResult() {
-        return result;
+        return RecipeRegistrar.Types.RIFT.get();
     }
 }
 

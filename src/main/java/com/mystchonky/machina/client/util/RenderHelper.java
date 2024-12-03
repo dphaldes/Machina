@@ -18,6 +18,7 @@ import net.minecraft.world.item.ItemStack;
 import org.joml.Matrix4f;
 
 public class RenderHelper {
+    @SuppressWarnings("deprecation")
     private static final RenderType TRANSLUCENT = RenderType.entityTranslucent(TextureAtlas.LOCATION_BLOCKS);
     private static final Matrix4f SCALE_INVERT_Y = new Matrix4f().scaling(1F, -1F, 1F);
 
