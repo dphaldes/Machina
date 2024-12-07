@@ -5,8 +5,6 @@ import com.mystchonky.machina.common.blockentity.RiftBlockEntity;
 import com.mystchonky.machina.common.registrar.BlockEntityRegistrar;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerLevel;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.item.context.BlockPlaceContext;
@@ -113,18 +111,9 @@ public class RiftBlock extends DirectionalBlock implements EntityBlock {
 
         if (entity instanceof ItemEntity item) {
             if (level.getBlockEntity(pos) instanceof RiftBlockEntity rift) {
-                rift.tryCraft(item);
+                rift.tryCraft(item, level);
             }
         }
     }
 
-    @Override
-    protected void tick(BlockState state, ServerLevel level, BlockPos pos, RandomSource random) {
-        if (level.isClientSide)
-            return;
-
-        if (level.getBlockEntity(pos) instanceof RiftBlockEntity rift) {
-            rift.craft();
-        }
-    }
 }

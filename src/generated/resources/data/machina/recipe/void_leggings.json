@@ -1,0 +1,10 @@
+{
+  "type": "machina:rift",
+  "input": {
+    "item": "minecraft:iron_leggings"
+  },
+  "result": {
+    "count": 1,
+    "id": "machina:void_leggings"
+  }
+}
