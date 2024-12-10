@@ -4,6 +4,8 @@ import com.mystchonky.machina.common.recipe.RiftRecipeInput;
 import com.mystchonky.machina.common.registrar.BlockEntityRegistrar;
 import com.mystchonky.machina.common.registrar.RecipeRegistrar;
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -26,6 +28,7 @@ public class RiftBlockEntity extends BlockEntity {
             stack.shrink(1);
             var position = getBlockPos().getCenter();
             level.addFreshEntity(new ItemEntity(level, position.x, position.y, position.z, result));
+            level.playSound(null, position.x, position.y, position.z, SoundEvents.PLAYER_TELEPORT, SoundSource.PLAYERS);
         }
     }
 }
