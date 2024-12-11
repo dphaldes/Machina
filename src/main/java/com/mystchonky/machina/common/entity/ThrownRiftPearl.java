@@ -3,8 +3,9 @@ package com.mystchonky.machina.common.entity;
 import com.mystchonky.machina.common.registrar.BlockRegistrar;
 import com.mystchonky.machina.common.registrar.EntityRegistrar;
 import com.mystchonky.machina.common.registrar.ItemRegistrar;
-import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
@@ -52,23 +53,20 @@ public class ThrownRiftPearl extends ThrowableItemProjectile {
     @Override
     protected void onHitBlock(BlockHitResult result) {
         super.onHitBlock(result);
-        var position = result.getBlockPos().relative(result.getDirection());
 
-
-        for (int i = 0; i < 32; i++) {
-            this.level()
-                    .addParticle(
-                            ParticleTypes.PORTAL,
-                            this.getX(),
-                            this.getY() + this.random.nextDouble() * 2.0,
-                            this.getZ(),
-                            this.random.nextGaussian(),
-                            0.0,
-                            this.random.nextGaussian()
-                    );
-        }
-
-        this.level().setBlock(position, BlockRegistrar.RIFT.block().defaultBlockState().setValue(DirectionalBlock.FACING, result.getDirection()), 3);
+        var direction = result.getDirection();
+        var position = result.getBlockPos().relative(direction);
+        this.level().playSound(
+                null,
+                position.getX() + 0.5,
+                position.getY() + 0.5,
+                position.getZ() + 0.5,
+                SoundEvents.PORTAL_AMBIENT,
+                SoundSource.BLOCKS,
+                0.5F,
+                random.nextFloat() * 0.4F + 0.8F
+        );
+        this.level().setBlock(position, BlockRegistrar.RIFT.block().defaultBlockState().setValue(DirectionalBlock.FACING, direction), 3);
         this.discard();
     }
 }
