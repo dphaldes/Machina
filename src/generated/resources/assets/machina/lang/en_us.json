@@ -1,4 +1,5 @@
 {
+  "block.machina.rift": "Rift",
   "gear.machina.remove": "Removed %s!",
   "gear.machina.unlock": "Unlocked %s!",
   "item.machina.aqueous": "Aqueous Gear",
@@ -10,6 +11,7 @@
   "item.machina.health": "Health Gear",
   "item.machina.jump": "Jump Gear",
   "item.machina.protection": "Protection Gear",
+  "item.machina.rift_pearl": "Rift Pearl",
   "item.machina.speed": "Speed Gear",
   "item.machina.void_boots": "Voidwalker Greaves",
   "item.machina.void_chestplate": "Voidwalker Mantle",
