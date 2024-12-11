@@ -19,15 +19,16 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
     @Override
     protected void registerModels() {
-        basicItem(ItemRegistrar.VOID_HELMET.get());
-        basicItem(ItemRegistrar.VOID_CHESTPLATE.get());
-        basicItem(ItemRegistrar.VOID_LEGGINGS.get());
-        basicItem(ItemRegistrar.VOID_BOOTS.get());
+        basicItem(ItemRegistrar.VOID_HELMET.asItem());
+        basicItem(ItemRegistrar.VOID_CHESTPLATE.asItem());
+        basicItem(ItemRegistrar.VOID_LEGGINGS.asItem());
+        basicItem(ItemRegistrar.VOID_BOOTS.asItem());
 
         GearRegistrar.GEAR_ITEMS.getEntries()
                 .forEach(gear -> basicGear(gear.get()));
 
         basicItem(BlockRegistrar.RIFT.blockItem());
+        basicItem(ItemRegistrar.RIFT_PEARL.asItem());
     }
 
     private ItemModelBuilder basicGear(Item item) {
