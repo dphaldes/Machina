@@ -19,8 +19,8 @@ import java.util.function.Consumer;
 
 public class MachinaRegistrar {
     private static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Machina.MODID);
-    public static final Holder<CreativeModeTab> MACHINA_TAB = CREATIVE_TABS.register("machina", () ->
-            CreativeModeTab.builder()
+    public static final Holder<CreativeModeTab> MACHINA_TAB = CREATIVE_TABS.register("machina",
+            () -> CreativeModeTab.builder()
                     .icon(() -> new ItemStack(Items.RECOVERY_COMPASS))
                     .displayItems((par, output) -> buildTabContents(output))
                     .title(Component.literal("Machina"))
@@ -29,6 +29,7 @@ public class MachinaRegistrar {
 
     public static void register(final IEventBus bus) {
         ItemRegistrar.register(bus);
+        EntityRegistrar.register(bus);
         BlockRegistrar.register(bus);
         BlockEntityRegistrar.register(bus);
         RecipeRegistrar.register(bus);
@@ -45,7 +46,8 @@ public class MachinaRegistrar {
     }
 
     private static void buildTabContents(final CreativeModeTab.Output output) {
-        Consumer<DeferredRegister<? extends ItemLike>> registryHandler = registry -> registry.getEntries().forEach(entry -> output.accept(entry.get()));
+        Consumer<DeferredRegister<? extends ItemLike>> registryHandler =
+                registry -> registry.getEntries().forEach(entry -> output.accept(entry.get()));
 
         registryHandler.accept(ItemRegistrar.ITEMS);
         registryHandler.accept(BlockRegistrar.BLOCKS);
