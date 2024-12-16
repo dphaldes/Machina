@@ -37,7 +37,7 @@ public class LangRegistrar {
     }
 
     private static LangEntry addTranslation(String type, String key, String translation) {
-        return addTranslation(type + "." + Machina.MODID + "." + key, translation);
+        return addTranslation(type + "." + Machina.ID + "." + key, translation);
     }
 
     public static Map<String, String> entries() {

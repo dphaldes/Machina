@@ -9,7 +9,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
-@EventBusSubscriber(modid = Machina.MODID, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Machina.ID, bus = EventBusSubscriber.Bus.MOD)
 public class DataGenerator {
 
     @SubscribeEvent

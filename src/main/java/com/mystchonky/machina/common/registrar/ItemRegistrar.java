@@ -11,7 +11,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 public class ItemRegistrar {
 
-    public static final DeferredRegister.Items ITEMS = DeferredRegister.Items.createItems(Machina.MODID);
+    public static final DeferredRegister.Items ITEMS = DeferredRegister.Items.createItems(Machina.ID);
 
     public static final DeferredItem<VoidArmorItem> VOID_HELMET = ITEMS.registerItem("void_helmet", (props) -> new VoidArmorItem(ArmorItem.Type.HELMET));
     public static final DeferredItem<VoidArmorItem> VOID_CHESTPLATE = ITEMS.registerItem("void_chestplate", (props) -> new VoidArmorItem(ArmorItem.Type.CHESTPLATE));

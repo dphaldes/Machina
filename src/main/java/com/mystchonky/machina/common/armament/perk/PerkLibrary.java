@@ -28,7 +28,7 @@ public class PerkLibrary {
     }
 
     public static String localizationKey(String key) {
-        return "perk." + Machina.MODID + "." + key;
+        return "perk." + Machina.ID + "." + key;
     }
 
     public static boolean hasPerk(LivingEntity entity, Perk perk) {

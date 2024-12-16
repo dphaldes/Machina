@@ -20,8 +20,8 @@ import java.util.function.Supplier;
 
 public class GearRegistrar {
 
-    public static final DeferredRegister<AbstractGear> GEARS = DeferredRegister.create(MachinaRegistries.GEARS_REGISTRY, Machina.MODID);
-    public static final DeferredRegister.Items GEAR_ITEMS = DeferredRegister.createItems(Machina.MODID);
+    public static final DeferredRegister<AbstractGear> GEARS = DeferredRegister.create(Registries.GEARS_REGISTRY, Machina.ID);
+    public static final DeferredRegister.Items GEAR_ITEMS = DeferredRegister.createItems(Machina.ID);
 
     public static final Supplier<ArmorGear> ARMOR = register(new ArmorGear());
     public static final Supplier<AqueousGear> AQUEOUS = register(new AqueousGear());

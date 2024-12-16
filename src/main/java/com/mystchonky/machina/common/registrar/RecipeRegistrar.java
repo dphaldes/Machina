@@ -19,7 +19,7 @@ public class RecipeRegistrar {
     }
 
     public static class Types {
-        public static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, Machina.MODID);
+        public static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, Machina.ID);
 
         public static final Supplier<RecipeType<RiftRecipe>> RIFT = TYPES.register("rift", () -> RecipeType.simple(Machina.prefix("rift")));
 
@@ -29,7 +29,7 @@ public class RecipeRegistrar {
     }
 
     public static class Serializers {
-        public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, Machina.MODID);
+        public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, Machina.ID);
 
         public static final Supplier<RecipeSerializer<RiftRecipe>> RIFT = SERIALIZERS.register("rift", RiftRecipeSerializer::new);
 

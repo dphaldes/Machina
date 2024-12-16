@@ -9,7 +9,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 public class BlockStateProvider extends net.neoforged.neoforge.client.model.generators.BlockStateProvider {
 
     public BlockStateProvider(PackOutput output, ExistingFileHelper exFileHelper) {
-        super(output, Machina.MODID, exFileHelper);
+        super(output, Machina.ID, exFileHelper);
     }
 
     @Override

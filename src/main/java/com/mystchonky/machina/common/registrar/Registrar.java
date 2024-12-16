@@ -4,7 +4,6 @@ import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.common.command.CommandManager;
 import com.mystchonky.machina.common.network.MessageRegistrar;
 import net.minecraft.core.Holder;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
@@ -17,8 +16,8 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Consumer;
 
-public class MachinaRegistrar {
-    private static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(Registries.CREATIVE_MODE_TAB, Machina.MODID);
+public class Registrar {
+    private static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(net.minecraft.core.registries.Registries.CREATIVE_MODE_TAB, Machina.ID);
     public static final Holder<CreativeModeTab> MACHINA_TAB = CREATIVE_TABS.register("machina",
             () -> CreativeModeTab.builder()
                     .icon(() -> new ItemStack(Items.RECOVERY_COMPASS))
@@ -35,14 +34,14 @@ public class MachinaRegistrar {
         RecipeRegistrar.register(bus);
         CREATIVE_TABS.register(bus);
 
-        bus.addListener(MachinaRegistries::register);
+        bus.addListener(Registries::register);
         AttachmentRegistrar.register(bus);
         GearRegistrar.register(bus);
 
         LangRegistrar.load();
         bus.addListener(MessageRegistrar::registerMessages);
 
-        NeoForge.EVENT_BUS.addListener(MachinaRegistrar::registerCommands);
+        NeoForge.EVENT_BUS.addListener(Registrar::registerCommands);
     }
 
     private static void buildTabContents(final CreativeModeTab.Output output) {

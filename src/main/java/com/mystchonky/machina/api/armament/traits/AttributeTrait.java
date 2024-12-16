@@ -31,7 +31,7 @@ public final class AttributeTrait implements Trait {
     }
 
     public void addModifier(Holder<Attribute> holder, double amount, AttributeModifier.Operation operation) {
-        builder.put(holder, new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Machina.MODID, gear.id()), amount, operation));
+        builder.put(holder, new AttributeModifier(ResourceLocation.fromNamespaceAndPath(Machina.ID, gear.id()), amount, operation));
     }
 
     @Override

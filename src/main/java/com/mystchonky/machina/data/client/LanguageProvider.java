@@ -10,7 +10,7 @@ import net.minecraft.data.PackOutput;
 
 public class LanguageProvider extends net.neoforged.neoforge.common.data.LanguageProvider {
     public LanguageProvider(PackOutput output, String locale) {
-        super(output, Machina.MODID, locale);
+        super(output, Machina.ID, locale);
     }
 
     @Override

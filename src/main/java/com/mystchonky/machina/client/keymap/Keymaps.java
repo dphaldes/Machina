@@ -10,7 +10,7 @@ import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
 import net.neoforged.neoforge.client.settings.KeyConflictContext;
 import org.lwjgl.glfw.GLFW;
 
-@EventBusSubscriber(modid = Machina.MODID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
+@EventBusSubscriber(modid = Machina.ID, value = Dist.CLIENT, bus = EventBusSubscriber.Bus.MOD)
 public class Keymaps {
 
     public static final KeyMapping KEY_PLAYER_ARSENAL = new KeyMapping("key.machina.key_arsenal",

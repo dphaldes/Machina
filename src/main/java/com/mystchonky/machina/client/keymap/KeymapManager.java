@@ -8,7 +8,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.ClientTickEvent;
 
-@EventBusSubscriber(modid = Machina.MODID, value = Dist.CLIENT)
+@EventBusSubscriber(modid = Machina.ID, value = Dist.CLIENT)
 public class KeymapManager {
     private static final Minecraft minecraft = Minecraft.getInstance();
 

@@ -5,7 +5,7 @@ import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.api.armament.traits.Trait;
 import com.mystchonky.machina.client.screen.TooltipProvider;
 import com.mystchonky.machina.common.item.GearItem;
-import com.mystchonky.machina.common.registrar.MachinaRegistries;
+import com.mystchonky.machina.common.registrar.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class AbstractGear implements TooltipProvider {
-    public static final Codec<AbstractGear> CODEC = MachinaRegistries.GEARS_REGISTRY.byNameCodec();
-    public static final StreamCodec<RegistryFriendlyByteBuf, AbstractGear> STREAM_CODEC = ByteBufCodecs.registry(MachinaRegistries.GEARS_REGISTRY.key());
+    public static final Codec<AbstractGear> CODEC = Registries.GEARS_REGISTRY.byNameCodec();
+    public static final StreamCodec<RegistryFriendlyByteBuf, AbstractGear> STREAM_CODEC = ByteBufCodecs.registry(Registries.GEARS_REGISTRY.key());
     private final String id;
     private final List<Trait> traits = new ArrayList<>();
     @Nullable
@@ -83,6 +83,6 @@ public abstract class AbstractGear implements TooltipProvider {
     }
 
     public final String localizationKey() {
-        return "name." + Machina.MODID + "." + id();
+        return "name." + Machina.ID + "." + id();
     }
 }

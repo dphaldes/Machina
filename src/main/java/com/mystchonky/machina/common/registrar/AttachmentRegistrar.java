@@ -1,8 +1,8 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.api.armament.Perk;
 import com.mystchonky.machina.api.armament.AbstractGear;
+import com.mystchonky.machina.api.armament.Perk;
 import com.mystchonky.machina.common.armament.arsenal.Arsenal;
 import com.mystchonky.machina.common.armament.gear.UnlockedGears;
 import com.mystchonky.machina.common.armament.perk.Perks;
@@ -16,7 +16,7 @@ import java.util.List;
 import java.util.function.Supplier;
 
 public class AttachmentRegistrar {
-    public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, Machina.MODID);
+    public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, Machina.ID);
 
     public static final Supplier<AttachmentType<Arsenal>> ARSENAL = ATTACHMENTS.register("arsenal",
             () -> AttachmentType.builder(Arsenal::create)

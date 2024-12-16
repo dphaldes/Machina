@@ -14,7 +14,7 @@ import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
 public class ItemModelProvider extends net.neoforged.neoforge.client.model.generators.ItemModelProvider {
     public ItemModelProvider(PackOutput output, ExistingFileHelper existingFileHelper) {
-        super(output, Machina.MODID, existingFileHelper);
+        super(output, Machina.ID, existingFileHelper);
     }
 
     @Override

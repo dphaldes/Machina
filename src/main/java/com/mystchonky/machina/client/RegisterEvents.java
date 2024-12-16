@@ -7,8 +7,8 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 
-@EventBusSubscriber(modid = Machina.MODID, bus = EventBusSubscriber.Bus.MOD)
-public class RegistrarEvents {
+@EventBusSubscriber(modid = Machina.ID, bus = EventBusSubscriber.Bus.MOD)
+public class RegisterEvents {
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
         event.registerEntityRenderer(EntityRegistrar.RIFT_PEARL.get(), ThrownItemRenderer::new);

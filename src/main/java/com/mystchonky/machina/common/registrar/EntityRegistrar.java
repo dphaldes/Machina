@@ -11,7 +11,7 @@ import net.neoforged.neoforge.registries.DeferredRegister;
 import java.util.function.Supplier;
 
 public class EntityRegistrar {
-    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, Machina.MODID);
+    public static final DeferredRegister<EntityType<?>> ENTITY_TYPES = DeferredRegister.create(Registries.ENTITY_TYPE, Machina.ID);
 
     public static final Supplier<EntityType<ThrownRiftPearl>> RIFT_PEARL = ENTITY_TYPES.register("rift_pearl",
             () -> EntityType.Builder.<ThrownRiftPearl>of(ThrownRiftPearl::new, MobCategory.MISC)
