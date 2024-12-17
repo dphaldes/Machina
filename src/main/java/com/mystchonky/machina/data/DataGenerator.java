@@ -4,6 +4,8 @@ import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.data.client.BlockStateProvider;
 import com.mystchonky.machina.data.client.ItemModelProvider;
 import com.mystchonky.machina.data.client.LanguageProvider;
+import com.mystchonky.machina.data.common.BlockTagsProvider;
+import com.mystchonky.machina.data.common.ItemTagsProvider;
 import com.mystchonky.machina.data.common.RecipeProvider;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
@@ -20,6 +22,9 @@ public class DataGenerator {
         var packOutput = generator.getPackOutput();
 
         // common
+        var blockTags = new BlockTagsProvider(packOutput, lookupProvider, helper);
+        generator.addProvider(event.includeServer(), blockTags);
+        generator.addProvider(event.includeServer(), new ItemTagsProvider(packOutput, lookupProvider, blockTags.contentsGetter(), helper));
         generator.addProvider(event.includeServer(), new RecipeProvider(packOutput, lookupProvider));
 
         // client
