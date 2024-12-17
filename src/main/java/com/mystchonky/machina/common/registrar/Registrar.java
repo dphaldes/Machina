@@ -27,6 +27,7 @@ public class Registrar {
     );
 
     public static void register(final IEventBus bus) {
+        MaterialRegistrar.register(bus);
         ItemRegistrar.register(bus);
         EntityRegistrar.register(bus);
         BlockRegistrar.register(bus);

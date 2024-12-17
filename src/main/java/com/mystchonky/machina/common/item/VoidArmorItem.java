@@ -1,11 +1,11 @@
 package com.mystchonky.machina.common.item;
 
 import com.mystchonky.machina.common.armament.perk.PerkLibrary;
+import com.mystchonky.machina.common.registrar.MaterialRegistrar;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
-import net.minecraft.world.item.ArmorMaterials;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.EnchantmentHelper;
@@ -16,7 +16,7 @@ import java.util.function.Consumer;
 
 public class VoidArmorItem extends ArmorItem {
     public VoidArmorItem(Type type) {
-        super(ArmorMaterials.IRON, type, new Properties().stacksTo(1));
+        super(MaterialRegistrar.VOID_MATERIAL, type, new Properties().stacksTo(1));
     }
 
     @Override
@@ -55,7 +55,7 @@ public class VoidArmorItem extends ArmorItem {
         return PerkLibrary.hasPerk(wearer, PerkLibrary.GILDED);
     }
 
-    // if not equipped, unenchant fully
+    // if not equipped, remove all enchants
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
         if (level.getGameTime() % 20 == 0 && entity instanceof Player && stack.isEnchanted()) {
