@@ -1,5 +1,6 @@
 package com.mystchonky.machina.common.block;
 
+import com.mystchonky.machina.common.registrar.BlockEntityRegistrar;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.world.level.BlockGetter;
@@ -93,6 +94,6 @@ public class ArmoireBlock extends Block implements EntityBlock {
 
     @Override
     public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return null;
+        return BlockEntityRegistrar.ARMOIRE.get().create(pos, state);
     }
 }

@@ -1,6 +1,7 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.common.blockentity.ArmoireBlockEntity;
 import com.mystchonky.machina.common.blockentity.RiftBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -19,7 +20,12 @@ public class BlockEntityRegistrar {
 //                    ).build(null)
 //            );
     public static final Supplier<BlockEntityType<RiftBlockEntity>> RIFT = BLOCK_ENTITIES.register("rift",
-            () -> BlockEntityType.Builder.of(RiftBlockEntity::new, BlockRegistrar.RIFT.block()).build(null));
+            () -> BlockEntityType.Builder.of(RiftBlockEntity::new, BlockRegistrar.RIFT.block())
+                    .build(null));
+
+    public static final Supplier<BlockEntityType<ArmoireBlockEntity>> ARMOIRE = BLOCK_ENTITIES.register("armoire",
+            () -> BlockEntityType.Builder.of(ArmoireBlockEntity::new, BlockRegistrar.ARMOIRE.block())
+                    .build(null));
 
     public static void register(IEventBus bus) {
         BLOCK_ENTITIES.register(bus);

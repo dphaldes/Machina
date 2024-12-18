@@ -1,6 +1,8 @@
 package com.mystchonky.machina.client;
 
 import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.client.renderer.ArmoireRenderer;
+import com.mystchonky.machina.common.registrar.BlockEntityRegistrar;
 import com.mystchonky.machina.common.registrar.EntityRegistrar;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.bus.api.SubscribeEvent;
@@ -11,6 +13,10 @@ import net.neoforged.neoforge.client.event.EntityRenderersEvent;
 public class RegisterEvents {
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        // entities
         event.registerEntityRenderer(EntityRegistrar.RIFT_PEARL.get(), ThrownItemRenderer::new);
+
+        // block_entities
+        event.registerBlockEntityRenderer(BlockEntityRegistrar.ARMOIRE.get(), ArmoireRenderer::new);
     }
 }
