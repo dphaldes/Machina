@@ -1,0 +1,98 @@
+package com.mystchonky.machina.common.block;
+
+import net.minecraft.core.BlockPos;
+import net.minecraft.core.Direction;
+import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.EntityBlock;
+import net.minecraft.world.level.block.HorizontalDirectionalBlock;
+import net.minecraft.world.level.block.Mirror;
+import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.BlockEntity;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.StateDefinition;
+import net.minecraft.world.level.block.state.properties.DirectionProperty;
+import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.shapes.CollisionContext;
+import net.minecraft.world.phys.shapes.Shapes;
+import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
+
+public class ArmoireBlock extends Block implements EntityBlock {
+    public static final DirectionProperty FACING = HorizontalDirectionalBlock.FACING;
+    public static final VoxelShape SHAPE_BASE = Block.box(0.0, 0.0, 0.0, 16.0, 2.0, 16.0);
+    public static final VoxelShape SHAPE_POST = Block.box(4.0, 2.0, 4.0, 12.0, 14.0, 12.0);
+    public static final VoxelShape SHAPE_COMMON = Shapes.or(SHAPE_BASE, SHAPE_POST);
+    public static final VoxelShape SHAPE_TOP_PLATE = Block.box(0.0, 15.0, 0.0, 16.0, 15.0, 16.0);
+    public static final VoxelShape SHAPE_COLLISION = Shapes.or(SHAPE_COMMON, SHAPE_TOP_PLATE);
+    public static final VoxelShape SHAPE_WEST = Shapes.or(
+            Block.box(1.0, 10.0, 0.0, 5.333333, 14.0, 16.0),
+            Block.box(5.333333, 12.0, 0.0, 9.666667, 16.0, 16.0),
+            Block.box(9.666667, 14.0, 0.0, 14.0, 18.0, 16.0),
+            SHAPE_COMMON
+    );
+    public static final VoxelShape SHAPE_NORTH = Shapes.or(
+            Block.box(0.0, 10.0, 1.0, 16.0, 14.0, 5.333333),
+            Block.box(0.0, 12.0, 5.333333, 16.0, 16.0, 9.666667),
+            Block.box(0.0, 14.0, 9.666667, 16.0, 18.0, 14.0),
+            SHAPE_COMMON
+    );
+    public static final VoxelShape SHAPE_EAST = Shapes.or(
+            Block.box(10.666667, 10.0, 0.0, 15.0, 14.0, 16.0),
+            Block.box(6.333333, 12.0, 0.0, 10.666667, 16.0, 16.0),
+            Block.box(2.0, 14.0, 0.0, 6.333333, 18.0, 16.0),
+            SHAPE_COMMON
+    );
+    public static final VoxelShape SHAPE_SOUTH = Shapes.or(
+            Block.box(0.0, 10.0, 10.666667, 16.0, 14.0, 15.0),
+            Block.box(0.0, 12.0, 6.333333, 16.0, 16.0, 10.666667),
+            Block.box(0.0, 14.0, 2.0, 16.0, 18.0, 6.333333),
+            SHAPE_COMMON
+    );
+
+    public ArmoireBlock(Properties properties) {
+        super(properties);
+        this.registerDefaultState(this.stateDefinition.any().setValue(FACING, Direction.NORTH));
+    }
+
+    @Override
+    protected VoxelShape getOcclusionShape(BlockState state, BlockGetter level, BlockPos pos) {
+        return SHAPE_COMMON;
+    }
+
+    @Override
+    protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
+        return switch (state.getValue(FACING)) {
+            case NORTH -> SHAPE_NORTH;
+            case SOUTH -> SHAPE_SOUTH;
+            case EAST -> SHAPE_EAST;
+            case WEST -> SHAPE_WEST;
+            default -> SHAPE_COMMON;
+        };
+    }
+
+    @Override
+    protected BlockState rotate(BlockState state, Rotation rotation) {
+        return state.setValue(FACING, rotation.rotate(state.getValue(FACING)));
+    }
+
+    @Override
+    protected BlockState mirror(BlockState state, Mirror mirror) {
+        return state.setValue(FACING, mirror.mirror(state.getValue(FACING)));
+    }
+
+    @Override
+    protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
+        builder.add(FACING);
+    }
+
+    @Override
+    protected boolean isPathfindable(BlockState state, PathComputationType pathComputationType) {
+        return false;
+    }
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return null;
+    }
+}

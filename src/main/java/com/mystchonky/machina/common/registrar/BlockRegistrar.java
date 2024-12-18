@@ -1,6 +1,7 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.common.block.ArmoireBlock;
 import com.mystchonky.machina.common.block.RiftBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
@@ -25,6 +26,11 @@ public class BlockRegistrar {
                     .lightLevel(state -> 4)
                     .noOcclusion()
                     .noLootTable()
+            ));
+
+    public static final BlockPair<ArmoireBlock, BlockItem> ARMOIRE = block("armoire",
+            () -> new ArmoireBlock(BlockBehaviour.Properties.of()
+                    .strength(3.5F)
             ));
 
     private static <X extends Block> BlockPair<X, BlockItem> block(String name, Supplier<X> supplier) {

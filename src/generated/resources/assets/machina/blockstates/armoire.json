@@ -1,0 +1,19 @@
+{
+  "variants": {
+    "facing=east": {
+      "model": "machina:block/armoire",
+      "y": 90
+    },
+    "facing=north": {
+      "model": "machina:block/armoire"
+    },
+    "facing=south": {
+      "model": "machina:block/armoire",
+      "y": 180
+    },
+    "facing=west": {
+      "model": "machina:block/armoire",
+      "y": 270
+    }
+  }
+}

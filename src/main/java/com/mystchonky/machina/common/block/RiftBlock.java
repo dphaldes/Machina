@@ -1,7 +1,6 @@
 package com.mystchonky.machina.common.block;
 
 import com.mojang.serialization.MapCodec;
-import com.mystchonky.machina.common.blockentity.BlockEntityHelper;
 import com.mystchonky.machina.common.blockentity.RiftBlockEntity;
 import com.mystchonky.machina.common.registrar.BlockEntityRegistrar;
 import net.minecraft.core.BlockPos;
@@ -112,7 +111,7 @@ public class RiftBlock extends DirectionalBlock implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return BlockEntityHelper.createTicker(type, BlockEntityRegistrar.RIFT.get(), RiftBlockEntity::tick);
+        return BlockHelper.createTicker(type, BlockEntityRegistrar.RIFT.get(), RiftBlockEntity::tick);
     }
 
     @Override

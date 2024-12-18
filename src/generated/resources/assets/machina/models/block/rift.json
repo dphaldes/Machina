@@ -1,6 +1,0 @@
-{
-  "parent": "machina:block/rift_base",
-  "textures": {
-    "texture": "machina:block/rift"
-  }
-}
