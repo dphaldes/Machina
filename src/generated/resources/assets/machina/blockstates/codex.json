@@ -1,18 +1,18 @@
 {
   "variants": {
     "facing=east": {
-      "model": "machina:block/armoire",
+      "model": "machina:block/codex",
       "y": 90
     },
     "facing=north": {
-      "model": "machina:block/armoire"
+      "model": "machina:block/codex"
     },
     "facing=south": {
-      "model": "machina:block/armoire",
+      "model": "machina:block/codex",
       "y": 180
     },
     "facing=west": {
-      "model": "machina:block/armoire",
+      "model": "machina:block/codex",
       "y": 270
     }
   }

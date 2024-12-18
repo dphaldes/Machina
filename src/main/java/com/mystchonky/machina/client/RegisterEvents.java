@@ -1,7 +1,7 @@
 package com.mystchonky.machina.client;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.client.renderer.ArmoireRenderer;
+import com.mystchonky.machina.client.renderer.CodexRenderer;
 import com.mystchonky.machina.common.registrar.BlockEntityRegistrar;
 import com.mystchonky.machina.common.registrar.EntityRegistrar;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
@@ -17,6 +17,6 @@ public class RegisterEvents {
         event.registerEntityRenderer(EntityRegistrar.RIFT_PEARL.get(), ThrownItemRenderer::new);
 
         // block_entities
-        event.registerBlockEntityRenderer(BlockEntityRegistrar.ARMOIRE.get(), ArmoireRenderer::new);
+        event.registerBlockEntityRenderer(BlockEntityRegistrar.CODEX.get(), CodexRenderer::new);
     }
 }
