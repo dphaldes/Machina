@@ -14,6 +14,7 @@ import net.minecraft.client.renderer.blockentity.BlockEntityRendererProvider;
 import net.minecraft.client.renderer.texture.TextureAtlas;
 import net.minecraft.client.resources.model.Material;
 import net.minecraft.resources.ResourceLocation;
+import net.minecraft.util.Mth;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.AABB;
 
@@ -34,11 +35,21 @@ public class CodexRenderer implements BlockEntityRenderer<CodexBlockEntity> {
         BlockState blockstate = blockEntity.getBlockState();
         poseStack.pushPose();
         poseStack.translate(0.5F, 1.0625F, 0.5F);
-        float f = blockstate.getValue(CodexBlock.FACING).getClockWise().toYRot();
-        poseStack.mulPose(Axis.YP.rotationDegrees(-f));
+
+        float f = (float) blockEntity.time + partialTick;
+        poseStack.translate(0.0F, Mth.sin(f * 0.1F) * 0.01F, 0.0F);
+
+        float rot = blockstate.getValue(CodexBlock.FACING).getClockWise().toYRot();
+        poseStack.mulPose(Axis.YP.rotationDegrees(-rot));
         poseStack.mulPose(Axis.ZP.rotationDegrees(67.5F));
+
         poseStack.translate(0.0F, -0.125F, 0.0F);
-        this.bookModel.setupAnim(0.0F, 0.1F, 0.9F, 1.2F);
+        float f3 = Mth.lerp(partialTick, blockEntity.oFlip, blockEntity.flip);
+        float f4 = Mth.frac(f3 + 0.25F) * 1.6F - 0.3F;
+        float f5 = Mth.frac(f3 + 0.75F) * 1.6F - 0.3F;
+        float f6 = Mth.lerp(partialTick, blockEntity.oOpen, blockEntity.open);
+        this.bookModel.setupAnim(f, Mth.clamp(f4, 0.0F, 1.0F), Mth.clamp(f5, 0.0F, 1.0F), f6);
+//        this.bookModel.setupAnim(0.0F, 0.1F, 0.9F, 1.2F);
         VertexConsumer vertexconsumer = BOOK_LOCATION.buffer(bufferSource, RenderType::entitySolid);
         this.bookModel.render(poseStack, vertexconsumer, packedLight, packedOverlay, -1);
         poseStack.popPose();
