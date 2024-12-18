@@ -132,11 +132,11 @@ public class RiftBlock extends DirectionalBlock implements EntityBlock {
             int j = random.nextInt(2) * 2 - 1;
             int k = random.nextInt(2) * 2 - 1;
             double d0 = (double) pos.getX() + 0.5 + 0.25 * (double) j;
-            double d1 = (double) ((float) pos.getY() + random.nextFloat());
+            double d1 = (float) pos.getY() + random.nextFloat();
             double d2 = (double) pos.getZ() + 0.5 + 0.25 * (double) k;
-            double d3 = (double) (random.nextFloat() * (float) j);
+            double d3 = random.nextFloat() * (float) j;
             double d4 = ((double) random.nextFloat() - 0.5) * 0.125;
-            double d5 = (double) (random.nextFloat() * (float) k);
+            double d5 = random.nextFloat() * (float) k;
             level.addParticle(ParticleTypes.PORTAL, d0, d1, d2, d3, d4, d5);
         }
     }

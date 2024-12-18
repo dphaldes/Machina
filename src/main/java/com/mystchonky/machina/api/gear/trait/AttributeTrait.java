@@ -60,8 +60,6 @@ public final class AttributeTrait implements Trait {
     @Override
     public void getTooltip(List<Component> tooltip) {
         var modifiers = this.getModifiers();
-        modifiers.forEach((holder, modifier) -> {
-            tooltip.add(FormattedAttribute.format(holder, modifier));
-        });
+        modifiers.forEach((holder, modifier) -> tooltip.add(FormattedAttribute.format(holder, modifier)));
     }
 }
