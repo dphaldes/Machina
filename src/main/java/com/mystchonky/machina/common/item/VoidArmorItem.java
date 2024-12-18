@@ -1,6 +1,6 @@
 package com.mystchonky.machina.common.item;
 
-import com.mystchonky.machina.common.armament.perk.PerkLibrary;
+import com.mystchonky.machina.common.perk.PerkLibrary;
 import com.mystchonky.machina.common.registrar.MaterialRegistrar;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;

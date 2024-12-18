@@ -1,11 +1,11 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.api.armament.AbstractGear;
-import com.mystchonky.machina.api.armament.Perk;
-import com.mystchonky.machina.common.armament.arsenal.Arsenal;
-import com.mystchonky.machina.common.armament.gear.UnlockedGears;
-import com.mystchonky.machina.common.armament.perk.Perks;
+import com.mystchonky.machina.api.gear.Gear;
+import com.mystchonky.machina.api.perk.Perk;
+import com.mystchonky.machina.common.arsenal.Arsenal;
+import com.mystchonky.machina.common.gear.UnlockedGears;
+import com.mystchonky.machina.common.perk.Perks;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -24,7 +24,7 @@ public class AttachmentRegistrar {
                     .copyOnDeath()
                     .build());
 
-    public static final Supplier<AttachmentType<ArrayList<AbstractGear>>> UNLOCKED_GEARS = ATTACHMENTS.register("unlocked_gears",
+    public static final Supplier<AttachmentType<ArrayList<Gear>>> UNLOCKED_GEARS = ATTACHMENTS.register("unlocked_gears",
             () -> AttachmentType.builder(UnlockedGears::create)
                     .serialize(UnlockedGears.CODEC)
                     .copyOnDeath()

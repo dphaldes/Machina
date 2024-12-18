@@ -3,7 +3,7 @@ package com.mystchonky.machina.client.util;
 import com.mojang.blaze3d.platform.Lighting;
 import com.mojang.blaze3d.systems.RenderSystem;
 import com.mojang.blaze3d.vertex.PoseStack;
-import com.mystchonky.machina.api.armament.AbstractGear;
+import com.mystchonky.machina.api.gear.Gear;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.renderer.LightTexture;
@@ -22,11 +22,11 @@ public class RenderHelper {
     private static final RenderType TRANSLUCENT = RenderType.entityTranslucent(TextureAtlas.LOCATION_BLOCKS);
     private static final Matrix4f SCALE_INVERT_Y = new Matrix4f().scaling(1F, -1F, 1F);
 
-    public static void drawGear(AbstractGear gear, GuiGraphics graphics, int positionX, int positionY, int size, boolean renderTransparent, int zIndex) {
+    public static void drawGear(Gear gear, GuiGraphics graphics, int positionX, int positionY, int size, boolean renderTransparent, int zIndex) {
         renderFakeItemTransparent(graphics.pose(), gear.getGearItem().getDefaultInstance(), positionX, positionY, size, 0, renderTransparent, zIndex);
     }
 
-    public static void drawGear(AbstractGear gear, GuiGraphics graphics, int positionX, int positionY, int size, boolean renderTransparent) {
+    public static void drawGear(Gear gear, GuiGraphics graphics, int positionX, int positionY, int size, boolean renderTransparent) {
         renderFakeItemTransparent(graphics.pose(), gear.getGearItem().getDefaultInstance(), positionX, positionY, size, 0, renderTransparent, 150);
     }
 

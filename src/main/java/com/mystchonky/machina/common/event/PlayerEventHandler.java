@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.event;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.armament.Armament;
+import com.mystchonky.machina.common.arsenal.ArsenalManager;
 import com.mystchonky.machina.common.item.VoidArmorItem;
 import com.mystchonky.machina.common.network.NetworkedAttachments;
 import net.minecraft.server.level.ServerPlayer;
@@ -39,10 +39,10 @@ public class PlayerEventHandler {
         if (!(event.getEntity() instanceof Player player) || !event.getSlot().isArmor()) return;
 
         if (event.getFrom().getItem() instanceof VoidArmorItem || event.getTo().getItem() instanceof VoidArmorItem) {
-            if (Armament.isWearingArmor(player)) {
-                Armament.activateArmor(player);
+            if (ArsenalManager.active(player)) {
+                ArsenalManager.activate(player);
             } else {
-                Armament.deactivateArmor(player);
+                ArsenalManager.deactivate(player);
             }
         }
     }

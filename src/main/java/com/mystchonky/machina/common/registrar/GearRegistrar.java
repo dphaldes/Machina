@@ -1,17 +1,17 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.api.armament.AbstractGear;
-import com.mystchonky.machina.common.armament.gear.standard.AqueousGear;
-import com.mystchonky.machina.common.armament.gear.standard.ArmorGear;
-import com.mystchonky.machina.common.armament.gear.standard.ElementalProtectionGear;
-import com.mystchonky.machina.common.armament.gear.standard.FrostWalkerGear;
-import com.mystchonky.machina.common.armament.gear.standard.GildedGear;
-import com.mystchonky.machina.common.armament.gear.standard.GlideGear;
-import com.mystchonky.machina.common.armament.gear.standard.HealthGear;
-import com.mystchonky.machina.common.armament.gear.standard.JumpGear;
-import com.mystchonky.machina.common.armament.gear.standard.ProtectionGear;
-import com.mystchonky.machina.common.armament.gear.standard.SpeedGear;
+import com.mystchonky.machina.api.gear.Gear;
+import com.mystchonky.machina.common.gear.standard.AqueousGear;
+import com.mystchonky.machina.common.gear.standard.ArmorGear;
+import com.mystchonky.machina.common.gear.standard.ElementalProtectionGear;
+import com.mystchonky.machina.common.gear.standard.FrostWalkerGear;
+import com.mystchonky.machina.common.gear.standard.GildedGear;
+import com.mystchonky.machina.common.gear.standard.GlideGear;
+import com.mystchonky.machina.common.gear.standard.HealthGear;
+import com.mystchonky.machina.common.gear.standard.JumpGear;
+import com.mystchonky.machina.common.gear.standard.ProtectionGear;
+import com.mystchonky.machina.common.gear.standard.SpeedGear;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
@@ -20,7 +20,7 @@ import java.util.function.Supplier;
 
 public class GearRegistrar {
 
-    public static final DeferredRegister<AbstractGear> GEARS = DeferredRegister.create(Registries.GEARS_REGISTRY, Machina.ID);
+    public static final DeferredRegister<Gear> GEARS = DeferredRegister.create(Registries.GEARS_REGISTRY, Machina.ID);
     public static final DeferredRegister.Items GEAR_ITEMS = DeferredRegister.createItems(Machina.ID);
 
     public static final Supplier<ArmorGear> ARMOR = register(new ArmorGear());
@@ -34,7 +34,7 @@ public class GearRegistrar {
     public static final Supplier<SpeedGear> SPEED = register(new SpeedGear());
     public static final Supplier<JumpGear> JUMP = register(new JumpGear());
 
-    private static <T extends AbstractGear> DeferredHolder<AbstractGear, T> register(T gear) {
+    private static <T extends Gear> DeferredHolder<Gear, T> register(T gear) {
         final var holder = GEARS.register(gear.id(), () -> gear);
         GEAR_ITEMS.register(gear.id(), gear::getGearItem);
         return holder;

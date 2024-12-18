@@ -1,7 +1,7 @@
 package com.mystchonky.machina.mixin.perk;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import com.mystchonky.machina.common.armament.perk.PerkLibrary;
+import com.mystchonky.machina.common.perk.PerkLibrary;
 import net.minecraft.client.renderer.entity.layers.ElytraLayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;

@@ -1,6 +1,6 @@
 package com.mystchonky.machina.client.screen.widget;
 
-import com.mystchonky.machina.api.armament.AbstractGear;
+import com.mystchonky.machina.api.gear.Gear;
 import com.mystchonky.machina.client.screen.TooltipProvider;
 import com.mystchonky.machina.client.util.RenderHelper;
 import net.minecraft.client.gui.GuiGraphics;
@@ -14,9 +14,9 @@ public class ArsenalGearButton extends Button implements TooltipProvider {
 
     private static final int SIZE = 16;
     @Nullable
-    private final AbstractGear gear;
+    private final Gear gear;
 
-    public ArsenalGearButton(int x, int y, int width, int height, OnPress onPress, @Nullable AbstractGear gear) {
+    public ArsenalGearButton(int x, int y, int width, int height, OnPress onPress, @Nullable Gear gear) {
         super(x, y, width, height, Component.empty(), onPress, Button.DEFAULT_NARRATION);
         this.gear = gear;
     }

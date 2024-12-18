@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.item;
 
-import com.mystchonky.machina.api.armament.AbstractGear;
-import com.mystchonky.machina.common.armament.gear.UnlockedGears;
+import com.mystchonky.machina.api.gear.Gear;
+import com.mystchonky.machina.common.gear.UnlockedGears;
 import com.mystchonky.machina.common.network.NetworkedAttachments;
 import com.mystchonky.machina.common.registrar.LangRegistrar;
 import net.minecraft.network.chat.Component;
@@ -16,9 +16,9 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 public class GearItem extends Item {
-    public final AbstractGear gear;
+    public final Gear gear;
 
-    public GearItem(AbstractGear gear) {
+    public GearItem(Gear gear) {
         super(new Properties().stacksTo(1));
         this.gear = gear;
     }

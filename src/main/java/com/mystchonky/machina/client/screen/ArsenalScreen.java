@@ -1,11 +1,11 @@
 package com.mystchonky.machina.client.screen;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.api.armament.AbstractGear;
+import com.mystchonky.machina.api.gear.Gear;
 import com.mystchonky.machina.client.screen.widget.ArsenalGearButton;
 import com.mystchonky.machina.client.screen.widget.GearButton;
-import com.mystchonky.machina.common.armament.arsenal.Arsenal;
-import com.mystchonky.machina.common.armament.gear.UnlockedGears;
+import com.mystchonky.machina.common.arsenal.Arsenal;
+import com.mystchonky.machina.common.gear.UnlockedGears;
 import com.mystchonky.machina.common.network.NetworkedAttachments;
 import com.mystchonky.machina.common.registrar.LangRegistrar;
 import net.minecraft.client.gui.GuiGraphics;
@@ -34,8 +34,8 @@ public class ArsenalScreen extends Screen {
     protected final int imageHeight = 148;
     private final Player player;
     private final Arsenal playerArsenal;
-    private final List<AbstractGear> unlockedGearsList;
-    private final List<AbstractGear> arsenalGearsList;
+    private final List<Gear> unlockedGearsList;
+    private final List<Gear> arsenalGearsList;
     private final List<GearButton> gearButtons = new ArrayList<>();
     private final List<ArsenalGearButton> arsenalButtons = new ArrayList<>();
     private final int currentPage = 0;
@@ -128,7 +128,7 @@ public class ArsenalScreen extends Screen {
         buttons.clear();
     }
 
-    private void onGearClicked(Button button, AbstractGear gear) {
+    private void onGearClicked(Button button, Gear gear) {
         var compatible = arsenalGearsList.stream().filter(Objects::nonNull).allMatch(it -> it.isCompatibleWith(gear));
         if (compatible) {
             for (int i = 0; i < arsenalGearsList.size(); i++) {
@@ -140,7 +140,7 @@ public class ArsenalScreen extends Screen {
         }
     }
 
-    private void arsenalGearClicked(Button button, @Nullable AbstractGear gear) {
+    private void arsenalGearClicked(Button button, @Nullable Gear gear) {
         if (gear == null) return;
         for (int i = 0; i < arsenalGearsList.size(); i++) {
             if (arsenalGearsList.get(i) == gear) arsenalGearsList.set(i, null);

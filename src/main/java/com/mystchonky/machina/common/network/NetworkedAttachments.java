@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.network;
 
 
-import com.mystchonky.machina.common.armament.arsenal.Arsenal;
+import com.mystchonky.machina.common.arsenal.Arsenal;
 import com.mystchonky.machina.common.network.messages.MessageSyncArsenal;
 import com.mystchonky.machina.common.network.messages.MessageSyncGears;
 import com.mystchonky.machina.common.network.messages.MessageUpdateArsenal;

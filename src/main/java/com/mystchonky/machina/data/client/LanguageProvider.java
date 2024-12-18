@@ -1,7 +1,7 @@
 package com.mystchonky.machina.data.client;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.armament.perk.PerkLibrary;
+import com.mystchonky.machina.common.perk.PerkLibrary;
 import com.mystchonky.machina.common.registrar.BlockRegistrar;
 import com.mystchonky.machina.common.registrar.GearRegistrar;
 import com.mystchonky.machina.common.registrar.ItemRegistrar;
