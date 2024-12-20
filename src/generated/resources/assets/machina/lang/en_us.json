@@ -1,4 +1,5 @@
 {
+  "block.machina.codex": "Codex",
   "block.machina.rift": "Rift",
   "gear.machina.remove": "Removed %s!",
   "gear.machina.unlock": "Unlocked %s!",
@@ -8,6 +9,7 @@
   "item.machina.frost_walker": "Frost Walker",
   "item.machina.gilded": "Gilded",
   "item.machina.glide": "Glide Gear",
+  "item.machina.grimoire": "Grimoire",
   "item.machina.health": "Health Gear",
   "item.machina.jump": "Jump Gear",
   "item.machina.protection": "Protection Gear",

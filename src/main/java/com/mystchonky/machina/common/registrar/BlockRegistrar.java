@@ -30,7 +30,7 @@ public class BlockRegistrar {
 
     public static final BlockPair<CodexBlock, BlockItem> CODEX = block("codex",
             () -> new CodexBlock(BlockBehaviour.Properties.of()
-                    .strength(3.5F)
+                    .strength(1.5F)
             ));
 
     private static <X extends Block> BlockPair<X, BlockItem> block(String name, Supplier<X> supplier) {

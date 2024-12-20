@@ -1,7 +1,7 @@
 package com.mystchonky.machina.client;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.client.renderer.CodexRenderer;
+import com.mystchonky.machina.client.renderer.block.CodexRenderer;
 import com.mystchonky.machina.common.registrar.BlockEntityRegistrar;
 import com.mystchonky.machina.common.registrar.EntityRegistrar;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;

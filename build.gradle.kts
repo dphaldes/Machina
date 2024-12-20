@@ -61,11 +61,24 @@ sourceSets.getByName("main").resources.srcDir("src/generated/resources")
 
 repositories {
     maven {
-        setUrl("https://dogforce-games.com/maven")
+        name = "gigaherz"
+        url = uri("https://dogforce-games.com/maven")
+        content {
+            includeGroup("dev.gigaherz.graph")
+        }
+    }
+    maven {
+        name = "GeckoLib"
+        url = uri("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
+        content {
+            includeGroup("software.bernie.geckolib")
+        }
     }
 }
 
 dependencies {
+    val minecraft_version: String by project
+
     val graphlib: String by project
     val graphlib_range: String by project
     implementation("dev.gigaherz.graph:GraphLib3:${graphlib}")
@@ -76,6 +89,8 @@ dependencies {
         }
     }
 
+//    val geckolib: String by project
+//    implementation("software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib}")
 }
 
 val replaceProperties = mapOf(

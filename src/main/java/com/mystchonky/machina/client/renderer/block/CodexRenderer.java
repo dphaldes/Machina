@@ -1,4 +1,4 @@
-package com.mystchonky.machina.client.renderer;
+package com.mystchonky.machina.client.renderer.block;
 
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;

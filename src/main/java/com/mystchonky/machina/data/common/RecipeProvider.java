@@ -1,10 +1,13 @@
 package com.mystchonky.machina.data.common;
 
+import com.mystchonky.machina.common.registrar.BlockRegistrar;
 import com.mystchonky.machina.common.registrar.ItemRegistrar;
 import com.mystchonky.machina.data.common.recipe.RiftRecipeBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -25,6 +28,13 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
         riftRecipe(ItemRegistrar.VOID_CHESTPLATE, Items.IRON_CHESTPLATE, recipeOutput);
         riftRecipe(ItemRegistrar.VOID_LEGGINGS, Items.IRON_LEGGINGS, recipeOutput);
         riftRecipe(ItemRegistrar.VOID_BOOTS, Items.IRON_BOOTS, recipeOutput);
+        riftRecipe(ItemRegistrar.GRIMOIRE, Items.BOOK, recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, BlockRegistrar.CODEX.blockItem())
+                .requires(ItemRegistrar.GRIMOIRE.asItem())
+                .requires(Items.LECTERN)
+                .unlockedBy("has_grimoire", has(ItemRegistrar.GRIMOIRE.asItem()))
+                .save(recipeOutput);
     }
 
     private void riftRecipe(DeferredItem<? extends Item> item, Item ingredient, RecipeOutput recipeOutput) {
