@@ -26,21 +26,22 @@ public class Registrar {
                     .build()
     );
 
-    public static void register(final IEventBus bus) {
-        MaterialRegistrar.register(bus);
-        ItemRegistrar.register(bus);
-        EntityRegistrar.register(bus);
-        BlockRegistrar.register(bus);
-        BlockEntityRegistrar.register(bus);
-        RecipeRegistrar.register(bus);
-        CREATIVE_TABS.register(bus);
+    public static void register(final IEventBus modBus) {
+        MaterialRegistrar.register(modBus);
+        ItemRegistrar.register(modBus);
+        EntityRegistrar.register(modBus);
+        BlockRegistrar.register(modBus);
+        BlockEntityRegistrar.register(modBus);
+        RecipeRegistrar.register(modBus);
+        CREATIVE_TABS.register(modBus);
+        MenuRegistrar.register(modBus);
 
-        bus.addListener(Registries::register);
-        AttachmentRegistrar.register(bus);
-        GearRegistrar.register(bus);
+        modBus.addListener(Registries::register);
+        AttachmentRegistrar.register(modBus);
+        GearRegistrar.register(modBus);
 
         LangRegistrar.load();
-        bus.addListener(MessageRegistrar::registerMessages);
+        modBus.addListener(MessageRegistrar::registerMessages);
 
         NeoForge.EVENT_BUS.addListener(Registrar::registerCommands);
     }

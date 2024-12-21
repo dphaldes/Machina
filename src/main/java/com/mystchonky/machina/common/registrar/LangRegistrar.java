@@ -31,6 +31,8 @@ public class LangRegistrar {
 
     // ENDREGION
 
+    public static final LangEntry CODEX_MENU = addTranslation("menu", "codex.title", "Codex");
+
     private static LangEntry addTranslation(String key, String translation) {
         entries.put(key, translation);
         return new LangEntry(key, Component.translatable(key));

@@ -1,9 +1,17 @@
 package com.mystchonky.machina.common.block;
 
 import com.mystchonky.machina.common.blockentity.CodexBlockEntity;
+import com.mystchonky.machina.common.menu.CodexMenu;
 import com.mystchonky.machina.common.registrar.BlockEntityRegistrar;
+import com.mystchonky.machina.common.registrar.LangRegistrar;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.server.level.ServerPlayer;
+import net.minecraft.world.InteractionResult;
+import net.minecraft.world.MenuProvider;
+import net.minecraft.world.SimpleMenuProvider;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -18,6 +26,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.DirectionProperty;
 import net.minecraft.world.level.pathfinder.PathComputationType;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
@@ -109,5 +118,22 @@ public class CodexBlock extends Block implements EntityBlock {
     @Override
     public @Nullable <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
         return level.isClientSide() ? BlockHelper.createTicker(type, BlockEntityRegistrar.CODEX.get(), CodexBlockEntity::animationTick) : null;
+    }
+
+    @Override
+    protected @Nullable MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
+        return new SimpleMenuProvider(
+                (id, inventory, player) -> new CodexMenu(id, inventory, ContainerLevelAccess.create(level, pos)),
+                LangRegistrar.CODEX_MENU.component()
+        );
+    }
+
+    @Override
+    protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
+        if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
+            serverPlayer.openMenu(state.getMenuProvider(level, pos));
+        }
+
+        return InteractionResult.sidedSuccess(level.isClientSide());
     }
 }
