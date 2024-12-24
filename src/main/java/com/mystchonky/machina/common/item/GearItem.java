@@ -46,6 +46,6 @@ public class GearItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> components, TooltipFlag flag) {
-        this.gear.getTooltip(components);
+        this.gear.getAdditionalTooltip(components);
     }
 }

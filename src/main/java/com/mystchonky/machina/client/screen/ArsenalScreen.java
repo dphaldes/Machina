@@ -2,17 +2,14 @@ package com.mystchonky.machina.client.screen;
 
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.api.gear.Gear;
-import com.mystchonky.machina.client.screen.widget.ArsenalGearButton;
 import com.mystchonky.machina.client.screen.widget.GearButton;
 import com.mystchonky.machina.common.arsenal.Arsenal;
 import com.mystchonky.machina.common.gear.UnlockedGears;
 import com.mystchonky.machina.common.network.NetworkedAttachments;
 import com.mystchonky.machina.common.registrar.LangRegistrar;
 import net.minecraft.client.gui.GuiGraphics;
-import net.minecraft.client.gui.components.AbstractWidget;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
-import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
@@ -24,7 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ArsenalScreen extends Screen {
+public class ArsenalScreen extends Screen implements Tooltip.Renderer {
 
     public static ResourceLocation background = Machina.prefix("textures/gui/arsenal.png");
     public static ResourceLocation applyButton = Machina.prefix("apply");
@@ -34,10 +31,10 @@ public class ArsenalScreen extends Screen {
     protected final int imageHeight = 148;
     private final Player player;
     private final Arsenal playerArsenal;
-    private final List<Gear> unlockedGearsList;
-    private final List<Gear> arsenalGearsList;
+    private final List<Gear> unlockedGears;
+    private final List<Gear> equippedGears;
     private final List<GearButton> gearButtons = new ArrayList<>();
-    private final List<ArsenalGearButton> arsenalButtons = new ArrayList<>();
+    private final List<GearButton> arsenalButtons = new ArrayList<>();
     private final int currentPage = 0;
     protected int leftPos;
     protected int topPos;
@@ -47,8 +44,8 @@ public class ArsenalScreen extends Screen {
         super(LangRegistrar.ARSENAL_SCREEN.component());
         this.player = player;
         playerArsenal = Arsenal.get(player);
-        unlockedGearsList = new ArrayList<>(UnlockedGears.get(player));
-        arsenalGearsList = new ArrayList<>(Arsenal.get(player).gears());
+        unlockedGears = new ArrayList<>(UnlockedGears.get(player));
+        equippedGears = new ArrayList<>(Arsenal.get(player).gears());
 
         updateNumPages();
     }
@@ -67,7 +64,7 @@ public class ArsenalScreen extends Screen {
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
-        drawTooltip(guiGraphics, mouseX, mouseY);
+        renderAdditionalTooltip(guiGraphics, mouseX, mouseY, font, renderables);
     }
 
     @Override
@@ -82,7 +79,7 @@ public class ArsenalScreen extends Screen {
     }
 
     private void updateNumPages() {
-        this.maxPages = (int) Math.ceil((double) unlockedGearsList.size() / 36);
+        this.maxPages = (int) Math.ceil((double) unlockedGears.size() / 36);
     }
 
     private void displayUnlockedGears(final int page) {
@@ -91,7 +88,7 @@ public class ArsenalScreen extends Screen {
         //TODO:PAGES
         int xOffset = 0;
         int yOffset = 0;
-        for (var gear : unlockedGearsList) {
+        for (var gear : unlockedGears) {
             final var button = new GearButton(leftPos + 16 + xOffset, topPos + 16 + yOffset, 16, 16, (btn) -> onGearClicked(btn, gear), gear);
             addRenderableWidget(button);
             gearButtons.add(button);
@@ -108,8 +105,8 @@ public class ArsenalScreen extends Screen {
 
         int xOffset = 0;
         int yOffset = 0;
-        for (var gear : arsenalGearsList) {
-            final var button = new ArsenalGearButton(leftPos + 164 + xOffset, topPos + 36 + yOffset, 16, 16, (btn) -> arsenalGearClicked(btn, gear), gear);
+        for (var gear : equippedGears) {
+            final var button = new GearButton(leftPos + 164 + xOffset, topPos + 36 + yOffset, 16, 16, (btn) -> arsenalGearClicked(btn, gear), gear);
             addRenderableWidget(button);
             arsenalButtons.add(button);
             xOffset += 20;
@@ -129,11 +126,11 @@ public class ArsenalScreen extends Screen {
     }
 
     private void onGearClicked(Button button, Gear gear) {
-        var compatible = arsenalGearsList.stream().filter(Objects::nonNull).allMatch(it -> it.isCompatibleWith(gear));
+        var compatible = equippedGears.stream().filter(Objects::nonNull).allMatch(it -> it.isCompatibleWith(gear));
         if (compatible) {
-            for (int i = 0; i < arsenalGearsList.size(); i++) {
-                if (arsenalGearsList.get(i) != null) continue;
-                arsenalGearsList.set(i, gear);
+            for (int i = 0; i < equippedGears.size(); i++) {
+                if (equippedGears.get(i) != null) continue;
+                equippedGears.set(i, gear);
                 break;
             }
             displayArsenalGears();
@@ -142,37 +139,17 @@ public class ArsenalScreen extends Screen {
 
     private void arsenalGearClicked(Button button, @Nullable Gear gear) {
         if (gear == null) return;
-        for (int i = 0; i < arsenalGearsList.size(); i++) {
-            if (arsenalGearsList.get(i) == gear) arsenalGearsList.set(i, null);
+        for (int i = 0; i < equippedGears.size(); i++) {
+            if (equippedGears.get(i) == gear) equippedGears.set(i, null);
         }
         displayArsenalGears();
     }
 
     private void applyButtonClicked(Button button) {
         for (int i = 0; i < playerArsenal.gears().size(); i++) {
-            playerArsenal.gears().set(i, arsenalGearsList.get(i));
+            playerArsenal.gears().set(i, equippedGears.get(i));
         }
         NetworkedAttachments.updateArsenal(playerArsenal);
     }
-
-    public void drawTooltip(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        List<Component> tooltip = new ArrayList<>();
-        collectTooltips(mouseX, mouseY, tooltip);
-        if (!tooltip.isEmpty()) {
-            guiGraphics.renderComponentTooltip(font, tooltip, mouseX, mouseY);
-        }
-    }
-
-    public void collectTooltips(int mouseX, int mouseY, List<Component> tooltip) {
-        for (Renderable renderable : renderables) {
-            if (renderable instanceof AbstractWidget widget && widget instanceof TooltipProvider tooltipProvider) {
-                if (widget.isMouseOver(mouseX, mouseY)) {
-                    tooltipProvider.getTooltip(tooltip);
-                    break;
-                }
-            }
-        }
-    }
-
 
 }

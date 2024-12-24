@@ -3,7 +3,7 @@ package com.mystchonky.machina.api.gear;
 import com.mojang.serialization.Codec;
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.api.gear.trait.Trait;
-import com.mystchonky.machina.client.screen.TooltipProvider;
+import com.mystchonky.machina.client.screen.Tooltip;
 import com.mystchonky.machina.common.item.GearItem;
 import com.mystchonky.machina.common.registrar.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -16,7 +16,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Gear implements TooltipProvider {
+public abstract class Gear implements Tooltip.Provider {
     public static final Codec<Gear> CODEC = Registries.GEARS_REGISTRY.byNameCodec();
     public static final StreamCodec<RegistryFriendlyByteBuf, Gear> STREAM_CODEC = ByteBufCodecs.registry(Registries.GEARS_REGISTRY.key());
     private final String id;
@@ -69,7 +69,7 @@ public abstract class Gear implements TooltipProvider {
     }
 
     @Override
-    public final void getTooltip(List<Component> tooltip) {
+    public final void getAdditionalTooltip(List<Component> tooltip) {
         traits.forEach(it -> it.getTooltip(tooltip));
     }
 

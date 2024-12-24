@@ -1,20 +1,22 @@
 package com.mystchonky.machina.client.screen.widget;
 
 import com.mystchonky.machina.api.gear.Gear;
-import com.mystchonky.machina.client.screen.TooltipProvider;
+import com.mystchonky.machina.client.screen.Tooltip;
 import com.mystchonky.machina.client.util.RenderHelper;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.network.chat.Component;
+import org.jetbrains.annotations.Nullable;
 
 import java.util.List;
 
-public class GearButton extends Button implements TooltipProvider {
+public class GearButton extends Button implements Tooltip.Provider {
 
     private static final int SIZE = 16;
+    @Nullable
     private final Gear gear;
 
-    public GearButton(int x, int y, int width, int height, OnPress onPress, Gear gear) {
+    public GearButton(int x, int y, int width, int height, OnPress onPress, @Nullable Gear gear) {
         super(x, y, width, height, Component.empty(), onPress, Button.DEFAULT_NARRATION);
         this.gear = gear;
     }
@@ -24,12 +26,14 @@ public class GearButton extends Button implements TooltipProvider {
         if (!visible) {
             return;
         }
-        RenderHelper.drawGear(gear, guiGraphics, getX(), getY(), SIZE, false);
+        if (gear != null)
+            RenderHelper.drawGear(gear, guiGraphics, getX(), getY(), SIZE, false);
     }
 
     @Override
-    public void getTooltip(List<Component> tooltip) {
+    public void getAdditionalTooltip(List<Component> tooltip) {
+        if (gear == null) return;
         tooltip.add(Component.translatable(gear.localizationKey()));
-        gear.getTooltip(tooltip);
+        gear.getAdditionalTooltip(tooltip);
     }
 }
