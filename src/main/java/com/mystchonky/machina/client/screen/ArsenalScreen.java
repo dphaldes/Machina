@@ -58,7 +58,7 @@ public class ArsenalScreen extends Screen implements Tooltip.Renderer {
         displayUnlockedGears(currentPage);
         displayArsenalGears();
 
-        addRenderableWidget(new ImageButton(leftPos + imageWidth - 48, topPos + imageHeight - 16, 48, 16, applySprites, this::applyButtonClicked, Component.literal("Apply")));
+        addRenderableWidget(new ImageButton(leftPos + imageWidth - 48, topPos + imageHeight - 16, 48, 16, applySprites, this::onApply, Component.literal("Apply")));
     }
 
     @Override
@@ -89,7 +89,7 @@ public class ArsenalScreen extends Screen implements Tooltip.Renderer {
         int xOffset = 0;
         int yOffset = 0;
         for (var gear : unlockedGears) {
-            final var button = new GearButton(leftPos + 16 + xOffset, topPos + 16 + yOffset, 16, 16, (btn) -> onGearClicked(btn, gear), gear);
+            final var button = new GearButton(leftPos + 16 + xOffset, topPos + 16 + yOffset, 16, 16, (btn) -> tryEquipGear(gear), gear);
             addRenderableWidget(button);
             gearButtons.add(button);
             xOffset += 20;
@@ -106,7 +106,7 @@ public class ArsenalScreen extends Screen implements Tooltip.Renderer {
         int xOffset = 0;
         int yOffset = 0;
         for (var gear : equippedGears) {
-            final var button = new GearButton(leftPos + 164 + xOffset, topPos + 36 + yOffset, 16, 16, (btn) -> arsenalGearClicked(btn, gear), gear);
+            final var button = new GearButton(leftPos + 164 + xOffset, topPos + 36 + yOffset, 16, 16, (btn) -> removeGear(gear), gear);
             addRenderableWidget(button);
             arsenalButtons.add(button);
             xOffset += 20;
@@ -118,14 +118,11 @@ public class ArsenalScreen extends Screen implements Tooltip.Renderer {
     }
 
     private <T extends Button> void clearButtons(final List<T> buttons) {
-        buttons.forEach(button -> {
-            renderables.remove(button);
-            children().remove(button);
-        });
+        buttons.forEach(this::removeWidget);
         buttons.clear();
     }
 
-    private void onGearClicked(Button button, Gear gear) {
+    private void tryEquipGear(Gear gear) {
         var compatible = equippedGears.stream().filter(Objects::nonNull).allMatch(it -> it.isCompatibleWith(gear));
         if (compatible) {
             for (int i = 0; i < equippedGears.size(); i++) {
@@ -137,7 +134,7 @@ public class ArsenalScreen extends Screen implements Tooltip.Renderer {
         }
     }
 
-    private void arsenalGearClicked(Button button, @Nullable Gear gear) {
+    private void removeGear(@Nullable Gear gear) {
         if (gear == null) return;
         for (int i = 0; i < equippedGears.size(); i++) {
             if (equippedGears.get(i) == gear) equippedGears.set(i, null);
@@ -145,7 +142,7 @@ public class ArsenalScreen extends Screen implements Tooltip.Renderer {
         displayArsenalGears();
     }
 
-    private void applyButtonClicked(Button button) {
+    private void onApply(Button button) {
         for (int i = 0; i < playerArsenal.gears().size(); i++) {
             playerArsenal.gears().set(i, equippedGears.get(i));
         }

@@ -88,10 +88,7 @@ public class CodexScreen extends AbstractContainerScreen<CodexMenu> implements T
     }
 
     private <T extends Button> void clearButtons(final List<T> buttons) {
-        buttons.forEach(button -> {
-            renderables.remove(button);
-            children().remove(button);
-        });
+        buttons.forEach(this::removeWidget);
         buttons.clear();
     }
 
