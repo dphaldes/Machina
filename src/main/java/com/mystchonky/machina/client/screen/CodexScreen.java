@@ -1,11 +1,11 @@
 package com.mystchonky.machina.client.screen;
 
 import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.api.RegistryKeys;
 import com.mystchonky.machina.api.gear.Gear;
 import com.mystchonky.machina.client.screen.widget.GearButton;
 import com.mystchonky.machina.common.gear.UnlockedGears;
 import com.mystchonky.machina.common.menu.CodexMenu;
-import com.mystchonky.machina.common.registrar.Registries;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -35,7 +35,7 @@ public class CodexScreen extends AbstractContainerScreen<CodexMenu> implements T
         imageHeight = 218;
         player = playerInventory.player;
         unlockedGears = new ArrayList<>(UnlockedGears.get(player));
-        allGears = Minecraft.getInstance().level.registryAccess().registryOrThrow(Registries.GEARS).stream()
+        allGears = Minecraft.getInstance().level.registryAccess().registryOrThrow(RegistryKeys.GEARS).stream()
                 .sorted(Comparator.comparing(Gear::displayName))
                 .toList();
     }
