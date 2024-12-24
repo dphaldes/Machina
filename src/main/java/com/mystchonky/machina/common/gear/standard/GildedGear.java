@@ -13,6 +13,6 @@ public class GildedGear extends Gear {
 
     @Override
     public String displayName() {
-        return "Gilded";
+        return "Gilded Gear";
     }
 }

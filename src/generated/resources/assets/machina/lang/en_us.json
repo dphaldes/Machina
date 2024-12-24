@@ -7,7 +7,7 @@
   "item.machina.armor": "Armor Gear",
   "item.machina.elemental_protection": "Elemental Protection Gear",
   "item.machina.frost_walker": "Frost Walker",
-  "item.machina.gilded": "Gilded",
+  "item.machina.gilded": "Gilded Gear",
   "item.machina.glide": "Glide Gear",
   "item.machina.grimoire": "Grimoire",
   "item.machina.health": "Health Gear",
@@ -19,11 +19,12 @@
   "item.machina.void_chestplate": "Voidwalker Mantle",
   "item.machina.void_helmet": "Voidwalker Hood",
   "item.machina.void_leggings": "Voidwalker Breeches",
+  "menu.machina.codex.title": "Codex",
   "name.machina.aqueous": "Aqueous Gear",
   "name.machina.armor": "Armor Gear",
   "name.machina.elemental_protection": "Elemental Protection Gear",
   "name.machina.frost_walker": "Frost Walker",
-  "name.machina.gilded": "Gilded",
+  "name.machina.gilded": "Gilded Gear",
   "name.machina.glide": "Glide Gear",
   "name.machina.health": "Health Gear",
   "name.machina.jump": "Jump Gear",
@@ -46,7 +47,7 @@
   "trait.machina.attribute_multiply_base_n": "-%s%% %s",
   "trait.machina.attribute_multiply_total": "+%s%% %s",
   "trait.machina.attribute_multiply_total_n": "-%s%% %s",
-  "trait.machina.enchant": "Enchanted with %s",
-  "trait.machina.perk": "Grants %s",
-  "trait.machina.potion": "Applies %s"
+  "trait.machina.enchant": "♠ %s",
+  "trait.machina.perk": "♦ %s",
+  "trait.machina.potion": "🧪 %s"
 }

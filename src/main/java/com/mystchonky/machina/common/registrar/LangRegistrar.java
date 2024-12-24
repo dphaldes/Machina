@@ -25,9 +25,9 @@ public class LangRegistrar {
     public static final LangEntry ATTRIBUTE_MULTIPLY_TOTAL = addTranslation("trait", "attribute_multiply_total", "+%s%% %s");
     public static final LangEntry ATTRIBUTE_MULTIPLY_TOTAL_N = addTranslation("trait", "attribute_multiply_total_n", "-%s%% %s");
 
-    public static final LangEntry POTION = addTranslation("trait", "potion", "Applies %s");
-    public static final LangEntry PERK = addTranslation("trait", "perk", "Grants %s");
-    public static final LangEntry ENCHANT = addTranslation("trait", "enchant", "Enchanted with %s");
+    public static final LangEntry POTION = addTranslation("trait", "potion", "\uD83E\uDDEA %s");
+    public static final LangEntry PERK = addTranslation("trait", "perk", "♦ %s");
+    public static final LangEntry ENCHANT = addTranslation("trait", "enchant", "♠ %s");
 
     // ENDREGION
 
