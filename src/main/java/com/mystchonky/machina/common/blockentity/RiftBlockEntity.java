@@ -1,6 +1,6 @@
 package com.mystchonky.machina.common.blockentity;
 
-import com.mystchonky.machina.common.recipe.RiftRecipeInput;
+import com.mystchonky.machina.common.recipe.RiftRecipe;
 import com.mystchonky.machina.common.registrar.BlockEntityRegistrar;
 import com.mystchonky.machina.common.registrar.RecipeRegistrar;
 import net.minecraft.core.BlockPos;
@@ -35,7 +35,7 @@ public class RiftBlockEntity extends BlockEntity {
 
     public void tryCraft(ItemEntity item, Level level) {
         var stack = item.getItem();
-        var recipeInput = new RiftRecipeInput(stack);
+        var recipeInput = new RiftRecipe.Input(stack);
         var recipe = level.getRecipeManager().getRecipeFor(RecipeRegistrar.Types.RIFT.get(), recipeInput, level);
         if (recipe.isPresent()) {
             var result = recipe.get().value().assemble(recipeInput, level.registryAccess());

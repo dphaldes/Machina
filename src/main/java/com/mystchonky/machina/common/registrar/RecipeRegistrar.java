@@ -2,7 +2,6 @@ package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.common.recipe.RiftRecipe;
-import com.mystchonky.machina.common.recipe.RiftRecipeSerializer;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -31,7 +30,7 @@ public class RecipeRegistrar {
     public static class Serializers {
         public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, Machina.ID);
 
-        public static final Supplier<RecipeSerializer<RiftRecipe>> RIFT = SERIALIZERS.register("rift", RiftRecipeSerializer::new);
+        public static final Supplier<RecipeSerializer<RiftRecipe>> RIFT = SERIALIZERS.register("rift", RiftRecipe.Serializer::new);
 
         public static void register(IEventBus bus) {
             SERIALIZERS.register(bus);
