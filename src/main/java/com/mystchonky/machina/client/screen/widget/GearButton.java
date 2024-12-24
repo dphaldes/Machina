@@ -15,10 +15,16 @@ public class GearButton extends Button implements Tooltip.Provider {
     private static final int SIZE = 16;
     @Nullable
     private final Gear gear;
+    private final boolean transparent;
 
-    public GearButton(int x, int y, int width, int height, OnPress onPress, @Nullable Gear gear) {
+    public GearButton(int x, int y, int width, int height, OnPress onPress, @Nullable Gear gear, boolean transparent) {
         super(x, y, width, height, Component.empty(), onPress, Button.DEFAULT_NARRATION);
         this.gear = gear;
+        this.transparent = transparent;
+    }
+
+    public GearButton(int x, int y, int width, int height, OnPress onPress, @Nullable Gear gear) {
+        this(x, y, width, height, onPress, gear, false);
     }
 
     @Override
@@ -27,7 +33,7 @@ public class GearButton extends Button implements Tooltip.Provider {
             return;
         }
         if (gear != null)
-            RenderHelper.drawGear(gear, guiGraphics, getX(), getY(), SIZE, false);
+            RenderHelper.drawGear(gear, guiGraphics, getX(), getY(), SIZE, transparent);
     }
 
     @Override

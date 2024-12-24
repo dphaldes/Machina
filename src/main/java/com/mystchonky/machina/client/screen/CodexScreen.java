@@ -68,9 +68,10 @@ public class CodexScreen extends AbstractContainerScreen<CodexMenu> implements T
         int xOffset = 0;
         int yOffset = 0;
         for (var gear : allGears) {
+            var unlocked = unlockedGears.contains(gear);
             final var button = new GearButton(leftPos + 16 + xOffset, topPos + 16 + yOffset, 16, 16,
                     (btn) -> {
-                    }, gear);
+                    }, gear, unlocked);
             addRenderableWidget(button);
             gearButtons.add(button);
             xOffset += 20;
