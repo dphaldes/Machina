@@ -15,7 +15,7 @@ import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
 import net.minecraft.world.level.Level;
 
-public record RiftRecipe(Ingredient ingredient, ItemStack result) implements Recipe<RiftRecipe.Input> {
+public record RiftRecipe(ItemStack result, Ingredient ingredient) implements Recipe<RiftRecipe.Input> {
 
     @Override
     public NonNullList<Ingredient> getIngredients() {
@@ -55,8 +55,8 @@ public record RiftRecipe(Ingredient ingredient, ItemStack result) implements Rec
     public record Input(ItemStack stack) implements RecipeInput {
 
         @Override
-        public ItemStack getItem(int slot) {
-            if (slot != 0) throw new IllegalArgumentException("No item for index: " + slot);
+        public ItemStack getItem(int index) {
+            if (index != 0) throw new IllegalArgumentException("No item for index: " + index);
             return this.stack();
         }
 
@@ -68,15 +68,15 @@ public record RiftRecipe(Ingredient ingredient, ItemStack result) implements Rec
 
     public static class Serializer implements RecipeSerializer<RiftRecipe> {
 
-        public static final MapCodec<RiftRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
-                Ingredient.CODEC.fieldOf("input").forGetter(RiftRecipe::ingredient),
-                ItemStack.CODEC.fieldOf("result").forGetter(RiftRecipe::result)
+        private static final MapCodec<RiftRecipe> CODEC = RecordCodecBuilder.mapCodec(instance -> instance.group(
+                ItemStack.STRICT_CODEC.fieldOf("result").forGetter(RiftRecipe::result),
+                Ingredient.CODEC_NONEMPTY.fieldOf("input").forGetter(RiftRecipe::ingredient)
         ).apply(instance, RiftRecipe::new));
 
-        public static final StreamCodec<RegistryFriendlyByteBuf, RiftRecipe> STREAM_CODEC =
+        private static final StreamCodec<RegistryFriendlyByteBuf, RiftRecipe> STREAM_CODEC =
                 StreamCodec.composite(
-                        Ingredient.CONTENTS_STREAM_CODEC, RiftRecipe::ingredient,
                         ItemStack.STREAM_CODEC, RiftRecipe::result,
+                        Ingredient.CONTENTS_STREAM_CODEC, RiftRecipe::ingredient,
                         RiftRecipe::new
                 );
 

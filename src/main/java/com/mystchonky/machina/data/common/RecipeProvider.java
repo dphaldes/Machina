@@ -1,7 +1,9 @@
 package com.mystchonky.machina.data.common;
 
 import com.mystchonky.machina.common.registrar.BlockRegistrar;
+import com.mystchonky.machina.common.registrar.GearRegistrar;
 import com.mystchonky.machina.common.registrar.ItemRegistrar;
+import com.mystchonky.machina.data.common.recipe.GearRecipeBuilder;
 import com.mystchonky.machina.data.common.recipe.RiftRecipeBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
@@ -34,6 +36,11 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .requires(ItemRegistrar.GRIMOIRE.asItem())
                 .requires(Items.LECTERN)
                 .unlockedBy("has_grimoire", has(ItemRegistrar.GRIMOIRE.asItem()))
+                .save(recipeOutput);
+
+        GearRecipeBuilder.builder(GearRegistrar.ARMOR.get())
+                .addIngredient(Ingredient.of(Items.DIAMOND_CHESTPLATE))
+                .addIngredient(Ingredient.of(Items.IRON_INGOT))
                 .save(recipeOutput);
     }
 
