@@ -3,7 +3,7 @@ package com.mystchonky.machina.api.gear;
 import com.mojang.serialization.Codec;
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.api.gear.trait.Trait;
-import com.mystchonky.machina.client.screen.Tooltip;
+import com.mystchonky.machina.client.screen.tooltip.Tooltip;
 import com.mystchonky.machina.common.item.GearItem;
 import com.mystchonky.machina.common.registrar.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;

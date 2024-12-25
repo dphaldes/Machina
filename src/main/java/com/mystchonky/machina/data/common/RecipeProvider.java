@@ -10,10 +10,12 @@ import net.minecraft.data.PackOutput;
 import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
 import net.minecraft.data.recipes.ShapelessRecipeBuilder;
+import net.minecraft.tags.ItemTags;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.neoforged.neoforge.common.Tags;
 import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.concurrent.CompletableFuture;
@@ -42,6 +44,13 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .addIngredient(Ingredient.of(Items.DIAMOND_CHESTPLATE))
                 .addIngredient(Ingredient.of(Items.IRON_INGOT))
                 .save(recipeOutput);
+
+        GearRecipeBuilder.builder(GearRegistrar.HEALTH.get())
+                .addIngredient(Ingredient.of(Tags.Items.ARMORS))
+                .addIngredient(Ingredient.of(ItemTags.MEAT))
+                .addIngredient(Ingredient.of(Tags.Items.CROPS))
+                .save(recipeOutput);
+
     }
 
     private void riftRecipe(DeferredItem<? extends Item> item, Item ingredient, RecipeOutput recipeOutput) {

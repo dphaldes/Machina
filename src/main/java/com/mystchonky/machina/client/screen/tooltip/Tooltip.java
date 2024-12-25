@@ -1,4 +1,4 @@
-package com.mystchonky.machina.client.screen;
+package com.mystchonky.machina.client.screen.tooltip;
 
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;

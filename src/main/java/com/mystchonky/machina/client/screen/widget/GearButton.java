@@ -1,7 +1,7 @@
 package com.mystchonky.machina.client.screen.widget;
 
 import com.mystchonky.machina.api.gear.Gear;
-import com.mystchonky.machina.client.screen.Tooltip;
+import com.mystchonky.machina.client.screen.tooltip.Tooltip;
 import com.mystchonky.machina.client.util.RenderHelper;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -25,6 +25,10 @@ public class GearButton extends Button implements Tooltip.Provider {
 
     public GearButton(int x, int y, int width, int height, OnPress onPress, @Nullable Gear gear) {
         this(x, y, width, height, onPress, gear, false);
+    }
+
+    public @Nullable Gear getGear() {
+        return gear;
     }
 
     @Override

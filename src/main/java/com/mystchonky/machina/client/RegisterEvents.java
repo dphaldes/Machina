@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
+import net.neoforged.neoforge.client.event.RegisterClientTooltipComponentFactoriesEvent;
 import net.neoforged.neoforge.client.event.RegisterMenuScreensEvent;
 
 @EventBusSubscriber(modid = Machina.ID, bus = EventBusSubscriber.Bus.MOD)
@@ -26,5 +27,10 @@ public class RegisterEvents {
     @SubscribeEvent
     public static void menuScreens(final RegisterMenuScreensEvent event) {
         event.register(MenuRegistrar.CODEX.get(), CodexScreen::new);
+    }
+
+    @SubscribeEvent
+    public static void tooltipFactory(final RegisterClientTooltipComponentFactoriesEvent event) {
+//        event.register(RecipeTooltip.class, RecipeTooltip.RecipeTooltipRenderer::new);
     }
 }

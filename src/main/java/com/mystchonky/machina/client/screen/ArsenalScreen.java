@@ -2,6 +2,7 @@ package com.mystchonky.machina.client.screen;
 
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.api.gear.Gear;
+import com.mystchonky.machina.client.screen.tooltip.Tooltip;
 import com.mystchonky.machina.client.screen.widget.GearButton;
 import com.mystchonky.machina.common.arsenal.Arsenal;
 import com.mystchonky.machina.common.gear.UnlockedGears;

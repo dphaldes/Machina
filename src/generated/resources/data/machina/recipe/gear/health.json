@@ -1,0 +1,15 @@
+{
+  "type": "machina:gear",
+  "ingredients": [
+    {
+      "tag": "c:armors"
+    },
+    {
+      "tag": "minecraft:meat"
+    },
+    {
+      "tag": "c:crops"
+    }
+  ],
+  "result": "machina:health"
+}

@@ -17,6 +17,7 @@ java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 
 neoForge {
     version = project.property("neo_version") as String
+    validateAccessTransformers = true
 
     parchment {
         mappingsVersion = project.property("parchment_mappings_version") as String
