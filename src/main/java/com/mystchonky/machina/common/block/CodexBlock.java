@@ -1,17 +1,12 @@
 package com.mystchonky.machina.common.block;
 
+import com.mystchonky.machina.client.screen.ScreenManager;
 import com.mystchonky.machina.common.blockentity.CodexBlockEntity;
-import com.mystchonky.machina.common.menu.CodexMenu;
 import com.mystchonky.machina.common.registrar.BlockEntityRegistrar;
-import com.mystchonky.machina.common.registrar.LangRegistrar;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.InteractionResult;
-import net.minecraft.world.MenuProvider;
-import net.minecraft.world.SimpleMenuProvider;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ContainerLevelAccess;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
@@ -121,17 +116,9 @@ public class CodexBlock extends Block implements EntityBlock {
     }
 
     @Override
-    protected @Nullable MenuProvider getMenuProvider(BlockState state, Level level, BlockPos pos) {
-        return new SimpleMenuProvider(
-                (id, inventory, player) -> new CodexMenu(id, inventory, ContainerLevelAccess.create(level, pos)),
-                LangRegistrar.CODEX_MENU.component()
-        );
-    }
-
-    @Override
     protected InteractionResult useWithoutItem(BlockState state, Level level, BlockPos pos, Player player, BlockHitResult hitResult) {
-        if (!level.isClientSide() && player instanceof ServerPlayer serverPlayer) {
-            serverPlayer.openMenu(state.getMenuProvider(level, pos));
+        if (level.isClientSide()) {
+            ScreenManager.openCodexScreen(player);
         }
 
         return InteractionResult.sidedSuccess(level.isClientSide());

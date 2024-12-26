@@ -34,7 +34,7 @@ public class Registrar {
         BlockEntityRegistrar.register(modBus);
         RecipeRegistrar.register(modBus);
         CREATIVE_TABS.register(modBus);
-        MenuRegistrar.register(modBus);
+        //MenuRegistrar.register(modBus);
 
         modBus.addListener(Registries::register);
         AttachmentRegistrar.register(modBus);

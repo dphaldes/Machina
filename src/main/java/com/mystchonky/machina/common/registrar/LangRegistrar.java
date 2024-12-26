@@ -11,13 +11,11 @@ public class LangRegistrar {
 
     private static final Map<String, String> entries = new HashMap<>();
 
-    public static final LangEntry ARSENAL_SCREEN = addTranslation("title", "arsenal", "Arsenal Screen");
     public static final LangEntry ARMOR_MISSING = addTranslation("text", "armor_missing", "Not wearing the full set");
     public static final LangEntry GEAR_UNLOCK = addTranslation("gear", "unlock", "Unlocked %s!");
     public static final LangEntry GEAR_REMOVE = addTranslation("gear", "remove", "Removed %s!");
 
-    // REGION TRAITS
-
+    // TRAITS
     public static final LangEntry ATTRIBUTE_ADD = addTranslation("trait", "attribute_add", "+%s %s");
     public static final LangEntry ATTRIBUTE_ADD_N = addTranslation("trait", "attribute_add_n", "-%s %s");
     public static final LangEntry ATTRIBUTE_MULTIPLY_BASE = addTranslation("trait", "attribute_multiply_base", "+%s%% %s");
@@ -28,10 +26,12 @@ public class LangRegistrar {
     public static final LangEntry POTION = addTranslation("trait", "potion", "\uD83E\uDDEA %s");
     public static final LangEntry PERK = addTranslation("trait", "perk", "♦ %s");
     public static final LangEntry ENCHANT = addTranslation("trait", "enchant", "♠ %s");
+    //
 
-    // ENDREGION
-
-    public static final LangEntry CODEX_MENU = addTranslation("menu", "codex.title", "Codex");
+    // SCREENS
+    public static final LangEntry ARSENAL_SCREEN = addTranslation("title", "screen.arsenal", "Arsenal Screen");
+    public static final LangEntry CODEX_SCREEN = addTranslation("title", "screen.codex", "Codex Screen");
+    //
 
     private static LangEntry addTranslation(String key, String translation) {
         entries.put(key, translation);

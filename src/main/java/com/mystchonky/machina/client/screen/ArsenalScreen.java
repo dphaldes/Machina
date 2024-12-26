@@ -12,7 +12,6 @@ import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.WidgetSprites;
-import net.minecraft.client.gui.screens.Screen;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -22,14 +21,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ArsenalScreen extends Screen implements Tooltip.Renderer {
+public class ArsenalScreen extends BaseScreen implements Tooltip.Renderer {
 
-    public static ResourceLocation background = Machina.prefix("textures/gui/arsenal.png");
-    public static ResourceLocation applyButton = Machina.prefix("apply");
-    public static WidgetSprites applySprites = new WidgetSprites(applyButton, applyButton);
+    private static final ResourceLocation BACKGROUND = Machina.prefix("textures/gui/arsenal.png");
+    private static final ResourceLocation APPLY = Machina.prefix("apply");
+    private static final WidgetSprites APPLY_SPRITES = new WidgetSprites(APPLY, APPLY);
 
-    protected final int imageWidth = 216;
-    protected final int imageHeight = 148;
     private final Player player;
     private final Arsenal playerArsenal;
     private final List<Gear> unlockedGears;
@@ -37,12 +34,10 @@ public class ArsenalScreen extends Screen implements Tooltip.Renderer {
     private final List<GearButton> gearButtons = new ArrayList<>();
     private final List<GearButton> arsenalButtons = new ArrayList<>();
     private final int currentPage = 0;
-    protected int leftPos;
-    protected int topPos;
     private int maxPages = 1;
 
     public ArsenalScreen(Player player) {
-        super(LangRegistrar.ARSENAL_SCREEN.component());
+        super(LangRegistrar.ARSENAL_SCREEN.component(), 216, 148);
         this.player = player;
         playerArsenal = Arsenal.get(player);
         unlockedGears = new ArrayList<>(UnlockedGears.get(player));
@@ -53,13 +48,11 @@ public class ArsenalScreen extends Screen implements Tooltip.Renderer {
 
     @Override
     protected void init() {
-        this.leftPos = (this.width - this.imageWidth) / 2;
-        this.topPos = (this.height - this.imageHeight) / 2;
-
+        super.init();
         displayUnlockedGears(currentPage);
         displayArsenalGears();
 
-        addRenderableWidget(new ImageButton(leftPos + imageWidth - 48, topPos + imageHeight - 16, 48, 16, applySprites, this::onApply, Component.literal("Apply")));
+        addRenderableWidget(new ImageButton(leftPos + imageWidth - 48, topPos + imageHeight - 16, 48, 16, APPLY_SPRITES, this::onApply, Component.literal("Apply")));
     }
 
     @Override
@@ -70,13 +63,7 @@ public class ArsenalScreen extends Screen implements Tooltip.Renderer {
 
     @Override
     public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
-        this.renderTransparentBackground(guiGraphics);
-        guiGraphics.blit(background, leftPos, topPos, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
-    }
-
-    @Override
-    public boolean isPauseScreen() {
-        return false;
+        guiGraphics.blit(BACKGROUND, leftPos, topPos, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
     }
 
     private void updateNumPages() {

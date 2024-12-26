@@ -7,20 +7,18 @@ import com.mystchonky.machina.client.ClientData;
 import com.mystchonky.machina.client.screen.tooltip.RecipeTooltip;
 import com.mystchonky.machina.client.screen.widget.GearButton;
 import com.mystchonky.machina.common.gear.UnlockedGears;
-import com.mystchonky.machina.common.menu.CodexMenu;
 import com.mystchonky.machina.common.recipe.GearRecipe;
+import com.mystchonky.machina.common.registrar.LangRegistrar;
 import com.mystchonky.machina.common.registrar.RecipeRegistrar;
 import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Renderable;
-import net.minecraft.client.gui.screens.inventory.AbstractContainerScreen;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
@@ -33,7 +31,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-public class CodexScreen extends AbstractContainerScreen<CodexMenu> {
+public class CodexScreen extends BaseScreen {
 
     private final Player player;
     private final List<Gear> allGears;
@@ -45,12 +43,10 @@ public class CodexScreen extends AbstractContainerScreen<CodexMenu> {
 
     private static final ResourceLocation BACKGROUND_LOCATION = Machina.prefix("textures/gui/codex.png");
 
-    public CodexScreen(CodexMenu menu, Inventory playerInventory, Component title) {
-        super(menu, playerInventory, title);
+    public CodexScreen(Player player) {
+        super(LangRegistrar.CODEX_SCREEN.component(), 216, 148);
+        this.player = player;
 
-        imageWidth = 216;
-        imageHeight = 218;
-        player = playerInventory.player;
         unlockedGears = new ArrayList<>(UnlockedGears.get(player));
         var level = Minecraft.getInstance().level;
         allGears = level.registryAccess().registryOrThrow(RegistryKeys.GEARS).stream()
@@ -70,7 +66,6 @@ public class CodexScreen extends AbstractContainerScreen<CodexMenu> {
     @Override
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
-        renderTooltip(guiGraphics, mouseX, mouseY);
 
         if (selectedRecipe != null) {
             var ingredients = selectedRecipe.right().ingredients();
@@ -97,13 +92,8 @@ public class CodexScreen extends AbstractContainerScreen<CodexMenu> {
     }
 
     @Override
-    protected void renderBg(GuiGraphics graphics, float partialTick, int mouseX, int mouseY) {
-        graphics.blit(BACKGROUND_LOCATION, leftPos, topPos, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
-    }
-
-    @Override
-    protected void renderLabels(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        // don't draw any labels
+    public void renderBackground(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
+        guiGraphics.blit(BACKGROUND_LOCATION, leftPos, topPos, 0, 0, imageWidth, imageHeight, imageWidth, imageHeight);
     }
 
     private void addGearButtons() {
@@ -126,14 +116,12 @@ public class CodexScreen extends AbstractContainerScreen<CodexMenu> {
     }
 
     @Override
-    protected void renderTooltip(GuiGraphics guiGraphics, int x, int y) {
-        super.renderTooltip(guiGraphics, x, y);
-
+    protected void renderTooltip(GuiGraphics guiGraphics, int mouseX, int mouseY) {
         Optional<GearRecipe> recipe = Optional.empty();
         List<Component> tooltip = new ArrayList<>();
         for (Renderable renderable : renderables) {
             if (renderable instanceof GearButton button) {
-                if (button.isMouseOver(x, y)) {
+                if (button.isMouseOver(mouseX, mouseY)) {
                     button.getAdditionalTooltip(tooltip);
 
                     if (gearButtons.contains(button)) {
@@ -145,9 +133,9 @@ public class CodexScreen extends AbstractContainerScreen<CodexMenu> {
         }
 
         if (!tooltip.isEmpty()) {
-            List<ClientTooltipComponent> components = new ArrayList<>(ClientHooks.gatherTooltipComponents(ItemStack.EMPTY, tooltip, x, guiGraphics.guiWidth(), guiGraphics.guiHeight(), font));
+            List<ClientTooltipComponent> components = new ArrayList<>(ClientHooks.gatherTooltipComponents(ItemStack.EMPTY, tooltip, mouseX, guiGraphics.guiWidth(), guiGraphics.guiHeight(), font));
             recipe.ifPresent(gearRecipe -> components.add(new RecipeTooltip(gearRecipe)));
-            guiGraphics.renderTooltipInternal(font, components, x, y, DefaultTooltipPositioner.INSTANCE);
+            guiGraphics.renderTooltipInternal(font, components, mouseX, mouseY, DefaultTooltipPositioner.INSTANCE);
         }
     }
 
