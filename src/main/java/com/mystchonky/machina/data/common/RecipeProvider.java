@@ -49,6 +49,8 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
                 .addIngredient(Ingredient.of(Tags.Items.ARMORS))
                 .addIngredient(Ingredient.of(ItemTags.MEAT))
                 .addIngredient(Ingredient.of(Tags.Items.CROPS))
+                .addIngredient(Ingredient.of(Items.GOLDEN_APPLE))
+                .addIngredient(Ingredient.of(Items.GHAST_TEAR))
                 .save(recipeOutput);
 
     }

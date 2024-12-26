@@ -3,12 +3,14 @@ package com.mystchonky.machina.client.screen;
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.api.RegistryKeys;
 import com.mystchonky.machina.api.gear.Gear;
+import com.mystchonky.machina.client.ClientData;
 import com.mystchonky.machina.client.screen.tooltip.RecipeTooltip;
 import com.mystchonky.machina.client.screen.widget.GearButton;
 import com.mystchonky.machina.common.gear.UnlockedGears;
 import com.mystchonky.machina.common.menu.CodexMenu;
 import com.mystchonky.machina.common.recipe.GearRecipe;
 import com.mystchonky.machina.common.registrar.RecipeRegistrar;
+import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -24,7 +26,9 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.neoforged.neoforge.client.ClientHooks;
 
+import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
@@ -36,6 +40,8 @@ public class CodexScreen extends AbstractContainerScreen<CodexMenu> {
     private final List<Gear> unlockedGears;
     private final List<GearButton> gearButtons = new ArrayList<>();
     private final List<GearRecipe> recipeCache;
+    @Nullable
+    private Pair<Gear, GearRecipe> selectedRecipe = null;
 
     private static final ResourceLocation BACKGROUND_LOCATION = Machina.prefix("textures/gui/codex.png");
 
@@ -65,6 +71,29 @@ public class CodexScreen extends AbstractContainerScreen<CodexMenu> {
     public void render(GuiGraphics guiGraphics, int mouseX, int mouseY, float partialTick) {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
         renderTooltip(guiGraphics, mouseX, mouseY);
+
+        if (selectedRecipe != null) {
+            var ingredients = selectedRecipe.right().ingredients();
+            for (int i = 0; i < ingredients.size(); i++) {
+                var items = new ArrayList<>(Arrays.asList(ingredients.get(i).getItems()));
+                var stack = items.get((ClientData.ticks / 20) % items.size());
+                var x = leftPos + 144 + ((i % 3) * 20);
+                var y = topPos + 36 + ((i / 3) * 20);
+                guiGraphics.renderItem(stack, x, y);
+                guiGraphics.renderItemDecorations(font, stack, x, y);
+                if (inBounds(mouseX, mouseY, x, y)) {
+                    guiGraphics.renderTooltip(font, stack, mouseX, mouseY);
+                }
+            }
+            var stack = selectedRecipe.left().getGearItem().getDefaultInstance();
+            var x = leftPos + 164;
+            var y = topPos + 96;
+            guiGraphics.renderItem(stack, x, y);
+            guiGraphics.renderItemDecorations(font, stack, x, y);
+            if (inBounds(mouseX, mouseY, x, y)) {
+                guiGraphics.renderTooltip(font, stack, mouseX, mouseY);
+            }
+        }
     }
 
     @Override
@@ -85,8 +114,7 @@ public class CodexScreen extends AbstractContainerScreen<CodexMenu> {
         for (var gear : allGears) {
             var unlocked = unlockedGears.contains(gear);
             final var button = new GearButton(leftPos + 16 + xOffset, topPos + 16 + yOffset, 16, 16,
-                    (btn) -> {
-                    }, gear, unlocked);
+                    this::gearButtonClicked, gear, unlocked);
             addRenderableWidget(button);
             gearButtons.add(button);
             xOffset += 20;
@@ -109,7 +137,7 @@ public class CodexScreen extends AbstractContainerScreen<CodexMenu> {
                     button.getAdditionalTooltip(tooltip);
 
                     if (gearButtons.contains(button)) {
-                        recipe = recipeCache.stream().filter(it -> it.result() == button.getGear()).findFirst();
+                        recipe = getRecipe(button.getGear());
                     }
                     break;
                 }
@@ -128,5 +156,18 @@ public class CodexScreen extends AbstractContainerScreen<CodexMenu> {
         buttons.clear();
     }
 
+    private void gearButtonClicked(Button button) {
+        var gear = ((GearButton) button).getGear();
+        var recipe = getRecipe(gear);
+        recipe.ifPresent(gearRecipe -> selectedRecipe = Pair.of(gear, gearRecipe));
+    }
+
+    private Optional<GearRecipe> getRecipe(@Nullable Gear gear) {
+        return recipeCache.stream().filter(it -> it.result() == gear).findFirst();
+    }
+
+    private boolean inBounds(int x, int y, int x1, int y1) {
+        return x >= x1 && x < x1 + 16 && y >= y1 && y < y1 + 16;
+    }
 
 }

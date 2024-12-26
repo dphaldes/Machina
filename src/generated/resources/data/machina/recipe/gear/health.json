@@ -9,6 +9,12 @@
     },
     {
       "tag": "c:crops"
+    },
+    {
+      "item": "minecraft:golden_apple"
+    },
+    {
+      "item": "minecraft:ghast_tear"
     }
   ],
   "result": "machina:health"
