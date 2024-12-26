@@ -118,7 +118,7 @@ public class CodexScreen extends AbstractContainerScreen<CodexMenu> {
 
         if (!tooltip.isEmpty()) {
             List<ClientTooltipComponent> components = new ArrayList<>(ClientHooks.gatherTooltipComponents(ItemStack.EMPTY, tooltip, x, guiGraphics.guiWidth(), guiGraphics.guiHeight(), font));
-            recipe.ifPresent(gearRecipe -> components.add(new RecipeTooltip.RecipeTooltipRenderer(gearRecipe)));
+            recipe.ifPresent(gearRecipe -> components.add(new RecipeTooltip(gearRecipe)));
             guiGraphics.renderTooltipInternal(font, components, x, y, DefaultTooltipPositioner.INSTANCE);
         }
     }
