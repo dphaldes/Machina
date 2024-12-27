@@ -1,7 +1,6 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.block.CodexBlock;
 import com.mystchonky.machina.common.block.RiftBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
@@ -28,10 +27,10 @@ public class BlockRegistrar {
                     .noLootTable()
             ));
 
-    public static final BlockPair<CodexBlock, BlockItem> CODEX = block("codex",
-            () -> new CodexBlock(BlockBehaviour.Properties.of()
-                    .strength(1.5F)
-            ));
+//    public static final BlockPair<CodexBlock, BlockItem> CODEX = block("codex",
+//            () -> new CodexBlock(BlockBehaviour.Properties.of()
+//                    .strength(1.5F)
+//            ));
 
     private static <X extends Block> BlockPair<X, BlockItem> block(String name, Supplier<X> supplier) {
         var block = BLOCKS.register(name, supplier);

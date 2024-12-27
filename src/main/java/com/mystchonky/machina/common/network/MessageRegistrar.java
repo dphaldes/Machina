@@ -17,6 +17,7 @@ public class MessageRegistrar {
         final PayloadRegistrar registrar = event.registrar(Machina.ID);
 
         registrar.playToServer(MessageUpdateArsenal.TYPE, MessageUpdateArsenal.STREAM_CODEC, MessageHandler::server);
+//        registrar.playToServer(MessageSetCodexRecipe.TYPE, MessageSetCodexRecipe.STREAM_CODEC, MessageHandler::server);
 
         registrar.playToClient(MessageSyncArsenal.TYPE, MessageSyncArsenal.STREAM_CODEC, MessageHandler::client);
         registrar.playToClient(MessageSyncGears.TYPE, MessageSyncGears.STREAM_CODEC, MessageHandler::client);

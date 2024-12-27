@@ -52,7 +52,7 @@ public class ArsenalScreen extends BaseScreen implements Tooltip.Renderer {
         displayUnlockedGears(currentPage);
         displayArsenalGears();
 
-        addRenderableWidget(new ImageButton(leftPos + imageWidth - 48, topPos + imageHeight - 16, 48, 16, APPLY_SPRITES, this::onApply, Component.literal("Apply")));
+        addRenderableWidget(new ImageButton(leftPos + 172, topPos + 120, 20, 8, APPLY_SPRITES, this::onApply, Component.literal("Apply")));
     }
 
     @Override

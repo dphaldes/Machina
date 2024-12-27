@@ -111,7 +111,7 @@ public class RiftBlock extends DirectionalBlock implements EntityBlock {
     @Nullable
     @Override
     public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return BlockHelper.createTicker(type, BlockEntityRegistrar.RIFT.get(), RiftBlockEntity::tick);
+        return BlockHelper.getTicker(type, BlockEntityRegistrar.RIFT.get());
     }
 
     @Override

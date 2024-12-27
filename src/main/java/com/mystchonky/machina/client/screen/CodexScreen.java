@@ -15,6 +15,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
 import net.minecraft.client.gui.components.Renderable;
+import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
 import net.minecraft.network.chat.Component;
@@ -33,6 +34,10 @@ import java.util.Optional;
 
 public class CodexScreen extends BaseScreen {
 
+    private static final ResourceLocation BACKGROUND_LOCATION = Machina.prefix("textures/gui/codex.png");
+    private static final ResourceLocation APPLY = Machina.prefix("apply");
+    private static final WidgetSprites APPLY_SPRITES = new WidgetSprites(APPLY, APPLY);
+
     private final Player player;
     private final List<Gear> allGears;
     private final List<Gear> unlockedGears;
@@ -40,8 +45,6 @@ public class CodexScreen extends BaseScreen {
     private final List<GearRecipe> recipeCache;
     @Nullable
     private Pair<Gear, GearRecipe> selectedRecipe = null;
-
-    private static final ResourceLocation BACKGROUND_LOCATION = Machina.prefix("textures/gui/codex.png");
 
     public CodexScreen(Player player) {
         super(LangRegistrar.CODEX_SCREEN.component(), 216, 148);
@@ -61,6 +64,7 @@ public class CodexScreen extends BaseScreen {
     protected void init() {
         super.init();
         addGearButtons();
+
     }
 
     @Override
@@ -157,5 +161,6 @@ public class CodexScreen extends BaseScreen {
     private boolean inBounds(int x, int y, int x1, int y1) {
         return x >= x1 && x < x1 + 16 && y >= y1 && y < y1 + 16;
     }
+
 
 }

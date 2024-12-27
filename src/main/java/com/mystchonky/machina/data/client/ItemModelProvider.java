@@ -31,7 +31,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(ItemRegistrar.RIFT_PEARL.asItem());
         basicItem(ItemRegistrar.GRIMOIRE.asItem());
 
-        simpleBlockItem(BlockRegistrar.CODEX.block());
+//        simpleBlockItem(BlockRegistrar.CODEX.block());
     }
 
     private ItemModelBuilder basicGear(Item item) {

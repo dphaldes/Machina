@@ -1,7 +1,6 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.blockentity.CodexBlockEntity;
 import com.mystchonky.machina.common.blockentity.RiftBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -23,9 +22,9 @@ public class BlockEntityRegistrar {
             () -> BlockEntityType.Builder.of(RiftBlockEntity::new, BlockRegistrar.RIFT.block())
                     .build(null));
 
-    public static final Supplier<BlockEntityType<CodexBlockEntity>> CODEX = BLOCK_ENTITIES.register("codex",
-            () -> BlockEntityType.Builder.of(CodexBlockEntity::new, BlockRegistrar.CODEX.block())
-                    .build(null));
+//    public static final Supplier<BlockEntityType<CodexBlockEntity>> CODEX = BLOCK_ENTITIES.register("codex",
+//            () -> BlockEntityType.Builder.of(CodexBlockEntity::new, BlockRegistrar.CODEX.block())
+//                    .build(null));
 
     public static void register(IEventBus bus) {
         BLOCK_ENTITIES.register(bus);

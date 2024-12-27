@@ -13,7 +13,7 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class RiftBlockEntity extends BlockEntity {
+public class RiftBlockEntity extends BlockEntity implements TickingBlockEntity {
 
     private static final String TIMER = "timer";
     private int timer = 0;
@@ -22,12 +22,13 @@ public class RiftBlockEntity extends BlockEntity {
         super(BlockEntityRegistrar.RIFT.get(), pos, blockState);
     }
 
-    public static void tick(Level level, BlockPos pos, BlockState state, RiftBlockEntity rift) {
-        rift.timer += 1;
+    @Override
+    public void tick(Level level, BlockPos pos, BlockState state) {
+        timer += 1;
 
         // 5 minutes
-        if (rift.timer >= 20 * 60 * 5) {
-            level.removeBlock(rift.getBlockPos(), false);
+        if (timer >= 20 * 60 * 5) {
+            level.removeBlock(getBlockPos(), false);
             level.playSound(null, pos.getX(), pos.getY(), pos.getZ(), SoundEvents.PORTAL_AMBIENT, SoundSource.BLOCKS,
                     0.5F, level.random.nextFloat() * 0.4F + 0.8F);
         }

@@ -1,6 +1,5 @@
 package com.mystchonky.machina.data.common.loot;
 
-import com.mystchonky.machina.common.registrar.BlockRegistrar;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.loot.BlockLootSubProvider;
 import net.minecraft.world.flag.FeatureFlags;
@@ -25,7 +24,7 @@ public class BlockLootTable extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-        loot(BlockRegistrar.CODEX.block(), this::dropSelf);
+//        loot(BlockRegistrar.CODEX.block(), this::dropSelf);
     }
 
     protected void loot(Block block, Consumer<Block> lootFunction) {

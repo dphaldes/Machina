@@ -1,5 +1,4 @@
 {
-  "block.machina.codex": "Codex",
   "block.machina.rift": "Rift",
   "gear.machina.remove": "Removed %s!",
   "gear.machina.unlock": "Unlocked %s!",
@@ -19,7 +18,6 @@
   "item.machina.void_chestplate": "Voidwalker Mantle",
   "item.machina.void_helmet": "Voidwalker Hood",
   "item.machina.void_leggings": "Voidwalker Breeches",
-  "menu.machina.codex.title": "Codex",
   "name.machina.aqueous": "Aqueous Gear",
   "name.machina.armor": "Armor Gear",
   "name.machina.elemental_protection": "Elemental Protection Gear",
@@ -40,7 +38,8 @@
   "perk.machina.protection_projectile": "Projectile Protection",
   "perk.machina.protection_water": "Aqua Protection",
   "text.machina.armor_missing": "Not wearing the full set",
-  "title.machina.arsenal": "Arsenal Screen",
+  "title.machina.screen.arsenal": "Arsenal Screen",
+  "title.machina.screen.codex": "Codex Screen",
   "trait.machina.attribute_add": "+%s %s",
   "trait.machina.attribute_add_n": "-%s %s",
   "trait.machina.attribute_multiply_base": "+%s%% %s",

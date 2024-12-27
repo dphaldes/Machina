@@ -16,7 +16,7 @@ public class BlockStateProvider extends net.neoforged.neoforge.client.model.gene
     protected void registerStatesAndModels() {
 
         directionalBlock(BlockRegistrar.RIFT.block(), models().getExistingFile(modLoc("block/rift")));
-        horizontalBlock(BlockRegistrar.CODEX.block(), models().getExistingFile(modLoc("block/codex")));
+//        horizontalBlock(BlockRegistrar.CODEX.block(), models().getExistingFile(modLoc("block/codex")));
 
     }
 }

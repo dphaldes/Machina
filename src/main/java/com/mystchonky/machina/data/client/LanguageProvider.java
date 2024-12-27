@@ -23,7 +23,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(ItemRegistrar.GRIMOIRE.get(), "Grimoire");
 
         add(BlockRegistrar.RIFT.block(), "Rift");
-        add(BlockRegistrar.CODEX.block(), "Codex");
+//        add(BlockRegistrar.CODEX.block(), "Codex");
 
         GearRegistrar.GEARS.getEntries().forEach(gear -> {
             add(gear.get().getGearItem(), gear.get().displayName());
