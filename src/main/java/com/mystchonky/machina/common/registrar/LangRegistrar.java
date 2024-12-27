@@ -33,6 +33,10 @@ public class LangRegistrar {
     public static final LangEntry CODEX_SCREEN = addTranslation("title", "screen.codex", "Codex Screen");
     //
 
+    // KEYMAPS
+    public static final LangEntry KEYMAP_CATEGORIES = addTranslation("key", "catergories", "Machina");
+    public static final LangEntry ARSENAL_KEY = addTranslation("key", "arsenal", "Open Arsenal Screen");
+
     private static LangEntry addTranslation(String key, String translation) {
         entries.put(key, translation);
         return new LangEntry(key, Component.translatable(key));
