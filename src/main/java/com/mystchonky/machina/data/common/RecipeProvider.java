@@ -14,8 +14,8 @@ import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
+import net.minecraft.world.level.ItemLike;
 import net.neoforged.neoforge.common.Tags;
-import net.neoforged.neoforge.registries.DeferredItem;
 
 import java.util.concurrent.CompletableFuture;
 
@@ -60,7 +60,7 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
     }
 
-    private void riftRecipe(DeferredItem<? extends Item> item, Item ingredient, RecipeOutput recipeOutput) {
-        new RiftRecipeBuilder(new ItemStack(item.get()), Ingredient.of(ingredient)).save(recipeOutput);
+    private void riftRecipe(ItemLike item, Item ingredient, RecipeOutput recipeOutput) {
+        new RiftRecipeBuilder(new ItemStack(item), Ingredient.of(ingredient)).save(recipeOutput);
     }
 }

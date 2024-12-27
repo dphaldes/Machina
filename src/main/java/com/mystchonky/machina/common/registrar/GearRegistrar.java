@@ -36,7 +36,7 @@ public class GearRegistrar {
 
     private static <T extends Gear> DeferredHolder<Gear, T> register(T gear) {
         final var holder = GEARS.register(gear.id(), () -> gear);
-        GEAR_ITEMS.register(gear.id(), gear::getGearItem);
+        GEAR_ITEMS.register(gear.id() + "_gear", gear::getGearItem);
         return holder;
     }
 

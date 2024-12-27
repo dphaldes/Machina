@@ -3,10 +3,14 @@ package com.mystchonky.machina.data.common.recipe;
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.api.gear.Gear;
 import com.mystchonky.machina.common.recipe.GearRecipe;
+import com.mystchonky.machina.common.registrar.ItemRegistrar;
 import net.minecraft.advancements.Criterion;
 import net.minecraft.core.NonNullList;
 import net.minecraft.data.recipes.RecipeBuilder;
+import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
+import net.minecraft.data.recipes.RecipeProvider;
+import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.crafting.Ingredient;
@@ -65,5 +69,12 @@ public class GearRecipeBuilder implements RecipeBuilder {
     public void save(RecipeOutput recipeOutput, ResourceLocation id) {
         var recipe = new GearRecipe(this.result, this.ingredients);
         recipeOutput.accept(id, recipe, null);
+
+        var shapeless = ShapelessRecipeBuilder
+                .shapeless(RecipeCategory.MISC, this.result.getGearItem())
+                .requires(ItemRegistrar.CODEX);
+        this.ingredients.forEach(shapeless::requires);
+        shapeless.unlockedBy("has_codex", RecipeProvider.has(ItemRegistrar.CODEX))
+                .save(recipeOutput);
     }
 }

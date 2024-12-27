@@ -16,7 +16,7 @@ import net.minecraft.world.level.Level;
 import java.util.List;
 
 public class GearItem extends Item {
-    public final Gear gear;
+    private final Gear gear;
 
     public GearItem(Gear gear) {
         super(new Properties().stacksTo(1));
@@ -47,5 +47,9 @@ public class GearItem extends Item {
     @Override
     public void appendHoverText(ItemStack stack, TooltipContext tooltipContext, List<Component> components, TooltipFlag flag) {
         this.gear.getAdditionalTooltip(components);
+    }
+
+    public Gear gear() {
+        return gear;
     }
 }

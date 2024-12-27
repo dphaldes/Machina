@@ -1,6 +1,7 @@
 package com.mystchonky.machina.data.client;
 
 import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.common.item.GearItem;
 import com.mystchonky.machina.common.registrar.BlockRegistrar;
 import com.mystchonky.machina.common.registrar.GearRegistrar;
 import com.mystchonky.machina.common.registrar.ItemRegistrar;
@@ -8,7 +9,6 @@ import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.Item;
-import net.neoforged.neoforge.client.model.generators.ItemModelBuilder;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -35,10 +35,13 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 //        simpleBlockItem(BlockRegistrar.CODEX.block());
     }
 
-    private ItemModelBuilder basicGear(Item item) {
-        var resource = BuiltInRegistries.ITEM.getKey(item);
-        return getBuilder(item.toString())
-                .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(resource.getNamespace(), "item/gear/" + resource.getPath()));
+    private void basicGear(Item item) {
+        if (item instanceof GearItem gearItem) {
+            var resource = BuiltInRegistries.ITEM.getKey(item);
+            getBuilder(item.toString())
+                    .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                    .texture("layer0", ResourceLocation.fromNamespaceAndPath(resource.getNamespace(), "item/gear/" + gearItem.gear().id()));
+
+        }
     }
 }

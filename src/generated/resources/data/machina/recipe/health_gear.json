@@ -1,0 +1,28 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "machina:codex"
+    },
+    {
+      "tag": "c:armors"
+    },
+    {
+      "tag": "minecraft:meat"
+    },
+    {
+      "tag": "c:crops"
+    },
+    {
+      "item": "minecraft:golden_apple"
+    },
+    {
+      "item": "minecraft:ghast_tear"
+    }
+  ],
+  "result": {
+    "count": 1,
+    "id": "machina:health_gear"
+  }
+}
