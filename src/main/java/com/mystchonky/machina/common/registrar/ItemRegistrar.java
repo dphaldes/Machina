@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.item.GrimoireItem;
+import com.mystchonky.machina.common.item.CodexItem;
 import com.mystchonky.machina.common.item.RiftPearlItem;
 import com.mystchonky.machina.common.item.VoidArmorItem;
 import net.minecraft.world.item.ArmorItem;
@@ -20,7 +20,8 @@ public class ItemRegistrar {
     public static final DeferredItem<VoidArmorItem> VOID_BOOTS = ITEMS.registerItem("void_boots", (props) -> new VoidArmorItem(ArmorItem.Type.BOOTS));
 
     public static final DeferredItem<RiftPearlItem> RIFT_PEARL = ITEMS.registerItem("rift_pearl", RiftPearlItem::new, new Item.Properties().stacksTo(16));
-    public static final DeferredItem<GrimoireItem> GRIMOIRE = ITEMS.registerItem("grimoire", GrimoireItem::new, new Item.Properties().stacksTo(1));
+    public static final DeferredItem<CodexItem> CODEX = ITEMS.registerItem("codex", CodexItem::new, new Item.Properties().stacksTo(1));
+    public static final DeferredItem<Item> GRIMOIRE = ITEMS.registerItem("grimoire", Item::new, new Item.Properties().stacksTo(1));
 
     public static void register(IEventBus bus) {
         ITEMS.register(bus);
