@@ -1,0 +1,25 @@
+{
+  "type": "machina:gear",
+  "ingredients": [
+    [
+      {
+        "item": "minecraft:prismarine_crystals"
+      },
+      {
+        "item": "minecraft:prismarine_bricks"
+      },
+      {
+        "item": "minecraft:dark_prismarine"
+      }
+    ],
+    [
+      {
+        "item": "minecraft:turtle_scute"
+      },
+      {
+        "item": "minecraft:turtle_helmet"
+      }
+    ]
+  ],
+  "result": "machina:aqueous"
+}

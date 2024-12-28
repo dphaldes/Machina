@@ -1,0 +1,15 @@
+{
+  "type": "machina:gear",
+  "ingredients": [
+    {
+      "item": "minecraft:blue_ice"
+    },
+    {
+      "item": "minecraft:iron_boots"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "result": "machina:frost_walker"
+}

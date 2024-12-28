@@ -3,9 +3,6 @@
   "ingredients": [
     {
       "item": "minecraft:diamond_chestplate"
-    },
-    {
-      "item": "minecraft:iron_ingot"
     }
   ],
   "result": "machina:diamond_armor"

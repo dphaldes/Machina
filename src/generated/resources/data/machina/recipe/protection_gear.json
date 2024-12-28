@@ -6,11 +6,17 @@
       "item": "machina:codex"
     },
     {
-      "item": "minecraft:diamond_chestplate"
+      "item": "minecraft:iron_block"
+    },
+    {
+      "item": "minecraft:iron_chestplate"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
     }
   ],
   "result": {
     "count": 1,
-    "id": "machina:diamond_armor_gear"
+    "id": "machina:protection_gear"
   }
 }

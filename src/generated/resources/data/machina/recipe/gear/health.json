@@ -2,19 +2,10 @@
   "type": "machina:gear",
   "ingredients": [
     {
-      "tag": "c:armors"
-    },
-    {
-      "tag": "minecraft:meat"
-    },
-    {
-      "tag": "c:crops"
-    },
-    {
       "item": "minecraft:golden_apple"
     },
     {
-      "item": "minecraft:ghast_tear"
+      "item": "minecraft:iron_chestplate"
     }
   ],
   "result": "machina:health"

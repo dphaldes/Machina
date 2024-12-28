@@ -1,0 +1,12 @@
+{
+  "type": "machina:gear",
+  "ingredients": [
+    {
+      "item": "minecraft:honey_bottle"
+    },
+    {
+      "item": "minecraft:lapis_lazuli"
+    }
+  ],
+  "result": "machina:small"
+}

@@ -1,0 +1,9 @@
+{
+  "type": "machina:gear",
+  "ingredients": [
+    {
+      "item": "minecraft:gold_block"
+    }
+  ],
+  "result": "machina:gilded"
+}

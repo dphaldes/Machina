@@ -6,14 +6,17 @@
       "item": "machina:codex"
     },
     {
-      "item": "minecraft:golden_apple"
+      "item": "minecraft:feather"
     },
     {
-      "item": "minecraft:iron_chestplate"
+      "item": "minecraft:magma_cream"
+    },
+    {
+      "item": "minecraft:sea_lantern"
     }
   ],
   "result": {
     "count": 1,
-    "id": "machina:health_gear"
+    "id": "machina:elemental_protection_gear"
   }
 }

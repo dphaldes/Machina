@@ -6,11 +6,14 @@
       "item": "machina:codex"
     },
     {
-      "item": "minecraft:diamond_chestplate"
+      "item": "minecraft:honey_bottle"
+    },
+    {
+      "item": "minecraft:redstone"
     }
   ],
   "result": {
     "count": 1,
-    "id": "machina:diamond_armor_gear"
+    "id": "machina:big_gear"
   }
 }

@@ -1,0 +1,32 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "machina:codex"
+    },
+    [
+      {
+        "item": "minecraft:prismarine_crystals"
+      },
+      {
+        "item": "minecraft:prismarine_bricks"
+      },
+      {
+        "item": "minecraft:dark_prismarine"
+      }
+    ],
+    [
+      {
+        "item": "minecraft:turtle_scute"
+      },
+      {
+        "item": "minecraft:turtle_helmet"
+      }
+    ]
+  ],
+  "result": {
+    "count": 1,
+    "id": "machina:aqueous_gear"
+  }
+}

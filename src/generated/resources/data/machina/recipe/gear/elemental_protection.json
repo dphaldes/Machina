@@ -1,0 +1,15 @@
+{
+  "type": "machina:gear",
+  "ingredients": [
+    {
+      "item": "minecraft:feather"
+    },
+    {
+      "item": "minecraft:magma_cream"
+    },
+    {
+      "item": "minecraft:sea_lantern"
+    }
+  ],
+  "result": "machina:elemental_protection"
+}

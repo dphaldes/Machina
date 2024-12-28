@@ -6,11 +6,17 @@
       "item": "machina:codex"
     },
     {
-      "item": "minecraft:diamond_chestplate"
+      "item": "minecraft:iron_boots"
+    },
+    {
+      "item": "minecraft:feather"
+    },
+    {
+      "item": "minecraft:feather"
     }
   ],
   "result": {
     "count": 1,
-    "id": "machina:diamond_armor_gear"
+    "id": "machina:speed_gear"
   }
 }

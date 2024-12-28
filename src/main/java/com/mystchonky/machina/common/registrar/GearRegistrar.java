@@ -32,7 +32,7 @@ public class GearRegistrar {
     public static final Supplier<AqueousGear> AQUEOUS = register(new AqueousGear());
     public static final Supplier<FrostWalkerGear> FROST_WALKER = register(new FrostWalkerGear());
     public static final Supplier<GildedGear> GILDED = register(new GildedGear());
-    public static final Supplier<ElytraGear> GLIDE = register(new ElytraGear());
+    public static final Supplier<ElytraGear> ELYTRA = register(new ElytraGear());
     public static final Supplier<HealthGear> HEALTH = register(new HealthGear());
     public static final Supplier<ProtectionGear> PROTECTION = register(new ProtectionGear());
     public static final Supplier<ElementalProtectionGear> ELMENTAL_PROTECTION = register(new ElementalProtectionGear());
@@ -41,7 +41,7 @@ public class GearRegistrar {
     public static final Supplier<ToughGear> TOUGH = register(new ToughGear());
     public static final Supplier<MiningGear> MINING = register(new MiningGear());
     public static final Supplier<AttackGear> ATTACK = register(new AttackGear());
-    public static final Supplier<SmallGear> TINY = register(new SmallGear());
+    public static final Supplier<SmallGear> SMALL = register(new SmallGear());
     public static final Supplier<BigGear> BIG = register(new BigGear());
 
     private static <T extends Gear> DeferredHolder<Gear, T> register(T gear) {

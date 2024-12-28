@@ -6,11 +6,11 @@
       "item": "machina:codex"
     },
     {
-      "item": "minecraft:diamond_chestplate"
+      "item": "minecraft:gold_block"
     }
   ],
   "result": {
     "count": 1,
-    "id": "machina:diamond_armor_gear"
+    "id": "machina:gilded_gear"
   }
 }

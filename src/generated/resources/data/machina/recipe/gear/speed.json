@@ -1,0 +1,15 @@
+{
+  "type": "machina:gear",
+  "ingredients": [
+    {
+      "item": "minecraft:iron_boots"
+    },
+    {
+      "item": "minecraft:feather"
+    },
+    {
+      "item": "minecraft:feather"
+    }
+  ],
+  "result": "machina:speed"
+}
