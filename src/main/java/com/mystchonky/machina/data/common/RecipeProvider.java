@@ -38,19 +38,25 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 //                .requires(Items.LECTERN)
 //                .unlockedBy("has_grimoire", has(ItemRegistrar.GRIMOIRE.asItem()))
 //                .save(recipeOutput);
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistrar.GRIMOIRE.asItem())
-                .requires(ItemRegistrar.CODEX.asItem())
-                .requires(Items.BOOK)
-                .unlockedBy("has_codex", has(ItemRegistrar.CODEX.asItem()))
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistrar.RIFT_PEARL)
+                .requires(Items.ENDER_PEARL)
+                .requires(Items.AMETHYST_SHARD)
+                .requires(Items.FLINT)
+                .unlockedBy("has_pearls", has(Items.ENDER_PEARL))
                 .save(recipeOutput);
 
-        GearRecipeBuilder.builder(GearRegistrar.ARMOR.get())
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistrar.GRIMOIRE)
+                .requires(ItemRegistrar.CODEX)
+                .requires(Items.BOOK)
+                .unlockedBy("has_codex", has(ItemRegistrar.CODEX))
+                .save(recipeOutput);
+
+        GearRecipeBuilder.builder(GearRegistrar.ARMOR)
                 .addIngredient(Ingredient.of(Items.DIAMOND_CHESTPLATE))
                 .addIngredient(Ingredient.of(Items.IRON_INGOT))
                 .save(recipeOutput);
 
-        GearRecipeBuilder.builder(GearRegistrar.HEALTH.get())
+        GearRecipeBuilder.builder(GearRegistrar.HEALTH)
                 .addIngredient(Ingredient.of(Tags.Items.ARMORS))
                 .addIngredient(Ingredient.of(ItemTags.MEAT))
                 .addIngredient(Ingredient.of(Tags.Items.CROPS))

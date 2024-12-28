@@ -14,7 +14,6 @@ public class PerkLibrary {
     public static final Perk GILDED = newPerk("gilded", "Gilded");
     public static final Perk PROTECTION = newPerk("protection", "Protection");
     public static final Perk PROTECTION_FIRE = newPerk("protection_fire", "Fire Protection");
-    public static final Perk PROTECTION_FALL = newPerk("protection_fall", "Fall Protection");
     public static final Perk PROTECTION_BLAST = newPerk("protection_blast", "Blast Protection");
     public static final Perk PROTECTION_WATER = newPerk("protection_water", "Aqua Protection");
     public static final Perk PROTECTION_FREEZE = newPerk("protection_freeze", "Ice Protection");

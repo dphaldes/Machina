@@ -18,6 +18,7 @@ import org.jetbrains.annotations.Nullable;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.function.Supplier;
 
 public class GearRecipeBuilder implements RecipeBuilder {
 
@@ -29,6 +30,10 @@ public class GearRecipeBuilder implements RecipeBuilder {
 
     protected GearRecipeBuilder(Gear result) {
         this.result = result;
+    }
+
+    public static GearRecipeBuilder builder(Supplier<? extends Gear> result) {
+        return builder(result.get());
     }
 
     public static GearRecipeBuilder builder(Gear result) {

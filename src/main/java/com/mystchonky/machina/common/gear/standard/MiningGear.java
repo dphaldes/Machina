@@ -5,19 +5,17 @@ import com.mystchonky.machina.api.gear.trait.AttributeTrait;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
-public class SpeedGear extends Gear {
-
-    public SpeedGear() {
-        super("speed");
+public class MiningGear extends Gear {
+    public MiningGear() {
+        super("mining");
 
         var attribute = new AttributeTrait(this);
-        attribute.addModifier(Attributes.MOVEMENT_SPEED, 0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-        attribute.addModifier(Attributes.STEP_HEIGHT, 0.4, AttributeModifier.Operation.ADD_VALUE);
+        attribute.addModifier(Attributes.MINING_EFFICIENCY, 16, AttributeModifier.Operation.ADD_VALUE);
         addTrait(attribute);
     }
 
     @Override
     public String displayName() {
-        return "Quick";
+        return "Mining";
     }
 }

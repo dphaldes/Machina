@@ -17,6 +17,6 @@ public class AqueousGear extends Gear {
 
     @Override
     public String displayName() {
-        return "Aqueous Gear";
+        return "Aqueous";
     }
 }

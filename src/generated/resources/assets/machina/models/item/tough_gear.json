@@ -1,6 +1,6 @@
 {
   "parent": "minecraft:item/generated",
   "textures": {
-    "layer0": "machina:item/gear/armor"
+    "layer0": "machina:item/gear/tough"
   }
 }

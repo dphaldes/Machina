@@ -13,6 +13,6 @@ public class ProtectionGear extends Gear {
 
     @Override
     public String displayName() {
-        return "Protection Gear";
+        return "Protection";
     }
 }

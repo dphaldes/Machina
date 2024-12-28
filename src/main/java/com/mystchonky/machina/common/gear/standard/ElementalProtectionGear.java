@@ -16,6 +16,6 @@ public class ElementalProtectionGear extends Gear {
 
     @Override
     public String displayName() {
-        return "Elemental Protection Gear";
+        return "Elemental Protection";
     }
 }

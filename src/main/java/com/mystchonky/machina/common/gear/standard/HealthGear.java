@@ -12,11 +12,12 @@ public class HealthGear extends Gear {
 
         var attribute = new AttributeTrait(this);
         attribute.addModifier(Attributes.MAX_HEALTH, 6, AttributeModifier.Operation.ADD_VALUE);
+        attribute.addModifier(Attributes.KNOCKBACK_RESISTANCE, 0.3, AttributeModifier.Operation.ADD_VALUE);
         addTrait(attribute);
     }
 
     @Override
     public String displayName() {
-        return "Health Gear";
+        return "Fortitude";
     }
 }

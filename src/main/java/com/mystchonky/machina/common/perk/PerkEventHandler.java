@@ -20,10 +20,6 @@ public class PerkEventHandler {
             event.setAmount(event.getAmount() * 0.5f); // reduce 50%
         }
 
-        if (damageSource.is(DamageTypeTags.IS_FALL) && PerkLibrary.hasPerk(entity, PerkLibrary.PROTECTION_FALL)) {
-            event.setAmount(event.getAmount() * 0.8f); // reduce by 20%
-        }
-
         if (damageSource.is(DamageTypeTags.IS_FIRE) && PerkLibrary.hasPerk(entity, PerkLibrary.PROTECTION_FIRE)) {
             event.setAmount(event.getAmount() * 0.8f); // reduce by 20%
         }

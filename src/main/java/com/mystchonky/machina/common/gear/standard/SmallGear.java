@@ -5,19 +5,19 @@ import com.mystchonky.machina.api.gear.trait.AttributeTrait;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
-public class SpeedGear extends Gear {
+public class SmallGear extends Gear {
 
-    public SpeedGear() {
-        super("speed");
+    public SmallGear() {
+        super("small");
 
         var attribute = new AttributeTrait(this);
-        attribute.addModifier(Attributes.MOVEMENT_SPEED, 0.2, AttributeModifier.Operation.ADD_MULTIPLIED_TOTAL);
-        attribute.addModifier(Attributes.STEP_HEIGHT, 0.4, AttributeModifier.Operation.ADD_VALUE);
+        attribute.addModifier(Attributes.SCALE, -0.6, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
+        attribute.addModifier(Attributes.MOVEMENT_SPEED, 0.2, AttributeModifier.Operation.ADD_MULTIPLIED_BASE);
         addTrait(attribute);
     }
 
     @Override
     public String displayName() {
-        return "Quick";
+        return "Small";
     }
 }

@@ -1,11 +1,11 @@
 {
   "parent": "minecraft:recipes/root",
   "criteria": {
-    "has_codex": {
+    "has_pearls": {
       "conditions": {
         "items": [
           {
-            "items": "machina:codex"
+            "items": "minecraft:ender_pearl"
           }
         ]
       },
@@ -13,7 +13,7 @@
     },
     "has_the_recipe": {
       "conditions": {
-        "recipe": "machina:armor_gear"
+        "recipe": "machina:rift_pearl"
       },
       "trigger": "minecraft:recipe_unlocked"
     }
@@ -21,12 +21,12 @@
   "requirements": [
     [
       "has_the_recipe",
-      "has_codex"
+      "has_pearls"
     ]
   ],
   "rewards": {
     "recipes": [
-      "machina:armor_gear"
+      "machina:rift_pearl"
     ]
   }
 }

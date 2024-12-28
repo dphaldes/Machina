@@ -5,10 +5,10 @@ import com.mystchonky.machina.api.gear.trait.AttributeTrait;
 import net.minecraft.world.entity.ai.attributes.AttributeModifier;
 import net.minecraft.world.entity.ai.attributes.Attributes;
 
-public class ArmorGear extends Gear {
+public class DiamondArmorGear extends Gear {
 
-    public ArmorGear() {
-        super("armor");
+    public DiamondArmorGear() {
+        super("diamond_armor");
 
         var attribute = new AttributeTrait(this);
         attribute.addModifier(Attributes.ARMOR, 5, AttributeModifier.Operation.ADD_VALUE);
@@ -18,6 +18,6 @@ public class ArmorGear extends Gear {
 
     @Override
     public String displayName() {
-        return "Armor Gear";
+        return "Brilliance";
     }
 }
