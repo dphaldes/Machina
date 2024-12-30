@@ -2,6 +2,7 @@ package com.mystchonky.machina.api.gear;
 
 import com.mojang.serialization.Codec;
 import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.api.RegistryKeys;
 import com.mystchonky.machina.api.gear.trait.Trait;
 import com.mystchonky.machina.client.screen.tooltip.Tooltip;
 import com.mystchonky.machina.common.item.GearItem;
@@ -10,6 +11,7 @@ import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
+import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.player.Player;
 
 import javax.annotation.Nullable;
@@ -17,8 +19,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public abstract class Gear implements Tooltip.Provider {
-    public static final Codec<Gear> CODEC = Registries.GEARS_REGISTRY.byNameCodec();
-    public static final StreamCodec<RegistryFriendlyByteBuf, Gear> STREAM_CODEC = ByteBufCodecs.registry(Registries.GEARS_REGISTRY.key());
+
+
     private final String id;
     private final List<Trait> traits = new ArrayList<>();
     @Nullable
@@ -85,4 +87,20 @@ public abstract class Gear implements Tooltip.Provider {
     public final String localizationKey() {
         return "name." + Machina.ID + "." + id();
     }
+
+    public static final Gear EMPTY = new Gear("empty") {
+        @Override
+        public String displayName() {
+            return "EMPTY";
+        }
+    };
+
+
+    public static final Codec<Gear> CODEC = ResourceKey.codec(RegistryKeys.GEARS).xmap(
+            key -> Registries.GEARS_REGISTRY.getOptional(key).orElse(Gear.EMPTY),
+            gear -> Registries.GEARS_REGISTRY.getResourceKey(gear).orElse(null)
+    );
+
+    public static final StreamCodec<RegistryFriendlyByteBuf, Gear> STREAM_CODEC =
+            ByteBufCodecs.registry(Registries.GEARS_REGISTRY.key());
 }

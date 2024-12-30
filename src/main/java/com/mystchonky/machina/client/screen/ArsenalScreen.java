@@ -16,7 +16,6 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
-import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -114,7 +113,7 @@ public class ArsenalScreen extends BaseScreen implements Tooltip.Renderer {
         var compatible = equippedGears.stream().filter(Objects::nonNull).allMatch(it -> it.isCompatibleWith(gear));
         if (compatible) {
             for (int i = 0; i < equippedGears.size(); i++) {
-                if (equippedGears.get(i) != null) continue;
+                if (equippedGears.get(i) != Gear.EMPTY) continue;
                 equippedGears.set(i, gear);
                 break;
             }
@@ -122,10 +121,9 @@ public class ArsenalScreen extends BaseScreen implements Tooltip.Renderer {
         }
     }
 
-    private void removeGear(@Nullable Gear gear) {
-        if (gear == null) return;
+    private void removeGear(Gear gear) {
         for (int i = 0; i < equippedGears.size(); i++) {
-            if (equippedGears.get(i) == gear) equippedGears.set(i, null);
+            if (equippedGears.get(i) == gear) equippedGears.set(i, Gear.EMPTY);
         }
         displayArsenalGears();
     }

@@ -28,6 +28,8 @@ public class GearRegistrar {
     public static final DeferredRegister<Gear> GEARS = DeferredRegister.create(Registries.GEARS_REGISTRY, Machina.ID);
     public static final DeferredRegister.Items GEAR_ITEMS = DeferredRegister.createItems(Machina.ID);
 
+    private static final Supplier<Gear> EMPTY = GEARS.register(Gear.EMPTY.id(), () -> Gear.EMPTY);
+
     public static final Supplier<DiamondArmorGear> ARMOR = register(new DiamondArmorGear());
     public static final Supplier<AqueousGear> AQUEOUS = register(new AqueousGear());
     public static final Supplier<FrostWalkerGear> FROST_WALKER = register(new FrostWalkerGear());

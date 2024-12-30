@@ -9,7 +9,6 @@ import net.minecraft.world.entity.player.Player;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Objects;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
@@ -28,12 +27,11 @@ public class ArsenalManager {
 
     public static void activate(Player player) {
         // activate gears
-        Arsenal.get(player).gears().stream().filter(Objects::nonNull).forEach(gear -> gear.onEquip(player));
+        Arsenal.get(player).gears().forEach(gear -> gear.onEquip(player));
 
         // recalculate perks
         List<Perk> perks = Arsenal.get(player)
                 .gears().stream()
-                .filter(Objects::nonNull)
                 .map(Gear::getTraits)
                 .flatMap(Collection::stream)
                 .filter(PerkTrait.class::isInstance)
@@ -45,7 +43,7 @@ public class ArsenalManager {
 
     public static void deactivate(Player player) {
         // deactivate gears
-        Arsenal.get(player).gears().stream().filter(Objects::nonNull).forEach(gear -> gear.onRemove(player));
+        Arsenal.get(player).gears().forEach(gear -> gear.onRemove(player));
 
         // remove perks
         Perks.set(player, List.of());
