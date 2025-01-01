@@ -1,6 +1,7 @@
 package com.mystchonky.machina.data.client;
 
 import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.api.gear.Gear;
 import com.mystchonky.machina.common.perk.PerkLibrary;
 import com.mystchonky.machina.common.registrar.BlockRegistrar;
 import com.mystchonky.machina.common.registrar.GearRegistrar;
@@ -24,9 +25,10 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(ItemRegistrar.GRIMOIRE.get(), "Grimoire");
 
         add(BlockRegistrar.RIFT.block(), "Rift");
-//        add(BlockRegistrar.CODEX.block(), "Codex");
 
         GearRegistrar.GEARS.getEntries().forEach(gear -> {
+            if (gear.get() == Gear.EMPTY)
+                return;
             add(gear.get().getGearItem(), gear.get().displayName());
             add(gear.get().localizationKey(), gear.get().displayName());
         });

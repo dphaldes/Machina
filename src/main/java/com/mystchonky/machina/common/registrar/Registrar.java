@@ -51,7 +51,7 @@ public class Registrar {
                 registry -> registry.getEntries().forEach(entry -> output.accept(entry.get()));
 
         registryHandler.accept(ItemRegistrar.ITEMS);
-        registryHandler.accept(BlockRegistrar.BLOCKS);
+        registryHandler.accept(BlockRegistrar.BLOCK_ITEMS);
         registryHandler.accept(GearRegistrar.GEAR_ITEMS);
 
     }

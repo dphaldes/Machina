@@ -2,9 +2,12 @@ package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.common.block.RiftBlock;
+import com.mystchonky.machina.common.block.RiftPortalBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
 import net.neoforged.neoforge.registries.DeferredItem;
@@ -27,10 +30,15 @@ public class BlockRegistrar {
                     .noLootTable()
             ));
 
-//    public static final BlockPair<CodexBlock, BlockItem> CODEX = block("codex",
-//            () -> new CodexBlock(BlockBehaviour.Properties.of()
-//                    .strength(1.5F)
-//            ));
+    public static final DeferredBlock<RiftPortalBlock> RIFT_PORTAL = BLOCKS.register("rift_portal",
+            () -> new RiftPortalBlock(BlockBehaviour.Properties.of()
+                    .noCollission()
+                    .randomTicks()
+                    .strength(-1.0F)
+                    .sound(SoundType.AMETHYST)
+                    .lightLevel(l -> 11)
+                    .pushReaction(PushReaction.BLOCK)
+            ));
 
     private static <X extends Block> BlockPair<X, BlockItem> block(String name, Supplier<X> supplier) {
         var block = BLOCKS.register(name, supplier);

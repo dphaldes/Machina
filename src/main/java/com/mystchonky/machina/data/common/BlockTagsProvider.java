@@ -16,7 +16,6 @@ public class BlockTagsProvider extends net.neoforged.neoforge.common.data.BlockT
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-//        tag(BlockTags.MINEABLE_WITH_PICKAXE)
-//                .add(BlockRegistrar.CODEX.block());
+
     }
 }

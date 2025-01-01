@@ -32,7 +32,6 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(ItemRegistrar.CODEX.asItem());
         basicItem(ItemRegistrar.GRIMOIRE.asItem());
 
-//        simpleBlockItem(BlockRegistrar.CODEX.block());
     }
 
     private void basicGear(Item item) {

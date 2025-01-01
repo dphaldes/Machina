@@ -24,7 +24,6 @@ public class BlockLootTable extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
-//        loot(BlockRegistrar.CODEX.block(), this::dropSelf);
     }
 
     protected void loot(Block block, Consumer<Block> lootFunction) {
