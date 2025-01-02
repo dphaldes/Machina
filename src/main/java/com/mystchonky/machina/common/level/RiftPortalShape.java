@@ -16,9 +16,9 @@ import java.util.Optional;
 import java.util.function.Predicate;
 
 public class RiftPortalShape {
-    private static final int MIN_WIDTH = 2;
+    private static final int MIN_WIDTH = 1;
     public static final int MAX_WIDTH = 21;
-    private static final int MIN_HEIGHT = 3;
+    private static final int MIN_HEIGHT = 2;
     public static final int MAX_HEIGHT = 21;
     private static final BlockBehaviour.StatePredicate FRAME = RiftPortalShape::frameBlock;
     private final LevelAccessor level;
@@ -84,20 +84,20 @@ public class RiftPortalShape {
     }
 
     private int getDistanceUntilEdgeAboveFrame(BlockPos pos, Direction direction) {
-        BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
+        BlockPos.MutableBlockPos blockPos = new BlockPos.MutableBlockPos();
 
         for (int i = 0; i <= 21; i++) {
-            blockpos$mutableblockpos.set(pos).move(direction, i);
-            BlockState blockstate = this.level.getBlockState(blockpos$mutableblockpos);
+            blockPos.set(pos).move(direction, i);
+            BlockState blockstate = this.level.getBlockState(blockPos);
             if (!isEmpty(blockstate)) {
-                if (FRAME.test(blockstate, this.level, blockpos$mutableblockpos)) {
+                if (FRAME.test(blockstate, this.level, blockPos)) {
                     return i;
                 }
                 break;
             }
 
-            BlockState blockstate1 = this.level.getBlockState(blockpos$mutableblockpos.move(Direction.DOWN));
-            if (!FRAME.test(blockstate1, this.level, blockpos$mutableblockpos)) {
+            BlockState blockstate1 = this.level.getBlockState(blockPos.move(Direction.DOWN));
+            if (!FRAME.test(blockstate1, this.level, blockPos)) {
                 break;
             }
         }
@@ -108,30 +108,19 @@ public class RiftPortalShape {
     private int calculateHeight() {
         BlockPos.MutableBlockPos blockpos$mutableblockpos = new BlockPos.MutableBlockPos();
         int i = this.getDistanceUntilTop(blockpos$mutableblockpos);
-        return i >= MIN_HEIGHT && i <= MAX_HEIGHT && this.hasTopFrame(blockpos$mutableblockpos, i) ? i : 0;
-    }
-
-    private boolean hasTopFrame(BlockPos.MutableBlockPos pos, int distanceToTop) {
-        for (int i = 0; i < this.width; i++) {
-            BlockPos.MutableBlockPos blockpos$mutableblockpos = pos.set(this.bottomLeft).move(Direction.UP, distanceToTop).move(this.rightDir, i);
-            if (!FRAME.test(this.level.getBlockState(blockpos$mutableblockpos), this.level, blockpos$mutableblockpos)) {
-                return false;
-            }
-        }
-
-        return true;
+        return i >= MIN_HEIGHT && i <= MAX_HEIGHT ? i : 0;
     }
 
     private int getDistanceUntilTop(BlockPos.MutableBlockPos pos) {
         for (int i = 0; i < 21; i++) {
             pos.set(this.bottomLeft).move(Direction.UP, i).move(this.rightDir, -1);
             if (!FRAME.test(this.level.getBlockState(pos), this.level, pos)) {
-                return i;
+                return i - 1;
             }
 
             pos.set(this.bottomLeft).move(Direction.UP, i).move(this.rightDir, this.width);
             if (!FRAME.test(this.level.getBlockState(pos), this.level, pos)) {
-                return i;
+                return i - 1;
             }
 
             for (int j = 0; j < this.width; j++) {
@@ -161,7 +150,7 @@ public class RiftPortalShape {
     public void createPortalBlocks() {
         BlockState blockstate = BlockRegistrar.RIFT_PORTAL.get().defaultBlockState().setValue(RiftPortalBlock.AXIS, this.axis);
         BlockPos.betweenClosed(this.bottomLeft, this.bottomLeft.relative(Direction.UP, this.height - 1).relative(this.rightDir, this.width - 1))
-                .forEach(p_77725_ -> this.level.setBlock(p_77725_, blockstate, 18));
+                .forEach(pos -> this.level.setBlock(pos, blockstate, 18));
     }
 
     public boolean isComplete() {

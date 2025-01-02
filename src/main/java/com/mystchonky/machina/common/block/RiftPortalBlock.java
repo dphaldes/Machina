@@ -20,7 +20,6 @@ import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class RiftPortalBlock extends Block {
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
-    protected static final int AABB_OFFSET = 2;
     protected static final VoxelShape X_AXIS_AABB = Block.box(0.0, 0.0, 6.0, 16.0, 16.0, 10.0);
     protected static final VoxelShape Z_AXIS_AABB = Block.box(6.0, 0.0, 0.0, 10.0, 16.0, 16.0);
 
@@ -31,17 +30,16 @@ public class RiftPortalBlock extends Block {
 
     @Override
     protected VoxelShape getShape(BlockState state, BlockGetter level, BlockPos pos, CollisionContext context) {
-        return switch (state.getValue(AXIS)) {
-            case Z -> Z_AXIS_AABB;
-            default -> X_AXIS_AABB;
-        };
+        if (state.getValue(AXIS) == Direction.Axis.Z)
+            return Z_AXIS_AABB;
+        return X_AXIS_AABB;
     }
 
     @Override
     protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
-        Direction.Axis direction$axis = facing.getAxis();
+        Direction.Axis facingAxis = facing.getAxis();
         Direction.Axis direction$axis1 = state.getValue(AXIS);
-        boolean flag = direction$axis1 != direction$axis && direction$axis.isHorizontal();
+        boolean flag = direction$axis1 != facingAxis && facingAxis.isHorizontal();
         return !flag && !facingState.is(this) && !new RiftPortalShape(level, currentPos, direction$axis1).isComplete()
                 ? Blocks.AIR.defaultBlockState()
                 : super.updateShape(state, facing, facingState, level, currentPos, facingPos);
@@ -49,24 +47,22 @@ public class RiftPortalBlock extends Block {
 
     @Override
     public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource random) {
-        for (int i = 0; i < 4; i++) {
-            double d0 = (double) pos.getX() + random.nextDouble();
-            double d1 = (double) pos.getY() + random.nextDouble();
-            double d2 = (double) pos.getZ() + random.nextDouble();
-            double d3 = ((double) random.nextFloat() - 0.5) * 0.5;
-            double d4 = ((double) random.nextFloat() - 0.5) * 0.5;
-            double d5 = ((double) random.nextFloat() - 0.5) * 0.5;
-            int j = random.nextInt(2) * 2 - 1;
-            if (!level.getBlockState(pos.west()).is(this) && !level.getBlockState(pos.east()).is(this)) {
-                d0 = (double) pos.getX() + 0.5 + 0.25 * (double) j;
-                d3 = random.nextFloat() * 2.0F * (float) j;
-            } else {
-                d2 = (double) pos.getZ() + 0.5 + 0.25 * (double) j;
-                d5 = random.nextFloat() * 2.0F * (float) j;
-            }
-
-            level.addParticle(ParticleTypes.ENCHANT, d0, d1, d2, d3, d4, d5);
+        double x = (double) pos.getX() + random.nextDouble();
+        double y = (double) pos.getY() + random.nextDouble();
+        double z = (double) pos.getZ() + random.nextDouble();
+        double xSpeed = ((double) random.nextFloat() - 0.5) * 0.5;
+        double ySpeed = ((double) random.nextFloat() - 0.5) * 0.5;
+        double zSpeed = ((double) random.nextFloat() - 0.5) * 0.5;
+        int j = random.nextInt(2) * 2 - 1;
+        if (!level.getBlockState(pos.west()).is(this) && !level.getBlockState(pos.east()).is(this)) {
+            x = (double) pos.getX() + 0.5 + 0.25 * (double) j;
+            xSpeed = random.nextFloat() * 2.0F * (float) j;
+        } else {
+            z = (double) pos.getZ() + 0.5 + 0.25 * (double) j;
+            zSpeed = random.nextFloat() * 2.0F * (float) j;
         }
+
+        level.addParticle(ParticleTypes.ENCHANT, x, y, z, xSpeed, ySpeed, zSpeed);
     }
 
     @Override

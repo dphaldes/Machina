@@ -54,7 +54,7 @@ public class PlayerEventHandler {
 
     @SubscribeEvent
     public static void useItemOnBlock(UseItemOnBlockEvent event) {
-        if (event.getUsePhase() == UseItemOnBlockEvent.UsePhase.BLOCK && event.getItemStack().is(Items.FLINT_AND_STEEL)) {
+        if (event.getUsePhase() == UseItemOnBlockEvent.UsePhase.ITEM_AFTER_BLOCK && event.getItemStack().is(Items.FLINT_AND_STEEL)) {
             var level = event.getLevel();
             var pos = event.getPos();
             var state = level.getBlockState(pos);
