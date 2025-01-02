@@ -1,12 +1,15 @@
 package com.mystchonky.machina.common.block;
 
+import com.mystchonky.machina.common.level.RiftPortalShape;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.Rotation;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
@@ -32,6 +35,16 @@ public class RiftPortalBlock extends Block {
             case Z -> Z_AXIS_AABB;
             default -> X_AXIS_AABB;
         };
+    }
+
+    @Override
+    protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
+        Direction.Axis direction$axis = facing.getAxis();
+        Direction.Axis direction$axis1 = state.getValue(AXIS);
+        boolean flag = direction$axis1 != direction$axis && direction$axis.isHorizontal();
+        return !flag && !facingState.is(this) && !new RiftPortalShape(level, currentPos, direction$axis1).isComplete()
+                ? Blocks.AIR.defaultBlockState()
+                : super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
 
     @Override

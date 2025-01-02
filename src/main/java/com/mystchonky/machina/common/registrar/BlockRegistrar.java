@@ -33,7 +33,6 @@ public class BlockRegistrar {
     public static final DeferredBlock<RiftPortalBlock> RIFT_PORTAL = BLOCKS.register("rift_portal",
             () -> new RiftPortalBlock(BlockBehaviour.Properties.of()
                     .noCollission()
-                    .randomTicks()
                     .strength(-1.0F)
                     .sound(SoundType.AMETHYST)
                     .lightLevel(l -> 11)

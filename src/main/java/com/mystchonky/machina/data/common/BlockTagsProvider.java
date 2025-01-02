@@ -1,8 +1,10 @@
 package com.mystchonky.machina.data.common;
 
 import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.common.registrar.TagRegistrar;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
+import net.minecraft.world.level.block.Blocks;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 import org.jetbrains.annotations.Nullable;
 
@@ -16,6 +18,15 @@ public class BlockTagsProvider extends net.neoforged.neoforge.common.data.BlockT
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
+        tag(TagRegistrar.RIFT_PORTAL_FRAME)
+                .add(Blocks.DEEPSLATE)
+                .add(Blocks.COBBLED_DEEPSLATE)
+                .add(Blocks.DEEPSLATE_BRICKS)
+                .add(Blocks.CRACKED_DEEPSLATE_BRICKS)
+                .add(Blocks.DEEPSLATE_TILES)
+                .add(Blocks.CRACKED_DEEPSLATE_TILES)
+                .add(Blocks.CHISELED_DEEPSLATE)
+                .add(Blocks.POLISHED_DEEPSLATE);
 
     }
 }

@@ -41,6 +41,7 @@ public class Registrar {
         GearRegistrar.register(modBus);
 
         LangRegistrar.load();
+        TagRegistrar.load();
         modBus.addListener(MessageRegistrar::registerMessages);
 
         NeoForge.EVENT_BUS.addListener(Registrar::registerCommands);
