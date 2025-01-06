@@ -1,6 +1,7 @@
 package com.mystchonky.machina.common.level;
 
 import com.mystchonky.machina.common.block.RiftPortalBlock;
+import com.mystchonky.machina.common.blockentity.RiftPortalBlockEntity;
 import com.mystchonky.machina.common.registrar.BlockRegistrar;
 import com.mystchonky.machina.common.registrar.TagRegistrar;
 import net.minecraft.core.BlockPos;
@@ -148,9 +149,17 @@ public class RiftPortalShape {
     }
 
     public void createPortalBlocks() {
-        BlockState blockstate = BlockRegistrar.RIFT_PORTAL.get().defaultBlockState().setValue(RiftPortalBlock.AXIS, this.axis);
-        BlockPos.betweenClosed(this.bottomLeft, this.bottomLeft.relative(Direction.UP, this.height - 1).relative(this.rightDir, this.width - 1))
-                .forEach(pos -> this.level.setBlock(pos, blockstate, 18));
+        if (bottomLeft == null) return;
+
+        BlockState blockstate = BlockRegistrar.RIFT_PORTAL.get().defaultBlockState().setValue(RiftPortalBlock.AXIS, axis);
+        BlockPos.betweenClosed(bottomLeft, bottomLeft.relative(Direction.UP, height - 1).relative(rightDir, width - 1)).forEach(pos -> {
+            level.setBlock(pos, blockstate, 18);
+            if (level.getBlockEntity(pos) instanceof RiftPortalBlockEntity rift) {
+                rift.setMasterPos(this.bottomLeft);
+            }
+        });
+
+
     }
 
     public boolean isComplete() {

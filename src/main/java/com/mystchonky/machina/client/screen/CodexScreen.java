@@ -18,6 +18,7 @@ import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
 import net.minecraft.client.gui.screens.inventory.tooltip.DefaultTooltipPositioner;
+import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
@@ -43,12 +44,14 @@ public class CodexScreen extends BaseScreen {
     private final List<Gear> unlockedGears;
     private final List<GearButton> gearButtons = new ArrayList<>();
     private final List<GearRecipe> recipeCache;
+    private final BlockPos masterRift;
     @Nullable
     private Pair<Gear, GearRecipe> selectedRecipe = null;
 
-    public CodexScreen(Player player) {
+    public CodexScreen(Player player, BlockPos masterRift) {
         super(LangRegistrar.CODEX_SCREEN.component(), 216, 148);
         this.player = player;
+        this.masterRift = masterRift;
 
         unlockedGears = new ArrayList<>(UnlockedGears.get(player));
         var level = Minecraft.getInstance().level;
@@ -64,7 +67,6 @@ public class CodexScreen extends BaseScreen {
     protected void init() {
         super.init();
         addGearButtons();
-
     }
 
     @Override

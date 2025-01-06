@@ -1,24 +1,36 @@
 package com.mystchonky.machina.common.block;
 
+import com.mystchonky.machina.client.screen.ScreenManager;
+import com.mystchonky.machina.common.blockentity.RiftPortalBlockEntity;
 import com.mystchonky.machina.common.level.RiftPortalShape;
+import com.mystchonky.machina.common.registrar.BlockEntityRegistrar;
+import com.mystchonky.machina.common.registrar.ItemRegistrar;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.ItemInteractionResult;
+import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.LevelAccessor;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
+import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.Rotation;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.EnumProperty;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
+import org.jetbrains.annotations.Nullable;
 
-public class RiftPortalBlock extends Block {
+public class RiftPortalBlock extends Block implements EntityBlock {
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
     protected static final VoxelShape X_AXIS_AABB = Block.box(0.0, 0.0, 6.0, 16.0, 16.0, 10.0);
     protected static final VoxelShape Z_AXIS_AABB = Block.box(6.0, 0.0, 0.0, 10.0, 16.0, 16.0);
@@ -80,5 +92,25 @@ public class RiftPortalBlock extends Block {
     @Override
     protected void createBlockStateDefinition(StateDefinition.Builder<Block, BlockState> builder) {
         builder.add(AXIS);
+    }
+
+    @Override
+    public @Nullable BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
+        return BlockEntityRegistrar.RIFT_PORTAL.get().create(pos, state);
+    }
+
+    @Override
+    protected ItemInteractionResult useItemOn(ItemStack stack, BlockState state, Level level, BlockPos pos, Player player, InteractionHand hand, BlockHitResult hitResult) {
+        if (!level.isClientSide)
+            return ItemInteractionResult.CONSUME;
+
+        if (stack.is(ItemRegistrar.CODEX) && level.getBlockEntity(pos) instanceof RiftPortalBlockEntity rift) {
+            var master = rift.getMasterPos();
+            if (master != null) {
+                ScreenManager.openCodexScreen(player, rift.getMasterPos());
+            }
+        }
+
+        return ItemInteractionResult.SUCCESS;
     }
 }
