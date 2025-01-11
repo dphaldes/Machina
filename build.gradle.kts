@@ -20,8 +20,8 @@ neoForge {
     validateAccessTransformers = true
 
     parchment {
-        mappingsVersion = project.property("parchment_mappings_version") as String
-        minecraftVersion = project.property("parchment_minecraft_version") as String
+        minecraftVersion = "1.21"
+        mappingsVersion = "2024.11.10"
     }
 
     runs {
@@ -69,12 +69,13 @@ repositories {
         }
     }
     maven {
-        name = "GeckoLib"
-        url = uri("https://dl.cloudsmith.io/public/geckolib3/geckolib/maven/")
+        name = "klikli"
+        url = uri("https://dl.cloudsmith.io/public/klikli-dev/mods/maven/")
         content {
-            includeGroup("software.bernie.geckolib")
+            includeGroup("com.klikli_dev")
         }
     }
+
 }
 
 dependencies {
@@ -90,8 +91,10 @@ dependencies {
         }
     }
 
-//    val geckolib: String by project
-//    implementation("software.bernie.geckolib:geckolib-neoforge-${minecraft_version}:${geckolib}")
+//    val modonomicon = "1.111.1"
+//    implementation("com.klikli_dev:modonomicon-${minecraft_version}-neoforge:${modonomicon}") {
+//        isTransitive = false
+//    }
 }
 
 val replaceProperties = mapOf(

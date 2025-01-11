@@ -7,6 +7,8 @@ import com.mystchonky.machina.client.ClientData;
 import com.mystchonky.machina.client.screen.tooltip.RecipeTooltip;
 import com.mystchonky.machina.client.screen.widget.GearButton;
 import com.mystchonky.machina.common.gear.UnlockedGears;
+import com.mystchonky.machina.common.network.MessageRegistrar;
+import com.mystchonky.machina.common.network.messages.MessageSetCodexRecipe;
 import com.mystchonky.machina.common.recipe.GearRecipe;
 import com.mystchonky.machina.common.registrar.LangRegistrar;
 import com.mystchonky.machina.common.registrar.RecipeRegistrar;
@@ -14,6 +16,7 @@ import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
+import net.minecraft.client.gui.components.ImageButton;
 import net.minecraft.client.gui.components.Renderable;
 import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.client.gui.screens.inventory.tooltip.ClientTooltipComponent;
@@ -43,10 +46,10 @@ public class CodexScreen extends BaseScreen {
     private final List<Gear> allGears;
     private final List<Gear> unlockedGears;
     private final List<GearButton> gearButtons = new ArrayList<>();
-    private final List<GearRecipe> recipeCache;
+    private final List<RecipeHolder<GearRecipe>> recipeCache;
     private final BlockPos masterRift;
     @Nullable
-    private Pair<Gear, GearRecipe> selectedRecipe = null;
+    private Pair<Gear, RecipeHolder<GearRecipe>> selectedRecipe = null;
 
     public CodexScreen(Player player, BlockPos masterRift) {
         super(LangRegistrar.CODEX_SCREEN.component(), 216, 148);
@@ -59,14 +62,15 @@ public class CodexScreen extends BaseScreen {
                 .sorted(Comparator.comparing(Gear::displayName))
                 .toList();
         recipeCache = level.getRecipeManager()
-                .getAllRecipesFor(RecipeRegistrar.Types.GEAR.get())
-                .stream().map(RecipeHolder::value).toList();
+                .getAllRecipesFor(RecipeRegistrar.Types.GEAR.get());
     }
 
     @Override
     protected void init() {
         super.init();
         addGearButtons();
+
+        addRenderableWidget(new ImageButton(leftPos + 162, topPos + 124, 20, 8, APPLY_SPRITES, this::select, Component.literal("Select")));
     }
 
     @Override
@@ -74,7 +78,7 @@ public class CodexScreen extends BaseScreen {
         super.render(guiGraphics, mouseX, mouseY, partialTick);
 
         if (selectedRecipe != null) {
-            var ingredients = selectedRecipe.right().ingredients();
+            var ingredients = selectedRecipe.right().value().ingredients();
             for (int i = 0; i < ingredients.size(); i++) {
                 var items = new ArrayList<>(Arrays.asList(ingredients.get(i).getItems()));
                 var stack = items.get((ClientData.ticks / 20) % items.size());
@@ -123,7 +127,7 @@ public class CodexScreen extends BaseScreen {
 
     @Override
     protected void renderTooltip(GuiGraphics guiGraphics, int mouseX, int mouseY) {
-        Optional<GearRecipe> recipe = Optional.empty();
+        Optional<RecipeHolder<GearRecipe>> recipe = Optional.empty();
         List<Component> tooltip = new ArrayList<>();
         for (Renderable renderable : renderables) {
             if (renderable instanceof GearButton button) {
@@ -140,7 +144,7 @@ public class CodexScreen extends BaseScreen {
 
         if (!tooltip.isEmpty()) {
             List<ClientTooltipComponent> components = new ArrayList<>(ClientHooks.gatherTooltipComponents(ItemStack.EMPTY, tooltip, mouseX, guiGraphics.guiWidth(), guiGraphics.guiHeight(), font));
-            recipe.ifPresent(gearRecipe -> components.add(new RecipeTooltip(gearRecipe)));
+            recipe.ifPresent(gearRecipe -> components.add(new RecipeTooltip(gearRecipe.value())));
             guiGraphics.renderTooltipInternal(font, components, mouseX, mouseY, DefaultTooltipPositioner.INSTANCE);
         }
     }
@@ -156,13 +160,18 @@ public class CodexScreen extends BaseScreen {
         recipe.ifPresent(gearRecipe -> selectedRecipe = Pair.of(gear, gearRecipe));
     }
 
-    private Optional<GearRecipe> getRecipe(@Nullable Gear gear) {
-        return recipeCache.stream().filter(it -> it.result() == gear).findFirst();
+    private Optional<RecipeHolder<GearRecipe>> getRecipe(@Nullable Gear gear) {
+        return recipeCache.stream().filter(it -> it.value().result() == gear).findFirst();
     }
 
     private boolean inBounds(int x, int y, int x1, int y1) {
         return x >= x1 && x < x1 + 16 && y >= y1 && y < y1 + 16;
     }
 
-
+    private void select(Button btn) {
+        if (selectedRecipe == null)
+            return;
+        var recipe = selectedRecipe.right();
+        MessageRegistrar.sendToServer(new MessageSetCodexRecipe(masterRift, recipe.id()));
+    }
 }
