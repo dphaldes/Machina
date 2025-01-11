@@ -84,12 +84,14 @@ public class RiftPortalBlockEntity extends BlockEntity {
     }
 
     public List<Ingredient> getRemainingRequired() {
+        var missing = new ArrayList<Ingredient>();
+        var consumed = new ArrayList<>(consumedStacks);
+        if (recipe == null)
+            return List.of();
+
         var ingredients = recipe.value().ingredients();
         if (consumedStacks.isEmpty())
             return ingredients;
-
-        var missing = new ArrayList<Ingredient>();
-        var consumed = new ArrayList<>(consumedStacks);
 
         for (var ingredient : ingredients) {
             for (var stack : consumed) {
@@ -118,9 +120,7 @@ public class RiftPortalBlockEntity extends BlockEntity {
     @Override
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
-        if (tag.contains("master")) {
-            this.masterPos = BlockPos.of(tag.getLong("master"));
-        }
+        this.masterPos = BlockPos.of(tag.getLong("master"));
         if (tag.contains("recipe")) {
             var id = ResourceLocation.parse(tag.getString("recipe"));
             this.recipe = level.getRecipeManager().byKeyTyped(RecipeRegistrar.Types.GEAR.get(), id);

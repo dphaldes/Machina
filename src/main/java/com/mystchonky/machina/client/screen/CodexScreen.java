@@ -8,7 +8,7 @@ import com.mystchonky.machina.client.screen.tooltip.RecipeTooltip;
 import com.mystchonky.machina.client.screen.widget.GearButton;
 import com.mystchonky.machina.common.gear.UnlockedGears;
 import com.mystchonky.machina.common.network.MessageRegistrar;
-import com.mystchonky.machina.common.network.messages.MessageSetCodexRecipe;
+import com.mystchonky.machina.common.network.messages.MessageSetRiftRecipe;
 import com.mystchonky.machina.common.recipe.GearRecipe;
 import com.mystchonky.machina.common.registrar.LangRegistrar;
 import com.mystchonky.machina.common.registrar.RecipeRegistrar;
@@ -172,6 +172,6 @@ public class CodexScreen extends BaseScreen {
         if (selectedRecipe == null)
             return;
         var recipe = selectedRecipe.right();
-        MessageRegistrar.sendToServer(new MessageSetCodexRecipe(masterRift, recipe.id()));
+        MessageRegistrar.sendToServer(new MessageSetRiftRecipe(masterRift, recipe.id()));
     }
 }

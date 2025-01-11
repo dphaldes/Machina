@@ -2,7 +2,7 @@ package com.mystchonky.machina.common.network;
 
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.common.network.messages.Message;
-import com.mystchonky.machina.common.network.messages.MessageSetCodexRecipe;
+import com.mystchonky.machina.common.network.messages.MessageSetRiftRecipe;
 import com.mystchonky.machina.common.network.messages.MessageSyncArsenal;
 import com.mystchonky.machina.common.network.messages.MessageSyncGears;
 import com.mystchonky.machina.common.network.messages.MessageUpdateArsenal;
@@ -18,7 +18,7 @@ public class MessageRegistrar {
         final PayloadRegistrar registrar = event.registrar(Machina.ID);
 
         registrar.playToServer(MessageUpdateArsenal.TYPE, MessageUpdateArsenal.STREAM_CODEC, MessageHandler::server);
-        registrar.playToServer(MessageSetCodexRecipe.TYPE, MessageSetCodexRecipe.STREAM_CODEC, MessageHandler::server);
+        registrar.playToServer(MessageSetRiftRecipe.TYPE, MessageSetRiftRecipe.STREAM_CODEC, MessageHandler::server);
 
         registrar.playToClient(MessageSyncArsenal.TYPE, MessageSyncArsenal.STREAM_CODEC, MessageHandler::client);
         registrar.playToClient(MessageSyncGears.TYPE, MessageSyncGears.STREAM_CODEC, MessageHandler::client);
