@@ -26,8 +26,8 @@ public record MessageSetRiftRecipe(BlockPos blockPos, ResourceLocation recipeId)
         var level = player.level();
         if (level.getBlockEntity(blockPos()) instanceof RiftPortalBlockEntity rift) {
             var recipe = level.getRecipeManager().byKeyTyped(RecipeRegistrar.Types.GEAR.get(), recipeId());
-            if (recipe != null && rift.getMaster() instanceof RiftPortalBlockEntity master)
-                master.setRecipe(recipe, player);
+            if (recipe != null)
+                rift.setRecipe(recipe, player);
         }
     }
 

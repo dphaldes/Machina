@@ -1,12 +1,18 @@
 package com.mystchonky.machina.common.blockentity;
 
+import com.mystchonky.machina.Machina;
+import com.mystchonky.machina.common.gear.UnlockedGears;
+import com.mystchonky.machina.common.network.NetworkedAttachments;
 import com.mystchonky.machina.common.recipe.GearRecipe;
 import com.mystchonky.machina.common.registrar.BlockEntityRegistrar;
+import com.mystchonky.machina.common.registrar.LangRegistrar;
 import com.mystchonky.machina.common.registrar.RecipeRegistrar;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
+import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
@@ -26,51 +32,81 @@ import java.util.List;
 
 public class RiftPortalBlockEntity extends BlockEntity {
 
-    @Nullable
-    private BlockPos masterPos = null;
+    private BlockPos masterPos;
 
     @Nullable
     private RecipeHolder<GearRecipe> recipe;
     private List<ItemStack> consumedStacks = new ArrayList<>();
-    public boolean crafting;
 
     public RiftPortalBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlockEntityRegistrar.RIFT_PORTAL.get(), pos, blockState);
+        this.masterPos = pos;
     }
 
     public void setMasterPos(BlockPos pos) {
         this.masterPos = pos;
     }
 
-    @Nullable
     public BlockPos getMasterPos() {
         return masterPos;
     }
 
     @Nullable
-    public RiftPortalBlockEntity getMaster() {
-        if (masterPos == null)
-            return null;
-
+    private RiftPortalBlockEntity getMaster() {
         if (level.getBlockEntity(masterPos) instanceof RiftPortalBlockEntity rift)
             return rift;
 
+        Machina.LOGGER.warn("Rift master not found for {}", worldPosition);
         return null;
     }
 
-    public void refundConsumed() {
-        for (ItemStack i : consumedStacks) {
-            ItemEntity entity = new ItemEntity(level, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), i);
-            level.addFreshEntity(entity);
+    public void tryConsumeStack(ItemEntity item) {
+        if (!(worldPosition.equals(masterPos))) {
+            getMaster().tryConsumeStack(item);
+            return;
         }
-        consumedStacks = new ArrayList<>();
 
-        recipe = null;
-        crafting = false;
+        var stack = item.getItem();
+        if (canConsumeStack(stack)) {
+            var input = stack.copyWithCount(1);
+            consumedStacks.add(input);
+            stack.shrink(1);
+        }
         setChanged();
     }
 
+    public void tryUnlock(Player player) {
+        if (!(worldPosition.equals(masterPos))) {
+            getMaster().tryUnlock(player);
+            return;
+        }
+
+
+        if (recipe != null && getRemainingRequired().isEmpty()) {
+            var unlockedGears = UnlockedGears.get(player);
+            var gear = recipe.value().result();
+            if (!unlockedGears.contains(gear)) {
+                unlockedGears.add(gear);
+                player.sendSystemMessage(Component.translatable(LangRegistrar.GEAR_UNLOCK.key(), Component.translatable(gear.localizationKey())));
+                recipe = null;
+                this.consumedStacks = new ArrayList<>();
+                NetworkedAttachments.syncGears(player);
+            } else {
+                player.sendSystemMessage(Component.literal("You already unlocked this!").withStyle(ChatFormatting.RED));
+                refundConsumed();
+            }
+        }
+
+        setChanged();
+    }
+
+
     public void setRecipe(RecipeHolder<GearRecipe> holder, Player player) {
+        if (!worldPosition.equals(masterPos)) {
+            getMaster().setRecipe(holder, player);
+            return;
+        }
+
         refundConsumed();
         recipe = holder;
         player.sendSystemMessage(Component.literal("Crafting: " + holder.value().result().displayName()).withStyle(ChatFormatting.GOLD));
@@ -83,6 +119,16 @@ public class RiftPortalBlockEntity extends BlockEntity {
         return getRemainingRequired().stream().anyMatch(i -> i.test(stack));
     }
 
+    public void refundConsumed() {
+        recipe = null;
+        for (ItemStack i : consumedStacks) {
+            ItemEntity entity = new ItemEntity(level, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), i);
+            level.addFreshEntity(entity);
+        }
+        consumedStacks = new ArrayList<>();
+    }
+
+
     public List<Ingredient> getRemainingRequired() {
         var missing = new ArrayList<Ingredient>();
         var consumed = new ArrayList<>(consumedStacks);
@@ -94,38 +140,63 @@ public class RiftPortalBlockEntity extends BlockEntity {
             return ingredients;
 
         for (var ingredient : ingredients) {
+            var found = false;
             for (var stack : consumed) {
                 if (ingredient.test(stack)) {
-                    missing.add(ingredient);
                     consumed.remove(stack);
+                    found = true;
                     break;
                 }
             }
+            if (!found) missing.add(ingredient);
         }
 
         return missing;
     }
 
     @Override
-    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.saveAdditional(tag, registries);
-        if (masterPos != null) {
-            tag.putLong("master", masterPos.asLong());
-        }
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.saveAdditional(tag, provider);
+        tag.putLong("master", masterPos.asLong());
         if (recipe != null) {
             tag.putString("recipe", recipe.id().toString());
         }
+
+        ListTag list = new ListTag();
+        for (int i = 0; i < consumedStacks.size(); i++) {
+            if (!consumedStacks.get(i).isEmpty()) {
+                CompoundTag itemTag = new CompoundTag();
+                itemTag.putInt("Slot", i);
+                list.add(consumedStacks.get(i).save(provider, itemTag));
+            }
+        }
+        CompoundTag stacks = new CompoundTag();
+        stacks.put("Items", list);
+        stacks.putInt("Size", list.size());
+        tag.put("consumedStacks", stacks);
     }
 
     @Override
-    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
-        super.loadAdditional(tag, registries);
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider provider) {
+        super.loadAdditional(tag, provider);
         this.masterPos = BlockPos.of(tag.getLong("master"));
         if (tag.contains("recipe")) {
             var id = ResourceLocation.parse(tag.getString("recipe"));
             this.recipe = level.getRecipeManager().byKeyTyped(RecipeRegistrar.Types.GEAR.get(), id);
-
         }
+
+        var stacks = tag.getCompound("consumedStacks");
+        var consumedStacks = new ArrayList<ItemStack>();
+        ListTag tagList = stacks.getList("Items", Tag.TAG_COMPOUND);
+        for (int i = 0; i < tagList.size(); i++) {
+            CompoundTag itemTags = tagList.getCompound(i);
+            int slot = itemTags.getInt("Slot");
+
+            if (slot >= 0 && slot < stacks.size()) {
+                ItemStack.parse(provider, itemTags).ifPresent(consumedStacks::add);
+            }
+        }
+        this.consumedStacks = consumedStacks;
     }
 
     @Override
