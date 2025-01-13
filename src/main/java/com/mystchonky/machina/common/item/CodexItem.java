@@ -19,12 +19,4 @@ public class CodexItem extends Item {
         return itemStack.copy();
     }
 
-//    @Override
-//    public InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand hand) {
-//        ItemStack itemstack = player.getItemInHand(hand);
-//        if (level.isClientSide()) {
-//            ScreenManager.openCodexScreen(player);
-//        }
-//        return InteractionResultHolder.sidedSuccess(itemstack, level.isClientSide());
-//    }
 }
