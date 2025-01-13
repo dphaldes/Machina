@@ -118,7 +118,10 @@ public class RiftPortalBlock extends Block implements EntityBlock {
 
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (level.isClientSide || !(level.getBlockEntity(pos) instanceof RiftPortalBlockEntity rift))
+        if (level.isClientSide || level.getGameTime() % 5 != 0)
+            return;
+
+        if (!(level.getBlockEntity(pos) instanceof RiftPortalBlockEntity rift))
             return;
 
         if (entity instanceof ItemEntity item) {
