@@ -2,7 +2,6 @@ package com.mystchonky.machina.data.client;
 
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.common.item.GearItem;
-import com.mystchonky.machina.common.registrar.BlockRegistrar;
 import com.mystchonky.machina.common.registrar.GearRegistrar;
 import com.mystchonky.machina.common.registrar.ItemRegistrar;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -27,8 +26,6 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         GearRegistrar.GEAR_ITEMS.getEntries()
                 .forEach(gear -> basicGear(gear.get()));
 
-        basicItem(BlockRegistrar.RIFT.blockItem());
-        basicItem(ItemRegistrar.RIFT_PEARL.asItem());
         basicItem(ItemRegistrar.CODEX.asItem());
         basicItem(ItemRegistrar.GRIMOIRE.asItem());
 

@@ -29,7 +29,6 @@ public class Registrar {
     public static void register(final IEventBus modBus) {
         MaterialRegistrar.register(modBus);
         ItemRegistrar.register(modBus);
-        EntityRegistrar.register(modBus);
         BlockRegistrar.register(modBus);
         BlockEntityRegistrar.register(modBus);
         RecipeRegistrar.register(modBus);

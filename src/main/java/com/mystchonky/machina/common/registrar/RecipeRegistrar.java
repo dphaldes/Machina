@@ -2,7 +2,6 @@ package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.common.recipe.GearRecipe;
-import com.mystchonky.machina.common.recipe.RiftRecipe;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.world.item.crafting.RecipeSerializer;
 import net.minecraft.world.item.crafting.RecipeType;
@@ -21,7 +20,6 @@ public class RecipeRegistrar {
     public static class Types {
         public static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, Machina.ID);
 
-        public static final Supplier<RecipeType<RiftRecipe>> RIFT = TYPES.register("rift", () -> RecipeType.simple(Machina.prefix("rift")));
         public static final Supplier<RecipeType<GearRecipe>> GEAR = TYPES.register("gear", () -> RecipeType.simple(Machina.prefix("gear")));
 
         public static void register(IEventBus bus) {
@@ -32,7 +30,6 @@ public class RecipeRegistrar {
     public static class Serializers {
         public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, Machina.ID);
 
-        public static final Supplier<RecipeSerializer<RiftRecipe>> RIFT = SERIALIZERS.register("rift", RiftRecipe.Serializer::new);
         public static final Supplier<RecipeSerializer<GearRecipe>> GEAR = SERIALIZERS.register("gear", GearRecipe.Serializer::new);
 
         public static void register(IEventBus bus) {

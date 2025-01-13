@@ -1,7 +1,6 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.blockentity.RiftBlockEntity;
 import com.mystchonky.machina.common.blockentity.RiftPortalBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -19,9 +18,6 @@ public class BlockEntityRegistrar {
 //                            BlockRegistrar.ENERGY_NEXUS.deferredBlock().get()
 //                    ).build(null)
 //            );
-    public static final Supplier<BlockEntityType<RiftBlockEntity>> RIFT = BLOCK_ENTITIES.register("rift",
-            () -> BlockEntityType.Builder.of(RiftBlockEntity::new, BlockRegistrar.RIFT.block())
-                    .build(null));
 
     public static final Supplier<BlockEntityType<RiftPortalBlockEntity>> RIFT_PORTAL = BLOCK_ENTITIES.register("rift_portal",
             () -> BlockEntityType.Builder.of(RiftPortalBlockEntity::new, BlockRegistrar.RIFT_PORTAL.get())

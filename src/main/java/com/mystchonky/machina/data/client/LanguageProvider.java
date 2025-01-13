@@ -3,7 +3,6 @@ package com.mystchonky.machina.data.client;
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.api.gear.Gear;
 import com.mystchonky.machina.common.perk.PerkLibrary;
-import com.mystchonky.machina.common.registrar.BlockRegistrar;
 import com.mystchonky.machina.common.registrar.GearRegistrar;
 import com.mystchonky.machina.common.registrar.ItemRegistrar;
 import com.mystchonky.machina.common.registrar.LangRegistrar;
@@ -20,11 +19,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(ItemRegistrar.VOID_CHESTPLATE.get(), "Voidwalker Mantle");
         add(ItemRegistrar.VOID_LEGGINGS.get(), "Voidwalker Breeches");
         add(ItemRegistrar.VOID_BOOTS.get(), "Voidwalker Greaves");
-        add(ItemRegistrar.RIFT_PEARL.get(), "Rift Pearl");
         add(ItemRegistrar.CODEX.get(), "Codex");
         add(ItemRegistrar.GRIMOIRE.get(), "Grimoire");
-
-        add(BlockRegistrar.RIFT.block(), "Rift");
 
         GearRegistrar.GEARS.getEntries().forEach(gear -> {
             if (gear.get() == Gear.EMPTY)

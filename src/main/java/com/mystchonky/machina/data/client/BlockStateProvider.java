@@ -16,18 +16,13 @@ public class BlockStateProvider extends net.neoforged.neoforge.client.model.gene
 
     @Override
     protected void registerStatesAndModels() {
-
-        directionalBlock(BlockRegistrar.RIFT.block(), models().getExistingFile(modLoc("block/rift")));
-
-        {
-            // Rift portal
-            var model = models().getExistingFile(modLoc("block/rift_portal"));
-            getVariantBuilder(BlockRegistrar.RIFT_PORTAL.get())
-                    .partialState().with(RiftPortalBlock.AXIS, Direction.Axis.X)
-                    .modelForState().modelFile(model).addModel()
-                    .partialState().with(RiftPortalBlock.AXIS, Direction.Axis.Z)
-                    .modelForState().modelFile(model).rotationY(90).addModel();
-        }
+        // Rift portal
+        var rift = models().getExistingFile(modLoc("block/rift_portal"));
+        getVariantBuilder(BlockRegistrar.RIFT_PORTAL.get())
+                .partialState().with(RiftPortalBlock.AXIS, Direction.Axis.X)
+                .modelForState().modelFile(rift).addModel()
+                .partialState().with(RiftPortalBlock.AXIS, Direction.Axis.Z)
+                .modelForState().modelFile(rift).rotationY(90).addModel();
 
     }
 }

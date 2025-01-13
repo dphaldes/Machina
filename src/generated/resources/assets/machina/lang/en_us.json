@@ -1,5 +1,5 @@
 {
-  "block.machina.rift": "Rift",
+  "gear.machina.learnt": "You have already learnt %s!",
   "gear.machina.remove": "Removed %s!",
   "gear.machina.unlock": "Unlocked %s!",
   "item.machina.aqueous_gear": "Aqueous",
@@ -16,7 +16,6 @@
   "item.machina.jump_gear": "Jump Boost",
   "item.machina.mining_gear": "Mining",
   "item.machina.protection_gear": "Protection",
-  "item.machina.rift_pearl": "Rift Pearl",
   "item.machina.small_gear": "Small",
   "item.machina.speed_gear": "Quick",
   "item.machina.tough_gear": "Tough",

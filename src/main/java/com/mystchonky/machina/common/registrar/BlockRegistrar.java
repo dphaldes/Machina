@@ -1,7 +1,6 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.block.RiftBlock;
 import com.mystchonky.machina.common.block.RiftPortalBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
@@ -21,14 +20,6 @@ public class BlockRegistrar {
     public static final DeferredRegister.Items BLOCK_ITEMS = DeferredRegister.createItems(Machina.ID);
 
     //    public static final BlockPair<EnergyNexusBlock, BlockItem> ENERGY_NEXUS = registerBlockPair("energy_nexus", EnergyNexusBlock::new);
-    public static final BlockPair<RiftBlock, BlockItem> RIFT = block("rift",
-            () -> new RiftBlock(BlockBehaviour.Properties.of()
-                    .destroyTime(50.0F)
-                    .explosionResistance(6.0F)
-                    .lightLevel(state -> 4)
-                    .noOcclusion()
-                    .noLootTable()
-            ));
 
     public static final DeferredBlock<RiftPortalBlock> RIFT_PORTAL = BLOCKS.register("rift_portal",
             () -> new RiftPortalBlock(BlockBehaviour.Properties.of()
