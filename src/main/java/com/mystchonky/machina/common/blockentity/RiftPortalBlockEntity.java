@@ -87,12 +87,12 @@ public class RiftPortalBlockEntity extends BlockEntity {
             var gear = recipe.value().result();
             if (!unlockedGears.contains(gear)) {
                 unlockedGears.add(gear);
-                player.sendSystemMessage(Component.translatable(LangRegistrar.GEAR_UNLOCK.key(), Component.translatable(gear.localizationKey())));
+                player.sendSystemMessage(Component.translatable(LangRegistrar.GEAR_UNLOCK.key(), Component.translatable(gear.localizationKey())).withStyle(ChatFormatting.GOLD));
                 recipe = null;
                 this.consumedStacks = new ArrayList<>();
                 NetworkedAttachments.syncGears(player);
             } else {
-                player.sendSystemMessage(Component.literal("You already unlocked this!").withStyle(ChatFormatting.RED));
+                player.sendSystemMessage(Component.translatable(LangRegistrar.GEAR_LEARNT.key(), Component.translatable(gear.localizationKey())).withStyle(ChatFormatting.RED));
                 refundConsumed();
             }
         }

@@ -52,10 +52,10 @@ public class RiftPortalBlock extends Block implements EntityBlock {
     @Override
     protected BlockState updateShape(BlockState state, Direction facing, BlockState facingState, LevelAccessor level, BlockPos currentPos, BlockPos facingPos) {
         Direction.Axis facingAxis = facing.getAxis();
-        Direction.Axis direction$axis1 = state.getValue(AXIS);
-        boolean flag = direction$axis1 != facingAxis && facingAxis.isHorizontal();
-        return !flag && !facingState.is(this) && !new RiftPortalShape(level, currentPos, direction$axis1).isComplete()
-                ? Blocks.AIR.defaultBlockState()
+        Direction.Axis stateAxis = state.getValue(AXIS);
+        boolean flag = stateAxis != facingAxis && facingAxis.isHorizontal();
+        return !flag && !facingState.is(this) && !new RiftPortalShape(level, currentPos, stateAxis).isComplete()
+                ? destroyBlock(level, currentPos)
                 : super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
 
@@ -131,6 +131,16 @@ public class RiftPortalBlock extends Block implements EntityBlock {
         if (entity instanceof Player player) {
             rift.tryUnlock(player);
         }
+    }
+
+    public BlockState destroyBlock(LevelAccessor world, BlockPos pos) {
+        if (!world.isClientSide()) {
+            BlockEntity entity = world.getBlockEntity(pos);
+            if (entity instanceof RiftPortalBlockEntity rift) {
+                rift.refundConsumed();
+            }
+        }
+        return Blocks.AIR.defaultBlockState();
     }
 
 }
