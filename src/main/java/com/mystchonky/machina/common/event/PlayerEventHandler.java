@@ -3,7 +3,7 @@ package com.mystchonky.machina.common.event;
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.common.arsenal.ArsenalManager;
 import com.mystchonky.machina.common.item.VoidArmorItem;
-import com.mystchonky.machina.common.level.RiftPortalShape;
+import com.mystchonky.machina.common.level.RiftShape;
 import com.mystchonky.machina.common.network.NetworkedAttachments;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
@@ -58,8 +58,8 @@ public class PlayerEventHandler {
             var level = event.getLevel();
             var pos = event.getPos();
             var state = level.getBlockState(pos);
-            if (RiftPortalShape.frameBlock(state, level, pos)) {
-                var optional = RiftPortalShape.findEmptyPortalShape(level, pos.above(), Direction.Axis.X);
+            if (RiftShape.frameBlock(state, level, pos)) {
+                var optional = RiftShape.findEmptyPortalShape(level, pos.above(), Direction.Axis.X);
                 if (optional.isPresent()) {
                     optional.get().createPortalBlocks();
                     event.setCancellationResult(ItemInteractionResult.sidedSuccess(level.isClientSide()));

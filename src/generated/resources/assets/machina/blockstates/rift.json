@@ -1,0 +1,11 @@
+{
+  "variants": {
+    "axis=x": {
+      "model": "machina:block/rift"
+    },
+    "axis=z": {
+      "model": "machina:block/rift",
+      "y": 90
+    }
+  }
+}

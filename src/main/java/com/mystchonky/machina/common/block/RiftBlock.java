@@ -1,8 +1,8 @@
 package com.mystchonky.machina.common.block;
 
 import com.mystchonky.machina.client.screen.ScreenManager;
-import com.mystchonky.machina.common.blockentity.RiftPortalBlockEntity;
-import com.mystchonky.machina.common.level.RiftPortalShape;
+import com.mystchonky.machina.common.blockentity.RiftBlockEntity;
+import com.mystchonky.machina.common.level.RiftShape;
 import com.mystchonky.machina.common.registrar.BlockEntityRegistrar;
 import com.mystchonky.machina.common.registrar.ItemRegistrar;
 import net.minecraft.core.BlockPos;
@@ -32,12 +32,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class RiftPortalBlock extends Block implements EntityBlock {
+public class RiftBlock extends Block implements EntityBlock {
     public static final EnumProperty<Direction.Axis> AXIS = BlockStateProperties.HORIZONTAL_AXIS;
     protected static final VoxelShape X_AXIS_AABB = Block.box(0.0, 0.0, 6.0, 16.0, 16.0, 10.0);
     protected static final VoxelShape Z_AXIS_AABB = Block.box(6.0, 0.0, 0.0, 10.0, 16.0, 16.0);
 
-    public RiftPortalBlock(Properties properties) {
+    public RiftBlock(Properties properties) {
         super(properties);
         this.registerDefaultState(this.stateDefinition.any().setValue(AXIS, Direction.Axis.X));
     }
@@ -54,7 +54,7 @@ public class RiftPortalBlock extends Block implements EntityBlock {
         Direction.Axis facingAxis = facing.getAxis();
         Direction.Axis stateAxis = state.getValue(AXIS);
         boolean flag = stateAxis != facingAxis && facingAxis.isHorizontal();
-        return !flag && !facingState.is(this) && !new RiftPortalShape(level, currentPos, stateAxis).isComplete()
+        return !flag && !facingState.is(this) && !new RiftShape(level, currentPos, stateAxis).isComplete()
                 ? destroyBlock(level, currentPos)
                 : super.updateShape(state, facing, facingState, level, currentPos, facingPos);
     }
@@ -106,7 +106,7 @@ public class RiftPortalBlock extends Block implements EntityBlock {
         if (!level.isClientSide)
             return ItemInteractionResult.CONSUME;
 
-        if (stack.is(ItemRegistrar.CODEX) && level.getBlockEntity(pos) instanceof RiftPortalBlockEntity rift) {
+        if (stack.is(ItemRegistrar.CODEX) && level.getBlockEntity(pos) instanceof RiftBlockEntity rift) {
             var master = rift.getMasterPos();
             if (master != null) {
                 ScreenManager.openCodexScreen(player, rift.getMasterPos());
@@ -121,7 +121,7 @@ public class RiftPortalBlock extends Block implements EntityBlock {
         if (level.isClientSide || level.getGameTime() % 5 != 0)
             return;
 
-        if (!(level.getBlockEntity(pos) instanceof RiftPortalBlockEntity rift))
+        if (!(level.getBlockEntity(pos) instanceof RiftBlockEntity rift))
             return;
 
         if (entity instanceof ItemEntity item) {
@@ -136,7 +136,7 @@ public class RiftPortalBlock extends Block implements EntityBlock {
     public BlockState destroyBlock(LevelAccessor world, BlockPos pos) {
         if (!world.isClientSide()) {
             BlockEntity entity = world.getBlockEntity(pos);
-            if (entity instanceof RiftPortalBlockEntity rift) {
+            if (entity instanceof RiftBlockEntity rift) {
                 rift.refundConsumed();
             }
         }

@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.network.messages;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.blockentity.RiftPortalBlockEntity;
+import com.mystchonky.machina.common.blockentity.RiftBlockEntity;
 import com.mystchonky.machina.common.registrar.RecipeRegistrar;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -24,7 +24,7 @@ public record MessageSetRiftRecipe(BlockPos blockPos, ResourceLocation recipeId)
     @Override
     public void onServerReceived(ServerPlayer player) {
         var level = player.level();
-        if (level.getBlockEntity(blockPos()) instanceof RiftPortalBlockEntity rift) {
+        if (level.getBlockEntity(blockPos()) instanceof RiftBlockEntity rift) {
             var recipe = level.getRecipeManager().byKeyTyped(RecipeRegistrar.Types.GEAR.get(), recipeId());
             if (recipe != null)
                 rift.setRecipe(recipe, player);

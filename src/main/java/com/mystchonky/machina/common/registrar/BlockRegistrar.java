@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.registrar;
 
 import com.mystchonky.machina.Machina;
-import com.mystchonky.machina.common.block.RiftPortalBlock;
+import com.mystchonky.machina.common.block.RiftBlock;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.SoundType;
@@ -21,8 +21,8 @@ public class BlockRegistrar {
 
     //    public static final BlockPair<EnergyNexusBlock, BlockItem> ENERGY_NEXUS = registerBlockPair("energy_nexus", EnergyNexusBlock::new);
 
-    public static final DeferredBlock<RiftPortalBlock> RIFT_PORTAL = BLOCKS.register("rift_portal",
-            () -> new RiftPortalBlock(BlockBehaviour.Properties.of()
+    public static final DeferredBlock<RiftBlock> RIFT_PORTAL = BLOCKS.register("rift",
+            () -> new RiftBlock(BlockBehaviour.Properties.of()
                     .noCollission()
                     .strength(-1.0F)
                     .sound(SoundType.AMETHYST)

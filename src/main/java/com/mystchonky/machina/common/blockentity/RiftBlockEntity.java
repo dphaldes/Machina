@@ -30,7 +30,7 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class RiftPortalBlockEntity extends BlockEntity {
+public class RiftBlockEntity extends BlockEntity {
 
     private BlockPos masterPos;
 
@@ -38,7 +38,7 @@ public class RiftPortalBlockEntity extends BlockEntity {
     private RecipeHolder<GearRecipe> recipe;
     private List<ItemStack> consumedStacks = new ArrayList<>();
 
-    public RiftPortalBlockEntity(BlockPos pos, BlockState blockState) {
+    public RiftBlockEntity(BlockPos pos, BlockState blockState) {
         super(BlockEntityRegistrar.RIFT_PORTAL.get(), pos, blockState);
         this.masterPos = pos;
     }
@@ -52,8 +52,8 @@ public class RiftPortalBlockEntity extends BlockEntity {
     }
 
     @Nullable
-    private RiftPortalBlockEntity getMaster() {
-        if (level.getBlockEntity(masterPos) instanceof RiftPortalBlockEntity rift)
+    private RiftBlockEntity getMaster() {
+        if (level.getBlockEntity(masterPos) instanceof RiftBlockEntity rift)
             return rift;
 
         Machina.LOGGER.warn("Rift master not found for {}", worldPosition);

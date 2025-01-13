@@ -24,6 +24,7 @@ public class BlockLootTable extends BlockLootSubProvider {
 
     @Override
     protected void generate() {
+        //put things here
     }
 
     protected void loot(Block block, Consumer<Block> lootFunction) {

@@ -1,7 +1,7 @@
 package com.mystchonky.machina.common.level;
 
-import com.mystchonky.machina.common.block.RiftPortalBlock;
-import com.mystchonky.machina.common.blockentity.RiftPortalBlockEntity;
+import com.mystchonky.machina.common.block.RiftBlock;
+import com.mystchonky.machina.common.blockentity.RiftBlockEntity;
 import com.mystchonky.machina.common.registrar.BlockRegistrar;
 import com.mystchonky.machina.common.registrar.TagRegistrar;
 import net.minecraft.core.BlockPos;
@@ -16,12 +16,12 @@ import javax.annotation.Nullable;
 import java.util.Optional;
 import java.util.function.Predicate;
 
-public class RiftPortalShape {
+public class RiftShape {
     private static final int MIN_WIDTH = 1;
     public static final int MAX_WIDTH = 21;
     private static final int MIN_HEIGHT = 2;
     public static final int MAX_HEIGHT = 21;
-    private static final BlockBehaviour.StatePredicate FRAME = RiftPortalShape::frameBlock;
+    private static final BlockBehaviour.StatePredicate FRAME = RiftShape::frameBlock;
     private final LevelAccessor level;
     private final Direction.Axis axis;
     private final Direction rightDir;
@@ -31,21 +31,21 @@ public class RiftPortalShape {
     private int height;
     private final int width;
 
-    public static Optional<RiftPortalShape> findEmptyPortalShape(LevelAccessor level, BlockPos bottomLeft, Direction.Axis axis) {
+    public static Optional<RiftShape> findEmptyPortalShape(LevelAccessor level, BlockPos bottomLeft, Direction.Axis axis) {
         return findPortalShape(level, bottomLeft, shape -> shape.isValid() && shape.numPortalBlocks == 0, axis);
     }
 
-    public static Optional<RiftPortalShape> findPortalShape(LevelAccessor level, BlockPos bottomLeft, Predicate<RiftPortalShape> predicate, Direction.Axis axis) {
-        Optional<RiftPortalShape> optional = Optional.of(new RiftPortalShape(level, bottomLeft, axis)).filter(predicate);
+    public static Optional<RiftShape> findPortalShape(LevelAccessor level, BlockPos bottomLeft, Predicate<RiftShape> predicate, Direction.Axis axis) {
+        Optional<RiftShape> optional = Optional.of(new RiftShape(level, bottomLeft, axis)).filter(predicate);
         if (optional.isPresent()) {
             return optional;
         } else {
             var flip = axis == Direction.Axis.X ? Direction.Axis.Z : Direction.Axis.X;
-            return Optional.of(new RiftPortalShape(level, bottomLeft, flip)).filter(predicate);
+            return Optional.of(new RiftShape(level, bottomLeft, flip)).filter(predicate);
         }
     }
 
-    public RiftPortalShape(LevelAccessor level, BlockPos bottomLeft, Direction.Axis axis) {
+    public RiftShape(LevelAccessor level, BlockPos bottomLeft, Direction.Axis axis) {
         this.level = level;
         this.axis = axis;
         this.rightDir = axis == Direction.Axis.X ? Direction.WEST : Direction.SOUTH;
@@ -151,10 +151,10 @@ public class RiftPortalShape {
     public void createPortalBlocks() {
         if (bottomLeft == null) return;
 
-        BlockState blockstate = BlockRegistrar.RIFT_PORTAL.get().defaultBlockState().setValue(RiftPortalBlock.AXIS, axis);
+        BlockState blockstate = BlockRegistrar.RIFT_PORTAL.get().defaultBlockState().setValue(RiftBlock.AXIS, axis);
         BlockPos.betweenClosed(bottomLeft, bottomLeft.relative(Direction.UP, height - 1).relative(rightDir, width - 1)).forEach(pos -> {
             level.setBlock(pos, blockstate, 18);
-            if (level.getBlockEntity(pos) instanceof RiftPortalBlockEntity rift) {
+            if (level.getBlockEntity(pos) instanceof RiftBlockEntity rift) {
                 rift.setMasterPos(this.bottomLeft);
             }
         });

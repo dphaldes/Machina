@@ -1,8 +1,8 @@
 {
     "render_type": "translucent",
     "textures": {
-        "particle": "machina:block/rift_portal",
-        "portal": "machina:block/rift_portal"
+        "particle": "machina:block/rift",
+        "portal": "machina:block/rift"
     },
     "elements": [
         {   "from": [ 0, 0, 6 ],
