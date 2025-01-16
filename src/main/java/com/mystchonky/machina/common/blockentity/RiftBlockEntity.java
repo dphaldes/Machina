@@ -14,8 +14,6 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
 import net.minecraft.nbt.Tag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.network.protocol.game.ClientboundBlockEntityDataPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.item.ItemEntity;
@@ -52,12 +50,17 @@ public class RiftBlockEntity extends BlockEntity {
     }
 
     @Nullable
-    private RiftBlockEntity getMaster() {
+    public RiftBlockEntity getMaster() {
         if (level.getBlockEntity(masterPos) instanceof RiftBlockEntity rift)
             return rift;
 
         Machina.LOGGER.warn("Rift master not found for {}", worldPosition);
         return null;
+    }
+
+    @Nullable
+    public RecipeHolder<GearRecipe> getRecipe() {
+        return recipe;
     }
 
     public void tryConsumeStack(ItemEntity item) {
@@ -71,8 +74,8 @@ public class RiftBlockEntity extends BlockEntity {
             var input = stack.copyWithCount(1);
             consumedStacks.add(input);
             stack.shrink(1);
+            updateSync();
         }
-        setChanged();
     }
 
     public void tryUnlock(Player player) {
@@ -97,7 +100,7 @@ public class RiftBlockEntity extends BlockEntity {
             }
         }
 
-        setChanged();
+        updateSync();
     }
 
 
@@ -110,7 +113,7 @@ public class RiftBlockEntity extends BlockEntity {
         refundConsumed();
         recipe = holder;
         player.sendSystemMessage(Component.literal("Crafting: " + holder.value().result().displayName()).withStyle(ChatFormatting.GOLD));
-        setChanged();
+        updateSync();
     }
 
     public boolean canConsumeStack(ItemStack stack) {
@@ -152,6 +155,14 @@ public class RiftBlockEntity extends BlockEntity {
         }
 
         return missing;
+    }
+
+    public void updateSync() {
+        if (level != null) {
+            BlockState state = level.getBlockState(worldPosition);
+            level.sendBlockUpdated(worldPosition, state, state, 3);
+            setChanged();
+        }
     }
 
     @Override
@@ -201,13 +212,11 @@ public class RiftBlockEntity extends BlockEntity {
 
     @Override
     public CompoundTag getUpdateTag(HolderLookup.Provider registries) {
-        var tag = new CompoundTag();
-        saveAdditional(tag, registries);
-        return tag;
+        return this.saveWithoutMetadata(registries);
     }
 
     @Override
-    public @Nullable Packet<ClientGamePacketListener> getUpdatePacket() {
+    public @Nullable ClientboundBlockEntityDataPacket getUpdatePacket() {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 }

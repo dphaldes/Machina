@@ -138,6 +138,7 @@ public class RiftBlock extends Block implements EntityBlock {
             BlockEntity entity = world.getBlockEntity(pos);
             if (entity instanceof RiftBlockEntity rift) {
                 rift.refundConsumed();
+                rift.updateSync();
             }
         }
         return Blocks.AIR.defaultBlockState();
