@@ -29,7 +29,6 @@ import javax.annotation.Nullable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.function.Function;
 
 public class RiftBlockEntity extends BlockEntity {
 
@@ -197,7 +196,7 @@ public class RiftBlockEntity extends BlockEntity {
                 .ifPresent(pair -> {
                     var data = pair.getFirst();
                     this.masterPos = data.master();
-                    this.consumedStacks = data.consumedStacks();
+                    this.consumedStacks = new ArrayList<>(data.consumedStacks());
                     setRecipe(data.recipe().orElse(null));
                 });
     }
@@ -212,14 +211,12 @@ public class RiftBlockEntity extends BlockEntity {
         return ClientboundBlockEntityDataPacket.create(this);
     }
 
-
     private record Data(BlockPos master, Optional<ResourceLocation> recipe, List<ItemStack> consumedStacks) {
         public static Codec<Data> CODEC = RecordCodecBuilder.create(
                 instance -> instance.group(
                                 BlockPos.CODEC.fieldOf("master").forGetter(Data::master),
                                 ResourceLocation.CODEC.optionalFieldOf("recipe").forGetter(Data::recipe),
-                                ItemStack.CODEC.listOf().fieldOf("consumedStacks")
-                                        .xmap(Function.identity(), ArrayList::new).forGetter(Data::consumedStacks))
+                                ItemStack.CODEC.listOf().fieldOf("consumedStacks").forGetter(Data::consumedStacks))
                         .apply(instance, Data::new));
     }
 }
