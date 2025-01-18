@@ -2,7 +2,6 @@ package com.mystchonky.machina.common.network.messages;
 
 import com.mystchonky.machina.Machina;
 import com.mystchonky.machina.common.blockentity.RiftBlockEntity;
-import com.mystchonky.machina.common.registrar.RecipeRegistrar;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -11,7 +10,7 @@ import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 
 public record MessageSetRiftRecipe(BlockPos blockPos, ResourceLocation recipeId) implements Message.Server {
-    public static final Type<MessageSetRiftRecipe> TYPE = new Type<>(Machina.prefix("set_codex_recipe"));
+    public static final Type<MessageSetRiftRecipe> TYPE = new Type<>(Machina.prefix("set_rift_recipe"));
     public static final StreamCodec<RegistryFriendlyByteBuf, MessageSetRiftRecipe> STREAM_CODEC =
             StreamCodec.composite(
                     BlockPos.STREAM_CODEC,
@@ -25,9 +24,7 @@ public record MessageSetRiftRecipe(BlockPos blockPos, ResourceLocation recipeId)
     public void onServerReceived(ServerPlayer player) {
         var level = player.level();
         if (level.getBlockEntity(blockPos()) instanceof RiftBlockEntity rift) {
-            var recipe = level.getRecipeManager().byKeyTyped(RecipeRegistrar.Types.GEAR.get(), recipeId());
-            if (recipe != null)
-                rift.setRecipe(recipe, player);
+            rift.setRecipeExternal(recipeId());
         }
     }
 

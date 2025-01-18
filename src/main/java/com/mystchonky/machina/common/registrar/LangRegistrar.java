@@ -32,6 +32,9 @@ public class LangRegistrar {
     // SCREENS
     public static final LangEntry ARSENAL_SCREEN = addTranslation("title", "screen.arsenal", "Arsenal Screen");
     public static final LangEntry CODEX_SCREEN = addTranslation("title", "screen.codex", "Codex Screen");
+    public static final LangEntry CRAFTING = addTranslation("text", "rift.crafting", "Crafting: %s");
+    public static final LangEntry RIFT_READY = addTranslation("text", "rift.crafting_done", "Walk into the portal");
+    public static final LangEntry RIFT_WAITING = addTranslation("text", "rift.waiting", "Waiting for remaining ingredients");
     //
 
     // KEYMAPS

@@ -1,14 +1,22 @@
 package com.mystchonky.machina.client.layer;
 
+import com.mystchonky.machina.client.ClientData;
 import com.mystchonky.machina.common.blockentity.RiftBlockEntity;
+import com.mystchonky.machina.common.registrar.LangRegistrar;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
+import net.minecraft.util.Mth;
 
 import javax.annotation.Nullable;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Optional;
 
 public class RiftLayer {
+    private static final int radius = 30;
+
     public static void render(@Nullable RiftBlockEntity rift, GuiGraphics graphics, Font font) {
         if (rift == null)
             return;
@@ -17,15 +25,37 @@ public class RiftLayer {
         if (recipe == null)
             return;
 
-
         var poseStack = graphics.pose();
         poseStack.pushPose();
+        var centerX = graphics.guiWidth() / 2;
+        var centerY = graphics.guiHeight() / 2;
 
-        var x = graphics.guiWidth() / 2 + 20;
-        var y = graphics.guiHeight() / 2 + 20;
-        var result = recipe.value().result().displayName();
+        var toolX = centerX + 5;
+        var toolY = centerY + 5;
+        var components = new ArrayList<Component>();
 
-        graphics.drawString(font, Component.literal("Crafting:\n" + result), x, y, ChatFormatting.GOLD.getColor());
+        var gear = recipe.value().result().displayName();
+        components.add(Component.translatable(LangRegistrar.CRAFTING.key(), Component.literal(gear)).withStyle(ChatFormatting.GOLD));
+
+        var remaining = rift.getRemainingRequired();
+        if (remaining.isEmpty()) {
+            components.add(LangRegistrar.RIFT_READY.component());
+        } else {
+            components.add(LangRegistrar.RIFT_WAITING.component());
+
+            var delta = Mth.TWO_PI / remaining.size();
+            var spinOffset = ((float) (ClientData.ticks % 100) / 100) * Mth.TWO_PI;
+            for (int index = 0; index < remaining.size(); index++) {
+                var items = new ArrayList<>(Arrays.asList(remaining.get(index).getItems()));
+                var stack = items.get((ClientData.ticks / 40) % items.size());
+                var x = (int) (centerX + Mth.cos((delta * index) + spinOffset) * radius);
+                var y = (int) (centerY + Mth.sin((delta * index) + spinOffset) * radius);
+                graphics.renderFakeItem(stack, x, y);
+            }
+
+        }
+        graphics.renderTooltip(font, components, Optional.empty(), toolX, toolY);
+
 
         poseStack.popPose();
     }

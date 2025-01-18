@@ -118,7 +118,7 @@ public class RiftBlock extends Block implements EntityBlock {
 
     @Override
     protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (level.isClientSide || level.getGameTime() % 5 != 0)
+        if (level.isClientSide)
             return;
 
         if (!(level.getBlockEntity(pos) instanceof RiftBlockEntity rift))
@@ -138,7 +138,6 @@ public class RiftBlock extends Block implements EntityBlock {
             BlockEntity entity = world.getBlockEntity(pos);
             if (entity instanceof RiftBlockEntity rift) {
                 rift.refundConsumed();
-                rift.updateSync();
             }
         }
         return Blocks.AIR.defaultBlockState();
