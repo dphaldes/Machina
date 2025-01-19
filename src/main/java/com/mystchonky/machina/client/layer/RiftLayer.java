@@ -30,8 +30,7 @@ public class RiftLayer {
         var centerX = graphics.guiWidth() / 2;
         var centerY = graphics.guiHeight() / 2;
 
-        var toolX = centerX + 5;
-        var toolY = centerY + 5;
+        var toolY = centerY - 100;
         var components = new ArrayList<Component>();
 
         var gear = recipe.value().result().displayName();
@@ -48,13 +47,18 @@ public class RiftLayer {
             for (int index = 0; index < remaining.size(); index++) {
                 var items = new ArrayList<>(Arrays.asList(remaining.get(index).getItems()));
                 var stack = items.get((ClientData.ticks / 40) % items.size());
-                var x = (int) (centerX + Mth.cos((delta * index) + spinOffset) * radius);
-                var y = (int) (centerY + Mth.sin((delta * index) + spinOffset) * radius);
+                // subtract 8 to account for item width
+                var x = (int) (centerX + Mth.cos((delta * index) + spinOffset) * radius - 8);
+                var y = (int) (centerY + Mth.sin((delta * index) + spinOffset) * radius - 8);
                 graphics.renderFakeItem(stack, x, y);
             }
 
         }
-        graphics.renderTooltip(font, components, Optional.empty(), toolX, toolY);
+        var width = 0;
+        for (var c : components) {
+            width = Math.max(width, font.width(c));
+        }
+        graphics.renderTooltip(font, components, Optional.empty(), centerX - (width / 2), toolY);
 
 
         poseStack.popPose();
