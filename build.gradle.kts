@@ -145,7 +145,7 @@ tasks.register<Task>("genPackageInfos") {
             val packageInfoFile = File(javaFile.parent, "package-info.java")
             if (!packageInfoFile.exists()) {
                 var pkgName = javaFile.toString().replace(Matcher.quoteReplacement(File.separator), "/")
-                pkgName = pkgName.substring(pkgName.indexOf("com/mystchonky/"), pkgName.lastIndexOf("/"))
+                pkgName = pkgName.substring(pkgName.indexOf("mod/machina/"), pkgName.lastIndexOf("/"))
                 pkgName = pkgName.replace("/", ".")
 
                 val pkgInfoText = """

@@ -1,11 +1,11 @@
 {
   "required": true,
-  "package": "com.mystchonky.machina.mixin",
+  "package": "mod.machina.mixin",
   "compatibilityLevel": "JAVA_21",
   "mixins": [
   ],
   "client": [
-    "perk.ElytraLayerMixin"
+    "ElytraLayerMixin"
   ],
   "minVersion": "0.8"
 }
