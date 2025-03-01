@@ -3,7 +3,7 @@ package mod.machina.common.event;
 import mod.machina.Machina;
 import mod.machina.common.arsenal.ArsenalManager;
 import mod.machina.common.item.VoidArmorItem;
-import mod.machina.common.item.components.ItemStackReference;
+import mod.machina.common.item.components.ItemStackHolder;
 import mod.machina.common.level.RiftShape;
 import mod.machina.common.network.NetworkedAttachments;
 import mod.machina.common.registrar.DataComponentRegistrar;
@@ -78,10 +78,10 @@ public class PlayerEventHandler {
     @SubscribeEvent
     public static void useItem(PlayerInteractEvent.RightClickItem event) {
         var itemStack = event.getItemStack();
-        if (itemStack.has(DataComponentRegistrar.ITEM_STACK_REF) && event.getEntity().isSecondaryUseActive()) {
-            var replaceStack = itemStack.get(DataComponentRegistrar.ITEM_STACK_REF).stack();
-            itemStack.remove(DataComponentRegistrar.ITEM_STACK_REF);
-            replaceStack.set(DataComponentRegistrar.ITEM_STACK_REF, ItemStackReference.of(itemStack));
+        if (itemStack.has(DataComponentRegistrar.STACK_HOLDER) && event.getEntity().isSecondaryUseActive()) {
+            var replaceStack = itemStack.get(DataComponentRegistrar.STACK_HOLDER).stack();
+            itemStack.remove(DataComponentRegistrar.STACK_HOLDER);
+            replaceStack.set(DataComponentRegistrar.STACK_HOLDER, ItemStackHolder.of(itemStack));
 
             event.getEntity().setItemInHand(event.getHand(), replaceStack);
         }
