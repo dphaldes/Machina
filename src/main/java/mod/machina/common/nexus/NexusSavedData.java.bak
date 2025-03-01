@@ -9,8 +9,6 @@ import net.minecraft.nbt.Tag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.world.level.ChunkPos;
 import net.minecraft.world.level.saveddata.SavedData;
-import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
 import net.neoforged.neoforge.event.tick.LevelTickEvent;
 
 import java.io.File;
@@ -19,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@EventBusSubscriber
+//@EventBusSubscriber
 public class NexusSavedData extends SavedData {
 
     private final static String KEY_NETWORKS = "Networks";
@@ -42,7 +40,7 @@ public class NexusSavedData extends SavedData {
         return level.getDataStorage().computeIfAbsent(new Factory<>(NexusSavedData::new, (nbt, provider) -> new NexusSavedData(level, nbt)), "machina_nexus_network");
     }
 
-    @SubscribeEvent
+    //    @SubscribeEvent
     public static void onLevelTick(LevelTickEvent.Post event) {
         if (event.getLevel() instanceof ServerLevel level) {
             get(level).tick(level);

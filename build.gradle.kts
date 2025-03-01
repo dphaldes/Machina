@@ -79,18 +79,6 @@ repositories {
 }
 
 dependencies {
-    val minecraft_version: String by project
-
-    val graphlib: String by project
-    val graphlib_range: String by project
-    implementation("dev.gigaherz.graph:GraphLib3:${graphlib}")
-    jarJar("dev.gigaherz.graph:GraphLib3:[${graphlib},)") {
-        version {
-            strictly(graphlib_range)
-            prefer(graphlib)
-        }
-    }
-
 //    val modonomicon = "1.111.1"
 //    implementation("com.klikli_dev:modonomicon-${minecraft_version}-neoforge:${modonomicon}") {
 //        isTransitive = false
