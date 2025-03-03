@@ -19,8 +19,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(ItemRegistrar.VOID_CHESTPLATE.get(), "Voidwalker Mantle");
         add(ItemRegistrar.VOID_LEGGINGS.get(), "Voidwalker Breeches");
         add(ItemRegistrar.VOID_BOOTS.get(), "Voidwalker Greaves");
-        add(ItemRegistrar.CODEX.get(), "Codex");
-        add(ItemRegistrar.GRIMOIRE.get(), "Grimoire");
+        add(ItemRegistrar.COMPENDIUM.get(), "Compendium");
 
         GearRegistrar.GEARS.getEntries().forEach(gear -> {
             if (gear.get() == Gear.EMPTY)

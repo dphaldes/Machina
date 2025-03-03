@@ -26,8 +26,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         GearRegistrar.GEAR_ITEMS.getEntries()
                 .forEach(gear -> basicGear(gear.get()));
 
-        basicItem(ItemRegistrar.CODEX.asItem());
-        basicItem(ItemRegistrar.GRIMOIRE.asItem());
+        basicItem(ItemRegistrar.COMPENDIUM.asItem());
 
     }
 

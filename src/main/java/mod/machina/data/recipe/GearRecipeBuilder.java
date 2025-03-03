@@ -77,9 +77,9 @@ public class GearRecipeBuilder implements RecipeBuilder {
 
         var shapeless = ShapelessRecipeBuilder
                 .shapeless(RecipeCategory.MISC, this.result.getGearItem())
-                .requires(ItemRegistrar.CODEX);
+                .requires(ItemRegistrar.COMPENDIUM);
         this.ingredients.forEach(shapeless::requires);
-        shapeless.unlockedBy("has_codex", RecipeProvider.has(ItemRegistrar.CODEX))
+        shapeless.unlockedBy("has_codex", RecipeProvider.has(ItemRegistrar.COMPENDIUM))
                 .save(recipeOutput);
     }
 }

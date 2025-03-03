@@ -8,11 +8,12 @@ plugins {
     id("net.neoforged.moddev") version "1.0+"
 }
 
-val mod_id: String by project
+val modId = project.property("mod_id") as String
+
 version = project.property("mod_version") as String
 group = project.property("mod_group_id") as String
+base.archivesName.set(modId)
 
-base.archivesName.set(mod_id)
 java.toolchain.languageVersion.set(JavaLanguageVersion.of(21))
 
 neoForge {
@@ -27,18 +28,18 @@ neoForge {
     runs {
         create("client") {
             client()
-            systemProperty("forge.enabledGameTestNamespaces", mod_id)
+            systemProperty("forge.enabledGameTestNamespaces", modId)
         }
 
         create("server") {
             server()
-            systemProperty("forge.enabledGameTestNamespaces", mod_id)
+            systemProperty("forge.enabledGameTestNamespaces", modId)
         }
 
         create("data") {
             data()
             programArguments.addAll(
-                "--mod", mod_id,
+                "--mod", modId,
                 "--all",
                 "--output", file("src/generated/resources/").absolutePath,
                 "--existing", file("src/main/resources/").absolutePath
@@ -52,7 +53,7 @@ neoForge {
     }
 
     mods {
-        register(mod_id) {
+        register(modId) {
             sourceSet(sourceSets["main"])
         }
     }
@@ -79,10 +80,11 @@ repositories {
 }
 
 dependencies {
-//    val modonomicon = "1.111.1"
-//    implementation("com.klikli_dev:modonomicon-${minecraft_version}-neoforge:${modonomicon}") {
-//        isTransitive = false
-//    }
+    val minecraft = project.property("minecraft_version") as String
+    val modonomicon = "1.111.1"
+    implementation("com.klikli_dev:modonomicon-${minecraft}-neoforge:${modonomicon}") {
+        isTransitive = false
+    }
 }
 
 val replaceProperties = mapOf(

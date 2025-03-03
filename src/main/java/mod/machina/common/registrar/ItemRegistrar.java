@@ -1,7 +1,7 @@
 package mod.machina.common.registrar;
 
 import mod.machina.Machina;
-import mod.machina.common.item.CodexItem;
+import mod.machina.common.item.GuideBookItem;
 import mod.machina.common.item.VoidArmorItem;
 import mod.machina.common.item.components.ItemStackHolder;
 import net.minecraft.world.item.ArmorItem;
@@ -16,12 +16,10 @@ public class ItemRegistrar {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.Items.createItems(Machina.ID);
 
-    public static final DeferredItem<CodexItem> CODEX = ITEMS.registerItem("codex", (props) -> new CodexItem(
+    public static final DeferredItem<GuideBookItem> COMPENDIUM = ITEMS.registerItem("compendium", (props) -> new GuideBookItem(
             new Item.Properties().stacksTo(1)
                     .component(DataComponentRegistrar.STACK_HOLDER, ItemStackHolder.of(Items.IRON_SWORD))
                     .rarity(Rarity.RARE)));
-    
-    public static final DeferredItem<Item> GRIMOIRE = ITEMS.registerItem("grimoire", Item::new, new Item.Properties().stacksTo(1));
 
     public static final DeferredItem<VoidArmorItem> VOID_HELMET = ITEMS.registerItem("void_helmet", (props) -> new VoidArmorItem(ArmorItem.Type.HELMET));
     public static final DeferredItem<VoidArmorItem> VOID_CHESTPLATE = ITEMS.registerItem("void_chestplate", (props) -> new VoidArmorItem(ArmorItem.Type.CHESTPLATE));

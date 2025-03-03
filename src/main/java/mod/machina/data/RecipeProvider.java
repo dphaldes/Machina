@@ -1,13 +1,10 @@
 package mod.machina.data;
 
 import mod.machina.common.registrar.GearRegistrar;
-import mod.machina.common.registrar.ItemRegistrar;
 import mod.machina.data.recipe.GearRecipeBuilder;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.data.PackOutput;
-import net.minecraft.data.recipes.RecipeCategory;
 import net.minecraft.data.recipes.RecipeOutput;
-import net.minecraft.data.recipes.ShapelessRecipeBuilder;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 
@@ -21,12 +18,6 @@ public class RecipeProvider extends net.minecraft.data.recipes.RecipeProvider {
 
     @Override
     protected void buildRecipes(RecipeOutput recipeOutput) {
-
-        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistrar.GRIMOIRE)
-                .requires(ItemRegistrar.CODEX)
-                .requires(Items.BOOK)
-                .unlockedBy("has_codex", has(ItemRegistrar.CODEX))
-                .save(recipeOutput);
 
         GearRecipeBuilder.builder(GearRegistrar.ARMOR)
                 .addIngredient(Ingredient.of(Items.DIAMOND_CHESTPLATE))

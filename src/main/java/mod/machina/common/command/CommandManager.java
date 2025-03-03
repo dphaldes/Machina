@@ -21,7 +21,7 @@ public class CommandManager {
     private static final String PLAYER = "player";
 
     public static LiteralArgumentBuilder<CommandSourceStack> register() {
-        return Commands.literal("mod/machina")
+        return Commands.literal("machina")
                 .then(Commands.literal("gears")
                         .then(Commands.literal("get")
                                 .then(Commands.argument(PLAYER, EntityArgument.player())
