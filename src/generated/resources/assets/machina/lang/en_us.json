@@ -1,11 +1,12 @@
 {
+  "block.machina.rift": "Rift",
   "gear.machina.learnt": "You have already learnt %s!",
   "gear.machina.remove": "Removed %s!",
   "gear.machina.unlock": "Unlocked %s!",
   "item.machina.aqueous_gear": "Aqueous",
   "item.machina.attack_gear": "Attack",
   "item.machina.big_gear": "Big",
-  "item.machina.compendium": "Compendium",
+  "item.machina.compendium": "The Compendium",
   "item.machina.diamond_armor_gear": "Brilliance",
   "item.machina.elemental_protection_gear": "Elemental Protection",
   "item.machina.elytra_gear": "Elytra",

@@ -20,7 +20,7 @@ public class BlockEntityRegistrar {
 //            );
 
     public static final Supplier<BlockEntityType<RiftBlockEntity>> RIFT_PORTAL = BLOCK_ENTITIES.register("rift",
-            () -> BlockEntityType.Builder.of(RiftBlockEntity::new, BlockRegistrar.RIFT_PORTAL.get())
+            () -> BlockEntityType.Builder.of(RiftBlockEntity::new, BlockRegistrar.RIFT_PORTAL.block())
                     .build(null));
 
     public static void register(IEventBus bus) {

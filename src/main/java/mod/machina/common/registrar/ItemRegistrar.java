@@ -19,7 +19,7 @@ public class ItemRegistrar {
     public static final DeferredItem<GuideBookItem> COMPENDIUM = ITEMS.registerItem("compendium", (props) -> new GuideBookItem(
             new Item.Properties().stacksTo(1)
                     .component(DataComponentRegistrar.STACK_HOLDER, ItemStackHolder.of(Items.IRON_SWORD))
-                    .rarity(Rarity.RARE)));
+                    .rarity(Rarity.EPIC)));
 
     public static final DeferredItem<VoidArmorItem> VOID_HELMET = ITEMS.registerItem("void_helmet", (props) -> new VoidArmorItem(ArmorItem.Type.HELMET));
     public static final DeferredItem<VoidArmorItem> VOID_CHESTPLATE = ITEMS.registerItem("void_chestplate", (props) -> new VoidArmorItem(ArmorItem.Type.CHESTPLATE));

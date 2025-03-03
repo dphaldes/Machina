@@ -2,6 +2,7 @@ package mod.machina.data.client;
 
 import mod.machina.Machina;
 import mod.machina.common.item.GearItem;
+import mod.machina.common.registrar.BlockRegistrar;
 import mod.machina.common.registrar.GearRegistrar;
 import mod.machina.common.registrar.ItemRegistrar;
 import net.minecraft.core.registries.BuiltInRegistries;
@@ -27,7 +28,7 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
                 .forEach(gear -> basicGear(gear.get()));
 
         basicItem(ItemRegistrar.COMPENDIUM.asItem());
-
+        simpleBlockItem(BlockRegistrar.RIFT_PORTAL.block());
     }
 
     private void basicGear(Item item) {
@@ -35,8 +36,8 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
             var resource = BuiltInRegistries.ITEM.getKey(item);
             getBuilder(item.toString())
                     .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                    .texture("layer0", ResourceLocation.fromNamespaceAndPath(resource.getNamespace(), "item/gear/" + gearItem.gear().id()));
-
+                    .texture("layer0", ResourceLocation.fromNamespaceAndPath(resource.getNamespace(),
+                            "item/gear/" + gearItem.gear().id()));
         }
     }
 }

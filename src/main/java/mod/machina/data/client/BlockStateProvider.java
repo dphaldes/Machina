@@ -18,7 +18,7 @@ public class BlockStateProvider extends net.neoforged.neoforge.client.model.gene
     protected void registerStatesAndModels() {
         // Rift portal
         var rift = models().getExistingFile(modLoc("block/rift"));
-        getVariantBuilder(BlockRegistrar.RIFT_PORTAL.get())
+        getVariantBuilder(BlockRegistrar.RIFT_PORTAL.block())
                 .partialState().with(RiftBlock.AXIS, Direction.Axis.X)
                 .modelForState().modelFile(rift).addModel()
                 .partialState().with(RiftBlock.AXIS, Direction.Axis.Z)

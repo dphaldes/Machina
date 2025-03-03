@@ -131,7 +131,7 @@ public class RiftShape {
                     return i;
                 }
 
-                if (blockstate.is(BlockRegistrar.RIFT_PORTAL.get())) {
+                if (blockstate.is(BlockRegistrar.RIFT_PORTAL.block())) {
                     this.numPortalBlocks++;
                 }
             }
@@ -141,7 +141,7 @@ public class RiftShape {
     }
 
     private static boolean isEmpty(BlockState state) {
-        return state.isAir() || state.is(BlockTags.FIRE) || state.is(BlockRegistrar.RIFT_PORTAL.get());
+        return state.isAir() || state.is(BlockTags.FIRE) || state.is(BlockRegistrar.RIFT_PORTAL.block());
     }
 
     public boolean isValid() {
@@ -151,7 +151,7 @@ public class RiftShape {
     public void createPortalBlocks() {
         if (bottomLeft == null) return;
 
-        BlockState blockstate = BlockRegistrar.RIFT_PORTAL.get().defaultBlockState().setValue(RiftBlock.AXIS, axis);
+        BlockState blockstate = BlockRegistrar.RIFT_PORTAL.block().defaultBlockState().setValue(RiftBlock.AXIS, axis);
         BlockPos.betweenClosed(bottomLeft, bottomLeft.relative(Direction.UP, height - 1).relative(rightDir, width - 1)).forEach(pos -> {
             level.setBlock(pos, blockstate, 18);
             if (level.getBlockEntity(pos) instanceof RiftBlockEntity rift) {

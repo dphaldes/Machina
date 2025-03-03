@@ -21,8 +21,7 @@ public class MachinaEntry extends EntryProvider {
                 .withTitle(context().pageTitle()))
                 .withText(context().pageText());
         pageTitle("Machina");
-        pageText("AAAAAAA");
-
+        pageText("Mod about Magic and Technology");
     }
 
     @Override

@@ -1,0 +1,47 @@
+{
+  "background_u_index": 0,
+  "background_v_index": 0,
+  "category": "main",
+  "description": "book.machina.compendium.main.rift.description",
+  "hide_while_locked": false,
+  "icon": {
+    "item": "machina:rift"
+  },
+  "name": "book.machina.compendium.main.rift.name",
+  "pages": [
+    {
+      "type": "modonomicon:text",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "show_title_separator": true,
+      "text": "book.machina.compendium.main.rift.rift.text",
+      "title": "book.machina.compendium.main.rift.rift.title",
+      "use_markdown_in_title": false
+    },
+    {
+      "type": "modonomicon:multiblock",
+      "anchor": "",
+      "condition": {
+        "type": "modonomicon:none"
+      },
+      "multiblock_id": "preview/rift",
+      "multiblock_name": "",
+      "show_visualize_button": false,
+      "text": "book.machina.compendium.main.rift.rift_preview.text"
+    }
+  ],
+  "parents": [
+    {
+      "draw_arrow": true,
+      "entry": "main/about",
+      "line_enabled": true,
+      "line_reversed": true
+    }
+  ],
+  "show_when_any_parent_unlocked": false,
+  "sort_number": 1,
+  "x": -6,
+  "y": -1
+}

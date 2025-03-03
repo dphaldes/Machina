@@ -21,7 +21,7 @@ public class BlockRegistrar {
 
     //    public static final BlockPair<EnergyNexusBlock, BlockItem> ENERGY_NEXUS = registerBlockPair("energy_nexus", EnergyNexusBlock::new);
 
-    public static final DeferredBlock<RiftBlock> RIFT_PORTAL = BLOCKS.register("rift",
+    public static final BlockHolder<RiftBlock> RIFT_PORTAL = blockWithItem("rift",
             () -> new RiftBlock(BlockBehaviour.Properties.of()
                     .noCollission()
                     .strength(-1.0F)
@@ -30,10 +30,10 @@ public class BlockRegistrar {
                     .pushReaction(PushReaction.BLOCK)
             ));
 
-    private static <X extends Block> BlockPair<X, BlockItem> block(String name, Supplier<X> supplier) {
+    private static <X extends Block> BlockHolder<X> blockWithItem(String name, Supplier<X> supplier) {
         var block = BLOCKS.register(name, supplier);
         var blockItem = BLOCK_ITEMS.registerSimpleBlockItem(block);
-        return new BlockPair<>(block, blockItem);
+        return new BlockHolder<>(block, blockItem);
     }
 
     public static void register(IEventBus bus) {
@@ -41,14 +41,14 @@ public class BlockRegistrar {
         BLOCK_ITEMS.register(bus);
     }
 
-    public record BlockPair<X extends Block, Y extends BlockItem>(DeferredBlock<X> deferredBlock,
-                                                                  DeferredItem<Y> deferredBlockItem) {
+    public record BlockHolder<X extends Block>(DeferredBlock<X> deferredBlock,
+                                               DeferredItem<BlockItem> deferredBlockItem) {
 
         public X block() {
             return deferredBlock.get();
         }
 
-        public Y blockItem() {
+        public BlockItem blockItem() {
             return deferredBlockItem.get();
         }
     }

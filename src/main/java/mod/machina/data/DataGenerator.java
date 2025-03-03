@@ -5,6 +5,7 @@ import com.klikli_dev.modonomicon.api.datagen.NeoBookProvider;
 import com.klikli_dev.modonomicon.datagen.EnUsProvider;
 import mod.machina.Machina;
 import mod.machina.data.book.GuideBook;
+import mod.machina.data.book.MultiblockProvider;
 import mod.machina.data.client.BlockStateProvider;
 import mod.machina.data.client.ItemModelProvider;
 import mod.machina.data.client.LanguageProvider;
@@ -28,6 +29,7 @@ public class DataGenerator {
         generator.addProvider(event.includeServer(), new ItemTagsProvider(packOutput, lookupProvider, blockTags.contentsGetter(), helper));
         generator.addProvider(event.includeServer(), new RecipeProvider(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, lookupProvider));
+        generator.addProvider(event.includeServer(), new MultiblockProvider(packOutput));
 
         // client
         generator.addProvider(event.includeClient(), new BlockStateProvider(packOutput, helper));
