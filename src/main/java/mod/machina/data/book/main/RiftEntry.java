@@ -11,7 +11,7 @@ import mod.machina.Machina;
 import mod.machina.common.registrar.BlockRegistrar;
 
 public class RiftEntry extends EntryProvider {
-    public static final String ID = "rift";
+    private static final String ID = "rift";
 
     public RiftEntry(CategoryProviderBase parent) {
         super(parent);
@@ -24,14 +24,19 @@ public class RiftEntry extends EntryProvider {
                 .withText(context().pageText())
         );
         pageTitle("Rifts");
-        pageText("Rifts allow you to access the other place. The portal resonates with your armor to grant you boons.\nThe structure can be as big as 21x21.");
+        pageText("""
+                Rifts allow you to access the other place. The portal resonates with your armor to grant you boons.
+                \\
+                \\
+                Make a U-Shape portal with Deepslate blocks and ignite it with [](item://minecraft:flint_and_steel).
+                """);
 
         page("rift_preview", () -> BookMultiblockPageModel.create()
                 .withMultiblockId(Machina.prefix("preview/rift"))
                 .withText(context().pageText())
                 .withVisualizeButton(false)
         );
-        pageText("Make a U-Shape portal with Deepslate blocks and ignite it with [](item://minecraft:flint_and_steel).");
+        pageText("The structure can be as big as 21x21.");
     }
 
     @Override

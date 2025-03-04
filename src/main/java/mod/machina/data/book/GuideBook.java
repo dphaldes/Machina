@@ -4,15 +4,14 @@ import com.klikli_dev.modonomicon.api.datagen.ModonomiconLanguageProvider;
 import com.klikli_dev.modonomicon.api.datagen.SingleBookSubProvider;
 import com.klikli_dev.modonomicon.api.datagen.book.BookModel;
 import mod.machina.Machina;
+import mod.machina.common.item.GuideBookItem;
 import mod.machina.common.registrar.ItemRegistrar;
 import net.minecraft.resources.ResourceLocation;
 
 public class GuideBook extends SingleBookSubProvider {
 
-    public static final String ID = "compendium";
-
     public GuideBook(ModonomiconLanguageProvider lang) {
-        super(ID, Machina.ID, lang);
+        super(GuideBookItem.ID, Machina.ID, lang);
     }
 
     @Override

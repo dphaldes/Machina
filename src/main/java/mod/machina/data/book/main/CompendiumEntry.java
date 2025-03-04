@@ -8,30 +8,35 @@ import com.klikli_dev.modonomicon.api.datagen.book.page.BookTextPageModel;
 import com.mojang.datafixers.util.Pair;
 import mod.machina.common.registrar.ItemRegistrar;
 
-public class MachinaEntry extends EntryProvider {
-    private static final String ID = "about";
+public class CompendiumEntry extends EntryProvider {
+    private static final String ID = "the_compendium";
 
-    public MachinaEntry(CategoryProviderBase parent) {
+    public CompendiumEntry(CategoryProviderBase parent) {
         super(parent);
     }
 
     @Override
     protected void generatePages() {
-        page("about", () -> BookTextPageModel.create()
-                .withTitle(context().pageTitle()))
-                .withText(context().pageText());
-        pageTitle("Machina");
-        pageText("Mod about Magic and Technology");
+        page("book_sword", () -> BookTextPageModel.create()
+                .withTitle(context().pageTitle())
+                .withText(context().pageText())
+        );
+        pageTitle("Your strongest weapon");
+        pageText("""
+                The compendium has the ability to transform into a weapon when you shift right click.
+                
+                The weapon retains any additional buffs you put on it. You can also swap it with a different weapon.
+                """);
     }
 
     @Override
     protected String entryName() {
-        return "Machina";
+        return "The Compendium";
     }
 
     @Override
     protected String entryDescription() {
-        return "About this Mod";
+        return "Your strongest weapon";
     }
 
     @Override

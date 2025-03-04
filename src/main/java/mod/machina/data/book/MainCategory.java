@@ -5,11 +5,12 @@ import com.klikli_dev.modonomicon.api.datagen.ModonomiconProviderBase;
 import com.klikli_dev.modonomicon.api.datagen.book.BookEntryParentModel;
 import com.klikli_dev.modonomicon.api.datagen.book.BookIconModel;
 import mod.machina.common.registrar.ItemRegistrar;
+import mod.machina.data.book.main.CompendiumEntry;
 import mod.machina.data.book.main.MachinaEntry;
 import mod.machina.data.book.main.RiftEntry;
 
 public class MainCategory extends CategoryProvider {
-    public static final String ID = "main";
+    private static final String ID = "main";
 
     public MainCategory(ModonomiconProviderBase parent) {
         super(parent);
@@ -20,15 +21,19 @@ public class MainCategory extends CategoryProvider {
         return new String[]{
                 "-----------r-----------------------",
                 "------m----------------------------",
-                "-----------------------------------"
+                "-----------c-----------------------"
         };
     }
 
     @Override
     protected void generateEntries() {
         var machina = new MachinaEntry(this).generate("m");
+
         var rift = new RiftEntry(this).generate("r");
         rift.withParent(BookEntryParentModel.create(machina.getId()).withLineReversed(true));
+
+        var compendium = new CompendiumEntry(this).generate("c");
+        compendium.withParent(BookEntryParentModel.create(machina.getId()).withLineReversed(true));
     }
 
     @Override
