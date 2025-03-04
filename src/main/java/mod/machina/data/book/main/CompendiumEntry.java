@@ -24,8 +24,9 @@ public class CompendiumEntry extends EntryProvider {
         pageTitle("Your strongest weapon");
         pageText("""
                 The compendium has the ability to transform into a weapon when you shift right click.
-                
-                The weapon retains any additional buffs you put on it. You can also swap it with a different weapon.
+                \\
+                \\
+                The weapon retains any additional buffs you put on it. You can also swap it with a different weapon in a crafting table.
                 """);
     }
 
