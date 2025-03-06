@@ -16,5 +16,26 @@ public class ShapelessRecipeProvider {
                 .requires(Items.IRON_SWORD)
                 .unlockedBy("has_iron_sword", has(Items.IRON_SWORD))
                 .save(recipeOutput);
+
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistrar.VOID_HELMET)
+                .requires(ItemRegistrar.COMPENDIUM)
+                .requires(Items.IRON_HELMET)
+                .unlockedBy("has_compendium", has(ItemRegistrar.COMPENDIUM))
+                .save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistrar.VOID_CHESTPLATE)
+                .requires(ItemRegistrar.COMPENDIUM)
+                .requires(Items.IRON_CHESTPLATE)
+                .unlockedBy("has_compendium", has(ItemRegistrar.COMPENDIUM))
+                .save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistrar.VOID_LEGGINGS)
+                .requires(ItemRegistrar.COMPENDIUM)
+                .requires(Items.IRON_LEGGINGS)
+                .unlockedBy("has_compendium", has(ItemRegistrar.COMPENDIUM))
+                .save(recipeOutput);
+        ShapelessRecipeBuilder.shapeless(RecipeCategory.MISC, ItemRegistrar.VOID_BOOTS)
+                .requires(ItemRegistrar.COMPENDIUM)
+                .requires(Items.IRON_BOOTS)
+                .unlockedBy("has_compendium", has(ItemRegistrar.COMPENDIUM))
+                .save(recipeOutput);
     }
 }

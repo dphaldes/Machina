@@ -1,0 +1,32 @@
+{
+  "parent": "minecraft:recipes/root",
+  "criteria": {
+    "has_compendium": {
+      "conditions": {
+        "items": [
+          {
+            "items": "machina:compendium"
+          }
+        ]
+      },
+      "trigger": "minecraft:inventory_changed"
+    },
+    "has_the_recipe": {
+      "conditions": {
+        "recipe": "machina:void_leggings"
+      },
+      "trigger": "minecraft:recipe_unlocked"
+    }
+  },
+  "requirements": [
+    [
+      "has_the_recipe",
+      "has_compendium"
+    ]
+  ],
+  "rewards": {
+    "recipes": [
+      "machina:void_leggings"
+    ]
+  }
+}
