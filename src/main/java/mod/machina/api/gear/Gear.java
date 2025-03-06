@@ -95,7 +95,6 @@ public abstract class Gear implements Tooltip.Provider {
         }
     };
 
-
     public static final Codec<Gear> CODEC = ResourceKey.codec(RegistryKeys.GEARS).xmap(
             key -> Registries.GEARS_REGISTRY.getOptional(key).orElse(Gear.EMPTY),
             gear -> Registries.GEARS_REGISTRY.getResourceKey(gear).orElse(null)
