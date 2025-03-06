@@ -4,7 +4,6 @@ import mod.machina.Machina;
 import net.minecraft.Util;
 import net.minecraft.core.Holder;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.ArmorMaterial;
@@ -30,7 +29,7 @@ public class MaterialRegistrar {
                     9,
                     SoundEvents.ARMOR_EQUIP_NETHERITE,
                     () -> Ingredient.EMPTY,
-                    List.of(new ArmorMaterial.Layer(ResourceLocation.withDefaultNamespace("netherite"))),
+                    List.of(new ArmorMaterial.Layer(Machina.prefix("void"))),
                     0,
                     0.0F
             ));
