@@ -3,8 +3,8 @@ package mod.machina.common.network;
 import mod.machina.Machina;
 import mod.machina.common.network.messages.Message;
 import mod.machina.common.network.messages.MessageSetRiftRecipe;
-import mod.machina.common.network.messages.MessageSyncArsenal;
-import mod.machina.common.network.messages.MessageSyncGears;
+import mod.machina.common.network.messages.MessageSyncEquippedGears;
+import mod.machina.common.network.messages.MessageSyncUnlockedGears;
 import mod.machina.common.network.messages.MessageUpdateArsenal;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
@@ -20,8 +20,8 @@ public class MessageRegistrar {
         registrar.playToServer(MessageUpdateArsenal.TYPE, MessageUpdateArsenal.STREAM_CODEC, MessageHandler::server);
         registrar.playToServer(MessageSetRiftRecipe.TYPE, MessageSetRiftRecipe.STREAM_CODEC, MessageHandler::server);
 
-        registrar.playToClient(MessageSyncArsenal.TYPE, MessageSyncArsenal.STREAM_CODEC, MessageHandler::client);
-        registrar.playToClient(MessageSyncGears.TYPE, MessageSyncGears.STREAM_CODEC, MessageHandler::client);
+        registrar.playToClient(MessageSyncEquippedGears.TYPE, MessageSyncEquippedGears.STREAM_CODEC, MessageHandler::client);
+        registrar.playToClient(MessageSyncUnlockedGears.TYPE, MessageSyncUnlockedGears.STREAM_CODEC, MessageHandler::client);
     }
 
     public static <T extends Message> void sendTo(ServerPlayer player, T message) {

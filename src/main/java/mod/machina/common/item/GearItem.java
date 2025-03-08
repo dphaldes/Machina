@@ -1,7 +1,7 @@
 package mod.machina.common.item;
 
 import mod.machina.api.gear.Gear;
-import mod.machina.common.gear.UnlockedGears;
+import mod.machina.common.arsenal.ArsenalManager;
 import mod.machina.common.network.NetworkedAttachments;
 import mod.machina.common.registrar.LangRegistrar;
 import net.minecraft.network.chat.Component;
@@ -28,7 +28,7 @@ public class GearItem extends Item {
         if (level.isClientSide())
             return super.use(level, player, hand);
 
-        var unlockedGears = UnlockedGears.get(player);
+        var unlockedGears = ArsenalManager.getUnlockedGears(player);
         if (!unlockedGears.contains(gear)) {
             unlockedGears.add(gear);
             if (!player.isCreative())

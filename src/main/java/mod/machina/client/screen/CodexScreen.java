@@ -1,18 +1,18 @@
 package mod.machina.client.screen;
 
+import it.unimi.dsi.fastutil.Pair;
 import mod.machina.Machina;
 import mod.machina.api.RegistryKeys;
 import mod.machina.api.gear.Gear;
 import mod.machina.client.ClientData;
 import mod.machina.client.screen.tooltip.RecipeTooltip;
 import mod.machina.client.screen.widget.GearButton;
-import mod.machina.common.gear.UnlockedGears;
+import mod.machina.common.arsenal.ArsenalManager;
 import mod.machina.common.network.MessageRegistrar;
 import mod.machina.common.network.messages.MessageSetRiftRecipe;
 import mod.machina.common.recipe.GearRecipe;
 import mod.machina.common.registrar.LangRegistrar;
 import mod.machina.common.registrar.RecipeRegistrar;
-import it.unimi.dsi.fastutil.Pair;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.Button;
@@ -56,7 +56,7 @@ public class CodexScreen extends BaseScreen {
         this.player = player;
         this.masterRift = masterRift;
 
-        unlockedGears = new ArrayList<>(UnlockedGears.get(player));
+        unlockedGears = new ArrayList<>(ArsenalManager.getUnlockedGears(player));
         var level = Minecraft.getInstance().level;
         allGears = level.registryAccess().registryOrThrow(RegistryKeys.GEARS).stream()
                 .sorted(Comparator.comparing(Gear::displayName))

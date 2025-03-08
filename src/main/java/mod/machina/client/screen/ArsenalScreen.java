@@ -4,8 +4,8 @@ import mod.machina.Machina;
 import mod.machina.api.gear.Gear;
 import mod.machina.client.screen.tooltip.Tooltip;
 import mod.machina.client.screen.widget.GearButton;
-import mod.machina.common.arsenal.Arsenal;
-import mod.machina.common.gear.UnlockedGears;
+import mod.machina.common.arsenal.ArsenalManager;
+import mod.machina.common.arsenal.EquippedGears;
 import mod.machina.common.network.NetworkedAttachments;
 import mod.machina.common.registrar.LangRegistrar;
 import net.minecraft.client.gui.GuiGraphics;
@@ -22,12 +22,12 @@ import java.util.Objects;
 
 public class ArsenalScreen extends BaseScreen implements Tooltip.Renderer {
 
-    private static final ResourceLocation BACKGROUND = Machina.prefix("textures/gui/arsenal.png");
+    private static final ResourceLocation BACKGROUND = Machina.prefix("textures/gui/gears.png");
     private static final ResourceLocation APPLY = Machina.prefix("apply");
     private static final WidgetSprites APPLY_SPRITES = new WidgetSprites(APPLY, APPLY);
 
     private final Player player;
-    private final Arsenal playerArsenal;
+    private final EquippedGears playerArsenal;
     private final List<Gear> unlockedGears;
     private final List<Gear> equippedGears;
     private final List<GearButton> gearButtons = new ArrayList<>();
@@ -38,9 +38,9 @@ public class ArsenalScreen extends BaseScreen implements Tooltip.Renderer {
     public ArsenalScreen(Player player) {
         super(LangRegistrar.ARSENAL_SCREEN.component(), 216, 148);
         this.player = player;
-        playerArsenal = Arsenal.get(player);
-        unlockedGears = new ArrayList<>(UnlockedGears.get(player));
-        equippedGears = new ArrayList<>(Arsenal.get(player).gears());
+        playerArsenal = ArsenalManager.getEquippedGears(player);
+        unlockedGears = new ArrayList<>(ArsenalManager.getUnlockedGears(player));
+        equippedGears = new ArrayList<>(playerArsenal.gears()); //TODO: better names
 
         updateNumPages();
     }

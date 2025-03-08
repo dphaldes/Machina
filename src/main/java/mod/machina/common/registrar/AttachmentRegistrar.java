@@ -3,8 +3,8 @@ package mod.machina.common.registrar;
 import mod.machina.Machina;
 import mod.machina.api.gear.Gear;
 import mod.machina.api.perk.Perk;
-import mod.machina.common.arsenal.Arsenal;
-import mod.machina.common.gear.UnlockedGears;
+import mod.machina.common.arsenal.EquippedGears;
+import mod.machina.common.arsenal.UnlockedGears;
 import mod.machina.common.perk.Perks;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
@@ -18,9 +18,9 @@ import java.util.function.Supplier;
 public class AttachmentRegistrar {
     public static final DeferredRegister<AttachmentType<?>> ATTACHMENTS = DeferredRegister.create(NeoForgeRegistries.ATTACHMENT_TYPES, Machina.ID);
 
-    public static final Supplier<AttachmentType<Arsenal>> ARSENAL = ATTACHMENTS.register("arsenal",
-            () -> AttachmentType.builder(Arsenal::create)
-                    .serialize(Arsenal.CODEC)
+    public static final Supplier<AttachmentType<EquippedGears>> ARSENAL = ATTACHMENTS.register("arsenal_equipped",
+            () -> AttachmentType.builder(EquippedGears::create)
+                    .serialize(EquippedGears.CODEC)
                     .copyOnDeath()
                     .build());
 

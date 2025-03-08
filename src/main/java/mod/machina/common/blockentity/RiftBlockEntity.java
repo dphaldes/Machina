@@ -3,7 +3,7 @@ package mod.machina.common.blockentity;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mod.machina.Machina;
-import mod.machina.common.gear.UnlockedGears;
+import mod.machina.common.arsenal.ArsenalManager;
 import mod.machina.common.network.NetworkedAttachments;
 import mod.machina.common.recipe.GearRecipe;
 import mod.machina.common.registrar.BlockEntityRegistrar;
@@ -109,7 +109,7 @@ public class RiftBlockEntity extends BlockEntity {
         var recipe = getRecipe();
 
         if (recipe != null && getRemainingRequired().isEmpty()) {
-            var unlockedGears = UnlockedGears.get(player);
+            var unlockedGears = ArsenalManager.getUnlockedGears(player);
             var gear = recipe.value().result();
             if (!unlockedGears.contains(gear)) {
                 unlockedGears.add(gear);

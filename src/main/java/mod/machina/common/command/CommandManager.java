@@ -5,7 +5,7 @@ import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
 import mod.machina.api.gear.Gear;
 import mod.machina.api.perk.Perk;
-import mod.machina.common.gear.UnlockedGears;
+import mod.machina.common.arsenal.ArsenalManager;
 import mod.machina.common.perk.Perks;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
@@ -41,7 +41,7 @@ public class CommandManager {
 
     private static int getGears(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = EntityArgument.getPlayer(context, PLAYER);
-        List<Gear> gears = UnlockedGears.get(player);
+        List<Gear> gears = ArsenalManager.getUnlockedGears(player);
         context.getSource().sendSuccess(() -> Component.literal(gears.toString()), true);
         return 0;
     }
