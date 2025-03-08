@@ -30,7 +30,7 @@ public class LangRegistrar {
     //
 
     // SCREENS
-    public static final LangEntry ARSENAL_SCREEN = addTranslation("title", "screen.gears", "Arsenal Screen");
+    public static final LangEntry ARSENAL_SCREEN = addTranslation("title", "screen.equipped", "Arsenal Screen");
     public static final LangEntry CODEX_SCREEN = addTranslation("title", "screen.codex", "Codex Screen");
     public static final LangEntry CRAFTING = addTranslation("text", "rift.crafting", "Crafting: %s");
     public static final LangEntry RIFT_READY = addTranslation("text", "rift.crafting_done", "Walk into the portal");
@@ -39,7 +39,7 @@ public class LangRegistrar {
 
     // KEYMAPS
     public static final LangEntry KEYMAP_CATEGORIES = addTranslation("key", "catergories", "Machina");
-    public static final LangEntry ARSENAL_KEY = addTranslation("key", "gears", "Open Arsenal Screen");
+    public static final LangEntry ARSENAL_KEY = addTranslation("key", "equipped", "Open Arsenal Screen");
     //
 
     // ITEMS

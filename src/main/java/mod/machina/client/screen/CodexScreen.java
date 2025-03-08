@@ -56,7 +56,7 @@ public class CodexScreen extends BaseScreen {
         this.player = player;
         this.masterRift = masterRift;
 
-        unlockedGears = new ArrayList<>(ArsenalManager.getUnlockedGears(player));
+        unlockedGears = new ArrayList<>(ArsenalManager.getArsenal(player).unlocked());
         var level = Minecraft.getInstance().level;
         allGears = level.registryAccess().registryOrThrow(RegistryKeys.GEARS).stream()
                 .sorted(Comparator.comparing(Gear::displayName))

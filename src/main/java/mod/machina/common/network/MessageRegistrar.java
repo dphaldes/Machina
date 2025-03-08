@@ -3,9 +3,9 @@ package mod.machina.common.network;
 import mod.machina.Machina;
 import mod.machina.common.network.messages.Message;
 import mod.machina.common.network.messages.MessageSetRiftRecipe;
-import mod.machina.common.network.messages.MessageSyncEquippedGears;
-import mod.machina.common.network.messages.MessageSyncUnlockedGears;
-import mod.machina.common.network.messages.MessageUpdateArsenal;
+import mod.machina.common.network.messages.MessageSyncArsenalEquipped;
+import mod.machina.common.network.messages.MessageSyncArsenalUnlocked;
+import mod.machina.common.network.messages.MessageUpdateArsenalEquipped;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.Entity;
@@ -17,11 +17,11 @@ public class MessageRegistrar {
     public static void registerMessages(final RegisterPayloadHandlersEvent event) {
         final PayloadRegistrar registrar = event.registrar(Machina.ID);
 
-        registrar.playToServer(MessageUpdateArsenal.TYPE, MessageUpdateArsenal.STREAM_CODEC, MessageHandler::server);
+        registrar.playToServer(MessageUpdateArsenalEquipped.TYPE, MessageUpdateArsenalEquipped.STREAM_CODEC, MessageHandler::server);
         registrar.playToServer(MessageSetRiftRecipe.TYPE, MessageSetRiftRecipe.STREAM_CODEC, MessageHandler::server);
 
-        registrar.playToClient(MessageSyncEquippedGears.TYPE, MessageSyncEquippedGears.STREAM_CODEC, MessageHandler::client);
-        registrar.playToClient(MessageSyncUnlockedGears.TYPE, MessageSyncUnlockedGears.STREAM_CODEC, MessageHandler::client);
+        registrar.playToClient(MessageSyncArsenalEquipped.TYPE, MessageSyncArsenalEquipped.STREAM_CODEC, MessageHandler::client);
+        registrar.playToClient(MessageSyncArsenalUnlocked.TYPE, MessageSyncArsenalUnlocked.STREAM_CODEC, MessageHandler::client);
     }
 
     public static <T extends Message> void sendTo(ServerPlayer player, T message) {

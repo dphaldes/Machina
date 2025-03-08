@@ -28,7 +28,7 @@ public class GearItem extends Item {
         if (level.isClientSide())
             return super.use(level, player, hand);
 
-        var unlockedGears = ArsenalManager.getUnlockedGears(player);
+        var unlockedGears = ArsenalManager.getArsenal(player).unlocked();
         if (!unlockedGears.contains(gear)) {
             unlockedGears.add(gear);
             if (!player.isCreative())

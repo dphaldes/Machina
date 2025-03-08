@@ -4,11 +4,11 @@ import mod.machina.api.gear.Gear;
 import mod.machina.api.gear.trait.PerkTrait;
 import mod.machina.api.perk.Perk;
 import mod.machina.common.item.VoidArmorItem;
-import mod.machina.common.perk.Perks;
 import mod.machina.common.registrar.AttachmentRegistrar;
+import mod.machina.common.util.SizedList;
+import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -21,50 +21,59 @@ public class ArsenalManager {
                 .allMatch(itemStack -> itemStack.getItem() instanceof VoidArmorItem);
     }
 
-    public static void update(Player player, EquippedGears gears) {
-        deactivate(player);
-        setEquippedGears(player, gears);
-        activate(player);
-    }
-
     public static void activate(Player player) {
-        // activate gears
-        getEquippedGears(player).gears().forEach(gear -> gear.onEquip(player));
+        // activate equipped
+        getArsenal(player).equipped().forEach(gear -> gear.onEquip(player));
 
         // calculate perks
-        List<Perk> perks = getEquippedGears(player)
-                .gears().stream()
+        List<Perk> perks = getArsenal(player)
+                .equipped().stream()
                 .map(Gear::getTraits)
                 .flatMap(Collection::stream)
                 .filter(PerkTrait.class::isInstance)
                 .map(PerkTrait.class::cast)
                 .map(PerkTrait::perk)
                 .collect(Collectors.toList());
-        Perks.set(player, perks);
+        setPerks(player, perks);
     }
 
     public static void deactivate(Player player) {
-        // deactivate gears
-        getEquippedGears(player).gears().forEach(gear -> gear.onRemove(player));
+        // deactivate equipped
+        getArsenal(player).equipped().forEach(gear -> gear.onRemove(player));
 
         // remove perks
-        Perks.set(player, List.of());
+        setPerks(player, List.of());
     }
 
-    public static EquippedGears getEquippedGears(Player player) {
+    public static Arsenal getArsenal(Player player) {
         return player.getData(AttachmentRegistrar.ARSENAL);
     }
 
-    public static void setEquippedGears(Player player, EquippedGears gears) {
-        player.setData(AttachmentRegistrar.ARSENAL, gears);
+    public static void setEquippedGears(Player player, SizedList<Gear> gears) {
+        deactivate(player);
+        var arsenal = getArsenal(player);
+        arsenal.setEquipped(gears);
+        player.setData(AttachmentRegistrar.ARSENAL, arsenal);
+        activate(player);
     }
 
-    public static ArrayList<Gear> getUnlockedGears(Player player) {
-        return player.getData(AttachmentRegistrar.UNLOCKED_GEARS);
-    }
-
-    public static void setUnlockedGears(Player player, ArrayList<Gear> gears) {
+    public static void setUnlockedGears(Player player, List<Gear> gears) {
         gears.remove(Gear.EMPTY);
-        player.setData(AttachmentRegistrar.UNLOCKED_GEARS, gears);
+        var arsenal = getArsenal(player);
+        arsenal.setUnlocked(gears);
+        player.setData(AttachmentRegistrar.ARSENAL, arsenal);
+    }
+
+    public static void setPerks(Player player, List<Perk> perks) {
+        var arsenal = getArsenal(player);
+        arsenal.setPerks(perks);
+        player.setData(AttachmentRegistrar.ARSENAL, arsenal);
+    }
+
+    public static boolean hasPerk(LivingEntity entity, Perk perk) {
+        if (entity instanceof Player player) {
+            return getArsenal(player).perks().contains(perk);
+        }
+        return false;
     }
 }

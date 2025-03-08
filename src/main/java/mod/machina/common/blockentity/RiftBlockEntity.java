@@ -109,7 +109,7 @@ public class RiftBlockEntity extends BlockEntity {
         var recipe = getRecipe();
 
         if (recipe != null && getRemainingRequired().isEmpty()) {
-            var unlockedGears = ArsenalManager.getUnlockedGears(player);
+            var unlockedGears = ArsenalManager.getArsenal(player).unlocked();
             var gear = recipe.value().result();
             if (!unlockedGears.contains(gear)) {
                 unlockedGears.add(gear);

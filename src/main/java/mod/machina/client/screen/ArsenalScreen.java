@@ -4,8 +4,8 @@ import mod.machina.Machina;
 import mod.machina.api.gear.Gear;
 import mod.machina.client.screen.tooltip.Tooltip;
 import mod.machina.client.screen.widget.GearButton;
+import mod.machina.common.arsenal.Arsenal;
 import mod.machina.common.arsenal.ArsenalManager;
-import mod.machina.common.arsenal.EquippedGears;
 import mod.machina.common.network.NetworkedAttachments;
 import mod.machina.common.registrar.LangRegistrar;
 import net.minecraft.client.gui.GuiGraphics;
@@ -22,14 +22,14 @@ import java.util.Objects;
 
 public class ArsenalScreen extends BaseScreen implements Tooltip.Renderer {
 
-    private static final ResourceLocation BACKGROUND = Machina.prefix("textures/gui/gears.png");
+    private static final ResourceLocation BACKGROUND = Machina.prefix("textures/gui/equipped.png");
     private static final ResourceLocation APPLY = Machina.prefix("apply");
     private static final WidgetSprites APPLY_SPRITES = new WidgetSprites(APPLY, APPLY);
 
     private final Player player;
-    private final EquippedGears playerArsenal;
-    private final List<Gear> unlockedGears;
-    private final List<Gear> equippedGears;
+    private final Arsenal arsenal;
+    private final List<Gear> unlocked;
+    private final List<Gear> equipped;
     private final List<GearButton> gearButtons = new ArrayList<>();
     private final List<GearButton> arsenalButtons = new ArrayList<>();
     private final int currentPage = 0;
@@ -38,9 +38,9 @@ public class ArsenalScreen extends BaseScreen implements Tooltip.Renderer {
     public ArsenalScreen(Player player) {
         super(LangRegistrar.ARSENAL_SCREEN.component(), 216, 148);
         this.player = player;
-        playerArsenal = ArsenalManager.getEquippedGears(player);
-        unlockedGears = new ArrayList<>(ArsenalManager.getUnlockedGears(player));
-        equippedGears = new ArrayList<>(playerArsenal.gears()); //TODO: better names
+        arsenal = ArsenalManager.getArsenal(player);
+        unlocked = new ArrayList<>(arsenal.unlocked());
+        equipped = new ArrayList<>(arsenal.equipped()); //TODO: better names
 
         updateNumPages();
     }
@@ -66,7 +66,7 @@ public class ArsenalScreen extends BaseScreen implements Tooltip.Renderer {
     }
 
     private void updateNumPages() {
-        this.maxPages = (int) Math.ceil((double) unlockedGears.size() / 36);
+        this.maxPages = (int) Math.ceil((double) unlocked.size() / 36);
     }
 
     private void displayUnlockedGears(final int page) {
@@ -75,7 +75,7 @@ public class ArsenalScreen extends BaseScreen implements Tooltip.Renderer {
         //TODO:PAGES
         int xOffset = 0;
         int yOffset = 0;
-        for (var gear : unlockedGears) {
+        for (var gear : unlocked) {
             final var button = new GearButton(leftPos + 16 + xOffset, topPos + 16 + yOffset, 16, 16, (btn) -> tryEquipGear(gear), gear);
             addRenderableWidget(button);
             gearButtons.add(button);
@@ -92,7 +92,7 @@ public class ArsenalScreen extends BaseScreen implements Tooltip.Renderer {
 
         int xOffset = 0;
         int yOffset = 0;
-        for (var gear : equippedGears) {
+        for (var gear : equipped) {
             final var button = new GearButton(leftPos + 164 + xOffset, topPos + 36 + yOffset, 16, 16, (btn) -> removeGear(gear), gear);
             addRenderableWidget(button);
             arsenalButtons.add(button);
@@ -110,11 +110,11 @@ public class ArsenalScreen extends BaseScreen implements Tooltip.Renderer {
     }
 
     private void tryEquipGear(Gear gear) {
-        var compatible = equippedGears.stream().filter(Objects::nonNull).allMatch(it -> it.isCompatibleWith(gear));
+        var compatible = equipped.stream().filter(Objects::nonNull).allMatch(it -> it.isCompatibleWith(gear));
         if (compatible) {
-            for (int i = 0; i < equippedGears.size(); i++) {
-                if (equippedGears.get(i) != Gear.EMPTY) continue;
-                equippedGears.set(i, gear);
+            for (int i = 0; i < equipped.size(); i++) {
+                if (equipped.get(i) != Gear.EMPTY) continue;
+                equipped.set(i, gear);
                 break;
             }
             displayArsenalGears();
@@ -122,17 +122,18 @@ public class ArsenalScreen extends BaseScreen implements Tooltip.Renderer {
     }
 
     private void removeGear(Gear gear) {
-        for (int i = 0; i < equippedGears.size(); i++) {
-            if (equippedGears.get(i) == gear) equippedGears.set(i, Gear.EMPTY);
+        for (int i = 0; i < equipped.size(); i++) {
+            if (equipped.get(i) == gear) equipped.set(i, Gear.EMPTY);
         }
         displayArsenalGears();
     }
 
     private void onApply(Button button) {
-        for (int i = 0; i < playerArsenal.gears().size(); i++) {
-            playerArsenal.gears().set(i, equippedGears.get(i));
+        var arsenalEquipped = arsenal.equipped();
+        for (int i = 0; i < arsenalEquipped.size(); i++) {
+            arsenalEquipped.set(i, equipped.get(i));
         }
-        NetworkedAttachments.updateArsenal(playerArsenal);
+        NetworkedAttachments.updateArsenal(arsenalEquipped);
     }
 
 }

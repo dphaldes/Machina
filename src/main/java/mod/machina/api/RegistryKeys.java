@@ -6,5 +6,5 @@ import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 
 public class RegistryKeys {
-    public static final ResourceKey<Registry<Gear>> GEARS = ResourceKey.createRegistryKey(Machina.prefix("gears"));
+    public static final ResourceKey<Registry<Gear>> GEARS = ResourceKey.createRegistryKey(Machina.prefix("equipped"));
 }

@@ -1,5 +1,6 @@
 package mod.machina.common.item;
 
+import mod.machina.common.arsenal.ArsenalManager;
 import mod.machina.common.perk.PerkLibrary;
 import mod.machina.common.registrar.MaterialRegistrar;
 import net.minecraft.world.entity.Entity;
@@ -39,7 +40,7 @@ public class VoidArmorItem extends ArmorItem {
         if (!(entity instanceof Player player))
             return false;
 
-        return PerkLibrary.hasPerk(player, PerkLibrary.GLIDE);
+        return ArsenalManager.hasPerk(player, PerkLibrary.GLIDE);
     }
 
     @Override
@@ -47,12 +48,12 @@ public class VoidArmorItem extends ArmorItem {
         if (!(entity instanceof Player player))
             return false;
 
-        return PerkLibrary.hasPerk(player, PerkLibrary.GLIDE);
+        return ArsenalManager.hasPerk(player, PerkLibrary.GLIDE);
     }
 
     @Override
     public boolean makesPiglinsNeutral(ItemStack stack, LivingEntity wearer) {
-        return PerkLibrary.hasPerk(wearer, PerkLibrary.GILDED);
+        return ArsenalManager.hasPerk(wearer, PerkLibrary.GILDED);
     }
 
     // if not equipped, remove all enchants
