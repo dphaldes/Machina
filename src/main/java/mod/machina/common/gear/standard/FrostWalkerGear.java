@@ -10,7 +10,7 @@ public class FrostWalkerGear extends Gear {
     public FrostWalkerGear() {
         super("frost_walker");
 
-        addTrait(new EnchantmentTrait(Enchantments.FROST_WALKER, 2, EquipmentSlot.FEET));
+        addTrait(EnchantmentTrait.of(Enchantments.FROST_WALKER, 2, EquipmentSlot.FEET));
     }
 
     @Override

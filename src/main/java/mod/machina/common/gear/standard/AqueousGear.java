@@ -10,9 +10,9 @@ public class AqueousGear extends Gear {
     public AqueousGear() {
         super("aqueous");
 
-        addTrait(new EnchantmentTrait(Enchantments.AQUA_AFFINITY, 1, EquipmentSlot.HEAD));
-        addTrait(new EnchantmentTrait(Enchantments.DEPTH_STRIDER, 2, EquipmentSlot.FEET));
-        addTrait(new EnchantmentTrait(Enchantments.RESPIRATION, 2, EquipmentSlot.HEAD));
+        addTrait(EnchantmentTrait.of(Enchantments.AQUA_AFFINITY, 1, EquipmentSlot.HEAD));
+        addTrait(EnchantmentTrait.of(Enchantments.DEPTH_STRIDER, 2, EquipmentSlot.FEET));
+        addTrait(EnchantmentTrait.of(Enchantments.RESPIRATION, 2, EquipmentSlot.HEAD));
     }
 
     @Override

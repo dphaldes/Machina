@@ -22,7 +22,7 @@ import java.util.Objects;
 
 public class ArsenalScreen extends BaseScreen implements Tooltip.Renderer {
 
-    private static final ResourceLocation BACKGROUND = Machina.prefix("textures/gui/equipped.png");
+    private static final ResourceLocation BACKGROUND = Machina.prefix("textures/gui/arsenal.png");
     private static final ResourceLocation APPLY = Machina.prefix("apply");
     private static final WidgetSprites APPLY_SPRITES = new WidgetSprites(APPLY, APPLY);
 

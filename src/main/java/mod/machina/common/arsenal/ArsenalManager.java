@@ -1,17 +1,18 @@
 package mod.machina.common.arsenal;
 
 import mod.machina.api.gear.Gear;
-import mod.machina.api.gear.trait.PerkTrait;
+import mod.machina.api.gear.trait.EnchantmentLevel;
 import mod.machina.api.perk.Perk;
 import mod.machina.common.item.VoidArmorItem;
 import mod.machina.common.registrar.AttachmentRegistrar;
 import mod.machina.common.util.SizedList;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 
-import java.util.Collection;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
 
 public class ArsenalManager {
@@ -22,24 +23,32 @@ public class ArsenalManager {
     }
 
     public static void activate(Player player) {
-        // activate equipped
-        getArsenal(player).equipped().forEach(gear -> gear.onEquip(player));
+        //perks
+        var perks = new ArrayList<Perk>();
+        var enchants = new HashMap<EquipmentSlot, List<EnchantmentLevel>>();
 
-        // calculate perks
-        List<Perk> perks = getArsenal(player)
-                .equipped().stream()
-                .map(Gear::getTraits)
-                .flatMap(Collection::stream)
-                .filter(PerkTrait.class::isInstance)
-                .map(PerkTrait.class::cast)
-                .map(PerkTrait::perk)
-                .collect(Collectors.toList());
+        // activate equipped
+        getArsenal(player).equipped().forEach(gear -> gear.onEquip(player, perks, enchants));
+
+        enchants.forEach((slot, slotEnchants) -> {
+            var stack = player.getItemBySlot(slot);
+            if (stack.getItem() instanceof VoidArmorItem armor) {
+                armor.applyEnchantmentTraits(stack, slotEnchants);
+            }
+        });
+
         setPerks(player, perks);
     }
 
     public static void deactivate(Player player) {
         // deactivate equipped
         getArsenal(player).equipped().forEach(gear -> gear.onRemove(player));
+
+        player.getArmorSlots().forEach(stack -> {
+            if (stack.getItem() instanceof VoidArmorItem armor) {
+                armor.removeEnchantmentTraits(stack);
+            }
+        });
 
         // remove perks
         setPerks(player, List.of());

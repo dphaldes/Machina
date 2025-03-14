@@ -17,7 +17,7 @@ public class JumpGear extends Gear {
         attribute.addModifier(Attributes.JUMP_STRENGTH, 0.2, AttributeModifier.Operation.ADD_VALUE);
         addTrait(attribute);
 
-        addTrait(new EnchantmentTrait(Enchantments.FEATHER_FALLING, 3, EquipmentSlot.FEET));
+        addTrait(EnchantmentTrait.of(Enchantments.FEATHER_FALLING, 3, EquipmentSlot.FEET));
     }
 
     @Override

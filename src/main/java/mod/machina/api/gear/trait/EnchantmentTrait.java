@@ -1,6 +1,5 @@
 package mod.machina.api.gear.trait;
 
-import mod.machina.common.item.VoidArmorItem;
 import mod.machina.common.registrar.LangRegistrar;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
@@ -9,34 +8,21 @@ import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EquipmentSlot;
-import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.enchantment.Enchantment;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 
 import java.util.List;
 
-public record EnchantmentTrait(ResourceKey<Enchantment> enchantment, int level, EquipmentSlot slot) implements Trait {
+public record EnchantmentTrait(EnchantmentLevel enchantment, EquipmentSlot slot) implements Trait {
 
-    @Override
-    public void onEquip(Player player) {
-        var registry = player.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
-        ItemStack stack = player.getItemBySlot(slot());
-        if (stack.getItem() instanceof VoidArmorItem) {
-            stack.enchant(registry.getHolderOrThrow(enchantment()), level());
-        }
-    }
-
-    @Override
-    public void onRemove(Player player) {
-        ItemStack stack = player.getItemBySlot(slot());
-        EnchantmentHelper.updateEnchantments(stack, enchants -> enchants.removeIf(holder -> holder.is(enchantment())));
+    public static EnchantmentTrait of(ResourceKey<Enchantment> enchantment, int level, EquipmentSlot slot) {
+        return new EnchantmentTrait(new EnchantmentLevel(enchantment, level), slot);
     }
 
     @Override
     public void getTooltip(List<Component> tooltip) {
         var registry = Minecraft.getInstance().level.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
-        var enchant = registry.getHolderOrThrow(enchantment()).value();
+        var enchant = registry.getHolderOrThrow(enchantment.enchant()).value();
+        var level = enchantment.level();
         var component = enchant.description().copy();
 
         if (level != 1 || enchant.getMaxLevel() != 1) {

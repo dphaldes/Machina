@@ -2,6 +2,7 @@ package mod.machina.common.registrar;
 
 import mod.machina.Machina;
 import mod.machina.common.item.components.ItemStackHolder;
+import mod.machina.common.item.components.PerkEnchantments;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.neoforged.bus.api.IEventBus;
@@ -16,6 +17,13 @@ public class DataComponentRegistrar {
             builder -> builder
                     .persistent(ItemStackHolder.CODEC)
                     .networkSynchronized(ItemStackHolder.STREAM_CODEC)
+    );
+
+    public static final DeferredHolder<DataComponentType<?>, DataComponentType<PerkEnchantments>> PERK_ENCHANTMENTS = COMPONENTS.registerComponentType(
+            "perk_enchantments",
+            builder -> builder
+                    .persistent(PerkEnchantments.CODEC)
+                    .networkSynchronized(PerkEnchantments.STREAM_CODEC)
     );
 
     public static void register(IEventBus bus) {

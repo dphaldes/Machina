@@ -3,7 +3,11 @@ package mod.machina.api.gear;
 import com.mojang.serialization.Codec;
 import mod.machina.Machina;
 import mod.machina.api.RegistryKeys;
+import mod.machina.api.gear.trait.EnchantmentLevel;
+import mod.machina.api.gear.trait.EnchantmentTrait;
+import mod.machina.api.gear.trait.PerkTrait;
 import mod.machina.api.gear.trait.Trait;
+import mod.machina.api.perk.Perk;
 import mod.machina.client.screen.tooltip.Tooltip;
 import mod.machina.common.item.GearItem;
 import mod.machina.common.registrar.Registries;
@@ -12,10 +16,12 @@ import net.minecraft.network.chat.Component;
 import net.minecraft.network.codec.ByteBufCodecs;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.resources.ResourceKey;
+import net.minecraft.world.entity.EquipmentSlot;
 import net.minecraft.world.entity.player.Player;
 
 import javax.annotation.Nullable;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public abstract class Gear implements Tooltip.Provider {
@@ -55,16 +61,25 @@ public abstract class Gear implements Tooltip.Provider {
         traits.add(type);
     }
 
-    public final void onEquip(Player player) {
-        if (player.level().isClientSide()) return;
-
+    public final void onEquip(Player player, List<Perk> perks, HashMap<EquipmentSlot, List<EnchantmentLevel>> enchants) {
+        if (player.level().isClientSide() || this == Gear.EMPTY) return;
         // handle traits
-        traits.forEach(it -> it.onEquip(player));
+        traits.forEach(it -> {
+            it.onEquip(player);
+            if (it instanceof PerkTrait(Perk perk)) {
+                perks.add(perk);
+            }
+
+            if (it instanceof EnchantmentTrait(EnchantmentLevel enchantment, EquipmentSlot slot)) {
+                var list = enchants.computeIfAbsent(slot, key -> new ArrayList<>());
+                list.add(enchantment);
+            }
+        });
 
     }
 
     public final void onRemove(Player player) {
-        if (player.level().isClientSide()) return;
+        if (player.level().isClientSide() || this == Gear.EMPTY) return;
 
         // handle traits
         traits.forEach(it -> it.onRemove(player));

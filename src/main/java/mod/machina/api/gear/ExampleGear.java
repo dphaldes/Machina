@@ -27,7 +27,7 @@ public class ExampleGear extends Gear {
 
         addTrait(new PerkTrait(PerkLibrary.GLIDE));
 
-        addTrait(new EnchantmentTrait(Enchantments.AQUA_AFFINITY, 1, EquipmentSlot.HEAD));
+        addTrait(EnchantmentTrait.of(Enchantments.AQUA_AFFINITY, 1, EquipmentSlot.HEAD));
     }
 
     @Override

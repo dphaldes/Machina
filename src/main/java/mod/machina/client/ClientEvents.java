@@ -20,9 +20,8 @@ public class ClientEvents {
         KeymapManager.handleKeymaps();
     }
 
-
     @SubscribeEvent
-    public static void itemTooltip(ItemTooltipEvent event) {
+    public static void itemTooltip(ItemTooltipEvent event) { // TODO: investigate if client only or not
         var itemstack = event.getItemStack();
         var tooltip = event.getToolTip();
         if (itemstack.has(DataComponentRegistrar.STACK_HOLDER)) {

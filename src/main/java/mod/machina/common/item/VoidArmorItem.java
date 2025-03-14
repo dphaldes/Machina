@@ -1,7 +1,10 @@
 package mod.machina.common.item;
 
+import mod.machina.api.gear.trait.EnchantmentLevel;
 import mod.machina.common.arsenal.ArsenalManager;
+import mod.machina.common.item.components.PerkEnchantments;
 import mod.machina.common.perk.PerkLibrary;
+import mod.machina.common.registrar.DataComponentRegistrar;
 import mod.machina.common.registrar.MaterialRegistrar;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.LivingEntity;
@@ -9,10 +12,10 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ArmorItem;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.enchantment.EnchantmentHelper;
 import net.minecraft.world.level.Level;
 import org.jetbrains.annotations.Nullable;
 
+import java.util.List;
 import java.util.function.Consumer;
 
 public class VoidArmorItem extends ArmorItem {
@@ -26,13 +29,8 @@ public class VoidArmorItem extends ArmorItem {
     }
 
     @Override
-    public boolean isEnchantable(ItemStack stack) {
-        return false;
-    }
-
-    @Override
     public boolean isFoil(ItemStack stack) {
-        return false;
+        return stack.isEnchanted() || stack.has(DataComponentRegistrar.PERK_ENCHANTMENTS);
     }
 
     @Override
@@ -56,13 +54,22 @@ public class VoidArmorItem extends ArmorItem {
         return ArsenalManager.hasPerk(wearer, PerkLibrary.GILDED);
     }
 
-    // if not equipped, remove all enchants
     @Override
     public void inventoryTick(ItemStack stack, Level level, Entity entity, int slotId, boolean isSelected) {
-        if (level.getGameTime() % 20 == 0 && entity instanceof Player && stack.isEnchanted()) {
-            if (slotId < 36 || slotId > 39) {
-                EnchantmentHelper.updateEnchantments(stack, enchants -> enchants.removeIf(holder -> true));
+        if (entity instanceof Player player) {
+            if (!ArsenalManager.active(player)) {
+                removeEnchantmentTraits(stack);
             }
         }
+        super.inventoryTick(stack, level, entity, slotId, isSelected);
     }
+
+    public void applyEnchantmentTraits(ItemStack stack, List<EnchantmentLevel> enchants) {
+        stack.set(DataComponentRegistrar.PERK_ENCHANTMENTS, new PerkEnchantments(enchants));
+    }
+
+    public void removeEnchantmentTraits(ItemStack stack) {
+        stack.remove(DataComponentRegistrar.PERK_ENCHANTMENTS);
+    }
+
 }

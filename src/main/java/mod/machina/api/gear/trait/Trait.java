@@ -11,7 +11,6 @@ public interface Trait {
     }
 
     default void onRemove(Player player) {
-
     }
 
     default void getTooltip(List<Component> tooltip) {
