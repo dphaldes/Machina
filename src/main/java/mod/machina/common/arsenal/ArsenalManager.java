@@ -33,7 +33,7 @@ public class ArsenalManager {
         enchants.forEach((slot, slotEnchants) -> {
             var stack = player.getItemBySlot(slot);
             if (stack.getItem() instanceof VoidArmorItem armor) {
-                armor.applyEnchantmentTraits(stack, slotEnchants);
+                armor.applyTraitEffects(stack, slotEnchants);
             }
         });
 
@@ -46,7 +46,7 @@ public class ArsenalManager {
 
         player.getArmorSlots().forEach(stack -> {
             if (stack.getItem() instanceof VoidArmorItem armor) {
-                armor.removeEnchantmentTraits(stack);
+                armor.removeTraitEffects(stack);
             }
         });
 

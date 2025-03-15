@@ -21,10 +21,13 @@ public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider {
 
     @Override
     protected void addTags(HolderLookup.Provider provider) {
-        tag(ItemTags.TRIMMABLE_ARMOR)
-                .add(ItemRegistrar.VOID_HELMET.get())
-                .add(ItemRegistrar.VOID_CHESTPLATE.get())
-                .add(ItemRegistrar.VOID_LEGGINGS.get())
-                .add(ItemRegistrar.VOID_BOOTS.get());
+        tag(ItemTags.HEAD_ARMOR)
+                .add(ItemRegistrar.VOID_HELMET.asItem());
+        tag(ItemTags.CHEST_ARMOR)
+                .add(ItemRegistrar.VOID_CHESTPLATE.asItem());
+        tag(ItemTags.LEG_ARMOR)
+                .add(ItemRegistrar.VOID_LEGGINGS.asItem());
+        tag(ItemTags.FOOT_ARMOR)
+                .add(ItemRegistrar.VOID_BOOTS.asItem());
     }
 }

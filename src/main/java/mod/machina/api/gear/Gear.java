@@ -25,8 +25,6 @@ import java.util.HashMap;
 import java.util.List;
 
 public abstract class Gear implements Tooltip.Provider {
-
-
     private final String id;
     private final List<Trait> traits = new ArrayList<>();
     @Nullable
