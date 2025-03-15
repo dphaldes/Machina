@@ -1,7 +1,7 @@
 package mod.machina.api.gear.trait;
 
 import mod.machina.api.perk.Perk;
-import mod.machina.common.perk.PerkLibrary;
+import mod.machina.common.arsenal.PerkLibrary;
 import mod.machina.common.registrar.LangRegistrar;
 import net.minecraft.ChatFormatting;
 import net.minecraft.network.chat.Component;

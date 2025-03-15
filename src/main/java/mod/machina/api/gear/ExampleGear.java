@@ -4,7 +4,7 @@ import mod.machina.api.gear.trait.AttributeTrait;
 import mod.machina.api.gear.trait.EnchantmentTrait;
 import mod.machina.api.gear.trait.PerkTrait;
 import mod.machina.api.gear.trait.PotionTrait;
-import mod.machina.common.perk.PerkLibrary;
+import mod.machina.common.arsenal.PerkLibrary;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.entity.EquipmentSlot;

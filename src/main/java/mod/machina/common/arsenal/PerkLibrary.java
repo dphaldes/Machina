@@ -1,4 +1,4 @@
-package mod.machina.common.perk;
+package mod.machina.common.arsenal;
 
 import mod.machina.Machina;
 import mod.machina.api.perk.Perk;

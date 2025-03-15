@@ -14,13 +14,15 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.enchanting.GetEnchantmentLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
+import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 
 @EventBusSubscriber(modid = Machina.ID)
-public class PlayerEventHandler {
+public class EventHandler {
     @SubscribeEvent
     public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
@@ -85,5 +87,15 @@ public class PlayerEventHandler {
 
             event.getEntity().setItemInHand(event.getHand(), replaceStack);
         }
+    }
+
+    @SubscribeEvent
+    public static void damageEvent(LivingIncomingDamageEvent event) {
+        TraitEventHandler.damageEvent(event);
+    }
+
+    @SubscribeEvent
+    public static void enchantmentEvent(GetEnchantmentLevelEvent event) {
+        TraitEventHandler.enchantmentEvent(event);
     }
 }

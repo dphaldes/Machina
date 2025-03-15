@@ -2,7 +2,7 @@ package mod.machina.data.client;
 
 import mod.machina.Machina;
 import mod.machina.api.gear.Gear;
-import mod.machina.common.perk.PerkLibrary;
+import mod.machina.common.arsenal.PerkLibrary;
 import mod.machina.common.registrar.BlockRegistrar;
 import mod.machina.common.registrar.GearRegistrar;
 import mod.machina.common.registrar.ItemRegistrar;

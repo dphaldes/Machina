@@ -2,8 +2,8 @@ package mod.machina.common.item;
 
 import mod.machina.api.gear.trait.EnchantmentLevel;
 import mod.machina.common.arsenal.ArsenalManager;
+import mod.machina.common.arsenal.PerkLibrary;
 import mod.machina.common.item.components.ArmorTraits;
-import mod.machina.common.perk.PerkLibrary;
 import mod.machina.common.registrar.DataComponentRegistrar;
 import mod.machina.common.registrar.MaterialRegistrar;
 import net.minecraft.network.chat.Component;
