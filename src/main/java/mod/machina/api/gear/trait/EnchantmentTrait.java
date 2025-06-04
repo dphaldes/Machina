@@ -4,7 +4,6 @@ import mod.machina.common.registrar.LangRegistrar;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.registries.Registries;
-import net.minecraft.network.chat.CommonComponents;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.entity.EquipmentSlot;
@@ -21,15 +20,9 @@ public record EnchantmentTrait(EnchantmentLevel enchantment, EquipmentSlot slot)
     @Override
     public void getTooltip(List<Component> tooltip) {
         var registry = Minecraft.getInstance().level.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
-        var enchant = registry.getHolderOrThrow(enchantment.enchant()).value();
+        var enchant = registry.getHolderOrThrow(enchantment.enchant());
         var level = enchantment.level();
-        var component = enchant.description().copy();
-
-        if (level != 1 || enchant.getMaxLevel() != 1) {
-            component.append(CommonComponents.SPACE).append(Component.translatable("enchantment.level." + level));
-        }
-
-        tooltip.add(Component.translatable(LangRegistrar.ENCHANT.key(), component)
+        tooltip.add(Component.translatable(LangRegistrar.ENCHANT.key(), Enchantment.getFullname(enchant, level))
                 .withStyle(ChatFormatting.LIGHT_PURPLE));
     }
 }

@@ -3,6 +3,8 @@ package mod.machina.common.item.components;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
 import mod.machina.api.gear.trait.EnchantmentLevel;
+import mod.machina.common.registrar.LangRegistrar;
+import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.chat.Component;
@@ -34,7 +36,10 @@ public record ArmorTraits(List<EnchantmentLevel> enchantments) implements Toolti
             var registry = provider.lookupOrThrow(Registries.ENCHANTMENT);
             for (var pair : enchantments) {
                 var holder = registry.get(pair.enchant());
-                holder.ifPresent(enchant -> tooltipAdder.accept(Enchantment.getFullname(enchant, pair.level())));
+                holder.ifPresent(enchant -> tooltipAdder.accept(
+                        Component.translatable(LangRegistrar.ARMOR_TRAITS.key(), Enchantment.getFullname(enchant, pair.level()))
+                                .withStyle(ChatFormatting.LIGHT_PURPLE)
+                ));
             }
         }
     }

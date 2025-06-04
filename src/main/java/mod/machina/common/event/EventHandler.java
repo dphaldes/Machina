@@ -49,11 +49,7 @@ public class EventHandler {
         if (!(event.getEntity() instanceof Player player) || !event.getSlot().isArmor()) return;
 
         if (event.getFrom().getItem() instanceof VoidArmorItem || event.getTo().getItem() instanceof VoidArmorItem) {
-            if (ArsenalManager.active(player)) {
-                ArsenalManager.activate(player);
-            } else {
-                ArsenalManager.deactivate(player);
-            }
+            ArsenalManager.respec(player);
         }
     }
 
