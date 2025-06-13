@@ -14,7 +14,6 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.common.EventBusSubscriber;
-import net.neoforged.neoforge.event.enchanting.GetEnchantmentLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
@@ -49,6 +48,8 @@ public class EventHandler {
         if (!(event.getEntity() instanceof Player player) || !event.getSlot().isArmor()) return;
 
         if (event.getFrom().getItem() instanceof VoidArmorItem || event.getTo().getItem() instanceof VoidArmorItem) {
+            ArsenalManager.removeTraitsFromStack(event.getFrom());
+            ArsenalManager.removeTraitsFromStack(event.getTo());
             ArsenalManager.respec(player);
         }
     }
@@ -90,8 +91,8 @@ public class EventHandler {
         TraitEventHandler.damageEvent(event);
     }
 
-    @SubscribeEvent
-    public static void enchantmentEvent(GetEnchantmentLevelEvent event) {
-        TraitEventHandler.enchantmentEvent(event);
-    }
+//    @SubscribeEvent
+//    public static void enchantmentEvent(GetEnchantmentLevelEvent event) {
+//        TraitEventHandler.enchantmentEvent(event);
+//    }
 }

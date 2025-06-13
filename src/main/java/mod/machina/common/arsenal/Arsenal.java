@@ -98,6 +98,13 @@ public class Arsenal {
                         list.add(enchantment);
                     }
                 }
+
+//                for (var entry : enchants.entrySet()) {
+//                    var stack = player.getItemBySlot(entry.getKey());
+//                    if (stack != ItemStack.EMPTY) {
+//                        stack.set(DataComponentRegistrar.ARMOR_TRAITS, new ArmorTraits(entry.getValue()));
+//                    }
+//                }
             } else {
                 // remove stats and leave perks empty
                 gear.onRemove(player);

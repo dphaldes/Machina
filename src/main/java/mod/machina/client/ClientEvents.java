@@ -28,5 +28,17 @@ public class ClientEvents {
             var held = itemstack.get(DataComponentRegistrar.STACK_HOLDER).stack().getDisplayName();
             tooltip.add(1, Component.translatable(LangRegistrar.STACK_HOLDER.key(), held));
         }
+
+//        if (itemstack.getItem() instanceof VoidArmorItem) {
+//            var registry = Minecraft.getInstance().level.registryAccess().registryOrThrow(Registries.ENCHANTMENT);
+//            if (itemstack.has(DataComponentRegistrar.ARMOR_TRAITS)) {
+//                var data = itemstack.get(DataComponentRegistrar.ARMOR_TRAITS).enchantments();
+//                for (var pair : data) {
+//                    var enchant = registry.getHolderOrThrow(pair.enchant());
+//                    tooltip.add(Component.translatable(LangRegistrar.ENCHANT.key(), Enchantment.getFullname(enchant, pair.level()))
+//                            .withStyle(ChatFormatting.LIGHT_PURPLE));
+//                }
+//            }
+//        }
     }
 }

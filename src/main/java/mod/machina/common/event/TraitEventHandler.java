@@ -2,10 +2,7 @@ package mod.machina.common.event;
 
 import mod.machina.common.arsenal.ArsenalManager;
 import mod.machina.common.arsenal.PerkLibrary;
-import mod.machina.common.item.VoidArmorItem;
-import mod.machina.common.registrar.DataComponentRegistrar;
 import net.minecraft.tags.DamageTypeTags;
-import net.neoforged.neoforge.event.enchanting.GetEnchantmentLevelEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 public class TraitEventHandler {
@@ -39,23 +36,24 @@ public class TraitEventHandler {
         event.setAmount(event.getAmount() * multiplier);
     }
 
-    public static void enchantmentEvent(GetEnchantmentLevelEvent event) {
-        var stack = event.getStack();
-        if (stack.getItem() instanceof VoidArmorItem) {
-            var data = stack.get(DataComponentRegistrar.ARMOR_TRAITS);
-            if (data == null) return;
-
-            var mutable = event.getEnchantments();
-            var lookup = event.getLookup();
-            for (var pair : data.enchantments()) {
-                var holder = lookup.get(pair.enchant());
-                if (holder.isEmpty()) continue;
-                var enchant = holder.get();
-
-                var level = mutable.getLevel(enchant);
-                mutable.upgrade(enchant, level + pair.level());
-            }
-        }
-    }
+    //disabled
+//    public static void enchantmentEvent(GetEnchantmentLevelEvent event) {
+//        var stack = event.getStack();
+//        if (stack.getItem() instanceof VoidArmorItem) {
+//            var data = stack.get(DataComponentRegistrar.ARMOR_TRAITS);
+//            if (data == null) return;
+//
+//            var mutable = event.getEnchantments();
+//            var lookup = event.getLookup();
+//            for (var pair : data.enchantments()) {
+//                var holder = lookup.get(pair.enchant());
+//                if (holder.isEmpty()) continue;
+//                var enchant = holder.get();
+//
+//                var level = mutable.getLevel(enchant);
+//                mutable.upgrade(enchant, level + pair.level());
+//            }
+//        }
+//    }
 
 }
