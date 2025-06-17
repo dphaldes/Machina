@@ -21,9 +21,7 @@ public class BlockHelper {
     @Nullable
     public static <E extends BlockEntity & TickingBlockEntity, A extends BlockEntity> BlockEntityTicker<A> getTicker(
             BlockEntityType<A> typeA, BlockEntityType<E> typeB) {
-        return createTicker(typeA, typeB, (level, blockPos, state, blockEntity) -> {
-            blockEntity.tick(level, blockPos, state);
-        });
+        return createTicker(typeA, typeB, (level, blockPos, state, blockEntity) -> blockEntity.tick(level, blockPos, state));
     }
 
 }

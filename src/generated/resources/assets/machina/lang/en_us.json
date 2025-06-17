@@ -1,5 +1,6 @@
 {
   "block.machina.rift": "Rift",
+  "block.machina.rune_projector": "Runic Projector",
   "gear.machina.learnt": "You have already learnt %s!",
   "gear.machina.remove": "Removed %s!",
   "gear.machina.unlock": "Unlocked %s!",

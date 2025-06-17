@@ -2,7 +2,7 @@ package mod.machina.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
 import mod.machina.common.arsenal.ArsenalManager;
-import mod.machina.common.arsenal.PerkLibrary;
+import mod.machina.common.registrar.PerkRegistrar;
 import net.minecraft.client.renderer.entity.layers.ElytraLayer;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.ItemStack;
@@ -14,7 +14,7 @@ public abstract class ElytraLayerMixin {
 
     @ModifyReturnValue(method = "shouldRender", at = @At("RETURN"))
     private boolean renderElytra(boolean original, ItemStack stack, LivingEntity entity) {
-        return original || ArsenalManager.hasPerk(entity, PerkLibrary.GLIDE);
+        return original || ArsenalManager.hasPerk(entity, PerkRegistrar.GLIDE);
     }
 
 }

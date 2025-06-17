@@ -92,10 +92,10 @@ public abstract class Gear implements Tooltip.Provider {
     };
 
     public static final Codec<Gear> CODEC = ResourceKey.codec(RegistryKeys.GEARS).xmap(
-            key -> Registries.GEARS_REGISTRY.getOptional(key).orElse(Gear.EMPTY),
-            gear -> Registries.GEARS_REGISTRY.getResourceKey(gear).orElse(null)
+            key -> Registries.GEARS.getOptional(key).orElse(Gear.EMPTY),
+            gear -> Registries.GEARS.getResourceKey(gear).orElse(null)
     );
 
     public static final StreamCodec<RegistryFriendlyByteBuf, Gear> STREAM_CODEC =
-            ByteBufCodecs.registry(Registries.GEARS_REGISTRY.key());
+            ByteBufCodecs.registry(Registries.GEARS.key());
 }

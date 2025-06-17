@@ -4,6 +4,7 @@ package mod.machina.data.client;
 import mod.machina.Machina;
 import mod.machina.common.block.RiftBlock;
 import mod.machina.common.registrar.BlockRegistrar;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraft.core.Direction;
 import net.minecraft.data.PackOutput;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
@@ -24,5 +25,8 @@ public class BlockStateProvider extends net.neoforged.neoforge.client.model.gene
                 .partialState().with(RiftBlock.AXIS, Direction.Axis.Z)
                 .modelForState().modelFile(rift).rotationY(90).addModel();
 
+        var projector = BlockRegistrar.RUNE_PROJECTOR.block();
+        simpleBlockWithItem(projector, models().cubeAll(modLoc("rune_projector").getPath(), blockTexture(projector))
+                .renderType(RenderType.CUTOUT.name));
     }
 }

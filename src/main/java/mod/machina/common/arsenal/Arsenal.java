@@ -2,11 +2,11 @@ package mod.machina.common.arsenal;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
+import mod.machina.api.Perk;
 import mod.machina.api.gear.Gear;
 import mod.machina.api.gear.trait.EnchantmentLevel;
 import mod.machina.api.gear.trait.EnchantmentTrait;
 import mod.machina.api.gear.trait.PerkTrait;
-import mod.machina.api.perk.Perk;
 import mod.machina.common.item.VoidArmorItem;
 import mod.machina.common.util.SizedList;
 import net.minecraft.network.RegistryFriendlyByteBuf;
@@ -77,10 +77,7 @@ public class Arsenal {
     public void respec(Player player) {
 
         // check if active condition is met
-        var active = true;
-        for (var stack : player.getArmorSlots()) {
-            active = active && stack.getItem() instanceof VoidArmorItem;
-        }
+        var active = shouldActivate(player);
 
         var perks = new ArrayList<Perk>();
         var enchants = new HashMap<EquipmentSlot, List<EnchantmentLevel>>();
@@ -114,6 +111,14 @@ public class Arsenal {
         this.active = active;
         this.perks = perks;
         this.enchantments = enchants;
+    }
+
+    public static boolean shouldActivate(Player player) {
+        var active = true;
+        for (var stack : player.getArmorSlots()) {
+            active = active && stack.getItem() instanceof VoidArmorItem;
+        }
+        return active;
     }
 
     public static final Codec<Arsenal> CODEC = RecordCodecBuilder.create(instance ->

@@ -1,11 +1,11 @@
-package mod.machina.common.arsenal;
+package mod.machina.common.registrar;
 
 import mod.machina.Machina;
-import mod.machina.api.perk.Perk;
+import mod.machina.api.Perk;
 
 import java.util.HashMap;
 
-public class PerkLibrary {
+public class PerkRegistrar {
     private static final HashMap<String, String> entries = new HashMap<>();
 
     public static final Perk GLIDE = perk("glide", "Glide");

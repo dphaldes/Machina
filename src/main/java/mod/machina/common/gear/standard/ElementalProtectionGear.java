@@ -2,16 +2,16 @@ package mod.machina.common.gear.standard;
 
 import mod.machina.api.gear.Gear;
 import mod.machina.api.gear.trait.PerkTrait;
-import mod.machina.common.arsenal.PerkLibrary;
+import mod.machina.common.registrar.PerkRegistrar;
 
 public class ElementalProtectionGear extends Gear {
     public ElementalProtectionGear() {
         super("elemental_protection");
 
-        addTrait(new PerkTrait(PerkLibrary.PROTECTION_FIRE));
-        addTrait(new PerkTrait(PerkLibrary.PROTECTION_WATER));
-        addTrait(new PerkTrait(PerkLibrary.PROTECTION_BLAST));
-        addTrait(new PerkTrait(PerkLibrary.PROTECTION_FREEZE));
+        addTrait(new PerkTrait(PerkRegistrar.PROTECTION_FIRE));
+        addTrait(new PerkTrait(PerkRegistrar.PROTECTION_WATER));
+        addTrait(new PerkTrait(PerkRegistrar.PROTECTION_BLAST));
+        addTrait(new PerkTrait(PerkRegistrar.PROTECTION_FREEZE));
     }
 
     @Override

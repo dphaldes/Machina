@@ -1,4 +1,4 @@
-package mod.machina.api.perk;
+package mod.machina.api;
 
 import com.mojang.serialization.Codec;
 

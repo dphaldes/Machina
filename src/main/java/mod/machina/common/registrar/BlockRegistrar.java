@@ -2,10 +2,16 @@ package mod.machina.common.registrar;
 
 import mod.machina.Machina;
 import mod.machina.common.block.RiftBlock;
+import mod.machina.common.block.RuneProjectorBlock;
+import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
+import net.minecraft.world.level.BlockGetter;
 import net.minecraft.world.level.block.Block;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
+import net.minecraft.world.level.block.state.BlockState;
+import net.minecraft.world.level.block.state.properties.NoteBlockInstrument;
 import net.minecraft.world.level.material.PushReaction;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredBlock;
@@ -30,6 +36,18 @@ public class BlockRegistrar {
                     .pushReaction(PushReaction.BLOCK)
             ));
 
+    public static final BlockHolder<RuneProjectorBlock> RUNE_PROJECTOR = blockWithItem("rune_projector",
+            () -> new RuneProjectorBlock(BlockBehaviour.Properties.of()
+                    .instrument(NoteBlockInstrument.HAT)
+                    .strength(0.3F)
+                    .sound(SoundType.GLASS)
+                    .noOcclusion()
+                    .isValidSpawn(Blocks::never)
+                    .isRedstoneConductor(BlockRegistrar::never)
+                    .isSuffocating(BlockRegistrar::never)
+                    .isViewBlocking(BlockRegistrar::never)
+            ));
+
     private static <X extends Block> BlockHolder<X> blockWithItem(String name, Supplier<X> supplier) {
         var block = BLOCKS.register(name, supplier);
         var blockItem = BLOCK_ITEMS.registerSimpleBlockItem(block);
@@ -52,4 +70,9 @@ public class BlockRegistrar {
             return deferredBlockItem.get();
         }
     }
+
+    private static boolean never(BlockState state, BlockGetter blockGetter, BlockPos pos) {
+        return false;
+    }
+
 }

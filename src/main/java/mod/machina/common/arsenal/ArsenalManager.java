@@ -1,7 +1,7 @@
 package mod.machina.common.arsenal;
 
+import mod.machina.api.Perk;
 import mod.machina.api.gear.Gear;
-import mod.machina.api.perk.Perk;
 import mod.machina.common.registrar.AttachmentRegistrar;
 import mod.machina.common.registrar.DataComponentRegistrar;
 import mod.machina.common.util.SizedList;
