@@ -1,6 +1,7 @@
 package mod.machina.data.client;
 
 import mod.machina.Machina;
+import mod.machina.client.ItemOverridePredicates;
 import mod.machina.common.item.GearItem;
 import mod.machina.common.registrar.BlockRegistrar;
 import mod.machina.common.registrar.GearRegistrar;
@@ -27,8 +28,17 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         GearRegistrar.GEAR_ITEMS.getEntries()
                 .forEach(gear -> basicGear(gear.get()));
 
-        basicItem(ItemRegistrar.COMPENDIUM.asItem());
         simpleBlockItem(BlockRegistrar.RIFT_PORTAL.block());
+
+        var compendium = ItemRegistrar.COMPENDIUM.getId();
+        getBuilder(compendium.toString())
+                .override()
+                .predicate(ItemOverridePredicates.COMPENDIUM_SWORD_ACTIVE, 1f)
+                .model(new ModelFile.ExistingModelFile(ResourceLocation.withDefaultNamespace("item/iron_sword"), existingFileHelper))
+                .end()
+                .parent(new ModelFile.UncheckedModelFile("item/generated"))
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(compendium.getNamespace(), "item/" + compendium.getPath()));
+
     }
 
     private void basicGear(Item item) {

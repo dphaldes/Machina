@@ -70,13 +70,6 @@ repositories {
         }
     }
     maven {
-        name = "klikli"
-        url = uri("https://dl.cloudsmith.io/public/klikli-dev/mods/maven/")
-        content {
-            includeGroup("com.klikli_dev")
-        }
-    }
-    maven {
         name = "Jared's maven"
         url = uri("https://maven.blamejared.com/")
         content {
@@ -88,11 +81,6 @@ repositories {
 
 dependencies {
     val minecraft = project.property("minecraft_version") as String
-
-    val modonomicon = "1.111.1"
-    implementation("com.klikli_dev:modonomicon-${minecraft}-neoforge:${modonomicon}") {
-        isTransitive = false
-    }
 
     val jei = "19.21.0.247"
     compileOnly("mezz.jei:jei-${minecraft}-neoforge-api:${jei}")

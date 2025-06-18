@@ -2,6 +2,7 @@ package mod.machina.api;
 
 import mod.machina.Machina;
 import mod.machina.api.gear.Gear;
+import mod.machina.api.rune.Rune;
 import net.minecraft.core.Registry;
 import net.minecraft.resources.ResourceKey;
 

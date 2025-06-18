@@ -1,4 +1,4 @@
-package mod.machina.api;
+package mod.machina.api.rune;
 
 import mod.machina.Machina;
 import net.minecraft.resources.ResourceLocation;

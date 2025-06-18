@@ -1,27 +1,29 @@
 package mod.machina.common.event;
 
-import mod.machina.Machina;
 import mod.machina.common.arsenal.ArsenalManager;
+import mod.machina.common.command.CommandManager;
 import mod.machina.common.item.VoidArmorItem;
-import mod.machina.common.item.components.ItemStackHolder;
 import mod.machina.common.level.RiftShape;
 import mod.machina.common.network.NetworkedAttachments;
-import mod.machina.common.registrar.DataComponentRegistrar;
 import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
-import net.neoforged.fml.common.EventBusSubscriber;
+import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.entity.player.PlayerInteractEvent;
 import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 
-@EventBusSubscriber(modid = Machina.ID)
-public class EventHandler {
+public class Events {
+
+    @SubscribeEvent
+    public static void registerCommands(RegisterCommandsEvent event) {
+        event.getDispatcher().register(CommandManager.register());
+    }
+
     @SubscribeEvent
     public static void playerLogin(PlayerEvent.PlayerLoggedInEvent event) {
         if (event.getEntity() instanceof ServerPlayer player) {
@@ -71,18 +73,6 @@ public class EventHandler {
                 }
             }
 
-        }
-    }
-
-    @SubscribeEvent
-    public static void useItem(PlayerInteractEvent.RightClickItem event) {
-        var itemStack = event.getItemStack();
-        if (itemStack.has(DataComponentRegistrar.STACK_HOLDER) && event.getEntity().isSecondaryUseActive()) {
-            var replaceStack = itemStack.get(DataComponentRegistrar.STACK_HOLDER).stack();
-            itemStack.remove(DataComponentRegistrar.STACK_HOLDER);
-            replaceStack.set(DataComponentRegistrar.STACK_HOLDER, ItemStackHolder.of(itemStack));
-
-            event.getEntity().setItemInHand(event.getHand(), replaceStack);
         }
     }
 

@@ -1,7 +1,8 @@
 package mod.machina.common.blockentity;
 
 import com.mojang.serialization.Codec;
-import mod.machina.api.Rune;
+import mod.machina.api.rune.Rune;
+import mod.machina.api.rune.RuneProvider;
 import mod.machina.common.registrar.BlockEntityRegistrar;
 import mod.machina.common.registrar.Registries;
 import net.minecraft.core.BlockPos;
@@ -11,7 +12,7 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class RuneProjectorBlockEntity extends BlockEntity {
+public class RuneProjectorBlockEntity extends BlockEntity implements RuneProvider {
 
     private Rune rune = Rune.EMPTY;
 
@@ -33,9 +34,12 @@ public class RuneProjectorBlockEntity extends BlockEntity {
         super.loadAdditional(tag, registries);
         Data.CODEC.decode(NbtOps.INSTANCE, tag.getCompound("data"))
                 .result()
-                .ifPresent(pair -> {
-                    this.rune = pair.getFirst().rune();
-                });
+                .ifPresent(pair -> this.rune = pair.getFirst().rune());
+    }
+
+    @Override
+    public Rune getRune() {
+        return rune;
     }
 
     private record Data(Rune rune) {

@@ -14,7 +14,7 @@ import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
 import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 public class MessageRegistrar {
-    public static void registerMessages(final RegisterPayloadHandlersEvent event) {
+    public static void registerMessages(RegisterPayloadHandlersEvent event) {
         final PayloadRegistrar registrar = event.registrar(Machina.ID);
 
         registrar.playToServer(MessageUpdateArsenalEquipped.TYPE, MessageUpdateArsenalEquipped.STREAM_CODEC, MessageHandler::server);

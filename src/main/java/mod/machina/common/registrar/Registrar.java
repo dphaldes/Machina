@@ -1,8 +1,10 @@
 package mod.machina.common.registrar;
 
 import mod.machina.Machina;
-import mod.machina.common.command.CommandManager;
-import mod.machina.common.network.MessageRegistrar;
+import mod.machina.client.ClientEvents;
+import mod.machina.client.ClientModBusEvents;
+import mod.machina.common.event.Events;
+import mod.machina.common.event.ModBusEvents;
 import net.minecraft.core.Holder;
 import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
@@ -11,7 +13,6 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.level.ItemLike;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.common.NeoForge;
-import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
 import java.util.function.Consumer;
@@ -37,15 +38,17 @@ public class Registrar {
         CREATIVE_TABS.register(modBus);
         //MenuRegistrar.register(modBus);
 
-        modBus.addListener(Registries::register);
         AttachmentRegistrar.register(modBus);
         GearRegistrar.register(modBus);
 
         LangRegistrar.load();
         TagRegistrar.load();
-        modBus.addListener(MessageRegistrar::registerMessages);
 
-        NeoForge.EVENT_BUS.addListener(Registrar::registerCommands);
+        modBus.register(ModBusEvents.class);
+        modBus.register(ClientModBusEvents.class);
+
+        NeoForge.EVENT_BUS.register(Events.class);
+        NeoForge.EVENT_BUS.register(ClientEvents.class);
     }
 
     private static void buildTabContents(final CreativeModeTab.Output output) {
@@ -58,8 +61,5 @@ public class Registrar {
 
     }
 
-    private static void registerCommands(final RegisterCommandsEvent event) {
-        event.getDispatcher().register(CommandManager.register());
-    }
 
 }

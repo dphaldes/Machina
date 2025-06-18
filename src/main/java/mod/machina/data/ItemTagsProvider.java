@@ -29,5 +29,10 @@ public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider {
                 .add(ItemRegistrar.VOID_LEGGINGS.asItem());
         tag(ItemTags.FOOT_ARMOR)
                 .add(ItemRegistrar.VOID_BOOTS.asItem());
+
+        tag(ItemTags.SWORDS)
+                .add(ItemRegistrar.COMPENDIUM.asItem());
+        tag(ItemTags.SWORD_ENCHANTABLE)
+                .add(ItemRegistrar.COMPENDIUM.asItem());
     }
 }
