@@ -1,6 +1,6 @@
 package mod.machina.client.layer;
 
-import mod.machina.common.blockentity.RiftBlockEntity;
+import mod.machina.common.block.blockentity.RiftBlockEntity;
 import net.minecraft.client.DeltaTracker;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiGraphics;

@@ -7,6 +7,7 @@ import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
 public class TraitEventHandler {
 
+
     public static void damageEvent(LivingIncomingDamageEvent event) {
         var damageSource = event.getSource();
         var entity = event.getEntity();
@@ -36,24 +37,5 @@ public class TraitEventHandler {
         event.setAmount(event.getAmount() * multiplier);
     }
 
-    //disabled
-//    public static void enchantmentEvent(GetEnchantmentLevelEvent event) {
-//        var stack = event.getStack();
-//        if (stack.getItem() instanceof VoidArmorItem) {
-//            var data = stack.get(DataComponentRegistrar.ARMOR_TRAITS);
-//            if (data == null) return;
-//
-//            var mutable = event.getEnchantments();
-//            var lookup = event.getLookup();
-//            for (var pair : data.enchantments()) {
-//                var holder = lookup.get(pair.enchant());
-//                if (holder.isEmpty()) continue;
-//                var enchant = holder.get();
-//
-//                var level = mutable.getLevel(enchant);
-//                mutable.upgrade(enchant, level + pair.level());
-//            }
-//        }
-//    }
 
 }

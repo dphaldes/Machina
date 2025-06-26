@@ -1,4 +1,4 @@
-package mod.machina.common.blockentity;
+package mod.machina.common.block.blockentity;
 
 //public class NexusBlockEntity extends BlockEntity {
 //
@@ -15,6 +15,6 @@ package mod.machina.common.blockentity;
 //    }
 //
 //    private void loadFromSavedData() {
-////        TODO("Not yet implemented")
+/// /        TODO("Not yet implemented")
 //    }
 //}

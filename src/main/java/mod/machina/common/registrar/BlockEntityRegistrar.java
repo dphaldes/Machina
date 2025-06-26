@@ -1,8 +1,8 @@
 package mod.machina.common.registrar;
 
 import mod.machina.Machina;
-import mod.machina.common.blockentity.RiftBlockEntity;
-import mod.machina.common.blockentity.RuneProjectorBlockEntity;
+import mod.machina.common.block.blockentity.RiftBlockEntity;
+import mod.machina.common.block.blockentity.RuneProjectorBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;

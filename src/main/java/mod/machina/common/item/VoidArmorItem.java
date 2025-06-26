@@ -1,7 +1,6 @@
 package mod.machina.common.item;
 
 import mod.machina.common.arsenal.ArsenalManager;
-import mod.machina.common.registrar.DataComponentRegistrar;
 import mod.machina.common.registrar.MaterialRegistrar;
 import mod.machina.common.registrar.PerkRegistrar;
 import net.minecraft.world.entity.LivingEntity;
@@ -23,10 +22,10 @@ public class VoidArmorItem extends ArmorItem {
         return 0;
     }
 
-    @Override
-    public boolean isFoil(ItemStack stack) {
-        return stack.isEnchanted() || stack.has(DataComponentRegistrar.ARMOR_TRAITS);
-    }
+//    @Override
+//    public boolean isFoil(ItemStack stack) {
+//        return stack.isEnchanted() || stack.has(DataComponentRegistrar.ARMOR_TRAITS);
+//    }
 
     @Override
     public boolean elytraFlightTick(ItemStack stack, LivingEntity entity, int flightTicks) {

@@ -3,11 +3,9 @@ package mod.machina.common.arsenal;
 import mod.machina.api.Perk;
 import mod.machina.api.gear.Gear;
 import mod.machina.common.registrar.AttachmentRegistrar;
-import mod.machina.common.registrar.DataComponentRegistrar;
 import mod.machina.common.util.SizedList;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.ItemStack;
 
 import java.util.List;
 
@@ -21,10 +19,6 @@ public class ArsenalManager {
     public static void respec(Player player) {
         var arsenal = getArsenal(player);
         arsenal.respec(player);
-    }
-
-    public static void removeTraitsFromStack(ItemStack stack) {
-        stack.remove(DataComponentRegistrar.ARMOR_TRAITS);
     }
 
     public static Arsenal getArsenal(Player player) {

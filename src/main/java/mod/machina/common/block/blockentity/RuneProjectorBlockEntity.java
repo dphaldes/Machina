@@ -1,4 +1,4 @@
-package mod.machina.common.blockentity;
+package mod.machina.common.block.blockentity;
 
 import com.mojang.serialization.Codec;
 import mod.machina.api.rune.Rune;
@@ -24,8 +24,8 @@ public class RuneProjectorBlockEntity extends BlockEntity implements RuneProvide
     protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.saveAdditional(tag, registries);
         if (rune != Rune.EMPTY) {
-            var result = Data.CODEC.encodeStart(NbtOps.INSTANCE, new Data(rune));
-            tag.put("data", result.getOrThrow());
+            Data.CODEC.encodeStart(NbtOps.INSTANCE, new Data(rune))
+                    .ifSuccess(data -> tag.put("data", data));
         }
     }
 
@@ -33,8 +33,7 @@ public class RuneProjectorBlockEntity extends BlockEntity implements RuneProvide
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         Data.CODEC.decode(NbtOps.INSTANCE, tag.getCompound("data"))
-                .result()
-                .ifPresent(pair -> this.rune = pair.getFirst().rune());
+                .ifSuccess(pair -> this.rune = pair.getFirst().rune());
     }
 
     @Override

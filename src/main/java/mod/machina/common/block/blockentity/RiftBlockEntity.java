@@ -1,4 +1,4 @@
-package mod.machina.common.blockentity;
+package mod.machina.common.block.blockentity;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

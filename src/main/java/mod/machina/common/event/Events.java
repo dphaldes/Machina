@@ -50,8 +50,6 @@ public class Events {
         if (!(event.getEntity() instanceof Player player) || !event.getSlot().isArmor()) return;
 
         if (event.getFrom().getItem() instanceof VoidArmorItem || event.getTo().getItem() instanceof VoidArmorItem) {
-            ArsenalManager.removeTraitsFromStack(event.getFrom());
-            ArsenalManager.removeTraitsFromStack(event.getTo());
             ArsenalManager.respec(player);
         }
     }
@@ -81,8 +79,4 @@ public class Events {
         TraitEventHandler.damageEvent(event);
     }
 
-//    @SubscribeEvent
-//    public static void enchantmentEvent(GetEnchantmentLevelEvent event) {
-//        TraitEventHandler.enchantmentEvent(event);
-//    }
 }

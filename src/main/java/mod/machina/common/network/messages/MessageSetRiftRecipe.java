@@ -1,7 +1,7 @@
 package mod.machina.common.network.messages;
 
 import mod.machina.Machina;
-import mod.machina.common.blockentity.RiftBlockEntity;
+import mod.machina.common.block.blockentity.RiftBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;

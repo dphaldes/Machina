@@ -1,7 +1,7 @@
 package mod.machina.common.block;
 
 import mod.machina.client.screen.ScreenManager;
-import mod.machina.common.blockentity.RiftBlockEntity;
+import mod.machina.common.block.blockentity.RiftBlockEntity;
 import mod.machina.common.level.RiftShape;
 import mod.machina.common.registrar.BlockEntityRegistrar;
 import mod.machina.common.registrar.ItemRegistrar;

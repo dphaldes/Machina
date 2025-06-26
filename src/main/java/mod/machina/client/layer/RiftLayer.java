@@ -1,7 +1,7 @@
 package mod.machina.client.layer;
 
 import mod.machina.client.ClientData;
-import mod.machina.common.blockentity.RiftBlockEntity;
+import mod.machina.common.block.blockentity.RiftBlockEntity;
 import mod.machina.common.registrar.LangRegistrar;
 import net.minecraft.ChatFormatting;
 import net.minecraft.client.gui.Font;

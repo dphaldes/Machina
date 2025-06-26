@@ -1,7 +1,7 @@
 package mod.machina.common.level;
 
 import mod.machina.common.block.RiftBlock;
-import mod.machina.common.blockentity.RiftBlockEntity;
+import mod.machina.common.block.blockentity.RiftBlockEntity;
 import mod.machina.common.registrar.BlockRegistrar;
 import mod.machina.common.registrar.TagRegistrar;
 import net.minecraft.core.BlockPos;
