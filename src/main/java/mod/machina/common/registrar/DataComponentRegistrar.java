@@ -1,6 +1,7 @@
 package mod.machina.common.registrar;
 
 import mod.machina.Machina;
+import mod.machina.api.rune.Rune;
 import net.minecraft.core.component.DataComponentType;
 import net.minecraft.core.registries.Registries;
 import net.minecraft.network.codec.ByteBufCodecs;
@@ -22,6 +23,11 @@ public class DataComponentRegistrar {
     public static final Supplier<DataComponentType<Integer>> COMPENDIUM_LAST_USED = COMPONENTS.registerComponentType(
             "compendium_last_used",
             builder -> builder.networkSynchronized(ByteBufCodecs.INT)
+    );
+
+    public static final Supplier<DataComponentType<Rune>> RUNE = COMPONENTS.registerComponentType(
+            "rune",
+            builder -> builder.persistent(Rune.CODEC).networkSynchronized(Rune.STREAM_CODEC)
     );
 
     public static void register(IEventBus bus) {

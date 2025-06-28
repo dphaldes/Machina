@@ -56,7 +56,7 @@
   "title.machina.screen.codex": "Codex Screen",
   "title.machina.screen.equipped": "Arsenal Screen",
   "tooltip.machina.armor_traits": "♠ + %s",
-  "tooltip.machina.stack_holder": "Holding %s",
+  "tooltip.machina.rune_provider": "Held Rune: %s",
   "trait.machina.attribute_add": "+%s %s",
   "trait.machina.attribute_add_n": "-%s %s",
   "trait.machina.attribute_multiply_base": "+%s%% %s",

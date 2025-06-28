@@ -20,7 +20,7 @@ public class ClientModBusEvents {
     @SubscribeEvent
     public static void fmlClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            ItemProperties.register(ItemRegistrar.COMPENDIUM.asItem(), ItemOverridePredicates.COMPENDIUM_SWORD_ACTIVE, CompendiumItem::getActiveState);
+            ItemProperties.register(ItemRegistrar.COMPENDIUM.asItem(), ItemOverridePredicates.COMPENDIUM_SWORD_ACTIVE, CompendiumItem::getVisualState);
         });
     }
 

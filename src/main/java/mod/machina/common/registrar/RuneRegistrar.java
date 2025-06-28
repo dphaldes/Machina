@@ -2,6 +2,7 @@ package mod.machina.common.registrar;
 
 import mod.machina.Machina;
 import mod.machina.api.rune.Rune;
+import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredHolder;
 import net.neoforged.neoforge.registries.DeferredRegister;
 
@@ -17,4 +18,7 @@ public class RuneRegistrar {
         return RUNES.register(id, () -> new Rune(Machina.prefix(id)));
     }
 
+    public static void register(IEventBus bus) {
+        RUNES.register(bus);
+    }
 }

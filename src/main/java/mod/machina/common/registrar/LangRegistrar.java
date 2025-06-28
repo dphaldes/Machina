@@ -43,8 +43,8 @@ public class LangRegistrar {
     //
 
     // ITEMS
-    public static final LangEntry STACK_HOLDER = addTranslation("tooltip", "stack_holder", "Holding %s");
     public static final LangEntry ARMOR_TRAITS = addTranslation("tooltip", "armor_traits", "♠ + %s");
+    public static final LangEntry HELD_RUNE = addTranslation("tooltip", "rune_provider", "Held Rune: %s");
 
     private static LangEntry addTranslation(String key, String translation) {
         entries.put(key, translation);

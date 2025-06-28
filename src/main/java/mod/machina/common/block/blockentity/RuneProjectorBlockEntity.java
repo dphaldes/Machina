@@ -4,7 +4,6 @@ import com.mojang.serialization.Codec;
 import mod.machina.api.rune.Rune;
 import mod.machina.api.rune.RuneProvider;
 import mod.machina.common.registrar.BlockEntityRegistrar;
-import mod.machina.common.registrar.Registries;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.nbt.CompoundTag;
@@ -42,7 +41,7 @@ public class RuneProjectorBlockEntity extends BlockEntity implements RuneProvide
     }
 
     private record Data(Rune rune) {
-        public static Codec<Data> CODEC = Registries.RUNES.byNameCodec().orElse(Rune.EMPTY)
+        public static Codec<Data> CODEC = Rune.CODEC.orElse(Rune.EMPTY)
                 .xmap(Data::new, Data::rune);
     }
 }
