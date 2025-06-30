@@ -1,7 +1,7 @@
 package mod.machina.common.registrar;
 
 import mod.machina.Machina;
-import mod.machina.common.item.CompendiumItem;
+import mod.machina.common.item.GuideItem;
 import mod.machina.common.item.VoidArmorItem;
 import net.minecraft.world.item.ArmorItem;
 import net.neoforged.bus.api.IEventBus;
@@ -12,7 +12,7 @@ public class ItemRegistrar {
 
     public static final DeferredRegister.Items ITEMS = DeferredRegister.Items.createItems(Machina.ID);
 
-    public static final DeferredItem<CompendiumItem> COMPENDIUM = ITEMS.registerItem("compendium", (props) -> new CompendiumItem());
+    public static final DeferredItem<GuideItem> GUIDE = ITEMS.registerItem("guide", (props) -> new GuideItem());
 
     public static final DeferredItem<VoidArmorItem> VOID_HELMET = ITEMS.registerItem("void_helmet", (props) -> new VoidArmorItem(ArmorItem.Type.HELMET));
     public static final DeferredItem<VoidArmorItem> VOID_CHESTPLATE = ITEMS.registerItem("void_chestplate", (props) -> new VoidArmorItem(ArmorItem.Type.CHESTPLATE));

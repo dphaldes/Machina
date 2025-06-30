@@ -18,9 +18,9 @@ import net.minecraft.world.item.TooltipFlag;
 import javax.annotation.Nullable;
 import java.util.List;
 
-public class CompendiumItem extends SwordItem {
+public class GuideItem extends SwordItem {
 
-    public CompendiumItem() {
+    public GuideItem() {
         super(Tiers.IRON, new Properties()
                 .stacksTo(1)
                 .rarity(Rarity.RARE)

@@ -36,7 +36,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
-public class CodexScreen extends BaseScreen {
+public class RunesmithScreen extends BaseScreen {
 
     private static final ResourceLocation BACKGROUND_LOCATION = Machina.prefix("textures/gui/codex.png");
     private static final ResourceLocation APPLY = Machina.prefix("apply");
@@ -51,7 +51,7 @@ public class CodexScreen extends BaseScreen {
     @Nullable
     private Pair<Gear, RecipeHolder<GearRecipe>> selectedRecipe = null;
 
-    public CodexScreen(Player player, BlockPos masterRift) {
+    public RunesmithScreen(Player player, BlockPos masterRift) {
         super(LangRegistrar.CODEX_SCREEN.component(), 216, 148);
         this.player = player;
         this.masterRift = masterRift;

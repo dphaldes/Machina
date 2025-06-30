@@ -31,7 +31,7 @@ public class ModBusEvents {
 
     @SubscribeEvent
     public static void modifyComponents(ModifyDefaultComponentsEvent event) {
-        event.modify(ItemRegistrar.COMPENDIUM, builder -> builder.set(DataComponentRegistrar.RUNE.get(), RuneRegistrar.PHI.get()));
+        event.modify(ItemRegistrar.GUIDE, builder -> builder.set(DataComponentRegistrar.RUNE.get(), RuneRegistrar.PHI.get()));
 
     }
 

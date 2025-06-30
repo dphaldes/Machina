@@ -18,7 +18,7 @@ public class ScreenManager {
     }
 
     public static void openCodexScreen(Player player, BlockPos master) {
-        minecraft.setScreen(new CodexScreen(player, master));
+        minecraft.setScreen(new RunesmithScreen(player, master));
     }
 
 }

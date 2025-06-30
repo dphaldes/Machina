@@ -30,10 +30,10 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
 
         simpleBlockItem(BlockRegistrar.RIFT_PORTAL.block());
 
-        var compendium = ItemRegistrar.COMPENDIUM.getId();
+        var compendium = ItemRegistrar.GUIDE.getId();
         getBuilder(compendium.toString())
                 .override()
-                .predicate(ItemOverridePredicates.COMPENDIUM_SWORD_ACTIVE, 1f)
+                .predicate(ItemOverridePredicates.GUIDE_SWORD_ACTIVE, 1f)
                 .model(new ModelFile.ExistingModelFile(ResourceLocation.withDefaultNamespace("item/iron_sword"), existingFileHelper))
                 .end()
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))

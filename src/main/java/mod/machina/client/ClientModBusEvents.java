@@ -4,7 +4,7 @@ import mod.machina.Machina;
 import mod.machina.client.keymap.Keymaps;
 import mod.machina.client.layer.Layers;
 import mod.machina.client.renderer.block.RuneProjectorRenderer;
-import mod.machina.common.item.CompendiumItem;
+import mod.machina.common.item.GuideItem;
 import mod.machina.common.registrar.BlockEntityRegistrar;
 import mod.machina.common.registrar.ItemRegistrar;
 import net.minecraft.client.renderer.item.ItemProperties;
@@ -20,7 +20,7 @@ public class ClientModBusEvents {
     @SubscribeEvent
     public static void fmlClientSetup(FMLClientSetupEvent event) {
         event.enqueueWork(() -> {
-            ItemProperties.register(ItemRegistrar.COMPENDIUM.asItem(), ItemOverridePredicates.COMPENDIUM_SWORD_ACTIVE, CompendiumItem::getVisualState);
+            ItemProperties.register(ItemRegistrar.GUIDE.asItem(), ItemOverridePredicates.GUIDE_SWORD_ACTIVE, GuideItem::getVisualState);
         });
     }
 

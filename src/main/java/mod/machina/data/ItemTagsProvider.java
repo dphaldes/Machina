@@ -31,8 +31,8 @@ public class ItemTagsProvider extends net.minecraft.data.tags.ItemTagsProvider {
                 .add(ItemRegistrar.VOID_BOOTS.asItem());
 
         tag(ItemTags.SWORDS)
-                .add(ItemRegistrar.COMPENDIUM.asItem());
+                .add(ItemRegistrar.GUIDE.asItem());
         tag(ItemTags.SWORD_ENCHANTABLE)
-                .add(ItemRegistrar.COMPENDIUM.asItem());
+                .add(ItemRegistrar.GUIDE.asItem());
     }
 }

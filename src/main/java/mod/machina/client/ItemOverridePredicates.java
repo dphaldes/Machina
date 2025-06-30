@@ -5,5 +5,5 @@ import net.minecraft.resources.ResourceLocation;
 
 public class ItemOverridePredicates {
 
-    public static final ResourceLocation COMPENDIUM_SWORD_ACTIVE = Machina.prefix("sword_active");
+    public static final ResourceLocation GUIDE_SWORD_ACTIVE = Machina.prefix("sword_active");
 }
