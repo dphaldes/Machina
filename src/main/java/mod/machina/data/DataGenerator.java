@@ -1,8 +1,11 @@
 package mod.machina.data;
 
+import mod.machina.api.RegistryKeys;
 import mod.machina.data.client.BlockStateProvider;
 import mod.machina.data.client.ItemModelProvider;
 import mod.machina.data.client.LanguageProvider;
+import mod.machina.data.content.AugmentsProvider;
+import net.minecraft.core.RegistrySetBuilder;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 
 public class DataGenerator {
@@ -19,6 +22,9 @@ public class DataGenerator {
         generator.addProvider(event.includeServer(), new ItemTagsProvider(packOutput, lookupProvider, blockTags.contentsGetter(), helper));
         generator.addProvider(event.includeServer(), new RecipeProvider(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, lookupProvider));
+        event.createDatapackRegistryObjects(new RegistrySetBuilder()
+                .add(RegistryKeys.AUGMENT, AugmentsProvider::bootstrap)
+        );
 
         // client
         generator.addProvider(event.includeClient(), new BlockStateProvider(packOutput, helper));

@@ -41,6 +41,7 @@ public class Registrar {
         AttachmentRegistrar.register(modBus);
         RuneRegistrar.register(modBus);
         PerkRegistrar.register(modBus);
+        TraitTypeRegistrar.register(modBus);
 
         LangRegistrar.load();
         TagRegistrar.load();

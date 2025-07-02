@@ -22,5 +22,5 @@ public interface Trait {
 
     MapCodec<? extends Trait> type();
 
-    Codec<Trait> CODEC = Registries.TRAIT_CODECS.byNameCodec().dispatch(Trait::type, Function.identity());
+    Codec<Trait> CODEC = Registries.TRAIT_TYPES.byNameCodec().dispatch(Trait::type, Function.identity());
 }

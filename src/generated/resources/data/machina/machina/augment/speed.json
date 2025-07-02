@@ -1,0 +1,12 @@
+{
+  "name": "Augment Speed",
+  "traits": [
+    {
+      "type": "machina:attribute",
+      "amount": 2.0,
+      "attribute": "minecraft:generic.movement_speed",
+      "id": "machina:speed",
+      "operation": "add_multiplied_base"
+    }
+  ]
+}

@@ -18,17 +18,17 @@ public class Registries {
             .sync(true)
             .create();
 
-    public static final Registry<MapCodec<? extends Trait>> TRAIT_CODECS = new RegistryBuilder<>(RegistryKeys.TRAIT_CODEC)
+    public static final Registry<Perk> PERKS = new RegistryBuilder<>(RegistryKeys.PERK)
             .sync(true)
             .create();
 
-    public static final Registry<Perk> PERKS = new RegistryBuilder<>(RegistryKeys.PERK)
+    public static final Registry<MapCodec<? extends Trait>> TRAIT_TYPES = new RegistryBuilder<>(RegistryKeys.TRAIT_CODEC)
             .sync(true)
             .create();
 
     public static void register(NewRegistryEvent event) {
         event.register(RUNES);
-        event.register(TRAIT_CODECS);
+        event.register(TRAIT_TYPES);
         event.register(PERKS);
     }
 
