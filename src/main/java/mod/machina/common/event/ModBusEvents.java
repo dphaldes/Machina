@@ -10,6 +10,7 @@ import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.data.event.GatherDataEvent;
 import net.neoforged.neoforge.event.ModifyDefaultComponentsEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 import net.neoforged.neoforge.registries.NewRegistryEvent;
 
 public class ModBusEvents {
@@ -17,6 +18,11 @@ public class ModBusEvents {
     @SubscribeEvent
     public static void newRegistry(NewRegistryEvent event) {
         Registries.register(event);
+    }
+
+    @SubscribeEvent
+    public static void newDatapackRegistry(DataPackRegistryEvent.NewRegistry event) {
+        Registries.datapackRegisty(event);
     }
 
     @SubscribeEvent

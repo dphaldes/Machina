@@ -1,12 +1,9 @@
 package mod.machina.data.client;
 
 import mod.machina.Machina;
-import mod.machina.api.gear.Gear;
 import mod.machina.common.registrar.BlockRegistrar;
-import mod.machina.common.registrar.GearRegistrar;
 import mod.machina.common.registrar.ItemRegistrar;
 import mod.machina.common.registrar.LangRegistrar;
-import mod.machina.common.registrar.PerkRegistrar;
 import net.minecraft.data.PackOutput;
 
 public class LanguageProvider extends net.neoforged.neoforge.common.data.LanguageProvider {
@@ -25,14 +22,8 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(BlockRegistrar.RIFT_PORTAL.block(), "Rift");
         add(BlockRegistrar.RUNE_PROJECTOR.block(), "Runic Projector");
 
-        GearRegistrar.GEARS.getEntries().forEach(gear -> {
-            if (gear.get() == Gear.EMPTY)
-                return;
-            add(gear.get().getGearItem(), gear.get().displayName());
-            add(gear.get().localizationKey(), gear.get().displayName());
-        });
 
-        PerkRegistrar.entries().forEach(this::add);
+//        PerkRegistrar.entries().forEach(this::add);
         LangRegistrar.entries().forEach(this::add);
     }
 }

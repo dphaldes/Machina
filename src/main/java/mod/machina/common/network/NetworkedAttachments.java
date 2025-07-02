@@ -1,13 +1,15 @@
 package mod.machina.common.network;
 
 
-import mod.machina.api.gear.Gear;
+import mod.machina.api.augment.Augment;
 import mod.machina.common.network.messages.MessageSyncArsenalEquipped;
 import mod.machina.common.network.messages.MessageSyncArsenalUnlocked;
 import mod.machina.common.network.messages.MessageUpdateArsenalEquipped;
-import mod.machina.common.util.SizedList;
+import net.minecraft.core.Holder;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
+
+import java.util.List;
 
 public class NetworkedAttachments {
     public static void syncArsenal(Player player) {
@@ -27,7 +29,7 @@ public class NetworkedAttachments {
         syncGears(player);
     }
 
-    public static void updateArsenal(SizedList<Gear> equipped) {
+    public static void updateArsenal(List<Holder<Augment>> equipped) {
         MessageRegistrar.sendToServer(new MessageUpdateArsenalEquipped(equipped));
     }
 }

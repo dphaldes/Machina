@@ -1,6 +1,6 @@
 package mod.machina.client.screen;
 
-import mod.machina.common.arsenal.Arsenal;
+import mod.machina.common.armor.Arsenal;
 import mod.machina.common.registrar.LangRegistrar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.core.BlockPos;

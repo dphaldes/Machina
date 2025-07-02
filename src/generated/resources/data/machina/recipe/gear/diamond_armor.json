@@ -1,9 +1,0 @@
-{
-  "type": "machina:gear",
-  "ingredients": [
-    {
-      "item": "minecraft:diamond_chestplate"
-    }
-  ],
-  "result": "machina:diamond_armor"
-}

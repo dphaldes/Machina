@@ -3,14 +3,14 @@
   "category": "misc",
   "ingredients": [
     {
-      "item": "machina:guide"
+      "item": "minecraft:book"
     },
     {
-      "item": "minecraft:iron_chestplate"
+      "item": "minecraft:iron_sword"
     }
   ],
   "result": {
     "count": 1,
-    "id": "machina:void_chestplate"
+    "id": "machina:guide"
   }
 }

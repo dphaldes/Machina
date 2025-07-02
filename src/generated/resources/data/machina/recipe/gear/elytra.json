@@ -1,9 +1,0 @@
-{
-  "type": "machina:gear",
-  "ingredients": [
-    {
-      "item": "minecraft:elytra"
-    }
-  ],
-  "result": "machina:elytra"
-}

@@ -2,14 +2,10 @@ package mod.machina.data.client;
 
 import mod.machina.Machina;
 import mod.machina.client.ItemOverridePredicates;
-import mod.machina.common.item.GearItem;
 import mod.machina.common.registrar.BlockRegistrar;
-import mod.machina.common.registrar.GearRegistrar;
 import mod.machina.common.registrar.ItemRegistrar;
-import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
-import net.minecraft.world.item.Item;
 import net.neoforged.neoforge.client.model.generators.ModelFile;
 import net.neoforged.neoforge.common.data.ExistingFileHelper;
 
@@ -25,29 +21,17 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(ItemRegistrar.VOID_LEGGINGS.asItem());
         basicItem(ItemRegistrar.VOID_BOOTS.asItem());
 
-        GearRegistrar.GEAR_ITEMS.getEntries()
-                .forEach(gear -> basicGear(gear.get()));
-
         simpleBlockItem(BlockRegistrar.RIFT_PORTAL.block());
 
-        var compendium = ItemRegistrar.GUIDE.getId();
-        getBuilder(compendium.toString())
+        var guideId = ItemRegistrar.GUIDE.getId();
+        getBuilder(guideId.toString())
                 .override()
                 .predicate(ItemOverridePredicates.GUIDE_SWORD_ACTIVE, 1f)
                 .model(new ModelFile.ExistingModelFile(ResourceLocation.withDefaultNamespace("item/iron_sword"), existingFileHelper))
                 .end()
                 .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                .texture("layer0", ResourceLocation.fromNamespaceAndPath(compendium.getNamespace(), "item/" + compendium.getPath()));
+                .texture("layer0", ResourceLocation.fromNamespaceAndPath(guideId.getNamespace(), "item/" + guideId.getPath()));
 
     }
 
-    private void basicGear(Item item) {
-        if (item instanceof GearItem gearItem) {
-            var resource = BuiltInRegistries.ITEM.getKey(item);
-            getBuilder(item.toString())
-                    .parent(new ModelFile.UncheckedModelFile("item/generated"))
-                    .texture("layer0", ResourceLocation.fromNamespaceAndPath(resource.getNamespace(),
-                            "item/gear/" + gearItem.gear().id()));
-        }
-    }
 }

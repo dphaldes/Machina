@@ -2,7 +2,7 @@ package mod.machina.common.item.components;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import mod.machina.api.gear.trait.EnchantmentLevel;
+import mod.machina.api.augment.trait.EnchantmentLevel;
 import mod.machina.common.registrar.LangRegistrar;
 import net.minecraft.ChatFormatting;
 import net.minecraft.core.registries.Registries;

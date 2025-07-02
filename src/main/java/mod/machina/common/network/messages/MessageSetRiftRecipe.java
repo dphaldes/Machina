@@ -1,7 +1,6 @@
 package mod.machina.common.network.messages;
 
 import mod.machina.Machina;
-import mod.machina.common.block.blockentity.RiftBlockEntity;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
@@ -22,10 +21,10 @@ public record MessageSetRiftRecipe(BlockPos blockPos, ResourceLocation recipeId)
 
     @Override
     public void onServerReceived(ServerPlayer player) {
-        var level = player.level();
-        if (level.getBlockEntity(blockPos()) instanceof RiftBlockEntity rift) {
-            rift.setRecipeExternal(recipeId());
-        }
+//        var level = player.level();
+//        if (level.getBlockEntity(blockPos()) instanceof RiftBlockEntity rift) {
+//            rift.setRecipeExternal(recipeId());
+//        }
     }
 
     @Override

@@ -1,16 +1,18 @@
 package mod.machina.common.network.messages;
 
 import mod.machina.Machina;
-import mod.machina.api.gear.Gear;
-import mod.machina.common.arsenal.Arsenal;
-import mod.machina.common.arsenal.ArsenalManager;
-import mod.machina.common.util.SizedList;
+import mod.machina.api.augment.Augment;
+import mod.machina.common.armor.Arsenal;
+import mod.machina.common.armor.ArsenalManager;
+import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;
 import net.minecraft.network.protocol.common.custom.CustomPacketPayload;
 import net.minecraft.world.entity.player.Player;
 
-public record MessageSyncArsenalEquipped(SizedList<Gear> equipped) implements Message.Client {
+import java.util.List;
+
+public record MessageSyncArsenalEquipped(List<Holder<Augment>> equipped) implements Message.Client {
 
     public static final Type<MessageSyncArsenalEquipped> TYPE = new Type<>(Machina.prefix("sync_arsenal_equipped"));
     public static final StreamCodec<RegistryFriendlyByteBuf, MessageSyncArsenalEquipped> STREAM_CODEC =

@@ -1,6 +1,6 @@
 package mod.machina.common.item;
 
-import mod.machina.common.arsenal.ArsenalManager;
+import mod.machina.common.armor.ArsenalManager;
 import mod.machina.common.registrar.MaterialRegistrar;
 import mod.machina.common.registrar.PerkRegistrar;
 import net.minecraft.world.entity.LivingEntity;
@@ -32,7 +32,7 @@ public class VoidArmorItem extends ArmorItem {
         if (!(entity instanceof Player player))
             return false;
 
-        return ArsenalManager.hasPerk(player, PerkRegistrar.GLIDE);
+        return ArsenalManager.hasPerk(player, PerkRegistrar.GLIDE.get());
     }
 
     @Override
@@ -40,12 +40,12 @@ public class VoidArmorItem extends ArmorItem {
         if (!(entity instanceof Player player))
             return false;
 
-        return ArsenalManager.hasPerk(player, PerkRegistrar.GLIDE);
+        return ArsenalManager.hasPerk(player, PerkRegistrar.GLIDE.get());
     }
 
     @Override
     public boolean makesPiglinsNeutral(ItemStack stack, LivingEntity wearer) {
-        return ArsenalManager.hasPerk(wearer, PerkRegistrar.GILDED);
+        return ArsenalManager.hasPerk(wearer, PerkRegistrar.GILDED.get());
     }
 
 }

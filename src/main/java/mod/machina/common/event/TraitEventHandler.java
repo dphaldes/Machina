@@ -1,7 +1,5 @@
 package mod.machina.common.event;
 
-import mod.machina.common.arsenal.ArsenalManager;
-import mod.machina.common.registrar.PerkRegistrar;
 import net.minecraft.tags.DamageTypeTags;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 
@@ -14,25 +12,6 @@ public class TraitEventHandler {
         if (damageSource.is(DamageTypeTags.BYPASSES_INVULNERABILITY))
             return;
         float multiplier = 1;
-
-        if (ArsenalManager.hasPerk(entity, PerkRegistrar.PROTECTION)) {
-            multiplier *= 0.5f; // reduce 50%
-        }
-
-        if (damageSource.is(DamageTypeTags.IS_FIRE) && ArsenalManager.hasPerk(entity, PerkRegistrar.PROTECTION_FIRE)) {
-            multiplier *= 0.8f; // reduce by 20%
-        }
-
-        if (damageSource.is(DamageTypeTags.IS_EXPLOSION) && ArsenalManager.hasPerk(entity, PerkRegistrar.PROTECTION_BLAST)) {
-            multiplier *= 0.8f; // reduce by 20%
-        }
-
-        if (damageSource.is(DamageTypeTags.IS_DROWNING) && ArsenalManager.hasPerk(entity, PerkRegistrar.PROTECTION_WATER)) {
-            multiplier *= 0.8f; // reduce by 20%
-        }
-        if (damageSource.is(DamageTypeTags.IS_FREEZING) && ArsenalManager.hasPerk(entity, PerkRegistrar.PROTECTION_FREEZE)) {
-            multiplier *= 0.8f; // reduce by 20%
-        }
 
         event.setAmount(event.getAmount() * multiplier);
     }

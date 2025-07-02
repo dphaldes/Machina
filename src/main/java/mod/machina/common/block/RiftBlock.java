@@ -11,8 +11,6 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.ItemInteractionResult;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.item.ItemEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -116,30 +114,31 @@ public class RiftBlock extends Block implements EntityBlock {
         return ItemInteractionResult.SUCCESS;
     }
 
-    @Override
-    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
-        if (level.isClientSide)
-            return;
-
-        if (!(level.getBlockEntity(pos) instanceof RiftBlockEntity rift))
-            return;
-
-        if (entity instanceof ItemEntity item) {
-            rift.tryConsumeStack(item);
-        }
-
-        if (entity instanceof Player player) {
-            rift.tryUnlock(player);
-        }
-    }
-
+    //
+//    @Override
+//    protected void entityInside(BlockState state, Level level, BlockPos pos, Entity entity) {
+//        if (level.isClientSide)
+//            return;
+//
+//        if (!(level.getBlockEntity(pos) instanceof RiftBlockEntity rift))
+//            return;
+//
+//        if (entity instanceof ItemEntity item) {
+//            rift.tryConsumeStack(item);
+//        }
+//
+//        if (entity instanceof Player player) {
+//            rift.tryUnlock(player);
+//        }
+//    }
+//
     public BlockState destroyBlock(LevelAccessor world, BlockPos pos) {
-        if (!world.isClientSide()) {
-            BlockEntity entity = world.getBlockEntity(pos);
-            if (entity instanceof RiftBlockEntity rift) {
-                rift.refundConsumed();
-            }
-        }
+//        if (!world.isClientSide()) {
+//            BlockEntity entity = world.getBlockEntity(pos);
+//            if (entity instanceof RiftBlockEntity rift) {
+//                rift.refundConsumed();
+//            }
+//        }
         return Blocks.AIR.defaultBlockState();
     }
 

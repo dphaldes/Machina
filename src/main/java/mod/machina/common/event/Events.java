@@ -1,6 +1,6 @@
 package mod.machina.common.event;
 
-import mod.machina.common.arsenal.ArsenalManager;
+import mod.machina.common.armor.ArsenalManager;
 import mod.machina.common.command.CommandManager;
 import mod.machina.common.item.VoidArmorItem;
 import mod.machina.common.level.RiftShape;

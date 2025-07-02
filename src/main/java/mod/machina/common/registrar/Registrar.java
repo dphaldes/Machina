@@ -19,7 +19,7 @@ import java.util.function.Consumer;
 
 public class Registrar {
     private static final DeferredRegister<CreativeModeTab> CREATIVE_TABS = DeferredRegister.create(net.minecraft.core.registries.Registries.CREATIVE_MODE_TAB, Machina.ID);
-    public static final Holder<CreativeModeTab> MACHINA_TAB = CREATIVE_TABS.register("mod/machina",
+    public static final Holder<CreativeModeTab> MACHINA_TAB = CREATIVE_TABS.register("machina",
             () -> CreativeModeTab.builder()
                     .icon(() -> new ItemStack(Items.RECOVERY_COMPASS))
                     .displayItems((par, output) -> buildTabContents(output))
@@ -39,8 +39,8 @@ public class Registrar {
         //MenuRegistrar.register(modBus);
 
         AttachmentRegistrar.register(modBus);
-        GearRegistrar.register(modBus);
         RuneRegistrar.register(modBus);
+        PerkRegistrar.register(modBus);
 
         LangRegistrar.load();
         TagRegistrar.load();
@@ -58,8 +58,6 @@ public class Registrar {
 
         registryHandler.accept(ItemRegistrar.ITEMS);
         registryHandler.accept(BlockRegistrar.BLOCK_ITEMS);
-        registryHandler.accept(GearRegistrar.GEAR_ITEMS);
-
     }
 
 

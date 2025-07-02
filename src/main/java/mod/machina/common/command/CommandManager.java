@@ -3,9 +3,8 @@ package mod.machina.common.command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import mod.machina.api.Perk;
-import mod.machina.api.gear.Gear;
-import mod.machina.common.arsenal.ArsenalManager;
+import mod.machina.api.augment.Perk;
+import mod.machina.common.armor.ArsenalManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
@@ -40,15 +39,15 @@ public class CommandManager {
 
     private static int getGears(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = EntityArgument.getPlayer(context, PLAYER);
-        List<Gear> gears = ArsenalManager.getArsenal(player).unlocked();
-        context.getSource().sendSuccess(() -> Component.literal(gears.toString()), true);
+        var augments = ArsenalManager.getArsenal(player).unlocked();
+        context.getSource().sendSuccess(() -> Component.literal(augments.toString()), true);
         return 0;
     }
 
     private static int getPerks(CommandContext<CommandSourceStack> context) throws CommandSyntaxException {
         ServerPlayer player = EntityArgument.getPlayer(context, PLAYER);
-        List<Perk> gears = ArsenalManager.getArsenal(player).perks();
-        context.getSource().sendSuccess(() -> Component.literal(gears.toString()), true);
+        var perks = ArsenalManager.getArsenal(player).perks();
+        context.getSource().sendSuccess(() -> Component.literal(perks.toString()), true);
         return 0;
     }
 
