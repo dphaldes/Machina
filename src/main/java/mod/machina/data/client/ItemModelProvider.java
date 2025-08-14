@@ -2,7 +2,6 @@ package mod.machina.data.client;
 
 import mod.machina.Machina;
 import mod.machina.client.ItemOverridePredicates;
-import mod.machina.common.registrar.BlockRegistrar;
 import mod.machina.common.registrar.ItemRegistrar;
 import net.minecraft.data.PackOutput;
 import net.minecraft.resources.ResourceLocation;
@@ -21,7 +20,6 @@ public class ItemModelProvider extends net.neoforged.neoforge.client.model.gener
         basicItem(ItemRegistrar.VOID_LEGGINGS.asItem());
         basicItem(ItemRegistrar.VOID_BOOTS.asItem());
 
-        simpleBlockItem(BlockRegistrar.RIFT_PORTAL.block());
 
         var guideId = ItemRegistrar.GUIDE.getId();
         getBuilder(guideId.toString())

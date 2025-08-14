@@ -57,8 +57,8 @@ public class Registrar {
         Consumer<DeferredRegister<? extends ItemLike>> registryHandler =
                 registry -> registry.getEntries().forEach(entry -> output.accept(entry.get()));
 
-        registryHandler.accept(ItemRegistrar.ITEMS);
         registryHandler.accept(BlockRegistrar.BLOCK_ITEMS);
+        registryHandler.accept(ItemRegistrar.ITEMS);
     }
 
 

@@ -1,8 +1,6 @@
 package mod.machina.client;
 
-import mod.machina.Machina;
 import mod.machina.client.keymap.Keymaps;
-import mod.machina.client.layer.Layers;
 import mod.machina.client.renderer.block.RuneProjectorRenderer;
 import mod.machina.common.item.GuideItem;
 import mod.machina.common.registrar.BlockEntityRegistrar;
@@ -11,9 +9,7 @@ import net.minecraft.client.renderer.item.ItemProperties;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.fml.event.lifecycle.FMLClientSetupEvent;
 import net.neoforged.neoforge.client.event.EntityRenderersEvent;
-import net.neoforged.neoforge.client.event.RegisterGuiLayersEvent;
 import net.neoforged.neoforge.client.event.RegisterKeyMappingsEvent;
-import net.neoforged.neoforge.client.gui.VanillaGuiLayers;
 
 public class ClientModBusEvents {
 
@@ -32,10 +28,6 @@ public class ClientModBusEvents {
         event.registerBlockEntityRenderer(BlockEntityRegistrar.RUNE_PROJECTOR.get(), context -> new RuneProjectorRenderer());
     }
 
-    @SubscribeEvent
-    public static void overlays(final RegisterGuiLayersEvent event) {
-        event.registerAbove(VanillaGuiLayers.CROSSHAIR, Machina.prefix("layer"), Layers.LAYER);
-    }
 
     @SubscribeEvent
     public static void registerKeymaps(RegisterKeyMappingsEvent event) {

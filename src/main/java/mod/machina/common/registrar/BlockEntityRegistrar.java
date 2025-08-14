@@ -1,7 +1,6 @@
 package mod.machina.common.registrar;
 
 import mod.machina.Machina;
-import mod.machina.common.block.blockentity.RiftBlockEntity;
 import mod.machina.common.block.blockentity.RuneProjectorBlockEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
@@ -19,10 +18,6 @@ public class BlockEntityRegistrar {
 //                            BlockRegistrar.ENERGY_NEXUS.deferredBlock().get()
 //                    ).build(null)
 //            );
-
-    public static final Supplier<BlockEntityType<RiftBlockEntity>> RIFT_PORTAL = BLOCK_ENTITIES.register("rift",
-            () -> BlockEntityType.Builder.of(RiftBlockEntity::new, BlockRegistrar.RIFT_PORTAL.block())
-                    .build(null));
 
     public static final Supplier<BlockEntityType<RuneProjectorBlockEntity>> RUNE_PROJECTOR = BLOCK_ENTITIES.register("rune_projector",
             () -> BlockEntityType.Builder.of(RuneProjectorBlockEntity::new, BlockRegistrar.RUNE_PROJECTOR.block())

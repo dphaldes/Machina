@@ -19,7 +19,6 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
         add(ItemRegistrar.VOID_BOOTS.get(), "Voidwalker Greaves");
         add(ItemRegistrar.GUIDE.get(), "The Index");
 
-        add(BlockRegistrar.RIFT_PORTAL.block(), "Rift");
         add(BlockRegistrar.RUNE_PROJECTOR.block(), "Runic Projector");
         add(BlockRegistrar.RUNESMITH.block(), "Runesmith");
 

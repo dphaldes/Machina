@@ -3,19 +3,14 @@ package mod.machina.common.event;
 import mod.machina.common.armor.ArsenalManager;
 import mod.machina.common.command.CommandManager;
 import mod.machina.common.item.VoidArmorItem;
-import mod.machina.common.level.RiftShape;
 import mod.machina.common.network.NetworkedAttachments;
-import net.minecraft.core.Direction;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.world.ItemInteractionResult;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.item.Items;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.event.RegisterCommandsEvent;
 import net.neoforged.neoforge.event.entity.living.LivingEquipmentChangeEvent;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;
 import net.neoforged.neoforge.event.entity.player.PlayerEvent;
-import net.neoforged.neoforge.event.entity.player.UseItemOnBlockEvent;
 
 public class Events {
 
@@ -51,26 +46,6 @@ public class Events {
 
         if (event.getFrom().getItem() instanceof VoidArmorItem || event.getTo().getItem() instanceof VoidArmorItem) {
             ArsenalManager.respec(player);
-        }
-    }
-
-    @SubscribeEvent
-    public static void useItemOnBlock(UseItemOnBlockEvent event) {
-        if (event.getUsePhase() == UseItemOnBlockEvent.UsePhase.ITEM_AFTER_BLOCK) {
-            // place rifts
-            if (event.getItemStack().is(Items.FLINT_AND_STEEL)) {
-                var level = event.getLevel();
-                var pos = event.getPos();
-                var state = level.getBlockState(pos);
-                if (RiftShape.frameBlock(state, level, pos)) {
-                    var optional = RiftShape.findEmptyPortalShape(level, pos.above(), Direction.Axis.X);
-                    if (optional.isPresent()) {
-                        optional.get().createPortalBlocks();
-                        event.setCancellationResult(ItemInteractionResult.sidedSuccess(level.isClientSide()));
-                    }
-                }
-            }
-
         }
     }
 
