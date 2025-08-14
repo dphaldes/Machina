@@ -3,7 +3,6 @@ package mod.machina.client.screen;
 import mod.machina.common.armor.Arsenal;
 import mod.machina.common.registrar.LangRegistrar;
 import net.minecraft.client.Minecraft;
-import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.player.Player;
 
 public class ScreenManager {
@@ -17,8 +16,8 @@ public class ScreenManager {
         minecraft.setScreen(new ArsenalScreen(player));
     }
 
-    public static void openCodexScreen(Player player, BlockPos master) {
-        minecraft.setScreen(new RunesmithScreen(player, master));
+    public static void openCodexScreen(Player player) {
+        minecraft.setScreen(new RunesmithScreen(player));
     }
 
 }

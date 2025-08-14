@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cube_top",
+  "textures": {
+    "side": "machina:block/runesmith_side",
+    "top": "machina:block/runesmith_top"
+  }
+}

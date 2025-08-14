@@ -3,6 +3,7 @@ package mod.machina.common.registrar;
 import mod.machina.Machina;
 import mod.machina.common.block.RiftBlock;
 import mod.machina.common.block.RuneProjectorBlock;
+import mod.machina.common.block.RunesmithBlock;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.level.BlockGetter;
@@ -46,6 +47,12 @@ public class BlockRegistrar {
                     .isRedstoneConductor(BlockRegistrar::never)
                     .isSuffocating(BlockRegistrar::never)
                     .isViewBlocking(BlockRegistrar::never)
+            ));
+
+    public static final BlockHolder<RunesmithBlock> RUNESMITH = blockWithItem("runesmith",
+            () -> new RunesmithBlock(BlockBehaviour.Properties.of()
+                    .strength(1.3F)
+                    .sound(SoundType.WOOD)
             ));
 
     private static <X extends Block> BlockHolder<X> blockWithItem(String name, Supplier<X> supplier) {

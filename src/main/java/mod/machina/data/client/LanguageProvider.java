@@ -21,6 +21,7 @@ public class LanguageProvider extends net.neoforged.neoforge.common.data.Languag
 
         add(BlockRegistrar.RIFT_PORTAL.block(), "Rift");
         add(BlockRegistrar.RUNE_PROJECTOR.block(), "Runic Projector");
+        add(BlockRegistrar.RUNESMITH.block(), "Runesmith");
 
 
 //        PerkRegistrar.entries().forEach(this::add);

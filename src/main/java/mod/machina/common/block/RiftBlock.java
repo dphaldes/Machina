@@ -107,7 +107,7 @@ public class RiftBlock extends Block implements EntityBlock {
         if (stack.is(ItemRegistrar.GUIDE) && level.getBlockEntity(pos) instanceof RiftBlockEntity rift) {
             var master = rift.getMasterPos();
             if (master != null) {
-                ScreenManager.openCodexScreen(player, rift.getMasterPos());
+                ScreenManager.openCodexScreen(player);
             }
         }
 

@@ -4,7 +4,6 @@ import mod.machina.Machina;
 import mod.machina.common.registrar.LangRegistrar;
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.client.gui.components.WidgetSprites;
-import net.minecraft.core.BlockPos;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
@@ -23,7 +22,7 @@ public class RunesmithScreen extends BaseScreen {
 //    @Nullable
 //    private Pair<Gear, RecipeHolder<GearRecipe>> selectedRecipe = null;
 
-    public RunesmithScreen(Player player, BlockPos masterRift) {
+    public RunesmithScreen(Player player /*, BlockPos masterRift*/) {
         super(LangRegistrar.CODEX_SCREEN.component(), 216, 148);
 //        this.player = player;
 //        this.masterRift = masterRift;
