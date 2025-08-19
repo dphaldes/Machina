@@ -1,4 +1,4 @@
-package mod.machina.common.event;
+package mod.machina.common.content.armor;
 
 import net.minecraft.tags.DamageTypeTags;
 import net.neoforged.neoforge.event.entity.living.LivingIncomingDamageEvent;

@@ -4,7 +4,7 @@ import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
 import mod.machina.Machina;
-import mod.machina.common.block.blockentity.RuneProjectorBlockEntity;
+import mod.machina.common.block.entity.RuneProjectorEntity;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.Sheets;
@@ -13,11 +13,11 @@ import net.minecraft.util.Mth;
 import net.minecraft.world.inventory.InventoryMenu;
 import org.joml.Matrix4f;
 
-public class RuneProjectorRenderer implements BlockEntityRenderer<RuneProjectorBlockEntity> {
+public class RuneProjectorRenderer implements BlockEntityRenderer<RuneProjectorEntity> {
     private static final Minecraft minecraft = Minecraft.getInstance();
 
     @Override
-    public void render(RuneProjectorBlockEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
+    public void render(RuneProjectorEntity blockEntity, float partialTick, PoseStack poseStack, MultiBufferSource bufferSource, int packedLight, int packedOverlay) {
         poseStack.pushPose();
         var position = minecraft.player.position();
         float f1 = (float) (Mth.atan2(position.z - blockEntity.getBlockPos().getZ() - 0.5D,

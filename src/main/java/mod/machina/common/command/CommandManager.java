@@ -3,15 +3,13 @@ package mod.machina.common.command;
 import com.mojang.brigadier.builder.LiteralArgumentBuilder;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.exceptions.CommandSyntaxException;
-import mod.machina.api.augment.Perk;
-import mod.machina.common.armor.ArsenalManager;
+import mod.machina.common.content.armor.ArsenalManager;
 import net.minecraft.commands.CommandSourceStack;
 import net.minecraft.commands.Commands;
 import net.minecraft.commands.arguments.EntityArgument;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 
-import java.util.List;
 import java.util.function.Predicate;
 
 public class CommandManager {

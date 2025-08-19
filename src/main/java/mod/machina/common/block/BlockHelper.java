@@ -1,6 +1,6 @@
 package mod.machina.common.block;
 
-import mod.machina.common.block.blockentity.TickingBlockEntity;
+import mod.machina.common.block.entity.TickingBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntityTicker;
 import net.minecraft.world.level.block.entity.BlockEntityType;

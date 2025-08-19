@@ -1,4 +1,4 @@
-package mod.machina.common.block;
+package mod.machina.common.content.nexus;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;

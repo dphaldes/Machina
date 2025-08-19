@@ -7,7 +7,7 @@ import net.minecraft.client.gui.components.WidgetSprites;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 
-public class RunesmithScreen extends BaseScreen {
+public class RuneforgeScreen extends BaseScreen {
 
     private static final ResourceLocation BACKGROUND_LOCATION = Machina.prefix("textures/gui/codex.png");
     private static final ResourceLocation APPLY = Machina.prefix("apply");
@@ -22,7 +22,7 @@ public class RunesmithScreen extends BaseScreen {
 //    @Nullable
 //    private Pair<Gear, RecipeHolder<GearRecipe>> selectedRecipe = null;
 
-    public RunesmithScreen(Player player /*, BlockPos masterRift*/) {
+    public RuneforgeScreen(Player player /*, BlockPos masterRift*/) {
         super(LangRegistrar.CODEX_SCREEN.component(), 216, 148);
 //        this.player = player;
 //        this.masterRift = masterRift;

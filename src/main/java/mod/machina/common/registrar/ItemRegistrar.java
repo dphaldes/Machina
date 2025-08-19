@@ -1,8 +1,8 @@
 package mod.machina.common.registrar;
 
 import mod.machina.Machina;
+import mod.machina.common.content.armor.VoidArmorItem;
 import mod.machina.common.item.GuideItem;
-import mod.machina.common.item.VoidArmorItem;
 import net.minecraft.world.item.ArmorItem;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.registries.DeferredItem;

@@ -1,4 +1,4 @@
-package mod.machina.common.armor;
+package mod.machina.common.content.armor;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
@@ -6,7 +6,6 @@ import mod.machina.api.augment.Augment;
 import mod.machina.api.augment.Perk;
 import mod.machina.api.augment.trait.EnchantmentLevel;
 import mod.machina.api.augment.trait.PerkTrait;
-import mod.machina.common.item.VoidArmorItem;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.ByteBufCodecs;

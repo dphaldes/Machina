@@ -1,4 +1,4 @@
-package mod.machina.common.armor;
+package mod.machina.common.content.armor;
 
 import mod.machina.api.augment.Augment;
 import mod.machina.api.augment.Perk;

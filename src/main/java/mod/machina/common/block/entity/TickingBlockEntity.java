@@ -1,4 +1,4 @@
-package mod.machina.common.block.blockentity;
+package mod.machina.common.block.entity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;

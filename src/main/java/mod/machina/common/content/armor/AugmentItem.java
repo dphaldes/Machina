@@ -1,4 +1,4 @@
-package mod.machina.common.item;
+package mod.machina.common.content.armor;
 
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;

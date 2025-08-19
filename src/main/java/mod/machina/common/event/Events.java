@@ -1,8 +1,9 @@
 package mod.machina.common.event;
 
-import mod.machina.common.armor.ArsenalManager;
 import mod.machina.common.command.CommandManager;
-import mod.machina.common.item.VoidArmorItem;
+import mod.machina.common.content.armor.ArsenalManager;
+import mod.machina.common.content.armor.TraitEventHandler;
+import mod.machina.common.content.armor.VoidArmorItem;
 import mod.machina.common.network.NetworkedAttachments;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;

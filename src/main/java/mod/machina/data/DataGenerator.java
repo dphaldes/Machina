@@ -17,9 +17,7 @@ public class DataGenerator {
         var packOutput = generator.getPackOutput();
 
         // common
-        var blockTags = new BlockTagsProvider(packOutput, lookupProvider, helper);
-        generator.addProvider(event.includeServer(), blockTags);
-        generator.addProvider(event.includeServer(), new ItemTagsProvider(packOutput, lookupProvider, blockTags.contentsGetter(), helper));
+        event.createBlockAndItemTags(BlockTagsProvider::new, ItemTagsProvider::new);
         generator.addProvider(event.includeServer(), new RecipeProvider(packOutput, lookupProvider));
         generator.addProvider(event.includeServer(), new LootTableProvider(packOutput, lookupProvider));
         event.createDatapackRegistryObjects(new RegistrySetBuilder()

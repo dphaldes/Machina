@@ -1,4 +1,4 @@
-package mod.machina.common.item.components;
+package mod.machina.common.content.armor.component;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;

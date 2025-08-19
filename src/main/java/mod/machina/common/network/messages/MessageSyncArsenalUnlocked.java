@@ -2,8 +2,8 @@ package mod.machina.common.network.messages;
 
 import mod.machina.Machina;
 import mod.machina.api.augment.Augment;
-import mod.machina.common.armor.Arsenal;
-import mod.machina.common.armor.ArsenalManager;
+import mod.machina.common.content.armor.Arsenal;
+import mod.machina.common.content.armor.ArsenalManager;
 import net.minecraft.core.Holder;
 import net.minecraft.network.RegistryFriendlyByteBuf;
 import net.minecraft.network.codec.StreamCodec;

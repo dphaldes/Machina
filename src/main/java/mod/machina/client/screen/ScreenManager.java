@@ -1,6 +1,6 @@
 package mod.machina.client.screen;
 
-import mod.machina.common.armor.Arsenal;
+import mod.machina.common.content.armor.Arsenal;
 import mod.machina.common.registrar.LangRegistrar;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.entity.player.Player;
@@ -17,7 +17,7 @@ public class ScreenManager {
     }
 
     public static void openCodexScreen(Player player) {
-        minecraft.setScreen(new RunesmithScreen(player));
+        minecraft.setScreen(new RuneforgeScreen(player));
     }
 
 }

@@ -1,4 +1,4 @@
-package mod.machina.common.block;
+package mod.machina.common.content.nexus;
 
 //public class EnergyNexusBlock extends NexusBlock {
 //    public EnergyNexusBlock() {

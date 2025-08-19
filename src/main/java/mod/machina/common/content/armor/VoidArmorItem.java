@@ -1,6 +1,5 @@
-package mod.machina.common.item;
+package mod.machina.common.content.armor;
 
-import mod.machina.common.armor.ArsenalManager;
 import mod.machina.common.registrar.MaterialRegistrar;
 import mod.machina.common.registrar.PerkRegistrar;
 import net.minecraft.world.entity.LivingEntity;

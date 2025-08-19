@@ -1,7 +1,7 @@
 package mod.machina.common.registrar;
 
 import mod.machina.Machina;
-import mod.machina.common.block.blockentity.RuneProjectorBlockEntity;
+import mod.machina.common.block.entity.RuneProjectorEntity;
 import net.minecraft.core.registries.BuiltInRegistries;
 import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.neoforged.bus.api.IEventBus;
@@ -19,8 +19,8 @@ public class BlockEntityRegistrar {
 //                    ).build(null)
 //            );
 
-    public static final Supplier<BlockEntityType<RuneProjectorBlockEntity>> RUNE_PROJECTOR = BLOCK_ENTITIES.register("rune_projector",
-            () -> BlockEntityType.Builder.of(RuneProjectorBlockEntity::new, BlockRegistrar.RUNE_PROJECTOR.block())
+    public static final Supplier<BlockEntityType<RuneProjectorEntity>> RUNE_PROJECTOR = BLOCK_ENTITIES.register("rune_projector",
+            () -> BlockEntityType.Builder.of(RuneProjectorEntity::new, BlockRegistrar.RUNE_PROJECTOR.block())
                     .build(null));
 
     public static void register(IEventBus bus) {

@@ -1,7 +1,7 @@
 package mod.machina.common.registrar;
 
 import mod.machina.Machina;
-import mod.machina.common.armor.Arsenal;
+import mod.machina.common.content.armor.Arsenal;
 import net.neoforged.bus.api.IEventBus;
 import net.neoforged.neoforge.attachment.AttachmentType;
 import net.neoforged.neoforge.registries.DeferredRegister;

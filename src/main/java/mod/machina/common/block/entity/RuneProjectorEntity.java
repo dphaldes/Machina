@@ -1,4 +1,4 @@
-package mod.machina.common.block.blockentity;
+package mod.machina.common.block.entity;
 
 import com.mojang.serialization.Codec;
 import mod.machina.api.rune.Rune;
@@ -11,11 +11,11 @@ import net.minecraft.nbt.NbtOps;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class RuneProjectorBlockEntity extends BlockEntity implements RuneProvider {
+public class RuneProjectorEntity extends BlockEntity implements RuneProvider {
 
     private Rune rune = Rune.EMPTY;
 
-    public RuneProjectorBlockEntity(BlockPos pos, BlockState blockState) {
+    public RuneProjectorEntity(BlockPos pos, BlockState blockState) {
         super(BlockEntityRegistrar.RUNE_PROJECTOR.get(), pos, blockState);
     }
 

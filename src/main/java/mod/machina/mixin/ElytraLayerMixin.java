@@ -1,7 +1,7 @@
 package mod.machina.mixin;
 
 import com.llamalad7.mixinextras.injector.ModifyReturnValue;
-import mod.machina.common.armor.ArsenalManager;
+import mod.machina.common.content.armor.ArsenalManager;
 import mod.machina.common.registrar.PerkRegistrar;
 import net.minecraft.client.renderer.entity.layers.ElytraLayer;
 import net.minecraft.world.entity.LivingEntity;

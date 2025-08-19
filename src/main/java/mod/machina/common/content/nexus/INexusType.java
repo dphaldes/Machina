@@ -1,4 +1,4 @@
-package mod.machina.common.nexus;
+package mod.machina.common.content.nexus;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;

@@ -1,4 +1,4 @@
-package mod.machina.common.block.blockentity;
+package mod.machina.common.block.entity;
 
 //public class NexusBlockEntity extends BlockEntity {
 //

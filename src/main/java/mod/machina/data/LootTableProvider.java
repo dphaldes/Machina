@@ -12,7 +12,8 @@ import java.util.concurrent.CompletableFuture;
 public class LootTableProvider extends net.minecraft.data.loot.LootTableProvider {
     public LootTableProvider(PackOutput output, CompletableFuture<HolderLookup.Provider> registries) {
         super(output, Set.of(), List.of(
-                new SubProviderEntry(BlockLootTable::new, LootContextParamSets.BLOCK)
-        ), registries);
+                        new SubProviderEntry(BlockLootTable::new, LootContextParamSets.BLOCK)
+                ), registries
+        );
     }
 }
